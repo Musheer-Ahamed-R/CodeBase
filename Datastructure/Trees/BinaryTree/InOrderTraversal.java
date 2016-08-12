@@ -9,7 +9,7 @@ public class InOrderTraversal {
       recurInOrder(root.getRChild());
     }
 
-    public static void main(String[] args) {
+    public static void iterInOrder {
         System.out.println("");
     }
 
