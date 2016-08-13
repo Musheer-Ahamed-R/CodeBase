@@ -10,6 +10,10 @@ public class InOrderTraversal {
       recurInOrder(root.getRChild());
     }
 
+    // Iterative approach can be solved using
+    // 1-> haing a Current node pointer, which is always one step ahead of the stack Top and it guides the flow
+    // 2 -> using the visited map
+
     //The extra space complexity of Map can be eliminated using a Single Variable
     public static void iterInOrder(Node root) {
         //System.out.println("");
@@ -32,7 +36,7 @@ public class InOrderTraversal {
         }
     }
 
-    // Here the currentNode is always a step(or some steps) ahead of the stack top and it guides the flow
+    // Here the currentNode is always one step ahead of the stack Top and it guides the flow
     public static void iterInOrder2(Node root) {
       Node currentNode = root;
       Stack<Node> stack = new Stack<>();
@@ -46,13 +50,12 @@ public class InOrderTraversal {
           if(stack.empty()) {
             isDone = true;
           } else {
-          currentNode = stack.pop();
-          System.out.println(currentNode.getData());
-          currentNode = currentNode.getRChild();
+            currentNode = stack.pop();
+            System.out.println(currentNode.getData());
+            currentNode = currentNode.getRChild();
           }
         }
       }
     }
-
 
 }

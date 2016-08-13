@@ -14,15 +14,15 @@ public class Application {
     tree.getRChild().setRChild(new Node(7, null, null));
 
 
-  	// tree.getLChild().getLChild().setLChild(new Node(8, null, null));
-  	// tree.getLChild().getLChild().setRChild(new Node(9, null, null));
-  	// tree.getLChild().getRChild().setLChild(new Node(10, null, null));
-    // tree.getLChild().getRChild().setRChild(new Node(11, null, null));
-  	// tree.getRChild().getLChild().setLChild(new Node(12, null, null));
-  	// tree.getRChild().getLChild().setRChild(new Node(13, null, null));
-  	// tree.getRChild().getRChild().setLChild(new Node(14, null, null));
-  	// tree.getRChild().getRChild().setRChild(new Node(15, null, null));
-    //
+  	tree.getLChild().getLChild().setLChild(new Node(8, null, null));
+  	tree.getLChild().getLChild().setRChild(new Node(9, null, null));
+  	tree.getLChild().getRChild().setLChild(new Node(10, null, null));
+    tree.getLChild().getRChild().setRChild(new Node(11, null, null));
+  	tree.getRChild().getLChild().setLChild(new Node(12, null, null));
+  	tree.getRChild().getLChild().setRChild(new Node(13, null, null));
+  	tree.getRChild().getRChild().setLChild(new Node(14, null, null));
+  	tree.getRChild().getRChild().setRChild(new Node(15, null, null));
+
 
 //		tree.getLChild().getLChild().getLChild().setLChild(new Node(16));
 //		tree.getLChild().getLChild().getLChild().setRChild(new Node(17));
@@ -50,7 +50,16 @@ public class Application {
 
     //InOrderTraversal.recurInOrder(tree);
     //InOrderTraversal.iterInOrder(tree);
-    InOrderTraversal.iterInOrder2(tree);
+    //InOrderTraversal.iterInOrder2(tree);
+
+    //PostOrderTraversal.recurPostOrder(tree);
+    //PostOrderTraversal.iterPostOrder(tree);
+    //PostOrderTraversal.iterPostOrder2(tree);
+    //PostOrderTraversal.iterPostOrder3(tree);
+
+    //LevelOrderTraversal.levelOrder(tree);
+
+    
 
   }
 

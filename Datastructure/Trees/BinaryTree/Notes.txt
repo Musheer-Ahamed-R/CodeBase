@@ -1,0 +1,20 @@
+Important Points
+
+1 -> Don't use root.getLChild() or root.getRChild() for NULL check(unless entirely necessary). It causes a lot of trouble with null pointer exception
+
+2 -> The Order in which Left and the Right Child are added is extremely important(e.g, Iterative PreOrderTraversal, tree to doubly linked list)
+
+3 -> Traversal Findings
+          PreOrder Traversal :
+                1 -> 1 -> A Node will always have its left child after it.
+
+          InOrder Traversal :
+                1 -> flattens the Tree.(used in converting Tree to a Linked List)
+                2 -> gives Nodes in increasing order if the tree is a BinarySearch Tree
+                3 -> for a particular node, its left and right children are on its left and right respectively.(used in constructing a tree, if another traversal is given)
+
+          PostOrder Traversal
+                1 -> A Node will always have its right child before it.(used in case of Iterative Traversal)
+
+
+4 -> 

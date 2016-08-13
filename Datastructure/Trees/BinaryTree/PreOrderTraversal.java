@@ -15,28 +15,37 @@ public class PreOrderTraversal {
       recurPreOrder(root.getRChild());
     }
 
+    // Iterative approach can be solved using
+    // 1-> Single Stack - Adding the right Child then adding the left Child
+    // 2-> Using Queue and a Stack(Not Ideal)
+
     //This can be bettered by using a Single Stack instead of a Queue and a Stack
     public static void iterPreOrder(Node root) {
+      if(root == null) {
+        return;
+      }
       Queue<Node> q = new ArrayDeque<>();
       Stack<Node> s = new Stack<>();
-        q.add(root);
-          while(!q.isEmpty()) {
-            Node target = q.poll();
-            System.out.println(target.getData());
-            if(target.getLChild() != null) {
-              q.add(target.getLChild());
-            }
-            if(target.getRChild() != null) {
-              s.add(target.getRChild());
-            }
-            if(q.isEmpty() && !s.isEmpty()) {
-              q.add(s.pop());
-            }
+      q.add(root);
+      while(!q.isEmpty()) {
+        Node target = q.poll();
+        System.out.println(target.getData());
+        if(target.getLChild() != null) {
+          q.add(target.getLChild());
         }
+        if(target.getRChild() != null) {
+          s.add(target.getRChild());
+        }
+        if(q.isEmpty() && !s.isEmpty()) {
+          q.add(s.pop());
+        }
+      }
     }
 
     public static void iterPreOrder2(Node root) {
-
+      if(root == null) {
+        return;
+      }
       Stack<Node> stack = new Stack<>();
       stack.push(root);
       while(!stack.empty()) {
@@ -50,6 +59,5 @@ public class PreOrderTraversal {
         }
       }
     }
-
 
 }
