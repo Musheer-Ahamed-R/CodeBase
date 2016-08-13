@@ -4,6 +4,7 @@ public class ZigZagTraversal {
 
   // This works and this should be preffered, also, the Two Stack approach is also easy to implement
   // Here the Stack is only used to PRINT the nodes in reverse order.
+  // Here the original order(for next Traversal) along with the reversed order is necessary. Thus, the nodes are added to both Stack and queue.
   public static void zigZagTraversal(Node root) {
     Stack<Node> s = new Stack<>();
     Queue<Node> q = new ArrayDeque<>();
