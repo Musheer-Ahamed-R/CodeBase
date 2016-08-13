@@ -59,8 +59,12 @@ public class Application {
 
     //LevelOrderTraversal.levelOrder(tree);
 
-    
+    //int max = MaxElement.getMax(tree);
+    //int max = MaxElement.iterGetMax(tree);
 
+    //boolean isPresent = FindElement.isPresent(tree, 3);
+    boolean isPresent = FindElement.isPresentIter(tree, 15);
+    System.out.println(isPresent);
   }
 
 }
