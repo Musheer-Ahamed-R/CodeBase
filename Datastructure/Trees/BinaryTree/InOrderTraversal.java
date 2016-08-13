@@ -1,3 +1,4 @@
+import java.util.*;
 public class InOrderTraversal {
 
     public static void recurInOrder(Node root) {
@@ -9,10 +10,49 @@ public class InOrderTraversal {
       recurInOrder(root.getRChild());
     }
 
-    public static void iterInOrder {
-        System.out.println("");
+    //The extra space complexity of Map can be eliminated using a Single Variable
+    public static void iterInOrder(Node root) {
+        //System.out.println("");
+        Map<Node, String> visitorMap = new HashMap<>();
+
+        Stack<Node> stack = new Stack<>();
+        stack.push(root);
+        while(!stack.empty()) {
+          Node target = stack.peek();
+          if(target.getLChild() == null || visitorMap.get(target.getLChild()) != null) {
+            stack.pop();
+            visitorMap.put(target, "Visited");
+            System.out.println("Node is "+target.getData());
+            if(target.getRChild() != null) {
+              stack.push(target.getRChild());
+            }
+          } else {
+            stack.push(target.getLChild());
+          }
+        }
     }
 
+    // Here the currentNode is always a step(or some steps) ahead of the stack top and it guides the flow
+    public static void iterInOrder2(Node root) {
+      Node currentNode = root;
+      Stack<Node> stack = new Stack<>();
+      //stack.push(root);
+      boolean isDone = false;
+      while(!isDone) {
+        if(currentNode != null) {
+          stack.push(currentNode);
+          currentNode = currentNode.getLChild();
+        } else {
+          if(stack.empty()) {
+            isDone = true;
+          } else {
+          currentNode = stack.pop();
+          System.out.println(currentNode.getData());
+          currentNode = currentNode.getRChild();
+          }
+        }
+      }
+    }
 
 
 }
