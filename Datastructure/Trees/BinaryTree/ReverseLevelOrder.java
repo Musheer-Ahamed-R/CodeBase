@@ -14,7 +14,7 @@ public class ReverseLevelOrder {
     q.add(root);
     while(!q.isEmpty()) {
       Node target = q.remove();
-      s.push(target);              //
+      s.push(target);              // This is enough, because the order we pull, is the order in which we push elements into the queue.
       if(target.getRChild() != null) {
         q.add(target.getRChild());
       }

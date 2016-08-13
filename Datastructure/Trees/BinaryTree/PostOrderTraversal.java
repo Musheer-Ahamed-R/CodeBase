@@ -13,7 +13,7 @@ public class PostOrderTraversal {
 
   // Iterative approach can be solved using
   // 1 -> haing a Current node pointer, which is always one step ahead of the stack Top and it guides the flow
-  // 2 -> "Come Give Your and Children and Wait" (Two Stack approach)
+  // 2 -> "Come Give Your and Children and Wait" (Two Stack approach).  (Like Level Order Traversal using Stack).
   // 3 -> using visited map
 
 
