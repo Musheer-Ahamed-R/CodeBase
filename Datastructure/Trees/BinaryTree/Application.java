@@ -91,8 +91,9 @@ public class Application {
     //TreeView.bottomView(skewedTree);
 
 
-
-      //System.out.println(isMirror);
+    //int sum = TreeSum.getSumRecur(tree);
+    int sum = TreeSum.getSumIter(tree);
+    System.out.println(sum);
   }
 
 }
