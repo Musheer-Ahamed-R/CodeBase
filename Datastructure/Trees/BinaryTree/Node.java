@@ -2,7 +2,7 @@ public class Node {
   private int data;
   private Node rChild;
   private Node lChild;
-  
+
   public Node(int data) {
     this(data, null, null);
   }
@@ -35,6 +35,45 @@ public class Node {
 
   public void setRChild(Node rChild) {
     this.rChild = rChild;
+  }
+
+  public class VerticalDistance {
+    /*private Node root;*/
+    private int verticalDistance;
+
+    /*public VerticalDistance(Node root) {
+      this(root, Integer.MIN_VALUE);
+    }
+
+    public VerticalDistance(Node root, int verticalDistance) {
+      this.root = root;
+      this.verticalDistance = verticalDistance;
+    }*/
+
+    public VerticalDistance(int verticalDistance) {
+      this.verticalDistance = verticalDistance;
+    }
+
+    /*public Node getRoot() {
+      return this.root;
+    }
+
+    public void setRoot(Node root) {
+      this.root = root;
+    }*/
+
+    public Node getNode() {
+      return Node.this;
+    }
+
+    public int getVerticalDistance() {
+      return this.verticalDistance;
+    }
+
+    public void setVerticalDistane(int verticalDistance) {
+      this.verticalDistance = verticalDistance;
+    }
+
   }
 
 }
