@@ -114,7 +114,9 @@ public class Application {
     //AncestorTree.printAncestor(tree, 24);
 
     //AncestorTree.printLCA(tree, 5, 11);
-    AncestorTree.printLCA2(tree, 5, 23);
+    //AncestorTree.printLCA2(tree, 5, 23);
+
+
     //System.out.println(sum);
   }
 
