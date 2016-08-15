@@ -1,0 +1,12 @@
+Threaded Binary Tree -
+
+    - A Binary tree is Threaded by making all Right child pointers that would NORMALLY be NULL, point to the InOrder-Successor of the node (if it exists),
+and all LEFT child pointers that would NORMALLY be NULL point to the InOrder-Predecessor of the node.
+
+Types :
+    Single Threaded: each node is threaded towards either the in-order predecessor(Left) or successor(Right).
+    Double threaded: each node is threaded towards both the in-order predecessor(Left) and successor(Right).
+
+    - A Node inside a Node(Main Node) is a Thread if it points to either the in-order predecessor(Left) or the in-order successor(Right).
+
+    - Rest as in Pdf
