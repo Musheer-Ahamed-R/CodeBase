@@ -1,3 +1,4 @@
+import java.util.*;
 
 public class Application {
 
@@ -92,8 +93,26 @@ public class Application {
 
 
     //int sum = TreeSum.getSumRecur(tree);
-    int sum = TreeSum.getSumIter(tree);
-    System.out.println(sum);
+    //int sum = TreeSum.getSumIter(tree);
+
+    /*Map<Integer, List<Node>> verticalLevelMap = new HashMap<>();
+    VerticalTree.printVerticalOrderRecur(tree, 0, verticalLevelMap);
+    for(Map.Entry<Integer, List<Node>> element : verticalLevelMap.entrySet()) {
+      System.out.println("Level "+element.getKey()+"  "+element.getValue());
+    }*/
+
+    //VerticalTree.printVerticalOrderIter(tree);
+
+    /*Map<Integer, Integer> verticalLevelSumMap = new TreeMap<>();
+    VerticalTree.sumVerticalOrderRecur(tree, 0, verticalLevelSumMap);
+    for(Map.Entry<Integer, Integer> element : verticalLevelSumMap.entrySet()) {
+      System.out.println(element.getKey()+" --> "+element.getValue());
+    }*/
+
+    VerticalTree.sumVerticalOrderIter(tree);
+
+
+    //System.out.println(sum);
   }
 
 }

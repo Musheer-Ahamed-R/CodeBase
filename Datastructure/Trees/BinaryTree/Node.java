@@ -37,6 +37,11 @@ public class Node {
     this.rChild = rChild;
   }
 
+  @Override
+  public String toString() {
+    return this.getData()+"";
+  }
+
   public class VerticalDistance {
     /*private Node root;*/
     private int verticalDistance;
