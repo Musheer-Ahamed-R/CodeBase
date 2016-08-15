@@ -116,7 +116,7 @@ public class Application {
     //AncestorTree.printLCA(tree, 5, 11);
     //AncestorTree.printLCA2(tree, 5, 23);
 
-
+    MaxLevel.printMaxLevel(tree);
     //System.out.println(sum);
   }
 
