@@ -16,8 +16,9 @@ public class PreOrderTraversal {
     }
 
     // Iterative approach can be solved using
-    // 1-> Single Stack - Adding the right Child then adding the left Child
-    // 2-> Using Queue and a Stack(Not Ideal)
+    // 1 -> Morris PreOrder Traversal
+    // 2 -> Single Stack - Adding the right Child then adding the left Child
+    // 3 -> Using Queue and a Stack(Not Ideal)
 
     //This can be bettered by using a Single Stack instead of a Queue and a Stack
     public static void iterPreOrder(Node root) {

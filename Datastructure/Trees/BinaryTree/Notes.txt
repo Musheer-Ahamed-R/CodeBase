@@ -18,3 +18,5 @@ Important Points
 
 
 4 -> The return value(Base Case) in a recursive call has a MAJOR MAJOR impact in the problem solution.(i.e They should be used wisely)
+
+5 -> Using root instead of the Current Node can lead to UNNECESSARY TROUBLE. Always take care of this BIG careless mistake. 

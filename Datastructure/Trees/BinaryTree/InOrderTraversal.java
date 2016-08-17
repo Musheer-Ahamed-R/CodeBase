@@ -11,8 +11,9 @@ public class InOrderTraversal {
     }
 
     // Iterative approach can be solved using
-    // 1-> haing a Current node pointer, which is always one step ahead of the stack Top and it guides the flow
-    // 2 -> using the visited map
+    // 1 -> Morris InOrder Traversal
+    // 2 -> haing a Current node pointer, which is always one step ahead of the stack Top and it guides the flow
+    // 3 -> using the visited map
 
     //The extra space complexity of Map can be eliminated using a Single Variable
     public static void iterInOrder(Node root) {
