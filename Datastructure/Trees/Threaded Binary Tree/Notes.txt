@@ -6,7 +6,8 @@ and all LEFT child pointers that would NORMALLY be NULL point to the InOrder-Pre
 Types :
     Single Threaded: each node is threaded towards either the in-order predecessor(Left) or successor(Right).
     Double threaded: each node is threaded towards both the in-order predecessor(Left) and successor(Right).
+    Here, Left Node will always point to a Predecessor and Right Node will always point to Successor.
 
     - A Node inside a Node(Main Node) is a Thread if it points to either the in-order predecessor(Left) or the in-order successor(Right).
 
-    - Rest as in Pdf
+    - Rest as in Pdf(But, it is mostly unnecessary, just refer geekforgeeks)
