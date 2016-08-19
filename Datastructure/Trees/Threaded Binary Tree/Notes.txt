@@ -10,4 +10,7 @@ Types :
 
     - A Node inside a Node(Main Node) is a Thread if it points to either the in-order predecessor(Left) or the in-order successor(Right).
 
+    - When we hear the word Predecessor or Successor of a Particular Node for a Specific Traversal, first write the Complete Traversal,
+      then visualize the Predecessor or Successor from that.
+
     - Rest as in Pdf(But, it is mostly unnecessary, just refer geekforgeeks)

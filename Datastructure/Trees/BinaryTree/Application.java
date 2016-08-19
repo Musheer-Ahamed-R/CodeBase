@@ -119,7 +119,7 @@ public class Application {
     //MaxLevel.printMaxLevel(tree);
 
     //MorrisTraversal.morrisInorder(tree);
-    MorrisTraversal.morrisPreOrder(tree);
+    //MorrisTraversal.morrisPreOrder(tree);
 
     //System.out.println(sum);
   }
