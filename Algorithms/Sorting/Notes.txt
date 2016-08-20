@@ -3,14 +3,21 @@
          Comparison - Based Sorting Algorithms-
 
                                     Average Case         Worst Case       Auxillary Memory         isStable
-               Bubble Sort
-               Selection Sort
-               Insertion Sort
-               Shell Sort
-               Merge Sort
-               Quick Sort
-               Heap Sort
-               Tree Sort
+               Bubble Sort             O(n^2)              O(n^2)                1                    yes
+
+               Selection Sort          O(n^2)              O(n^2)                1                    no
+
+               Insertion Sort          O(n^2)              O(n^2)                1                    yes
+
+               Shell Sort                 -                O(nlog^2n)            1                    no
+
+               Merge Sort              O(nlogn)            O(nlogn)              depends              yes
+
+               Heap Sort               O(nlogn)            O(nlogn)              1                    no
+
+               Quick Sort              O(nlogn)            O(n^2)                O(logn)              depends
+
+               Tree Sort               O(nlogn)            O(n^2)                O(n)                 depends
 
 
          Linear Sorting Algorithms -
@@ -19,4 +26,3 @@
                Counting Sort
                Bucket Sort
                Radix Sort
-               Topological Sort
