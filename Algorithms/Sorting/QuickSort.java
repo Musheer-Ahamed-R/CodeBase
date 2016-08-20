@@ -1,5 +1,10 @@
 public class QuickSort {
 
+   /*
+      Algorithm - This Algorithm is based on Divide and Conquer Algorithm.
+
+   */
+
 
    public static void quickSort(int[] arr, int start, int end) {
       if(start >= end) {

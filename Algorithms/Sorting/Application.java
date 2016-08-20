@@ -3,7 +3,7 @@ import java.util.*;
 public class Application {
 
    public static void main(String[] args) {
-      int[] elements = {3, 2, 8, 12, 56, 1};
+      int[] elements = {32, 2, 3, 67, 56, 3, 1, 10};
 
       //SelectionSort.selectionSort(elements);
 
@@ -13,10 +13,12 @@ public class Application {
 
       //QuickSort.quickSort(elements, 0, elements.length-1);
 
-      
+      //InsertionSort.insertionSort(elements);
 
+      //int[] mergedArr = MergeSort.merge(new int[]{32}, new int[]{2});
 
-      System.out.println(Arrays.toString(elements));
+      int[] mergedArr = MergeSort.mergeSort(elements);
+      System.out.println(Arrays.toString(mergedArr));
    }
 
    public static void swap(int[] arr, int firIndex, int secIndex) {
