@@ -5,6 +5,8 @@ public class Application {
    public static void main(String[] args) {
       int[] elements = {32, 2, 3, 67, 56, 3, 1, 10};
 
+      //int[] elements = new int[]{5, -3, 1, 5, 2, 8, 1, -4, 9, -2, 4, 7};
+
       //SelectionSort.selectionSort(elements);
 
       //BubbleSort.bubbleSort(elements);
@@ -15,10 +17,13 @@ public class Application {
 
       //InsertionSort.insertionSort(elements);
 
-      //int[] mergedArr = MergeSort.merge(new int[]{32}, new int[]{2});
+      //int[] mergedArr = MergeSort.mergeSort(elements);
 
-      int[] mergedArr = MergeSort.mergeSort(elements);
-      System.out.println(Arrays.toString(mergedArr));
+      //CountingSort.countingSort(elements);
+      //CountingSort.handleNegative(elements);
+
+
+      //System.out.println(Arrays.toString(mergedArr));
    }
 
    public static void swap(int[] arr, int firIndex, int secIndex) {
