@@ -1,0 +1,22 @@
+ 1 -> Two types of Sorting Technique
+
+         Comparison - Based Sorting Algorithms-
+
+                                    Average Case         Worst Case       Auxillary Memory         isStable
+               Bubble Sort
+               Selection Sort
+               Insertion Sort
+               Shell Sort
+               Merge Sort
+               Quick Sort
+               Heap Sort
+               Tree Sort
+
+
+         Linear Sorting Algorithms -
+
+
+               Counting Sort
+               Bucket Sort
+               Radix Sort
+               Topological Sort
