@@ -1,4 +1,7 @@
 1 -> All the Nodes in the Left Subtree of the Node(Root) should be less than the Node data and
      all the Nodes in the Right Subtree of the Node(Root) should be greater than the Node data.
 
-2 ->   
+2 -> We can find a Node in a Binary Search Tree with traversing the entire tree.
+     We just need to traverse the path from the Root to the Node using the Binary Search Tree Property.
+
+3 ->

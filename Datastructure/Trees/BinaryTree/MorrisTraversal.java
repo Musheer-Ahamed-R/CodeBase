@@ -1,6 +1,8 @@
 public class MorrisTraversal {
 
-  //This is done by making the Tree as Threaded and then making it as normal
+  // This is done by making the Tree as Threaded and then making it as normal.
+  // Here the process of finding the Predecessor of a Node is simple. The Right Most Node in the Left Subtree of the Current Node. Other cases
+  // of finding the Predecessor does not apply here because here the Node is always on Top of its Predecessor.
   /*
     Algo -
       while curr != null
