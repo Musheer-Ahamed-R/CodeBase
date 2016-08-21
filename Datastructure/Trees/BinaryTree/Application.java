@@ -124,6 +124,8 @@ public class Application {
       //MorrisTraversal.morrisInorder(tree);
       //MorrisTraversal.morrisPreOrder(tree);
 
+      PrintBinaryTree.printTree(tree);
+
       //System.out.println(sum);
   }
 
