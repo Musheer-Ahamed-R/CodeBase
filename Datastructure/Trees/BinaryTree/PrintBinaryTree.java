@@ -3,13 +3,13 @@ import java.util.*;
 public class PrintBinaryTree {
 
    public static void printTree(Node root) {
-      int treeWidth = 4;
+      int treeWidth = 6;
       int spacing = (treeWidth & 1) == 1 ? (treeWidth / 2) + 1 : treeWidth/2;
 
       String fourSpace = "    ";
+      String threeSpace = "  ";
       Queue<Node> q = new ArrayDeque<>();
       q.add(root);
-
 
       while(!q.isEmpty()) {
          for(int i=0;i<spacing;i++) {
@@ -20,7 +20,7 @@ public class PrintBinaryTree {
          while(count > 0) {
             Node target = q.remove();
             if(alternate == 1) {
-               System.out.print(fourSpace+fourSpace);
+               System.out.print(fourSpace+threeSpace);
             }
             alternate ^= 1;
             System.out.print(target.getData());

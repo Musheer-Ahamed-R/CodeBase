@@ -1,16 +1,19 @@
 public class SearchNode {
 
-   public static void searchNode(Node root, int data) {
+   public static boolean searchNode(Node root, int data) {
       if(root == null) {
-         return;
+         return false;
       }
+      boolean isFound = false;
       if(root.getData() > data) {
-         searchNode(root.getLChild());
+         isFound = searchNode(root.getLChild(), data);
       } else if(root.getData() < data) {
-         searchNode(root.getRChild());
+         isFound = searchNode(root.getRChild(), data);
       } else {
+         isFound = true;
          System.out.println("The Node is Found at "+root.getData());
       }
+      return isFound;
    }
 
 }
