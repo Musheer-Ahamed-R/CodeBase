@@ -1,0 +1,4 @@
+1 -> All the Nodes in the Left Subtree of the Node(Root) should be less than the Node data and
+     all the Nodes in the Right Subtree of the Node(Root) should be greater than the Node data.
+
+2 ->   

@@ -4,6 +4,9 @@ public class Application {
 
    public static void main(String[] args) {
 
+      //Scanner input = new Scanner(System.in);
+      //String s = input.nextLine();
+
       Node skewedTree = new Node(1, null, null);
       skewedTree.setRChild(new Node(3, null, null));
       skewedTree.getRChild().setRChild(new Node(7, null, null));
