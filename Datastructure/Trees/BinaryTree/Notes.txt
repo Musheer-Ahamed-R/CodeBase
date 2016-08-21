@@ -14,10 +14,10 @@ Important Points
                 3 -> for a particular node, its left and right children are on its left and right respectively.(used in constructing a tree, if another traversal is given)
                 4 -> The Successor of a Node is
                               1 -> The Right Child or the Left Most Child in the Right SubTree of the Current Node(Top to Bottom - Presence of Right Child)
-                              2 -> The First Node for which the current node is in the Left SubTree of that Node(Bottom to Top - Absence of a Right Child)
+                              2 -> The First Ancestor Node for which the current node is in the Left SubTree of that Node(Bottom to Top - Absence of a Right Child)
                 5 -> The predecessor of a Node is
                               1 -> The Left Child or the Right Most Node in the Left Subtree of the Current Node(Top to Bottom - Presence of a Left Child)
-                              2 -> The First Node for which the Current Node is in the Right SubTree of that Node(Bottom to Top - Absence of a Left Child)
+                              2 -> The First Ancestor Node for which the Current Node is in the Right SubTree of that Node(Bottom to Top - Absence of a Left Child)
 
           PostOrder Traversal
                 1 -> A Node will always have its right child before it.(used in case of Iterative Traversal)

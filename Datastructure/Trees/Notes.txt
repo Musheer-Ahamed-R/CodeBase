@@ -1,0 +1,31 @@
+                              Tree Name                                 Comments/Restrictions
+
+               1 ->           Binary Tree                                Each Node cannot have more than two Children
+
+               2 ->           Generic Tree(N-ary Tree)                   Each Node can have any number of Children
+
+               3 ->           Threaded Binary Tree                       Binary Tree where a Node's Left Child points to its InOrder Predecessor or
+                                                                         a Node's Right Child points to its InOrder Successor, or Both. It Only points to
+                                                                         its Successor or Predecessor if it was Originally pointing to NULL.
+
+               4 ->           Expression Tree                            All Leaf Nodes are Operands and all Other Nodes are Operators.
+
+               5 ->           XOR Tree                                   Each Node has an XOR of its Parent and LeftChild and an XOR of its Parent and Right Child
+
+               5 ->           Binary Search Tree                         All the Nodes in the Left Subtree of the Node(Root) should be less than the Node data and
+                                                                         All the Nodes in the Right Subtree of the Node(Root) should be greater than the Node data.
+
+               6 ->           AVL(Adelson-Velskii and Landis) Tree       Its is BST, but the Difference between the Height of a Node's Left SubTree and
+                                                                         its Right SubTree must not be greater than 1.
+
+               7 ->           Red-Black Tree
+
+               8 ->           Splay Tree
+
+               9 ->           B-Tree
+
+              10 ->           Augmented Tree
+
+              11 ->           Scapegoat Tree
+
+              12 ->           Interval Tree
