@@ -47,14 +47,19 @@ public class Application {
 
 
       //boolean isFound = SearchNode.searchNode(tree, 150);
+      //boolean isFound = SearchNode.searchNodeIter(tree, 150);
 
       //InsertNode.insertNode(tree, 200);
       //traverse(tree);
 
       //Node minNode = FindMinimum.findMin(tree);
+      //FindMinimum.findMinIter(tree);
 
       //Node maxNode = FindMaximum.findMax(tree);
+      //FindMaximum.findMaxIter(tree);
 
+      DeleteNode.deleteNode(tree, 40);
+      traverse(tree);
 
       //System.out.println(minNode);
 
