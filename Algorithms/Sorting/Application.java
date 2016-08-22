@@ -3,7 +3,7 @@ import java.util.*;
 public class Application {
 
    public static void main(String[] args) {
-      int[] elements = {32, 2, 3, 67, 56, 3, 1, 10};
+      int[] elements = {32, 23, 39, 67, 56, 31, 13, 10};
 
       //int[] elements = new int[]{5, -3, 1, 5, 2, 8, 1, -4, 9, -2, 4, 7};
 
@@ -22,6 +22,7 @@ public class Application {
       //CountingSort.countingSort(elements);
       //CountingSort.handleNegative(elements);
 
+      RadixSort.radixSort(elements);
 
       //System.out.println(Arrays.toString(mergedArr));
    }
