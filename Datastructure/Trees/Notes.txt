@@ -15,7 +15,7 @@
                5 ->           Binary Search Tree                         All the Nodes in the Left Subtree of the Node(Root) should be less than the Node data and
                                                                          All the Nodes in the Right Subtree of the Node(Root) should be greater than the Node data.
 
-               6 ->           AVL(Adelson-Velskii and Landis) Tree       Its is BST, but the Difference between the Height of a Node's Left SubTree and
+               6 ->           AVL(Adelson-Velskii and Landis) Tree       Its is self-balancing BST, but the Difference between the Height of a Node's Left SubTree and
                                                                          its Right SubTree must not be greater than 1.
 
                7 ->           Red-Black Tree

@@ -1,0 +1,15 @@
+1 -> AVL Tree is a self-balancing BinarySearch Tree where the difference between the height of the right and the left subtree must not be greater than 1.
+
+2 -> Time Complexity for Searching, Insertion and Deletion in an AVL Tree is O(log n).
+
+3 -> There are basically Four Violations in an AVL Tree
+
+                        Left, Left   ->   Right Rotation(Single)
+
+                        Right, Right ->   Left Rotation(Single)
+
+                        Left, Right  ->   Left then Right(Double)
+
+                        Right, Left  ->   Right then Left(Double)
+
+4 -> For Insertion, One Type of Rotation is Enough. But for Deletion, the number of rotation depends.
