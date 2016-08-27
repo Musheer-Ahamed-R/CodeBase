@@ -1,0 +1,39 @@
+1 -> Binary Heaps are Rooted Binary Tree Structure with two special properties
+
+      1 -> The Binary Heap must be a Complete Binary Heap at any Time.(All levels are completely filled, except the last level with nodes as left as possible)
+      2 -> The Root is the greatest/smallest(Max or Min heap) in the Tree. The same applies recursively for all nodes.
+
+2 -> Every Sub-Tree is a Heap.
+
+2 -> There are two types of Binary Heaps,
+         Min Heap -
+                  The Root is minimum than its left and right children.
+         Max heap -
+                  The Root is maximum than its left and right children.
+
+3 -> Heap Representation using Arrays
+
+      The Heap elements are stored in the Array in Level-wise.(This works since a Heap is a Complete Binary Tree)
+
+      -> left child in array  -  2i + 1         (i - index of the parent node)
+      -> right child in array -  2i + 2
+      -> parent               -  (i - 1) / 2    (i - any child index)
+
+4 -> Heap can be Built using Two ways.
+         1 -> Using BUBBLE DOWN technique.(Bubble down from the First non-leaf element).     O(n)
+         2 -> Calling Insert on each element.                                                O(nlog n)
+
+         Thus, we can literally do everything using BUBBLE DOWN Technique.
+
+4 -> Insert a Node in a Binary Heap
+
+      -> First insert the node in the place where it is supposed to come.
+      -> If the parent is larger than or equal to the node then we are done.
+      -> Otherwise, swap that node withe the parent and do that recursively till the parent is larger than the node
+
+5 -> Delete a Node in a Binary Heap
+
+      -> SWAP the node with the LAST NODE in the heap. Then remove the root node.
+      -> swap the NEW ROOT with its greatest child and do this recursively till the NODE is greater than its children
+
+6 -> Heapify is the state where the Heap is no longer a Heap and we have to do some changes to make it as a Heap again.(When adding an element or deleting the root).
