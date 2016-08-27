@@ -7,7 +7,7 @@ public class InsertionSort {
           and the second part which is the unsorted or the raw part)
 
         - This sorting Algorithm gets its name, because it can be used to insert a new Element to the array in the same way,
-            so that the resultant array after insertion is sorted.
+            so that the resultant array after insertion is sorted.(Priority Queue)
 
         - Its advantage over Bubble Sort is that, we only need to traverse till the element is less than any other element in the sorted section.
 

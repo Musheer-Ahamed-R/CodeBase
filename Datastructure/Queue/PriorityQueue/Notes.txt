@@ -1,0 +1,3 @@
+1 -> The Priority Queue is used for getting the Element with the Highest Priority(Max value or Min value, depending on the use case).
+
+2 -> The Elements are going to be Maintained/Ordered based on their Priority and not on their Insertion Order

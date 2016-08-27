@@ -1,0 +1,10 @@
+1 -> Red Black Tree is a self-balanced Binary Search Tree.
+
+2 -> Its Nodes are either Black or Red
+
+3 -> Rules
+
+      1 -> Root is Black.
+      2 -> Every Leaf is black.(Doubt)
+      3 -> No Red-Red parent-child relationship.
+      4 -> No of Black nodes from root to leaves with less than 2 children is same.

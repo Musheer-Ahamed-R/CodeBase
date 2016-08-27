@@ -4,7 +4,10 @@ public class Height {
       if(root == null) {
          return -1;
       } else {
-         return root.getHeight();
+         // This is not necessary in case of Insertion, Since we modify the height of the Node from the bottom.
+         int lHeight = height(root.getLChild());
+         int rHeight = height(root.getRChild());
+         return rHeight >= lHeight ? rHeight + 1 : lHeight + 1;
       }
    }
 

@@ -18,7 +18,7 @@
                6 ->           AVL(Adelson-Velskii and Landis) Tree       Its is self-balancing BST, but the Difference between the Height of a Node's Left SubTree and
                                                                          its Right SubTree must not be greater than 1.
 
-               7 ->           Red-Black Tree
+               7 ->           Red-Black Tree                             It is also a self-balancing BST, with each Node having a Color property(some restrictions on them).
 
                8 ->           Splay Tree
 
