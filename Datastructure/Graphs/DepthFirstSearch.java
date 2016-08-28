@@ -14,6 +14,9 @@ public class DepthFirstSearch {
 
    /*
       Adding the Vertex INDEX to the Stack, Instead of the Vertex itself is VERY IMPORTANT.
+      We are making Recursive Call inside a FOR LOOP in case of Recursive Depth First Search.
+      This is because in case of Tree, we have to make just Two Recursive Calls. But, incase of Graphs we Could have to have to make
+      N(Number of Vertices) Recursive Calls altogether. Thus, a Recursive Call in a For Loop is NO BIG DEAL in case of Graphs.
    */
 
    public void dfs() {
@@ -39,8 +42,18 @@ public class DepthFirstSearch {
             stack.pop();
          }
       }
+   }
 
+   public void dfsRecur(int index) {
 
+      // This For Loop is also the "Base Case" for the Method Call
+      for(int i=0;i<vertexCount;i++) {
+         if(this.matrix[index][i] == 1 && !vertices[i].isVisited) {
+            System.out.println("Vertex -> "+vertices[i].vertexName);
+            vertices[i].isVisited = true;
+            dfsRecur(i);
+         }
+      }
    }
 
    public void addEdge(String a, String b) {

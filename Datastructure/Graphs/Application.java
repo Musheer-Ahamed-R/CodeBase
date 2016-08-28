@@ -57,21 +57,29 @@ public class Application {
       // bfs.bfs();
 
 
-      Vertex[] vertex = {new Vertex("A"), new Vertex("B"), new Vertex("C"), new Vertex("D"), new Vertex("E")};
+      // Vertex[] vertex = {new Vertex("A"), new Vertex("B"), new Vertex("C"), new Vertex("D"), new Vertex("E")};
+      //
+      // DepthFirstSearch dfs = new DepthFirstSearch(5, vertex);
+      //
+      // dfs.addEdge("A", "B");
+      // dfs.addEdge("A", "C");
+      // dfs.addEdge("B", "E");
+      // dfs.addEdge("D", "A");
+      // dfs.addEdge("E", "C");
+      // dfs.addEdge("C", "B");
+      // dfs.addEdge("D", "E");
+      //
+      // System.out.println(Arrays.deepToString(dfs.matrix));
+      //
+      // dfs.dfs();
+      // for(Vertex v : dfs.vertices) {
+      //    v.isVisited = false;
+      // }
+      // System.out.println();
+      // System.out.println(dfs.vertices[0].vertexName);
+      // dfs.vertices[0].isVisited = true;
+      // dfs.dfsRecur(0);
 
-      DepthFirstSearch dfs = new DepthFirstSearch(5, vertex);
-
-      dfs.addEdge("A", "B");
-      dfs.addEdge("A", "C");
-      dfs.addEdge("B", "E");
-      dfs.addEdge("D", "A");
-      dfs.addEdge("E", "C");
-      dfs.addEdge("C", "B");
-      dfs.addEdge("D", "E");
-
-      System.out.println(Arrays.deepToString(dfs.matrix));
-
-      dfs.dfs();
 
    }
 
