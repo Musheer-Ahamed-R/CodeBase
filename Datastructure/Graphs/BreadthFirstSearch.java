@@ -20,13 +20,14 @@ public class BreadthFirstSearch {
       Queue<Integer> q = new ArrayDeque<>();
       q.add(0);
       this.vertices[0].isVisited = true;
+      System.out.println("Vertex -> "+vertices[vertexIndex].vertexName);
       // The Vertices that are not reacheable from first Vertex cannot be Traversed in a Single Traversal(logical). Instead, we can use a
-      // Seperate for loop for Iterating Over those Vertices. But That is not necessary, Since we are Talking about Traversal here and not Visiting the Nodes.
+      // Seperate for loop for Iterating Over those Vertices. But That is not necessary, Since we are Talking about Traversal here and not Visiting Every Node.
       while(!q.isEmpty()) {
          int vertexIndex = q.remove();
-         System.out.println("Vertex -> "+vertices[vertexIndex].vertexName);
          for(int i=0;i<vertexCount;i++) {
             if(matrix[vertexIndex][i] == 1 && !vertices[i].isVisited) {
+               System.out.println("Vertex -> "+vertices[vertexIndex].vertexName);
                vertices[i].isVisited = true;    // Important, because if we are going to add visited to a Vertex when removing it, there will be duplicates in the Queue.
                q.add(i);
             }
