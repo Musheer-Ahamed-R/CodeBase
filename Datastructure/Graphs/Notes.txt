@@ -15,4 +15,10 @@
          -> Adjacency Set                                                                    log(Degree V)                           Degree(V)
 
 5 -> A Separate VERTICES ARRAY is required for both Adjacency Matrix and Adjacency List.(But, could be avoided for Adjacency List)
-6 ->
+
+6 -> Graph Traversal Algorithms
+
+         -> Depth First Search(DFS)
+         -> Breadth First Search(BFS)
+
+7 -> 

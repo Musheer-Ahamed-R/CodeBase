@@ -25,7 +25,7 @@ public class AdjacencyMatrix {
       int secIndex = getIndex(b);
       if(firIndex >= 0 && firIndex < this.vertexCount && secIndex >= 0 && secIndex < this.vertexCount) {
          this.matrix[firIndex][secIndex] = 1;
-         this.matrix[secIndex][secIndex] = 1;
+         this.matrix[secIndex][firIndex] = 1;
       }
    }
 
