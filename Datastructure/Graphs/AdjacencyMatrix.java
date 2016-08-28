@@ -4,6 +4,11 @@ public class AdjacencyMatrix {
    public String[] vertexArr;
    public int vertexCount;
 
+   /*
+
+
+   */
+
    public AdjacencyMatrix(int vertexCount) {
       this.vertexCount = vertexCount;
       this.matrix = new int[vertexCount][vertexCount];
