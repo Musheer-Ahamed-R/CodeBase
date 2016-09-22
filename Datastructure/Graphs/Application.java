@@ -4,9 +4,19 @@ public class Application {
 
    public static void main(String[] args) {
 
-      String[] vertexArr = {"A", "B", "C", "D", "E"};
-      AdjacencyMatrix adj = new AdjacencyMatrix(5, vertexArr);
-
+      String[] vertexArr = {"A", "B", "C", "D", "E", "F", "G", "H"};
+      Vertex[] vertex = new Vertex[]{new Vertex("A"), new Vertex("B"), new Vertex("C"), new Vertex("D"), new Vertex("E"), new Vertex("F"), new Vertex("G"), new Vertex("H")};
+      AdjacencyMatrix adj = new AdjacencyMatrix(8, vertexArr);
+      //                   OR
+      //int[][] adjMatrix = new int[][]{{0, 1, 1, 1, 0}, {1, 0, 1, 0, 1}, {1, 1, 0, 0, 1}, {1, 0, 0, 0, 1}, {0, 1, 1, 1, 0}};
+      int[][] adjMatrix = {{0, 0, 1, 0, 0, 0, 0, 0},
+                           {0, 0, 1, 1, 0, 0, 0, 0},
+                           {0, 0, 0, 0, 1, 0, 0, 0},
+                           {0, 0, 0, 0, 0, 1, 0, 0},
+                           {0, 0, 0, 0, 0, 1, 0, 1},
+                           {0, 0, 0, 0, 0, 0, 1, 0},
+                           {0, 0, 0, 0, 0, 0, 0, 0},
+                           {1, 0, 0, 0, 0, 0, 0, 0}};
       // adj.addEdge("A", "B");
       // adj.addEdge("A", "C");
       // adj.addEdge("B", "E");
@@ -80,6 +90,8 @@ public class Application {
       // dfs.vertices[0].isVisited = true;
       // dfs.dfsRecur(0);
 
+      System.out.println(Arrays.toString(vertex));
+      TopologicalSort.topoSort(adjMatrix, vertex, 0);
 
    }
 

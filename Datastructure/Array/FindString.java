@@ -1,15 +1,14 @@
 public class FindString {
 
-   int[][] visitedMatrix = new int[3][13];
+   int[] row = new int[]{};
+   int[] column = new int[]{};
 
    public boolean findString(char[][] matrix, int i, int j, String str, int charIndex, int direction) {
       if(i < 0 || j < 0 || j >= matrix[0].length || i >= matrix.length) {
          return false;
       }
       if(str.charAt(charIndex) == matrix[i][j]) {
-         //System.out.println("Char "+matrix[i][j]);
          if(charIndex == str.length()-1) {
-            //System.out.println("String found ");
             return true;
          }
          charIndex++;
