@@ -1,4 +1,3 @@
-
 Package -
 
       The Java compiler automatically imports two entire packages,
@@ -7,7 +6,6 @@ Package -
 
       Nested Imports -
          This allows us to import the public nested classes of an enclosing class.
-
 
       Static Import Statement -
           The static import statement gives you a way to import the constants and static methods of a Class, so that we do not need to prefix the name of their class.
