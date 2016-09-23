@@ -30,7 +30,7 @@ Compiling -
                            Make sure to Include the Current Directory("."), if Extra Source Paths are Provided.
 
    Note :
-      -> We can run our project from Anywhere, we just need to give the Class Path and the Destination Directory and Traverse to the Java File Containing the Main method.
+      -> We can compile our project from Anywhere, we just need to give the Class Path and the Destination Directory and Traverse to the Java File Containing the Main method.
       -> Traversing to the Main Java Class is a Normal Traversal(i.e) No Package Level Traversing
       -> The CLASS_PATH can be any PATH and need not be set as an Environment Variable.
 
