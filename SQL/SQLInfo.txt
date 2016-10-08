@@ -81,7 +81,7 @@ Different Types of Keys in a Table -
 
          -> Unique Key
                      -> They have UNIUUE values in a Table, except for NULL Values.
-                     -> It can take NULL values (Those NULL values could occur multiple times. Thus, need not always be a Candidate Key)
+                     -> It can take NULL values (Those NULL values could occur MULTIPLE TIMES. Thus, need not always be a Candidate Key)
                      -> There can one or more Unique Keys in a Table.
                      -> It is a Single Attribute
 
@@ -160,7 +160,7 @@ Additional Properties :
                                                    @@Identity                    ->    Same Session, but Any Scope
                                                    IDENT_CURRENT(TableName)      ->    Any Session and Any Scope
 
-                                                   Session  - A Connection with the Database Server.
+                                                   Session  - A Connection with the Database Server.(A Tab in Terminal)
                                                    Scope    - A Single Action(Like Inset, Update, Delete etc..)
 
 Important Keywords in SQL
@@ -211,4 +211,10 @@ Important Keywords in SQL
 
 
 
-CASCADING Referential Integrity Constraint -
+
+
+
+
+         -> RETURNING   -     -> This is used to get the value of the Column(s) which are inserted/Deleted currently. Used in cases where the value for a Column is Inserted by a Sequence.
+                              Syntax :
+                                 insert into dummy3(id, name) values(DEFAULT, 'sfcsdd'), (DEFAULT, 'fsfsd') RETURNING id, name;

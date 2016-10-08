@@ -10,6 +10,8 @@ Shortcuts -
 
 -> List all Tables in a Schema    => \dt SCHEMA_NAME.*
 
+-> Set Schema to be used          => SET SEARCH_PATH TO Schema_Name
+
 -> Table Structure                => \d+ TABLE_NAME   or \d TABLE_NAME
 
 -> exit                           => \q
