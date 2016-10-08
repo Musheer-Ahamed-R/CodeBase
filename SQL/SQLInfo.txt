@@ -163,6 +163,7 @@ Additional Properties :
                                                    Session  - A Connection with the Database Server.(A Tab in Terminal)
                                                    Scope    - A Single Action(Like Inset, Update, Delete etc..)
 
+
 Important Keywords in SQL
 
          -> CREATE      -     -> We use CREATE Command to Create ALL Types of the Database Objects.
@@ -180,13 +181,76 @@ Important Keywords in SQL
                               Syntax :
                                  DROP Object_Type Name
 
-         -> SELECT
+         -> SELECT      -    -> To Retrieve Column Values from a Table or a Combination of Two tables(JOIN).
+                             -> Better to Specify all Column names, instead of just * for Performance reasons.
+                             -> The Column could also contain EXPRESSION(involving literals, Arithmetic Operators(COUNT(id) + SUM(Salary)), SubQuery etc..)
 
-         -> INSERT      -     -> To Insert values into a Table
-                              -> DEFAULT Keyword can be used if we want to use Default value for the Attribute.
-                              Syntax :
+                             SUBQUERY    -   -> In SQL, a subquery can be substituted anywhere an Expression can be used in SELECT, UPDATE, INSERT, and DELETE statements,
+                                                except in an ORDER BY list.
+
+
+         -> DISTINCT    -    -> Distinct on a Column(s), is used to get Unique Column Values from the Result.
+                             -> It is same like GROUP BY Clause, except that we cannot use Aggregate Functions(Without any Tweak) with it.(i.e Just Removes duplicates).
+                             -> DISTINCT = GROUP BY - AGGREGATE FUNCTIONS
+                             -> Distinct on Multiple Columns means, the Values should be Distinct on all the Columns.(e.g, record -> ('mush', 'chn') is DISTNICT only with record -> ('mush', 'chn')).
+                             -> DISTINCT Cannot be applied on Specific Columns of a Select Query.
+
+         -> Top         -    ->
+
+         -> WHERE       -    -> To Filter records with a Condition. The Condition is Checked FOR EVERY RECORD.
+                                Syntax :
+                                    WHERE Condition
+
+                                    Wildcards -
+                                          -> %                     -    Matches one or more characters(any Character)
+                                          -> _                     -    Matches one Character(any Character)
+
+                                    SQL Logical Operators Possibilities -
+                                          -> LIKE                  -    'String_Pattern'
+                                          -> IN                    -    (val1, val2, val3, ...)
+                                          -> BETWEEN               -    (val1 AND val2)
+                                          -> IS NULL               -    IS NULL
+                                          -> IS NOT NULL           -    IS NOT NULL
+                                          -> NOT                   -    Uses with LIKE, IN, BETWEEN, EXISTS
+                                          -> AND                   -    AND
+                                          -> OR                    -    OR
+                                          -> EXISTS                -
+                                          -> ALL                   -
+                                          -> ANY                   -
+
+                                    SQL Comparison Operators -
+                                          -> =, !=, <>(Same as !=), >, <. >=, <=, !>, !<
+
+                                    SQL Arithmetic Operators -
+                                          -> +, -, *, /, %
+
+                                Additional Notes on Operators -
+
+                                    Exists   -  -> When a subquery is introduced with the keyword EXISTS, the subquery functions as an existence test.(i.e The subquery
+                                                   does not actually produce any data, it returns a value of TRUE or FALSE.
+                                                -> The WHERE clause of the outer query tests whether the rows that are returned by the subquery exist.
+                                                -> The Subquery is a CORRELATED SubQuery.(i.e It references a Table Outside the SubQuery)
+                                                -> JOIN along with DISTINCT does the same thing, but EXISTS has a Performance Advantage Over Join(i.e It returns True if there exists at least a Single Record, need not go through all the records, Unlike JOIN).
+                                                -> Logically very Similar to the IN Clause, but we don't use JOIN Like Condition in the SubQuery.
+                                                -> The keyword EXISTS is not preceded by a column name, constant, or other expression.
+                                                -> The select list of a subquery introduced by EXISTS almost always consists of an asterisk (*).
+                                                   There is no reason to list column names because you are just testing whether rows that meet the conditions specified in the subquery exist.
+
+                                    IN       -  -> The Possible Values for IN WITH A SUBQUERY is, all the Values for the related Column in the other table. It is as Efficient as Exists(Discussed above).
+
+                                    ANY      -  ->
+
+                                Note :
+
+                                    -> IN, ANY, ALL, EXISTS can be used with a SubQuery.
+                                    -> JOIN takes all the record, when a Col in One table has Multiple matches in Other table(Col is Duplicated as many times it found a Match on the Other table).
+                                    -> EXISTS is better than JOIN + DISTINCT
+
+         -> INSERT      -    -> To Insert values into a Table
+                             -> DEFAULT Keyword can be used if we want to use Default value for the Attribute.
+                             Syntax :
                                  INSERT INTO TABLE_NAME(Col1, Col2, ...) VALUES(Val1, Val2, ...);
-                                                            OR
+                                                         OR
                                  INSERT INTO TABLE_NAME VALUES(Val1, Val2, ...);           //If we are going to insert Values for all Attributes.
 
          -> UPDATE
@@ -195,7 +259,7 @@ Important Keywords in SQL
 
          -> FROM
 
-         -> WHERE
+
 
          -> ORDER BY
 
@@ -215,6 +279,25 @@ Important Keywords in SQL
 
 
 
+
+
+
          -> RETURNING   -     -> This is used to get the value of the Column(s) which are inserted/Deleted currently. Used in cases where the value for a Column is Inserted by a Sequence.
                               Syntax :
                                  insert into dummy3(id, name) values(DEFAULT, 'sfcsdd'), (DEFAULT, 'fsfsd') RETURNING id, name;
+
+         -> CROSS
+
+         -> OUTER
+
+         -> PARTITION
+
+         -> CASE
+
+         -> WHEN
+
+         -> THEN
+
+         -> ELSE
+
+         -> END
