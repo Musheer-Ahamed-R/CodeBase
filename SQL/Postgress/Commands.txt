@@ -1,0 +1,21 @@
+Shortcuts -
+
+-> Show QUERIES of Commands       => psql -E
+
+-> List all Users                 => \du
+
+-> List all Databases             => \l
+
+-> List all Schemas in a Database => \dn
+
+-> List all Tables in a Schema    => \dt SCHEMA_NAME.*
+
+-> Table Structure                => \d+ TABLE_NAME   or \d TABLE_NAME
+
+-> exit                           => \q
+
+-> Switch Database                => \connect DB_NAME or \c DB_NAME
+
+-> Show all Sequences             => \ds
+
+-> Show Sequence in detail        => \d+ Sequence_Name  or \d+ Sequence_Name

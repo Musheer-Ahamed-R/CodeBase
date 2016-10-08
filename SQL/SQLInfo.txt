@@ -1,0 +1,214 @@
+Database Server -
+
+      Database Server is a Software Application that Contains Databases, Schemas, Tables, Triggers, Views, Indexes, Stored Procedures, Functions etc..
+
+Types of Database Management System(Server) :
+
+      1 -> Flat File Database
+            -> A Single large Table.
+
+      2 -> Relational Database
+            -> Hierarchical Database
+                     -> Folder Structure, One to One Relationship(i.e Employee reporting to a Single Manager(Parent).
+                     -> A Folder/File is related to a Single Folder.
+            -> RDBMS (Relational DBMS)
+                     -> One to Many Relationship(i.e Employee reporting to a Multiple Managers).
+                     -> A Table can be related to any other Table in a Database.
+                     -> e.g SQL Server, MySQL, Oracle
+            -> ORDBMS (Object-Relational DBMS)
+                     -> e.g Postgres
+            -> NEWSQL
+                     -> Provides the Same Scalable Performance of NoSQL System for OLTP(Online Transaction Processing), while maintaining the ACID
+                        guarantees of a Traditional Database System.
+                     -> e.g Clustrix, NuoDB, MemSQL, Elastic Database, VoltDB, Google Spanner.
+
+      3 -> NoSQL Database (Lacks in ACID test)
+            -> Key-Value Database
+                     -> e.g Amazon DynamoDB, Oracle Berkeley Db, Redis
+            -> Graph Database
+                     -> e.g Neo4j, infiniteGraph, Sones
+            -> Column Database
+                     -> e.g HBASE, Riak, Cassandra
+            -> Document Database
+                     -> Nested form of Key-Value database(JSON Structured)
+                     -> e.g CouchDB, MongoDB, Terrastore
+
+Terms and Meanings :
+
+Database          - A Database is the Main Container, it Contains the Data, Log files and all the Schemas within it.
+                     -> Whenever a Database is created, two files are Generated,
+                           -> MASTER Data File (MDF)(Contains Actual Data)
+                           -> LOG Data File (LDF)(Transaction Log File - Used to recover the Database).
+
+
+
+Schemas           - A Schema is like a Folder within a Database(namespace/package), and are mainly used to group logical Objects together, which leads to ease of
+                  Setting Permission by Schema. (e.g HR Schema, Research Schema, Vendors Schema etc.., Now HR User can be made to access only HR Schema).
+
+                  Syntax :
+                           CREATE SCHEMA schemaname AUTHORIZATION username;                                                   // Postgres - Authorization username could be skipped
+
+                           -> Its a Distinct namespace, that exists independently of the Database User who Created it (i.e It Could be Made accessible to Other Users). Its Ownership is Transferable.
+
+                           -> Every Database has a Default Schema. If we Create a Table without a Schema, it will go inside the Default Schema of the Database.
+
+                           -> We can only DROP a Schema if it is Empty(No Objects inside it). Otherwise, we should use the CASCADE Command.
+
+Tables/Entity     - A Table is a  Collection of Data Elements organized in terms of Rows and Columns. It is a Convenient representation of a Relation.
+
+Field/Attribute   - Fields are the Properties(Column names) of a Table/Entity.
+                    Types of Attributes :
+
+                        -> Simple Single Values Attribute (e.g Gender)
+                        -> Simple Multi-Values Attribute (e.g Phone No)
+                        -> Composite Single Values Attribute (e.g firstname_lastname)
+                        -> Composite Multi-Values Attribute (e.g sibilingfirstname_sibilinglastname)
+                        -> Derived Attribute (e.g Average Salary of Employees, age derived from DOB)
+
+Record/Row/TUPLE  - A Single instance of a table that represents set of related data.
+
+Column            - Set of Value(Instance) of a Particular Type(Filed).
+
+Different Types of Keys in a Table -
+
+         -> Super Key
+                     -> A Single Attribute or a Combination of Attributes that is used to uniquely identify a record.
+                     -> A table can have many super keys.
+                     -> The Combination of Attributes need not be minimal. (i.e There can be a Combination of three attributes for a Super key, even if one or two is sufficient to uniquely identify a Record).
+
+         -> Candidate Key
+                     -> The Minimal Super Key or the Irreducible Super Key (i.e An SINGLE Attribute or a Combination of Attributes that identifies the record uniquely, but none of its subsets can identify the records uniquely).
+
+         -> Unique Key
+                     -> They have UNIUUE values in a Table, except for NULL Values.
+                     -> It can take NULL values (Those NULL values could occur multiple times. Thus, need not always be a Candidate Key)
+                     -> There can one or more Unique Keys in a Table.
+                     -> It is a Single Attribute
+
+         -> Primary Key
+                     -> A Candidate Key that is used by the Database Designer for unique identification of each Row in a Table.
+                     -> A Primary Key can Consist of One or More Attributes of a Table
+                     -> It Cannot take NULL values
+                     -> There can only be one Primary Key
+                     -> It can be a Combination of Attributes(e.g Composite Primary Key)
+
+         -> Composite Key(Compound Key/Concatenated Key)
+                     -> If we use Multiple Attributes to create a Primary Key, then that Primary Key is called ad Composite Key
+
+         -> Alternate Key
+                     -> Any Candidate Key that is not a Primary Key.
+
+         -> Secondary Key
+                     -> The Attribute that are not even the Super Key, but can still be used for Identification of Records(though NOT UNIQUE).
+
+         -> Foreign Key
+                     -> An Attribute or Combination of Attribute in one Base table that points to the Primary Key of Another table.
+                     -> This is used to ensure Referential Integrity of the Data.(i.e Only values that are already Present in the Parent Table or NULL is allowed)
+
+         -> Artificial Key
+                     -> If no Obvious Stand alone Primary Key or Composite Key is available, then we simply create a new Attribute and assign a Unique Number to each Record.
+                     -> This eventually becomes the Primary Key.
+
+         -> Surrogate Key
+
+
+         -> Partial Key
+
+
+Constraints in SQL :
+
+         -> Primary Key           - PRIMARY KEY(Col1, Col2, Col3);
+
+         -> Unique                - Checks if the Value for the Column, is UNIQUE in the Table.
+                                    UNIQUE (Col)
+
+         -> Foreign Key           - FOREIGN KEY(Col111, Col222, Col333) REFERENCES PARENT_TABLE(Col1, Col2, Col3);
+
+                                    CASCADING Referential Integrity - This allows the Database Server to define the Actions which should be taken when a user attempts to
+                                                                    Delete/Update a key to which an existing Foreign key points.
+                                                                    -> The CASCADING Referential Integrity is for the FOREIGN KEY of a Table(i.e) Not for the Entire Parent Table. Thus, it can
+                                                                    only be applied when a Foreign key is Declared.
+                                                                    Options -
+                                                                        -> NO ACTION (Default, DELETE/UPDATE is ROLLED BACK)
+                                                                        -> CASCADE (DELETE/UPDATE reflected everywhere the key is referenced as a Foreign Key)
+                                                                        -> SET NULL
+                                                                        -> SET DEFAULT
+
+         -> Check                 - This is used to limit the Range of values, that can be entered for a Column.(NULL is Considered as a Valid Value if Passed).
+                                    CHECK (Boolean_Expression)
+
+         -> NOT NULL              - Checks if the Value to be Inserted for a Column is Not NULL
+                                    NOT NULL
+
+         -> DEFAULT               - The Value to be Set for the Column, if no Value is specified(NULL is Considered as a Value if Passed).
+                                    DEFAULT Default_Value
+
+         Note :
+            -> We should be using the Keyword CONSTRAINT, if we want to name our Constraint. (e.g CONSTRAINT prim_key_attr PRIMARY KEY(id).
+            -> CONSTRAINT name should be UNIQUE WITHIN a SCHEMA. It should not Collide with Table name either.
+
+Additional Properties :
+
+         Identity Column          -       -> If a Column is Marked as an Identity Column, we need not provide Value for that Column, for each Record we Insert into that Table.
+                                          -> We can also explicitly give the value for the Identity Column. But, in case of SQL Server, We have to SET
+                                             IDENTITY_INSERT to "ON"(Used in case of filling the Deleted Values).
+                                          -> Thus, It could allow duplicate values.
+                                          -> Same as AUTO_INCREMENT in MYSQL or SEQUENCE in PostgreSQL(SERIAL is implicitly Converted to a SEQUENCE in PostgreSQL).
+                                          -> DBCC Command(Database Consistency Check) can be used to RESET the Identity Value(Start value).
+                                          -> Last generated Identity value can be retrieved using Three Commands
+                                                   SCOPE_IDENTITY()              ->    Same Session and Same Scope
+                                                   @@Identity                    ->    Same Session, but Any Scope
+                                                   IDENT_CURRENT(TableName)      ->    Any Session and Any Scope
+
+                                                   Session  - A Connection with the Database Server.
+                                                   Scope    - A Single Action(Like Inset, Update, Delete etc..)
+
+Important Keywords in SQL
+
+         -> CREATE      -     -> We use CREATE Command to Create ALL Types of the Database Objects.
+                              Syntax :
+                                 CREATE Object_Type Name ...
+
+         -> ALTER       -     -> If we Want to Alter Any Object which is already created using the CREATE Command.
+                              -> If ONLY is specified before the Table Name, only that Table is altered, else the Table and all its descendant Tables (if any) are altered
+                              Syntax :
+                                 ALTER Object_Type [IF EXISTS, ONLY] Name Option
+                                 Option - ADD/MODIFY/DROP/ALTER/RENAME/VALIDATE/DISABLE/ENABLE/CLUSTER/SET/RESET/INHERIT/NO INHERIT/OF/NOT OF/OWNER TO
+
+         -> DROP        -     -> TO Drop any Object
+                              -> We Cannot DROP an Object if it is Currently in use.
+                              Syntax :
+                                 DROP Object_Type Name
+
+         -> SELECT
+
+         -> INSERT      -     -> To Insert values into a Table
+                              -> DEFAULT Keyword can be used if we want to use Default value for the Attribute.
+                              Syntax :
+                                 INSERT INTO TABLE_NAME(Col1, Col2, ...) VALUES(Val1, Val2, ...);
+                                                            OR
+                                 INSERT INTO TABLE_NAME VALUES(Val1, Val2, ...);           //If we are going to insert Values for all Attributes.
+
+         -> UPDATE
+
+         -> DELETE
+
+         -> FROM
+
+         -> WHERE
+
+         -> ORDER BY
+
+         -> GROUP BY
+
+         -> HAVING
+
+         -> UNION
+
+         -> UNION ALL
+
+         -> INTERSECT
+
+
+
+CASCADING Referential Integrity Constraint -

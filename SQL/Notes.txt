@@ -1,0 +1,11 @@
+Notes :
+
+   -> The Databases, Schemas, Tables, Views, functions, Triggers, Stored Procedures are all Database Objects.
+
+   -> We can query two tables in two different databases on the same SQL Server, Using the Fully Qualified name of the Table(i.e 'DatabaseName'.'SchemaName'.'TableName')
+
+   -> Using DISTINCT Attribute with another Attribute Could bring up duplicates for the Distinct Attribute.
+
+   -> When using Aggregate Functions, the additional Attributes must be in a Group By Clause.
+
+   -> SET SINGLE_USER on a Database makes sure that only the Current User is Using the Database.(Used along with the Command "With Rollback Immediate").

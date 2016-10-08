@@ -1,0 +1,8 @@
+Terms -
+
+   SEQUENCE          -  It is a database object, not a data type. Simple object, that
+                        can be used to generate unique integer numbers for Columns across the Schema.
+
+   SERIAL            -  It is a fictive/pseudo datatype. It implicitly creates its own SEQUENCE object(table_col_seq) and
+                        can create a reference on this object. The implicitly generated Sequence can be used in other Tables across the schema.
+                        But, if the parent Table(where it is implicitly created) is deleted, then insertion into other dependent table gives an error.

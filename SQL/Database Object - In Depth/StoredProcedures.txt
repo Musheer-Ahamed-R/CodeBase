@@ -1,0 +1,7 @@
+Notes :
+
+   A Group of Commands that are executed together.
+
+   Types :
+         -> System Stored Procedures
+         -> User-Defined Stored Procedures
