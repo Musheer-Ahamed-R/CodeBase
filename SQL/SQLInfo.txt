@@ -184,9 +184,37 @@ Important Keywords in SQL
          -> SELECT      -    -> To Retrieve Column Values from a Table or a Combination of Two tables(JOIN).
                              -> Better to Specify all Column names, instead of just * for Performance reasons.
                              -> The Column could also contain EXPRESSION(involving literals, Arithmetic Operators(COUNT(id) + SUM(Salary)), SubQuery etc..)
+                             -> It Always gives a Result Set, even that that can be a Single value.
 
-                             SUBQUERY    -   -> In SQL, a subquery can be substituted anywhere an Expression can be used in SELECT, UPDATE, INSERT, and DELETE statements,
-                                                except in an ORDER BY list.
+                             SUBQUERY    -   -> A subquery is a (Select) query that is nested inside the WHERE or HAVING or FROM Clause of an Outer SELECT, INSERT, UPDATE, or DELETE statement, or inside another subquery.
+                                             -> In SQL, a subquery can be substituted anywhere an Expression can be used in SELECT, UPDATE, INSERT, and DELETE statements,
+                                                except in an ORDER BY list, if it returns a SINGLE VALUE.
+                                             -> The SELECT query of a subquery is always enclosed in parentheses.
+                                             -> A subquery nested in the outer SELECT statement has the following components:
+                                                      -> A regular SELECT query including the regular select list components.
+                                                      -> A regular FROM clause including one or more table or view names.
+                                                      -> An optional WHERE clause.
+                                                      -> An optional GROUP BY clause.
+                                                      -> An optional HAVING clause.
+                                             -> It cannot include a COMPUTE or FOR BROWSE or INTO clause, and may only include an ORDER BY clause when a TOP clause is also specified.
+                                             -> Statements that include a subquery usually take one of these formats:
+                                                      -> FROM (subquery)
+                                                      -> WHERE expression [NOT] IN (subquery)
+                                                      -> WHERE expression comparison_operator [ANY | ALL] (subquery)
+                                                      -> WHERE [NOT] EXISTS (subquery)
+                                             -> There are three basic types of subqueries. Those that:
+                                                      -> Used in the FROM Clause, that gives a Normal Result Set.(Only case where Multiple Columns are Supported)
+                                                      -> Operate on lists introduced with IN, or those that a comparison operator modified by ANY or ALL, must have a Single Column.
+                                                      -> Are introduced with an unmodified comparison operator and must return a single value.
+                                                      -> Are existence tests introduced with EXISTS, almost always consists of an asterisk (*).
+                                             -> SUBQUERY Rules
+                                                      -> If the WHERE clause of an outer query includes a column name, it must be join-compatible with the column in the subquery select list.
+                                                      -> Because they must return a single value, subqueries introduced by an unmodified comparison operator
+                                                         (one not followed by the keyword ANY or ALL) cannot include GROUP BY and HAVING clauses.
+                                                      -> The DISTINCT keyword cannot be used with subqueries that include GROUP BY.
+                                             -> Subqueries with Aliases
+                                                      -> Many statements in which the subquery and the outer query refer to the same table can be stated
+                                                         as self-joins (joining a table to itself). An Alias Will/Must be used in this case.
 
 
          -> DISTINCT    -    -> Distinct on a Column(s), is used to get Unique Column Values from the Result.
@@ -237,8 +265,11 @@ Important Keywords in SQL
                                                    There is no reason to list column names because you are just testing whether rows that meet the conditions specified in the subquery exist.
 
                                     IN       -  -> The Possible Values for IN WITH A SUBQUERY is, all the Values for the related Column in the other table. It is as Efficient as Exists(Discussed above).
+                                                -> The SubQuery can have only one Column
 
                                     ANY      -  ->
+
+                                    ALL      -  ->
 
                                 Note :
 
@@ -289,6 +320,8 @@ Important Keywords in SQL
          -> CROSS
 
          -> OUTER
+
+         -> OVER
 
          -> PARTITION
 
