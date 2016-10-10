@@ -286,7 +286,6 @@ Important Keywords in SQL
                                 Note :
 
                                     -> IN, ANY, ALL, EXISTS can be used with a SubQuery.
-                                    -> JOIN takes all the record, when a Col in One table has Multiple matches in Other table(Col is Duplicated as many times it found a Match on the Other table).
                                     -> EXISTS is better than JOIN + DISTINCT
 
          -> INSERT      -    -> To Insert values into a Table
@@ -303,6 +302,7 @@ Important Keywords in SQL
          -> FROM
 
          -> JOIN        -    -> By using joins, we can retrieve data from two or more tables based on logical relationships between the tables.
+                             -> JOIN takes all the record, when a Col in One table has Multiple matches in Other table(Col is Duplicated as many times it found a Match on the Other table).
                              -> A join can always be expressed as a subquery. A subquery can often, but not always, be expressed as a join.
                                 This is because joins are symmetric, you can join table A to B in either order and get the same answer. The same is not true if a subquery is involved.
                                 Syntax :
@@ -320,16 +320,43 @@ Important Keywords in SQL
                                       -> Cross joins
                                 INNER JOIN   -  -> Inner joins use a comparison operator to match rows from two tables based on the values in common columns from each table.
                                                 -> Inner joins can be specified in either the FROM (Includes ON Clause)or WHERE clauses.In case of WHERE Clause, it becomes an IMPLICIT Inner Join.
+                                                -> Inner joins eliminate the rows that do not match with a row from the other table based on the Join Criteria.
                                                 -> The Not-Equal join (<>) is rarely used. As a general rule, Not-Equal joins make sense only when used with a self-join.
-                                                Types of Inner Join -
+                                                -> This is the Default Join.(i.e its an Inner Join if only Join is specified).
+                                                Types of Inner Join  -
                                                       -> A THETA join allows for arbitrary comparison relationships (such as ≥).
                                                       -> An EQUI-JOIN is a theta join using the equality operator.
                                                       -> A NATURAL join is an EQUI-JOIN on attributes that have the same NAME in each relationship. Additionally, a natural join removes the duplicate columns involved in
                                                          the equality comparison. This type of JOIN is HIGHLY DISCOURAGED.
 
 
+                                OUTER JOIN   -  -> Outer joins, return all rows from at least one of the tables (Left or Right)or views mentioned in the FROM clause, as long as those rows meet any WHERE or HAVING search conditions.
+                                                -> Types of Outer Join  -
+                                                      -> LEFT OUTER JOIN or LEFT JOIN
+                                                      -> RIGHT OUTER JOIN or RIGHT JOIN
+                                                      -> FULL OUTER JOIN or FULL JOIN
 
+                                                   LEFT JOIN   -  -> All rows, Other than the Matches Rows, are retrieved from the Left table. For those Rows, the Value for Columns in the Right Table will be NULL.
 
+                                                   RIGHT JOIN  -  -> All rows, Other than the Matches Rows, are retrieved from the Right table. For those Rows, the Value for Columns in the Left Table will be NULL.
+
+                                                   FULL JOIN   -  -> All rows, Other than the Matches Rows, are retrieved from the Left and the Right table. For those Rows, the Value for Columns in the Other Table will be NULL.
+
+                                CROSS JOIN   -  -> This return all rows from the left table. Each row from the left table is combined with all rows from the right table.(i.e If the
+                                                   First Table has 17 Rows and Second table has 10 Rows, then the Resultant ResultSet will have 170 Rows).
+                                                -> Cross joins are also called Cartesian products.
+                                                -> They don't have an ON Clause or a WHERE Clause. If where Clause is used, they behave like INNER JOIN.
+
+                                SELF JOIN    -  -> A table can be joined to itself in a self-join. Use a self-join when you want to create a result set that joins records in a table with other records in the same table.
+                                                -> This is Done using an INNER JOIN.
+                                                -> The Not-Equal join (<>) is rarely used. Not-Equal joins make sense only when used with a self-join that too as a Second Condition.
+
+                            -> Join Over Three or More Tables
+                                                -> The FROM Clauses can contain multiple join specifications. This allows many tables to be joined for a single query.
+                                                -> The Middle table of the join, can be called the Translation table or Intermediate table, because Table is an intermediate point of Connection between the other Tables involved in the Join.
+                                                -> The Second or Joins after it use the ResultSet returned from their Previous Join.
+                                                -> When there is more than one join operator in the same statement, either to join more than two tables or to join more than two pairs of columns,
+                                                   the Join expressions can be connected with AND or with OR.
 
          -> ORDER BY
 
