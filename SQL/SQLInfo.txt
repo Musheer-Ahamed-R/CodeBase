@@ -63,7 +63,7 @@ Field/Attribute   - Fields are the Properties(Column names) of a Table/Entity.
                         -> Simple Multi-Values Attribute (e.g Phone No)
                         -> Composite Single Values Attribute (e.g firstname_lastname)
                         -> Composite Multi-Values Attribute (e.g sibilingfirstname_sibilinglastname)
-                        -> Derived Attribute (e.g Average Salary of Employees, age derived from DOB)
+                        -> Derived Attribute  =>  Values that do not exist in the base tables, but are calculated from the values stored in the base tables(e.g Average Salary of Employees, age derived from DOB, etc..)
 
 Record/Row/TUPLE  - A Single instance of a table that represents set of related data.
 
@@ -183,8 +183,50 @@ Important Keywords in SQL
 
          -> SELECT      -    -> To Retrieve Column Values from a Table or a Combination of Two tables(JOIN).
                              -> Better to Specify all Column names, instead of just * for Performance reasons.
-                             -> The Column could also contain EXPRESSION(involving literals, Arithmetic Operators(COUNT(id) + SUM(Salary)), SubQuery etc..)
+                             -> The Select_List is a series of Expressions separated by commas. Each expression defines a column in the result set.
+                             -> The Select_List could also contain EXPRESSION, involving literals, Arithmetic Operators(COUNT(id) + SUM(Salary)), SubQuery etc..
                              -> It Always gives a Result Set, even that that can be a Single value.
+                             -> The optional AS keyword can be used to change the name, or to assign a name if the expression has no name.
+
+                             Syntax :
+                                 SELECT select_list
+                                 [ INTO new_table_name ]
+                                 FROM table_list
+                                 [ WHERE search_conditions ]
+                                 [ GROUP BY group_by_list ]
+                                 [ HAVING search_conditions ]
+                                 [ ORDER BY order_list [ ASC | DESC ] ]
+
+                             The Select_List can also contain the following keywords that control the final format of the result set :
+                                 ALL         -     -> The ALL keyword can explicitly ask for all rows. However, there is no need to specify ALL because it is the default.
+
+                                 DISTINCT    -     -> The DISTINCT keyword eliminates duplicate rows from the results of a SELECT statement.
+                                                   -> It is same like GROUP BY Clause, except that we cannot use Aggregate Functions(Without any Tweak) with it.(i.e Just Removes duplicates).
+                                                   -> DISTINCT = GROUP BY - AGGREGATE FUNCTIONS
+                                                   -> Distinct on Multiple Columns means, the Values should be Distinct on all the Columns.(e.g, record -> ('mush', 'chn') is DISTNICT only with record -> ('mush', 'chn')).
+                                                   -> For the DISTINCT keyword, null values are considered to be duplicates of each other, and only one NULL is returned in the results, regardless of how many NULL values are encountered.
+                                                   -> DISTINCT Cannot be applied on Specific Columns of a Select Query.
+                                                   Syntax :
+                                                      DISTINCT Col1[, Col2, Col3 ...]
+
+                                 TOP/LIMIT   -     -> We can use the TOP Clause to limit the number of rows that are returned in the Result Set.
+                                                   -> If a SELECT statement that includes TOP also has an ORDER BY clause, the rows to be returned are selected from the ordered result set.
+                                                   Syntax :
+                                                      TOP ( expression ) [ PERCENT ] [ WITH TIES ]          // expression within Brackets
+                                                                     OR
+                                                               LIMIT expression
+                                                      Note :
+                                                         expression - is a numeric expression that specifies the number of rows to be returned;
+                                                         PERCENT    - The percentage (specified by expression) of the result set rows is returned.
+                                                         WITH TIES  - All rows that contain the last value returned by the ORDER BY clause are returned, even if doing this exceeds the number specified by expression.
+
+
+                                                   -> The items in the select list can include the following:
+                                                            -> A simple Expression, such as: a reference to a function(Scalar), a variable, a constant, or a Column in a table or view.
+                                                            -> A scalar subquery. This is a SELECT statement that evaluates to a single value for each result set row.
+                                                            -> A complex expression that is built by using Operators on one or more Simple Expressions. For more information about expressions, see Expressions (Transact-SQL).
+                                                            -> The * symbol. This specifies that all columns in all Table are returned. It can be Qualified with a Table or View Name.
+                                                            -> Variable Assignment in the form: @local_variable = expression. The SET @local_variable statement can also be used for variable assignment.
 
                              SUBQUERY    -   -> A subquery is a (Select) query that is nested inside the WHERE or HAVING or FROM Clause of an Outer SELECT, INSERT, UPDATE, or DELETE statement, or inside another subquery.
                                              -> In SQL, a subquery can be substituted anywhere an Expression can be used in SELECT, UPDATE, INSERT, and DELETE statements,
@@ -223,27 +265,42 @@ Important Keywords in SQL
                                                                            This means that the subquery is executed repeatedly, once for each row that might be selected by the outer query.
                                                                         -> Sometimes a correlated subquery mimics a GROUP BY clause.
 
+                             Note :
+                                   -> SubQuery in a FROM Clause, means SubQuery is allowed where a Table is Expected.(e.g.. JOIN Clause etc..)
 
 
-         -> DISTINCT    -    -> Distinct on a Column(s), is used to get Unique Column Values from the Result.
-                             -> It is same like GROUP BY Clause, except that we cannot use Aggregate Functions(Without any Tweak) with it.(i.e Just Removes duplicates).
-                             -> DISTINCT = GROUP BY - AGGREGATE FUNCTIONS
-                             -> Distinct on Multiple Columns means, the Values should be Distinct on all the Columns.(e.g, record -> ('mush', 'chn') is DISTNICT only with record -> ('mush', 'chn')).
-                             -> DISTINCT Cannot be applied on Specific Columns of a Select Query.
 
-         -> Top         -    ->
 
-         -> WHERE       -    -> To Filter records with a Condition. The Condition is Checked FOR EVERY RECORD.
-                                Syntax :
+         -> INTO        -    -> This is used to Create a new table from the Result set of a Select Query. The Name of the New Table is Specified along with it.
+                             Syntax :
+                                 INTO new_table_name
+
+
+         -> FROM        -    -> Contains a list of the Tables from which the Result set data is retrieved.
+                             -> These sources can be :
+                                    -> Base tables in the local server running SQL Server.
+                                    -> Result of a SubQuery.
+                                    -> Views in the local instance of SQL Server. SQL Server internally resolves a View reference to references against the base tables that make up the view.
+                                    -> Linked tables. These are tables in OLE DB data sources that can be accessed by SQL Server. This is referred to as a distributed query. OLE DB data sources can be accessed from SQL Server by linking them as a linked server,
+                                       or by referencing the data source in an OPENROWSET or OPENQUERY function.
+                             -> The FROM clause can also contain join specifications. These define the specific path SQL Server is to use in
+                                navigating from one table to another.
+                             -> The FROM clause is also used on the DELETE and UPDATE statements to define the tables that are modified.
+                             -> ----------------------------------------------
+
+         -> WHERE       -    -> The WHERE clause is a filter that defines the conditions EACH ROW in the source Tables must meet to qualify for the SELECT.
+                             -> The WHERE clause is also used on the DELETE and UPDATE statements to define the rows in the target tables that are modified.
+                             Syntax :
                                     WHERE Condition
 
                                     Wildcards -
                                           -> %                     -    Matches one or more characters(any Character)
                                           -> _                     -    Matches one Character(any Character)
+                                          -> [a-z]                 -    Matches one Character from the CHARACTER CLASS
 
                                     SQL Logical Operators Possibilities -
                                           -> LIKE                  -    'String_Pattern'
-                                          -> SIMILAR TO            -    'Regular_Expression'
+                                          -> SIMILAR TO            -    'Regular_Expression'(PostgreSQL)
                                           -> IN                    -    (val1, val2, val3, ...) OR SUBQUERY
                                           -> BETWEEN               -    (val1 AND val2)
                                           -> IS NULL               -    IS NULL
@@ -295,11 +352,10 @@ Important Keywords in SQL
                                                          OR
                                  INSERT INTO TABLE_NAME VALUES(Val1, Val2, ...);           //If we are going to insert Values for all Attributes.
 
-         -> UPDATE
+         -> UPDATE      -   ->
+                            -> FROM Clause can also be Used if Required.
 
          -> DELETE
-
-         -> FROM
 
          -> JOIN        -    -> By using joins, we can retrieve data from two or more tables based on logical relationships between the tables.
                              -> JOIN takes all the record, when a Col in One table has Multiple matches in Other table(Col is Duplicated as many times it found a Match on the Other table).
@@ -314,6 +370,8 @@ Important Keywords in SQL
                              -> Specifying the Join conditions in the FROM clause helps separate them from any other search conditions that may be specified in a WHERE clause, and is the recommended method for specifying joins.
                              -> Columns used in a join condition are not required to have the same name or be the same data type. However, if the data types are not identical,
                                 they must be compatible, or be types that SQL Server can implicitly convert. If the data types cannot be implicitly converted, the join condition must explicitly convert the data type using the CAST function.
+                             -> When there are NULL values in the columns of the tables being joined, the NULL values do not match each other. The presence of NULL values in a column(JOIN Column) from one of the tables
+                                being joined can be returned only by using an outer join (unless the WHERE clause excludes null values).
                              -> JOIN Types
                                       -> Inner joins
                                       -> Outer joins
@@ -351,18 +409,40 @@ Important Keywords in SQL
                                                 -> This is Done using an INNER JOIN.
                                                 -> The Not-Equal join (<>) is rarely used. Not-Equal joins make sense only when used with a self-join that too as a Second Condition.
 
-                            -> Join Over Three or More Tables
+                             -> Join Over Three or More Tables
                                                 -> The FROM Clauses can contain multiple join specifications. This allows many tables to be joined for a single query.
                                                 -> The Middle table of the join, can be called the Translation table or Intermediate table, because Table is an intermediate point of Connection between the other Tables involved in the Join.
                                                 -> The Second or Joins after it use the ResultSet returned from their Previous Join.
                                                 -> When there is more than one join operator in the same statement, either to join more than two tables or to join more than two pairs of columns,
                                                    the Join expressions can be connected with AND or with OR.
 
-         -> ORDER BY
+         -> GROUP BY    -    -> The GROUP BY clause partitions the result set into groups based on the values in the columns provider in the Group By Clause.
+                             ->  -------------------------------------------------------------
+                             Syntax :
+                                 GROUP BY group_by_list
 
-         -> GROUP BY
+         -> HAVING      -    -> The HAVING clause is an additional filter that is applied to the result set. Logically, the HAVING clause filters rows from the intermediate result set
+                                built from applying any FROM, WHERE, or GROUP BY clauses in the SELECT statement.
+                             -> HAVING clauses are typically used with a GROUP BY clause, although a GROUP BY clause is not required before a HAVING clause.
+                             -> ------------------------------------------------------------------
+                             Syntax :
+                                 HAVING search_conditions
 
-         -> HAVING
+         -> ORDER BY    -    -> The ORDER BY clause defines the order in which the rows in the result set are sorted.
+                             -> We specify the RESULT SET Columns that make up the sort list.
+                             -> The ASC and DESC keywords are used to specify if the rows are sorted in an ascending or descending sequence.
+                             -> The Sequence of Ordering should be Specified for EACH Column in the ORDER BY List.
+                             -> The default Ordering is ASC.
+                             -> ORDER BY is important because relational theory specifies that the rows in a result set cannot be assumed to have any sequence unless ORDER BY is specified.
+                             -> Used Only in the SELECT Clause.
+                             Syntax :
+                                 ORDER BY order_list[ ASC | DESC ]
+
+         -> AS          -    -> The AS clause can be used either to change the name of a result set column or assign a name to a derived column.
+                             -> If the name does not follow the rules for identifiers it must be delimited using either brackets ([]) or double quotation marks ("").
+                             -> The SQL reserved keywords can be used in Quoted Column headings(e.g "sum").
+                             Syntax :
+                                 Col[ OR Derived Col ] AS New_Col_Name
 
          -> WITH
 
@@ -393,12 +473,13 @@ Important Keywords in SQL
 
          -> PARTITION
 
-         -> CASE
 
-         -> WHEN
 
-         -> THEN
-
-         -> ELSE
-
-         -> END
+         -> CASE        -     -> It is very similar to switch case.
+                              Syntax :
+                                 CASE Col_Name
+                                    WHEN Some_Value THEN   Value_To_Return
+                                    ...
+                                    ...
+                                    ELSE Value_To_Return
+                                 END

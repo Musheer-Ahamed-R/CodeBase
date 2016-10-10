@@ -9,3 +9,5 @@ Notes :
    -> When using Aggregate Functions, the additional Attributes must be in a Group By Clause.
 
    -> SET SINGLE_USER on a Database makes sure that only the Current User is Using the Database.(Used along with the Command "With Rollback Immediate").
+
+   -> To make sure that the correct Object is always used, regardless of the current Database setting, qualify the Object name with the database and schema.
