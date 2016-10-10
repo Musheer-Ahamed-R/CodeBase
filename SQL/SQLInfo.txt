@@ -201,20 +201,28 @@ Important Keywords in SQL
                                                       -> FROM (subquery)
                                                       -> WHERE expression [NOT] IN (subquery)
                                                       -> WHERE expression comparison_operator [ANY | ALL] (subquery)
+                                                         Where Comparison Operator can be one of the (=, < >, >, > =, <, ! >, ! <, or < =) operators.
                                                       -> WHERE [NOT] EXISTS (subquery)
                                              -> There are three basic types of subqueries. Those that:
                                                       -> Used in the FROM Clause, that gives a Normal Result Set.(Only case where Multiple Columns are Supported)
                                                       -> Operate on lists introduced with IN, or those that a comparison operator modified by ANY or ALL, must have a Single Column.
-                                                      -> Are introduced with an unmodified comparison operator and must return a single value.
+                                                      -> Are introduced with an unmodified comparison operator or in place of an Expression and must return a Single Value.
                                                       -> Are existence tests introduced with EXISTS, almost always consists of an asterisk (*).
                                              -> SUBQUERY Rules
-                                                      -> If the WHERE clause of an outer query includes a column name, it must be join-compatible with the column in the subquery select list.
+                                                      -> If the WHERE clause of an outer query includes a column name, it must be JOIN-COMPATIBLE with the Column in the subquery select list.
+                                                      -> Subqueries introduced with Unmodified comparison operators often include AGGREGATE Functions, because these return a single value.
                                                       -> Because they must return a single value, subqueries introduced by an unmodified comparison operator
-                                                         (one not followed by the keyword ANY or ALL) cannot include GROUP BY and HAVING clauses.
+                                                         (one not followed by the keyword ANY or ALL) cannot include GROUP BY and HAVING clauses, unless we know the GROUP BY or HAVING clause itself returns a single value.
                                                       -> The DISTINCT keyword cannot be used with subqueries that include GROUP BY.
                                              -> Subqueries with Aliases
                                                       -> Many statements in which the subquery and the outer query refer to the same table can be stated
                                                          as self-joins (joining a table to itself). An Alias Will/Must be used in this case.
+
+                                             Correlated Subqueries   -  -> Many queries can be evaluated by executing the subquery once and substituting the resulting value or values into the WHERE clause of the outer query.
+                                                                           In queries that include a correlated subquery (also known as a repeating subquery), the subquery depends on the outer query for its values.
+                                                                           This means that the subquery is executed repeatedly, once for each row that might be selected by the outer query.
+                                                                        -> Sometimes a correlated subquery mimics a GROUP BY clause.
+
 
 
          -> DISTINCT    -    -> Distinct on a Column(s), is used to get Unique Column Values from the Result.
@@ -235,16 +243,17 @@ Important Keywords in SQL
 
                                     SQL Logical Operators Possibilities -
                                           -> LIKE                  -    'String_Pattern'
-                                          -> IN                    -    (val1, val2, val3, ...)
+                                          -> SIMILAR TO            -    'Regular_Expression'
+                                          -> IN                    -    (val1, val2, val3, ...) OR SUBQUERY
                                           -> BETWEEN               -    (val1 AND val2)
                                           -> IS NULL               -    IS NULL
                                           -> IS NOT NULL           -    IS NOT NULL
-                                          -> NOT                   -    Uses with LIKE, IN, BETWEEN, EXISTS
+                                          -> NOT                   -    Uses with LIKE, IN, BETWEEN, EXISTS and ALL Comparator Operators(e.g NOT Col1 = Col2)
                                           -> AND                   -    AND
                                           -> OR                    -    OR
-                                          -> EXISTS                -
-                                          -> ALL                   -
-                                          -> ANY                   -
+                                          -> EXISTS                -    SUBQUERY
+                                          -> ALL                   -    SUBQUERY
+                                          -> ANY                   -    SUBQUERY
 
                                     SQL Comparison Operators -
                                           -> =, !=, <>(Same as !=), >, <. >=, <=, !>, !<
@@ -254,22 +263,25 @@ Important Keywords in SQL
 
                                 Additional Notes on Operators -
 
-                                    Exists   -  -> When a subquery is introduced with the keyword EXISTS, the subquery functions as an existence test.(i.e The subquery
-                                                   does not actually produce any data, it returns a value of TRUE or FALSE.
-                                                -> The WHERE clause of the outer query tests whether the rows that are returned by the subquery exist.
-                                                -> The Subquery is a CORRELATED SubQuery.(i.e It references a Table Outside the SubQuery)
-                                                -> JOIN along with DISTINCT does the same thing, but EXISTS has a Performance Advantage Over Join(i.e It returns True if there exists at least a Single Record, need not go through all the records, Unlike JOIN).
-                                                -> Logically very Similar to the IN Clause, but we don't use JOIN Like Condition in the SubQuery.
-                                                -> The keyword EXISTS is not preceded by a column name, constant, or other expression.
-                                                -> The select list of a subquery introduced by EXISTS almost always consists of an asterisk (*).
-                                                   There is no reason to list column names because you are just testing whether rows that meet the conditions specified in the subquery exist.
+                                    Exists          -  -> When a subquery is introduced with the keyword EXISTS, the subquery functions as an existence test.(i.e The subquery
+                                                          does not actually produce any data, it returns a value of TRUE or FALSE.
+                                                       -> The WHERE clause of the outer query tests whether the rows that are returned by the subquery exist.
+                                                       -> The Subquery is a CORRELATED SubQuery.(i.e It references a Table Outside the SubQuery)
+                                                       -> JOIN along with DISTINCT does the same thing, but EXISTS has a Performance Advantage Over Join(i.e It returns True if there exists at least a Single Record, need not go through all the records, Unlike JOIN).
+                                                       -> Logically very Similar to the IN Clause, but we don't use JOIN Like Condition in the SubQuery.
+                                                       -> The keyword EXISTS is not preceded by a column name, constant, or other expression.
+                                                       -> The select list of a subquery introduced by EXISTS almost always consists of an asterisk (*).
+                                                          There is no reason to list column names because you are just testing whether rows that meet the conditions specified in the subquery exist.
 
-                                    IN       -  -> The Possible Values for IN WITH A SUBQUERY is, all the Values for the related Column in the other table. It is as Efficient as Exists(Discussed above).
-                                                -> The SubQuery can have only one Column
+                                    IN              -  -> The Possible Values for IN WITH A SUBQUERY is, all the Values for the related Column in the other table. It is as Efficient as Exists(Discussed above).
+                                                       -> The SubQuery can have only one Column
+                                                       -> Can also be expressed using a JOIN WITH DISTINCT
 
-                                    ANY      -  ->
-
-                                    ALL      -  ->
+                                    ANY and ALL     -  -> The SubQuery can have only one Column
+                                                       -> They can return a list of zero or more values and can include a GROUP BY or HAVING clause.
+                                                       -> These subqueries can be restated with EXISTS.
+                                                       ->  >ALL, means greater than the Maximum value and >ANY means greater than the Minimum value in the List returned by the SubQuery.
+                                                       -> =ANY is Equivalent to IN and <>ALL is same as NOT IN.
 
                                 Note :
 
@@ -290,6 +302,33 @@ Important Keywords in SQL
 
          -> FROM
 
+         -> JOIN        -    -> By using joins, we can retrieve data from two or more tables based on logical relationships between the tables.
+                             -> A join can always be expressed as a subquery. A subquery can often, but not always, be expressed as a join.
+                                This is because joins are symmetric, you can join table A to B in either order and get the same answer. The same is not true if a subquery is involved.
+                                Syntax :
+                                    FROM first_table join_type second_table [ON (join_condition)]
+                             -> A join condition defines the way two tables are related in a query by:
+                                      -> Specifying the column from each table to be used for the join. A typical join condition specifies a foreign key from one table and its associated key in the other table.
+                                      -> Specifying a logical operator (for example, = or <>,) to be used in comparing values from the columns.
+                             -> Inner joins can be specified in either the FROM (Includes ON Clause)or WHERE clauses. Outer joins can be specified in the FROM clause only.
+                             -> Specifying the Join conditions in the FROM clause helps separate them from any other search conditions that may be specified in a WHERE clause, and is the recommended method for specifying joins.
+                             -> Columns used in a join condition are not required to have the same name or be the same data type. However, if the data types are not identical,
+                                they must be compatible, or be types that SQL Server can implicitly convert. If the data types cannot be implicitly converted, the join condition must explicitly convert the data type using the CAST function.
+                             -> JOIN Types
+                                      -> Inner joins
+                                      -> Outer joins
+                                      -> Cross joins
+                                INNER JOIN   -  -> Inner joins use a comparison operator to match rows from two tables based on the values in common columns from each table.
+                                                -> Inner joins can be specified in either the FROM (Includes ON Clause)or WHERE clauses.In case of WHERE Clause, it becomes an IMPLICIT Inner Join.
+                                                -> The Not-Equal join (<>) is rarely used. As a general rule, Not-Equal joins make sense only when used with a self-join.
+                                                Types of Inner Join -
+                                                      -> A THETA join allows for arbitrary comparison relationships (such as ≥).
+                                                      -> An EQUI-JOIN is a theta join using the equality operator.
+                                                      -> A NATURAL join is an EQUI-JOIN on attributes that have the same NAME in each relationship. Additionally, a natural join removes the duplicate columns involved in
+                                                         the equality comparison. This type of JOIN is HIGHLY DISCOURAGED.
+
+
+
 
 
          -> ORDER BY
@@ -297,6 +336,8 @@ Important Keywords in SQL
          -> GROUP BY
 
          -> HAVING
+
+         -> WITH
 
          -> UNION
 
