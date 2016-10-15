@@ -276,17 +276,44 @@ Important Keywords in SQL
                                  INTO new_table_name
 
 
-         -> FROM        -    -> Contains a list of the Tables from which the Result set data is retrieved.
+         -> FROM        -    -> Contains a (comma Separated list of the Tables and Views) and JOINS from which the Result set data is retrieved.
+                             -> We can use the FROM clause to:
+                                    -> List the tables and views containing the columns referenced in the select list and in the WHERE clause. The table or view names can be aliased using the AS clause.
+                                    -> Join types. These are qualified by join conditions specified in the ON clause.
                              -> These sources can be :
                                     -> Base tables in the local server running SQL Server.
                                     -> Result of a SubQuery.
                                     -> Views in the local instance of SQL Server. SQL Server internally resolves a View reference to references against the base tables that make up the view.
                                     -> Linked tables. These are tables in OLE DB data sources that can be accessed by SQL Server. This is referred to as a distributed query. OLE DB data sources can be accessed from SQL Server by linking them as a linked server,
                                        or by referencing the data source in an OPENROWSET or OPENQUERY function.
-                             -> The FROM clause can also contain join specifications. These define the specific path SQL Server is to use in
-                                navigating from one table to another.
-                             -> The FROM clause is also used on the DELETE and UPDATE statements to define the tables that are modified.
-                             -> ----------------------------------------------
+                             -> The FROM clause is also used on the DELETE and UPDATE statements to define the Tables that are modified.
+                             -> It can also have APPLY, PIVOT and the UNPIVOT operators.
+                                    APPLY  -   ->  The APPLY operator allows you to invoke a TABLE-VALUED FUNCTION for each row returned by an Outer Table expression of a query.
+                                               ->  We can join a Result(Table) from a FUNCTION with other Tables, but not by simple joins. It can only be done using an APPLY operator.
+                                               ->  The table-valued function acts as the Right input and the Outer table expression acts as the Left input. The right input is evaluated for each row from the left input and the rows produced are combined for the final output.
+                                               ->  The list of columns produced by the APPLY operator is the set of columns in the left input followed by the list of columns returned by the right input.
+                                               ->  You pass one of the columns from the outer table to the function and the TVF returns the MATCHING ROWS. You can also use APPLY to supply a value to "join" on a derived table.
+                                               ->  You can also use the same Cross Apply and Outer Apply with Derived tables joined to your main query, this means you can select from a View instead of a TV function (code reuse).
+
+                                               There are two forms of APPLY :
+                                                   -> CROSS APPLY    -     -> This returns only rows from the outer table that produce a result set from the TABLE-VALUED FUNCTION.
+                                                                           -> CROSS APPLY is SIMILAR to, but in most cased not the same as an INNER JOIN.(i.e When calling a TVF the TVF is called/executed for each row in the outer table/left input)
+                                                   -> OUTER APPLY    -     -> This returns both rows that produce a result set, and rows that do not, with NULL values in the columns produced by the TABLE-VALUED FUNCTION.
+
+                                    Using PIVOT and UNPIVOT -
+
+                             -> SELECT Statements Without FROM Clauses
+                                    -> The SELECT statements that do not require a FROM clause are those that are not selecting data from any tables in the database. These SELECT statements
+                                       only select data from local variables or Transact-SQL functions that do not operate on a column, for example:
+                                       e.g.. SELECT @MyIntVariable
+                             -> Using Table Aliases
+                                    -> A table alias can be assigned either with or without the AS keyword:
+                                    -> If an Alias is assigned to a Table, all explicit references to the Table in the Transact-SQL statement must use the Alias, not the Table Name.
+                                       Syntax :
+                                          table_name AS table alias
+                                          table_name table_alias
+
+
 
          -> WHERE       -    -> The WHERE clause is a filter that defines the conditions EACH ROW in the source Tables must meet to qualify for the SELECT.
                              -> The WHERE clause is also used on the DELETE and UPDATE statements to define the rows in the target tables that are modified.
@@ -357,7 +384,7 @@ Important Keywords in SQL
 
          -> DELETE
 
-         -> JOIN        -    -> By using joins, we can retrieve data from two or more tables based on logical relationships between the tables.
+         -> JOIN        -    -> By using joins, we can retrieve data from two or more tables(or VIEWS) based on logical relationships between the tables.
                              -> JOIN takes all the record, when a Col in One table has Multiple matches in Other table(Col is Duplicated as many times it found a Match on the Other table).
                              -> A join can always be expressed as a subquery. A subquery can often, but not always, be expressed as a join.
                                 This is because joins are symmetric, you can join table A to B in either order and get the same answer. The same is not true if a subquery is involved.
@@ -431,10 +458,12 @@ Important Keywords in SQL
          -> ORDER BY    -    -> The ORDER BY clause defines the order in which the rows in the result set are sorted.
                              -> We specify the RESULT SET Columns that make up the sort list.
                              -> The ASC and DESC keywords are used to specify if the rows are sorted in an ascending or descending sequence.
-                             -> The Sequence of Ordering should be Specified for EACH Column in the ORDER BY List.
+                             -> The Ordering happens for Each Column Specified and not as a Whole like in GROUP BY Clause. Thus, The Sequence of Ordering should be Specified for EACH Column
+                                in the ORDER BY List.
                              -> The default Ordering is ASC.
                              -> ORDER BY is important because relational theory specifies that the rows in a result set cannot be assumed to have any sequence unless ORDER BY is specified.
                              -> Used Only in the SELECT Clause.
+                             -> Columns not in the Select Clause can also be specified for Ordering.
                              Syntax :
                                  ORDER BY order_list[ ASC | DESC ]
 

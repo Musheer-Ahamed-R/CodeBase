@@ -1,1 +1,5 @@
-In-Built Functions - 
+In-Built Functions -
+
+Aggregate Functions -
+
+Table - Valued Functions - 
