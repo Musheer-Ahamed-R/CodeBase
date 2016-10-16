@@ -300,7 +300,36 @@ Important Keywords in SQL
                                                                            -> CROSS APPLY is SIMILAR to, but in most cased not the same as an INNER JOIN.(i.e When calling a TVF the TVF is called/executed for each row in the outer table/left input)
                                                    -> OUTER APPLY    -     -> This returns both rows that produce a result set, and rows that do not, with NULL values in the columns produced by the TABLE-VALUED FUNCTION.
 
-                                    Using PIVOT and UNPIVOT -
+                                    Using PIVOT and UNPIVOT    -  -> You can use the PIVOT and UNPIVOT relational operators to change a TABLE-VALUED EXPRESSION(Expression that returns a Table) into Another table.
+                                                                  -> This is Just ANOTHER VIEW of a GROUP BY Clause.
+
+                                                                  PIVOT    -  -> PIVOT rotates a TABLE-VALUED EXPRESSION by turning the unique values from ONE Column in the expression into Multiple Columns/Attributes in the output, and performs aggregations
+                                                                                 where they are required on any remaining column values that are wanted in the final output.
+                                                                              -> Here, the Group by happens on the non-pivoted Column(and also the Pivoted Column, based on which the aggregate Functions Operate.(Its Right).
+                                                                              -> In Case, this Functionality is Not Supported by the Database Server, this Can be achieved using a Single Group By Clause and Multiple Aggregate Functions(Which uses a Case Statement) having Alias as Each Pivoted Column.
+                                                                              -> When aggregate functions are used with PIVOT, the presence of any NULL values in the value column are not considered when computing an aggregation.
+                                                                                 Syntax :
+                                                                                    SELECT <non-pivoted column>,
+                                                                                    [first pivoted column] AS <column name>,
+                                                                                    [second pivoted column] AS <column name>,
+                                                                                    ...
+                                                                                    [last pivoted column] AS <column name>
+                                                                                    FROM
+                                                                                    (<SELECT query that produces the data>)
+                                                                                    AS <alias for the source query>
+                                                                                    PIVOT
+                                                                                    (
+                                                                                    <aggregation function>(<column being aggregated>)
+                                                                                    FOR
+                                                                                    [<column that contains the values that will become column headers>]
+                                                                                    IN ( [first pivoted column], [second pivoted column],
+                                                                                    ... [last pivoted column])
+                                                                                    ) AS <alias for the pivot table>
+                                                                                    <optional ORDER BY clause>;
+                                                                  UNPIVOT  -  -> UNPIVOT performs the opposite operation to PIVOT by rotating columns of a TABLE-VALUED EXPRESSION into column values(Rows).
+                                                                              -> There Should be two additional columns, correspond to the pivot_column and value_column.
+                                                                              -> PIVOT performs an aggregation and, therefore, merges possible multiple rows into a single row in the output. UNPIVOT does not reproduce the original TABLE-VALUED EXPRESSION result
+                                                                                 because rows have been merged. Besides, NULL values in the input of UNPIVOT disappear in the output, whereas there may have been original NULL values in the input before the PIVOT operation.
 
                              -> SELECT Statements Without FROM Clauses
                                     -> The SELECT statements that do not require a FROM clause are those that are not selecting data from any tables in the database. These SELECT statements
@@ -316,6 +345,7 @@ Important Keywords in SQL
 
 
          -> WHERE       -    -> The WHERE clause is a filter that defines the conditions EACH ROW in the source Tables must meet to qualify for the SELECT.
+                             -> The WHERE search condition is applied before the grouping operation occurs.
                              -> The WHERE clause is also used on the DELETE and UPDATE statements to define the rows in the target tables that are modified.
                              Syntax :
                                     WHERE Condition
@@ -323,13 +353,19 @@ Important Keywords in SQL
                                     Wildcards -
                                           -> %                     -    Matches one or more characters(any Character)
                                           -> _                     -    Matches one Character(any Character)
-                                          -> [a-z]                 -    Matches one Character from the CHARACTER CLASS
+                                          -> []                    -    Matches one Character from the CHARACTER CLASS
+                                    Note :
+                                          -> WildCards are only used with LIKE Operator and SIMILAR TO Operator.
+                                          -> AN Important consideration in using wildcards is their effect on performance. If a wildcard begins the expression (e.g %mith'), an index cannot be used. (Just as you would not know where to start in a phone book.
+                                             A wildcard in or at the end of an expression does not preclude use of an index.
+                                          -> Use the ESCAPE keyword to define an escape character.
+                                          -> Use square brackets ([ ]) to enclose the wildcard by itself.
 
                                     SQL Logical Operators Possibilities -
-                                          -> LIKE                  -    'String_Pattern'
+                                          -> LIKE                  -    'Regular_Expression_STRING_PATTERN'
                                           -> SIMILAR TO            -    'Regular_Expression'(PostgreSQL)
                                           -> IN                    -    (val1, val2, val3, ...) OR SUBQUERY
-                                          -> BETWEEN               -    (val1 AND val2)
+                                          -> BETWEEN               -    (val1 AND val2), Inclusive Range
                                           -> IS NULL               -    IS NULL
                                           -> IS NOT NULL           -    IS NOT NULL
                                           -> NOT                   -    Uses with LIKE, IN, BETWEEN, EXISTS and ALL Comparator Operators(e.g NOT Col1 = Col2)
@@ -364,13 +400,30 @@ Important Keywords in SQL
                                     ANY and ALL     -  -> The SubQuery can have only one Column
                                                        -> They can return a list of zero or more values and can include a GROUP BY or HAVING clause.
                                                        -> These subqueries can be restated with EXISTS.
-                                                       ->  >ALL, means greater than the Maximum value and >ANY means greater than the Minimum value in the List returned by the SubQuery.
+                                                       -> >ALL, means greater than the Maximum value and >ANY means greater than the Minimum value in the List returned by the SubQuery.
                                                        -> =ANY is Equivalent to IN and <>ALL is same as NOT IN.
+
+                                 Using NULL VALUES  -  -> A value of NULL indicates that the value is UNKNOWN. A value of NULL is different from an empty or zero value.
+                                                       -> No two null values are equal. Comparisons between two null values, or between a NULL and any other value, return UNKNOWN because the value of each NULL is UNKNOWN.
+                                                       -> Null values generally indicate data that is UNKNOWN, not applicable, or that the data will be added later.
+                                                         Following is information about nulls:
+                                                            -> To test for null values in a query, use IS NULL or IS NOT NULL in the WHERE clause.
+                                                            -> When query results are viewed in SQL Server Management Studio Code editor, null values are shown as NULL in the result set.
+                                                            -> Null values can be inserted into a column by explicitly stating NULL in an INSERT or UPDATE statement, by leaving a column out of an INSERT statement, or
+                                                               when adding a new column to an existing table by using the ALTER TABLE statement.
+                                                            -> Null values cannot be used for information that is required to distinguish one row in a table from another row in a table, such as primary keys.
+
+                                 Order Of Execution -  -> Understanding the correct sequence in which the WHERE, GROUP BY, and HAVING clauses are applied helps in CODING EFFICIENT QUERIES :
+                                                            -> The WHERE clause is used to filter the rows that result from the operations specified in the FROM clause.
+                                                            -> The GROUP BY clause is used to group the output of the WHERE clause.
+                                                            -> The HAVING clause is used to filter rows from the grouped result.
+                                 Operator Prece     -  -> When more than one logical operator is used in a statement, NOT is evaluated first, then AND, and finally OR. Arithmetic, and bitwise, operators are handled before logical operators.
 
                                 Note :
 
                                     -> IN, ANY, ALL, EXISTS can be used with a SubQuery.
                                     -> EXISTS is better than JOIN + DISTINCT
+                                    -> When you search for a Unicode string in a WHERE clause, put the N character before the search string.
 
          -> INSERT      -    -> To Insert values into a Table
                              -> DEFAULT Keyword can be used if we want to use Default value for the Attribute.
@@ -384,7 +437,7 @@ Important Keywords in SQL
 
          -> DELETE
 
-         -> JOIN        -    -> By using joins, we can retrieve data from two or more tables(or VIEWS) based on logical relationships between the tables.
+         -> JOIN        -    -> By using joins, we can retrieve data from two or more tables(or VIEWS or a SubQuery) based on logical relationships between the tables.
                              -> JOIN takes all the record, when a Col in One table has Multiple matches in Other table(Col is Duplicated as many times it found a Match on the Other table).
                              -> A join can always be expressed as a subquery. A subquery can often, but not always, be expressed as a join.
                                 This is because joins are symmetric, you can join table A to B in either order and get the same answer. The same is not true if a subquery is involved.
@@ -450,8 +503,12 @@ Important Keywords in SQL
 
          -> HAVING      -    -> The HAVING clause is an additional filter that is applied to the result set. Logically, the HAVING clause filters rows from the intermediate result set
                                 built from applying any FROM, WHERE, or GROUP BY clauses in the SELECT statement.
-                             -> HAVING clauses are typically used with a GROUP BY clause, although a GROUP BY clause is not required before a HAVING clause.
-                             -> ------------------------------------------------------------------
+                             -> The HAVING search condition is applied after the grouping operation occurs.
+                             -> HAVING clauses are typically used with a GROUP BY clause to filter the results of AGGREGATE Values, although a GROUP BY clause is not required before a HAVING clause.
+                             -> They are typically used to Filter the Rows after Grouped by a Group By Clause.
+                             -> The HAVING Filter can be applied to an AGGREGATE FUNCTION used in the SELECT LIST(or Outside of it), While the WHERE Clause Cannot be used in this Case.
+                             -> For any search conditions that could be applied either before or after the grouping operation, it is more efficient to specify them in the WHERE clause.
+                                The only search conditions that should be specified in the HAVING clause are those search conditions that must be applied after the grouping operation has been performed.
                              Syntax :
                                  HAVING search_conditions
 
@@ -460,16 +517,18 @@ Important Keywords in SQL
                              -> The ASC and DESC keywords are used to specify if the rows are sorted in an ascending or descending sequence.
                              -> The Ordering happens for Each Column Specified and not as a Whole like in GROUP BY Clause. Thus, The Sequence of Ordering should be Specified for EACH Column
                                 in the ORDER BY List.
+                             -> The Order in which the Columns are Specified in the ORDER BY Clause is also Important unlike the GROUP BY Clause.
                              -> The default Ordering is ASC.
                              -> ORDER BY is important because relational theory specifies that the rows in a result set cannot be assumed to have any sequence unless ORDER BY is specified.
                              -> Used Only in the SELECT Clause.
                              -> Columns not in the Select Clause can also be specified for Ordering.
+                             -> ORDER BY guarantees a sorted result only for the outermost SELECT statement of a query.(i.e The SELECT QUERY With Which the Order BY Clause is Associated). and NOT For any Query that Uses the Query Containing the ORDER BY Clause.
                              Syntax :
                                  ORDER BY order_list[ ASC | DESC ]
 
          -> AS          -    -> The AS clause can be used either to change the name of a result set column or assign a name to a derived column.
                              -> If the name does not follow the rules for identifiers it must be delimited using either brackets ([]) or double quotation marks ("").
-                             -> The SQL reserved keywords can be used in Quoted Column headings(e.g "sum").
+                             -> The SQL reserved keywords can also be used in Quoted Column headings(e.g "sum").
                              Syntax :
                                  Col[ OR Derived Col ] AS New_Col_Name
 

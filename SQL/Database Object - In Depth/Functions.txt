@@ -1,5 +1,6 @@
 In-Built Functions -
 
-Aggregate Functions -
+Aggregate Functions -   -> The Function is applied to the whole Group, but the Condition passed as an Argument to the Function is on every single Row of the Particular
+                           Selected Group.(e.g Condition - DISTINCT, CASE(returning 1 or 0) OR ANY NORMAL CONDITION ON ANY NUMBER OF COLUMNS... )                   -------- IMPORTANT   ------------
 
-Table - Valued Functions - 
+Table - Valued Functions -
