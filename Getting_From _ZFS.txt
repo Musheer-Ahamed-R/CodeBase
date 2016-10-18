@@ -1,0 +1,62 @@
+public static String retrieveCtiApiCommonFileFromZFS(String filePath)
+	{
+		StringBuilder sb = new StringBuilder();
+		String line = null;
+		String fileContent = "";
+		InputStream zfsInStream=null;
+		BufferedReader rd=null;
+		try
+		{
+			zfsInStream = ZFSUtil.retriveSystemFileFromZFS(ZFSConstants.ZOHOCRM_SPACE, filePath);
+			
+			if( zfsInStream != null)
+			{
+				rd = new BufferedReader(new InputStreamReader(zfsInStream));
+				while ((line = rd.readLine()) != null)
+				{
+					sb.append(line + '\n');
+				}
+				fileContent = sb.toString();
+			}
+		}
+		catch(Exception e)
+		{
+			LOGGER.log(Level.WARNING,"Error occured during retrieve Cti common content into zfs",e);
+		}
+		finally
+		{
+			IOUtils.closeQuietly(zfsInStream);
+			IOUtils.closeQuietly(rd);
+		}
+		//LOGGER.log(Level.INFO,"ctiapilog: retrieve Cti CommonDB content from ZFS. File content==>"+fileContent+" File path==>"+filePath);
+		return fileContent;
+	}
+  
+  
+	/**
+	 * This method returns the System file stored in the ZFS as InputStream. FilePath and ZGID should be provided.
+	 * @param zgid as String 
+	 * @param filePath as String
+	 * @return file as a InputStream
+	 * @throws Exception
+	 */
+	public static InputStream retriveSystemFileFromZFS(String zgid, String filePath) throws Exception {
+		InputStream in = null;
+		if (zgid == null) {
+			zgid=retriveZgid();
+		}
+		try {
+			in = DFileAPI.getDFile(zgid, ZFSConstants.SERVICETYPE_CRM, filePath);
+		} catch(ZFSException ex) {
+			String errCode = ex.getErrorCode();
+			if("F121".equals(errCode))
+			{
+				LOGGER.log(Level.WARNING, "ZFS ERROR - FILE NOT PRESENT IN THE SPECIFIED PATH ::::: "+ filePath);
+			}
+			else
+			{
+				LOGGER.log(Level.WARNING, "ZFSException occured in retriveSystemFileFromZFS method and Exception message ::: {0}", ex.getErrorCode() );
+			}
+		}
+		return in;
+	}
