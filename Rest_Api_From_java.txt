@@ -65,3 +65,49 @@ public static String invoke(String methodType,String url,Hashtable parameters,Ha
 		}
 		return readline;
 	 }
+	 
+	 private static void setAuthScopeCredentials(HttpClient client , Hashtable scopeCredentials)
+	{
+		try
+		{
+			String host = (String) (CtiApiUtil.checkNotNull(scopeCredentials.get(HOST)) ? scopeCredentials.get(HOST) : null) ;
+			Integer port = Integer.parseInt( (CtiApiUtil.checkNotNull(scopeCredentials.get(PORT)) ? scopeCredentials.get(PORT)+"" : "0") );
+			String username = (String) (CtiApiUtil.checkNotNull(scopeCredentials.get(USERNAME)) ? scopeCredentials.get(USERNAME) : null) ;
+			String password = (String) (CtiApiUtil.checkNotNull(scopeCredentials.get(PASSWORD)) ? scopeCredentials.get(PASSWORD) : null) ;
+			if(host !=null && port !=0 && username != null && password !=null)
+			{
+				//set authentication credentials
+				client.getState().setCredentials( new AuthScope(host,port), new UsernamePasswordCredentials(username, password));
+			}
+		}
+		catch (Exception e)
+		{
+			LOGGER.log(Level.WARNING,"setAuthScopeCredentials error check host,port,username,password "+e);
+		}
+		
+	}
+	 
+	 
+	 private static void addParameter(HttpMethod method,String name, String value){
+		if(GET.equals(method.getName())){
+			if(value != null){
+				try{
+					value = URLEncoder.encode(value,"UTF-8");//no i18n
+				}catch(UnsupportedEncodingException e){
+					LOGGER.log(Level.WARNING,"ctiapibeanutil addparameter error"+e);
+				}
+			}
+			String queryString = method.getQueryString();
+			if(queryString != null)
+			{
+				queryString = buildString(queryString, "&", name, "=", value);
+			}
+			else
+			{
+				queryString = buildString("?", name, "=", value);
+			}
+			method.setQueryString(queryString);
+		}else{
+			((PostMethod)method).addParameter(name, value);
+		}
+	}
