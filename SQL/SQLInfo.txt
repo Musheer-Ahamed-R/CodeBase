@@ -354,7 +354,8 @@ Important Keywords in SQL
 
          -> WHERE       -    -> The WHERE clause is a filter that defines the conditions EACH ROW in the source Tables must meet to qualify for the SELECT.
                              -> The WHERE search condition is applied before the grouping operation occurs.
-                             -> The WHERE clause is also used on the DELETE and UPDATE statements to define the rows in the target tables that are modified.
+                             -> The WHERE clause is used on the SELECT, DELETE and UPDATE statements to define the rows in the target tables that are modified/retrieved.
+                             -> Aggregate Functions CANNOT be used in a WHERE Clause, unless it is in a SubQuery Contained in a Having Clause.
                              Syntax :
                                     WHERE Condition
 
@@ -461,6 +462,7 @@ Important Keywords in SQL
                              -> When there are NULL values in the columns of the tables being joined, the NULL values do not match each other. The presence of NULL values in a column(JOIN Column) from one of the tables
                                 being joined can be returned only by using an outer join (unless the WHERE clause excludes null values).
                              -> The JOIN Columns need not be having a Primary Key and a Foreign Key Relationship, even though it should be having for performance reasons.
+                             -> The Join Types can be Visualized using VENN Diagrams.
                              -> JOIN Types
                                       -> Inner joins
                                       -> Outer joins
@@ -478,6 +480,7 @@ Important Keywords in SQL
 
 
                                 OUTER JOIN   -  -> Outer joins, return all rows from at least one of the tables (Left or Right)or views mentioned in the FROM clause, as long as those rows meet any WHERE or HAVING search conditions.
+                                                -> To get Only the Non-Matching Rows Over an Outer Join, in addition to the Normal Join Condition in the ON Clause, we have to use an Additional NULL Check on the JOIN COLUMN of the Other table in the Where Clause.
                                                 -> Types of Outer Join  -
                                                       -> LEFT OUTER JOIN or LEFT JOIN
                                                       -> RIGHT OUTER JOIN or RIGHT JOIN
@@ -497,6 +500,7 @@ Important Keywords in SQL
                                 SELF JOIN    -  -> A table can be joined to itself in a self-join. Use a self-join when you want to create a result set that joins records in a table with other records in the same table.
                                                 -> This is Done using an INNER JOIN.
                                                 -> The Not-Equal join (<>) is rarely used. Not-Equal joins make sense only when used with a self-join that too as a Second Condition.
+                                                -> e.g Looking for Employee's Manager using Manager Id in the Employee table.(i.e Manager is also an Employee with an Employee Id) 
 
                              -> Join Over Three or More Tables
                                                 -> The FROM Clauses can contain multiple join specifications. This allows many tables to be joined for a single query.
@@ -504,6 +508,8 @@ Important Keywords in SQL
                                                 -> The Second or Joins after it use the ResultSet returned from their Previous Join.
                                                 -> When there is more than one join operator in the same statement, either to join more than two tables or to join more than two pairs of columns,
                                                    the Join expressions can be connected with AND or with OR.
+                           -> Note :
+
 
          -> GROUP BY    -    -> Groups a selected set of rows into a set of summary rows by the values of one or more columns or expressions.
                              -> One row is returned for each group. Aggregate functions in the SELECT clause select_list provide information about each group instead of individual rows.
@@ -517,9 +523,11 @@ Important Keywords in SQL
                              -> A GROUP BY clause can be described as general or simple:
                                     -> A general GROUP BY clause includes GROUPING SETS, CUBE, ROLLUP, WITH CUBE, or WITH ROLLUP.
                                     -> A simple GROUP BY clause does not include GROUPING SETS, CUBE, ROLLUP, WITH CUBE, or WITH ROLLUP.
+
                              -> Simple GROUP BY Clause -
                                     -> This includes a GROUP BY Clause containing Zero or More Columns, based on which the Grouping Occurs.
                                     -> The Order of the Columns in this GROUP BY Clause does not matter as Grouping happens as a Whole.
+
                              -> Advanced Grouping Options -    -> This type of Grouping allows us to get Multiple Grouping Options on a Single Query.
                                                                -> ALL the Grouping done by this method can be achieved using UNION ALL(S) Where each Select Queries does a Separate Grouping.
                                                                -> All the Advanced Grouping Options should have at least ONE AGGREGATE FUNCTION EXPRESSION. Otherwise, It would be Pointless to do have multiple grouping options.
@@ -647,6 +655,7 @@ Important Keywords in SQL
                              -> The HAVING Filter can be applied to an AGGREGATE FUNCTION used in the SELECT LIST(or Outside of it), While the WHERE Clause Cannot be used in this Case.
                              -> For any search conditions that could be applied either before or after the grouping operation, it is more efficient to specify them in the WHERE clause.
                                 The only search conditions that should be specified in the HAVING clause are those search conditions that must be applied after the grouping operation has been performed.
+                             -> They can only be used in a Select Clause.
                              Syntax :
                                  HAVING search_conditions
 

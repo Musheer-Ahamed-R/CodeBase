@@ -1,4 +1,22 @@
 In-Built Functions -
+      ISNULL         -     -> If the Expression passed is NOT NULL, then the Expression value itself is Returned, else the second Argument is Returned.
+                           Syntax :
+                              ISNULL(Expression, replacementValue)
+                           Compatibility :
+                              SQLSever
+
+      COALESCE      -     -> Evaluates the arguments in order and returns the current value of the first expression that initially does not evaluate to NULL.
+                          -> The COALESCE expression is a syntactic shortcut for the CASE expression. That is, the code COALESCE(expression1,...n) is rewritten by the query optimizer as the following CASE expression:
+                             CASE
+                              WHEN (expression1 IS NOT NULL) THEN expression1
+                              WHEN (expression2 IS NOT NULL) THEN expression2
+                              ...
+                              ELSE expressionN
+                             END
+                          Syntax :
+                              COALESCE ( expression [ ,...n ] )
+                          Compatibility :
+                              SQLServer, PostgreSQL
 
 Aggregate Functions -   -> The Function is applied to the whole Group,
                            but we can use a Condition(Corresponding to every Single Row in the GROUP) to determine whether to pass an expression(to be included in the result) or Not as an Argument to the Function
