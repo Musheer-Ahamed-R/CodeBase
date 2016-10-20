@@ -1,4 +1,1 @@
 1 -> Declare and use a Variable in PostgreSQL.
-
-
-CREATE TABLE #Demo   (col1 integer NULL, col2 AS COALESCE(col1, 0), col3 AS ISNULL(col1, 0) PRIMARY KEY);
