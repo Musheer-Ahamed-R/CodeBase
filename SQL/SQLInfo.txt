@@ -500,7 +500,7 @@ Important Keywords in SQL
                                 SELF JOIN    -  -> A table can be joined to itself in a self-join. Use a self-join when you want to create a result set that joins records in a table with other records in the same table.
                                                 -> This is Done using an INNER JOIN.
                                                 -> The Not-Equal join (<>) is rarely used. Not-Equal joins make sense only when used with a self-join that too as a Second Condition.
-                                                -> e.g Looking for Employee's Manager using Manager Id in the Employee table.(i.e Manager is also an Employee with an Employee Id) 
+                                                -> e.g Looking for Employee's Manager using Manager Id in the Employee table.(i.e Manager is also an Employee with an Employee Id)
 
                              -> Join Over Three or More Tables
                                                 -> The FROM Clauses can contain multiple join specifications. This allows many tables to be joined for a single query.
@@ -679,6 +679,24 @@ Important Keywords in SQL
                              Syntax :
                                  Col[ OR Derived Col ] AS New_Col_Name
 
+         -> Set Operators    -> Set operators combine results from two or more queries into a single result set.
+                             -> Types of Set Operators
+                                -> UNION
+                                -> INTERSECT
+                                -> EXCEPT
+
+                                -> UNION      -    -> Combines the results of two or more Queries into a Single Result Set that includes ALL THE ROWS that belong to ALL QUERIES in the union.
+                                                   -> The UNION operation is different from using joins that combine columns from two tables, as there is no Condition for Joining in case of UNION.
+                                                   -> The following are basic rules for combining the result sets of two queries by using UNION:
+                                                         -> The number and the order of the columns must be the same in all queries.
+                                                         -> The data types must be compatible.
+                                                   Syntax :
+                                                      { <query_specification> | ( <query_expression> ) }
+                                                      UNION [ ALL ]
+                                                      <query_specification | ( <query_expression> )
+                                                      [ UNION [ ALL ]
+                                                      <query_specification> | ( <query_expression> )
+                                                      [ ...n ] ]
          -> WITH
 
          -> UNION
@@ -716,8 +734,15 @@ Important Keywords in SQL
 
          -> CASE        -    -> It is very similar to switch case.
                              Syntax :
-                                 CASE Col_Name
-                                    WHEN Some_Value THEN   Value_To_Return
+                                 CASE Expression                                         // This behaves more like a Normal Switch-Case Statement
+                                    WHEN Some_Actual_Value THEN Value_To_Return
+                                    ...
+                                    ...
+                                    ELSE Value_To_Return
+                                 END
+                                    OR
+                                 CASE
+                                    WHEN Expression_Evaluating_BOOLEAN THEN Value_To_Return
                                     ...
                                     ...
                                     ELSE Value_To_Return

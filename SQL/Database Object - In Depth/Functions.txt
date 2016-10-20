@@ -6,7 +6,7 @@ In-Built Functions -
                               SQLSever
 
       COALESCE      -     -> Evaluates the arguments in order and returns the current value of the first expression that initially does not evaluate to NULL.
-                          -> The COALESCE expression is a syntactic shortcut for the CASE expression. That is, the code COALESCE(expression1,...n) is rewritten by the query optimizer as the following CASE expression:
+                          -> The COALESCE Expression is a syntactic shortcut for the CASE Expression. That is, the code COALESCE(expression1,...n) is rewritten by the query optimizer as the following CASE expression:
                              CASE
                               WHEN (expression1 IS NOT NULL) THEN expression1
                               WHEN (expression2 IS NOT NULL) THEN expression2
@@ -17,6 +17,27 @@ In-Built Functions -
                               COALESCE ( expression [ ,...n ] )
                           Compatibility :
                               SQLServer, PostgreSQL
+
+      GREATEST      -     -> The GREATEST functions select the largest value from a list of any number of expressions. The expressions must all be convertible to a common data type, which will be the type of the result.
+                             NULL values in the list are ignored. The result will be NULL only if all the expressions evaluate to NULL.
+                             Syntax :
+                                 GREATEST(value [, ...])
+                             Compatibility :
+                                 PostgreSQL
+
+      LEAST         -     -> The LEAST functions select the smallest value from a list of any number of expressions. The expressions must all be convertible to a common data type, which will be the type of the result.
+                             NULL values in the list are ignored. The result will be NULL only if all the expressions evaluate to NULL.
+                             Syntax :
+                                 LEAST(value [, ...])
+                             Compatibility :
+                                 PostgreSQL
+
+      NULLIF        -     -> The NULLIF function returns a null value if value1 equals value2; otherwise it returns value1. This can be used to perform the inverse operation of the COALESCE.
+                             Syntax :
+                                 NULLIF(value1, value2)
+                             Compatibility :
+                                 PostgreSQL
+
 
 Aggregate Functions -   -> The Function is applied to the whole Group,
                            but we can use a Condition(Corresponding to every Single Row in the GROUP) to determine whether to pass an expression(to be included in the result) or Not as an Argument to the Function
