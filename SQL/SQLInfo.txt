@@ -271,7 +271,7 @@ Important Keywords in SQL
 
 
 
-         -> INTO        -    -> This is used to Create a new table from the Result set of a Select Query. The Name of the New Table is Specified along with it.
+         -> INTO        -    -> This is used to CREATE a new table(on the Fly) from the Result set of a Select Query. The Name of the New Table is Specified along with it.
                              Syntax :
                                  INTO new_table_name
 
@@ -680,23 +680,42 @@ Important Keywords in SQL
                                  Col[ OR Derived Col ] AS New_Col_Name
 
          -> Set Operators    -> Set operators combine results from two or more queries into a single result set.
+                             -> The Set Operation Clauses are just like NORMAL Clause Like FROM, WHERE for the (First) Select Query.(i.e They Don't stand Alone in a Query).
+                             -> The Column names of the Result Set that are returned by the FULL SET OPERATOR Query are the same names as those returned by the query on the left side of the operand.
+                             -> All Other Clauses (like GROUP BY, ORDER BY) should appear after the FULL SET OPERATOR Query, Otherwise, unexpected results may Occur.
+                             -> The Final ResultSet becomes the ResultSet of the first Select Query. Thus, INTO is only allowed on first SELECT of UNION/INTERSECT/EXCEPT
+                             -> When we compare rows for determining DISTINCT values, two NULL values on Separate ROWS are considered equal.
+                             -> The following are basic rules for combining the result sets of two queries by using Set Operators:
+                                   -> The number and the order of the columns must be the same in all queries.
+                                   -> The data types must be compatible.
                              -> Types of Set Operators
                                 -> UNION
                                 -> INTERSECT
                                 -> EXCEPT
+                                Syntax :
+                                   { <query_specification> | ( <query_expression> ) }
+                                   { UNION [ ALL ] | EXCEPT | INTERSECT }
+                                   <query_specification | ( <query_expression> )
+                                   { UNION [ ALL ] | EXCEPT | INTERSECT }
+                                   <query_specification> | ( <query_expression> )
+                                   { ... }
 
-                                -> UNION      -    -> Combines the results of two or more Queries into a Single Result Set that includes ALL THE ROWS that belong to ALL QUERIES in the union.
+                                -> UNION      -    -> Combines the results(ResultsSets) of two or more Queries into a Single Result Set that includes ALL THE ROWS(UNIQUE ROWS ACROSS ALL THE RESULT SETS) that belong to ALL QUERIES in the Union.
                                                    -> The UNION operation is different from using joins that combine columns from two tables, as there is no Condition for Joining in case of UNION.
-                                                   -> The following are basic rules for combining the result sets of two queries by using UNION:
-                                                         -> The number and the order of the columns must be the same in all queries.
-                                                         -> The data types must be compatible.
-                                                   Syntax :
-                                                      { <query_specification> | ( <query_expression> ) }
-                                                      UNION [ ALL ]
-                                                      <query_specification | ( <query_expression> )
-                                                      [ UNION [ ALL ]
-                                                      <query_specification> | ( <query_expression> )
-                                                      [ ...n ] ]
+                                                   -> The ALL (UNION ALL) incorporates all rows into the results. This includes Duplicates. If NOT SPECIFIED, DUPLICATE rows are REMOVED.
+
+                                                   Note :
+                                                      -> UNION takes longer time, since the duplicates must be removed after the combination of the two selects has ended. So if we know that each set is unique or if we want duplicates to remain, we can save BIG Time by use UNION ALL.
+
+                                -> INTERSECT  -    -> This returns any DISTINCT Rows that are FOUND IN BOTH the left and right Query.
+
+                                -> EXCEPT     -    -> This returns any DISTINCT Rows from the left query that are NOT ALSO FOUND on the right query.
+
+                                Notes :
+                                    -> Set Operator Precedence are executed in the order
+                                             -> Expressions in parentheses
+                                             -> The INTERSECT operand
+                                             -> EXCEPT and UNION evaluated from left to right based on their position in the expression
          -> WITH
 
          -> UNION

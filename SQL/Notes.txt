@@ -4,10 +4,10 @@ Notes :
 
    -> We can query two tables in two different databases on the same SQL Server, Using the Fully Qualified name of the Table(i.e 'DatabaseName'.'SchemaName'.'TableName')
 
-   -> Using DISTINCT Attribute with another Attribute Could bring up duplicates for the Distinct Attribute.
-
    -> When using Aggregate Functions, the additional Attributes must be in a Group By Clause.
 
    -> SET SINGLE_USER on a Database makes sure that only the Current User is Using the Database.(Used along with the Command "With Rollback Immediate").
 
    -> To make sure that the correct Object is always used, regardless of the current Database setting, qualify the Object name with the database and schema.
+
+   -> Parenthesis, usually used with SubQuery, can also be used in other cases to increase the Precedence of an Expression or a Select Query(e.g UNION).  
