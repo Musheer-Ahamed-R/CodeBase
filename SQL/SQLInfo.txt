@@ -682,9 +682,9 @@ Important Keywords in SQL
          -> Set Operators    -> Set operators combine results from two or more queries into a single result set.
                              -> The Set Operation Clauses are just like NORMAL Clause Like FROM, WHERE for the (First) Select Query.(i.e They Don't stand Alone in a Query).
                              -> The Column names of the Result Set that are returned by the FULL SET OPERATOR Query are the same names as those returned by the query on the left side of the operand.
-                             -> All Other Clauses (like GROUP BY, ORDER BY) should appear after the FULL SET OPERATOR Query, Otherwise, unexpected results may Occur.
+                             -> All Other Clauses (like GROUP BY, ORDER BY) should appear after the FULL SET OPERATOR Query(i.e. After the Last Select Statement), Otherwise, unexpected results may Occur.
                              -> The Final ResultSet becomes the ResultSet of the first Select Query. Thus, INTO is only allowed on first SELECT of UNION/INTERSECT/EXCEPT
-                             -> When we compare rows for determining DISTINCT values, two NULL values on Separate ROWS are considered equal.
+                             -> When we compare rows for determining DISTINCT values, two NULL VALUES on Separate ROWS are considered EQUAL.
                              -> The following are basic rules for combining the result sets of two queries by using Set Operators:
                                    -> The number and the order of the columns must be the same in all queries.
                                    -> The data types must be compatible.
@@ -705,13 +705,18 @@ Important Keywords in SQL
                                                    -> The ALL (UNION ALL) incorporates all rows into the results. This includes Duplicates. If NOT SPECIFIED, DUPLICATE rows are REMOVED.
 
                                                    Note :
-                                                      -> UNION takes longer time, since the duplicates must be removed after the combination of the two selects has ended. So if we know that each set is unique or if we want duplicates to remain, we can save BIG Time by use UNION ALL.
+                                                      -> UNION takes longer time, since the duplicates must be removed after the combination of the two selects has ended. So if we know that each set is unique or
+                                                         if we want duplicates to remain, we can save BIG Time by use UNION ALL.
+                                                      -> The UNION has to perform a Distinct SORT to remove the Duplicates.
+                                                      -> UNION Combines ROWS from 2 or more Tables, whereas JOIN Combines COLUMNS from 2 or more Tables.
 
                                 -> INTERSECT  -    -> This returns any DISTINCT Rows that are FOUND IN BOTH the left and right Query.
+                                                   -> Similar to INNER JOIN + DISTINCT. Also, NULL Values are Considered Equal.
 
                                 -> EXCEPT     -    -> This returns any DISTINCT Rows from the left query that are NOT ALSO FOUND on the right query.
+                                                   -> Similar to NOT IN + DISTINCT. Also, NULL Values are Considered Equal.
 
-                                Notes :
+                                Note :
                                     -> Set Operator Precedence are executed in the order
                                              -> Expressions in parentheses
                                              -> The INTERSECT operand
