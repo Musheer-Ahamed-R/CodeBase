@@ -1,0 +1,13 @@
+Views    -     -> A View is a virtual table whose contents are defined by a query.(A SAVED SELECT QUERY)
+               -> Like a table, a view consists of a set of named columns and rows of data.
+               -> Unless indexed, a view does not exist as a stored set of data values in a database. The rows and columns of data come from tables referenced
+                  in the query defining the view and are PRODUCED DYNAMICALLY when the View is referenced.
+               -> A view acts as a filter on the underlying tables referenced in the view. The query that defines the view can be from one or more tables
+                  or from other views in the current or other databases
+               -> Distributed queries can also be used to define views that use data from multiple heterogeneous sources. This is useful, for example, if you want
+                  to combine similarly structured data from different servers, each of which stores data for a different region of your organization.
+               -> Views are generally used to focus, simplify, and customize the perception each user has of the database.
+               -> Views can be used as security mechanisms by letting users access data through the view, without granting the users permissions
+                  to directly access the underlying base tables of the view.
+               -> Views can be used to provide a backward compatible interface to emulate a table that used to exist but whose schema has changed.(i.e The End User need not know or Do Anything about the changes).
+               -> Views can also be used when you copy data to and from SQL Server to improve performance and to partition data.   
