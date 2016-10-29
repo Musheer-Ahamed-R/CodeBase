@@ -1,5 +1,5 @@
-Indexes  -  -> Indexing is Nothing but ORDERING of the Rows(Actual Table Rows or Reference/Indexed Rows(Rows that refer back to the Actual Rows in the Table) based on the LIST OF COLUMNS
-               used for Indexing, for faster searching(i.e For Avoiding Table Scan).
+Indexes  -  -> Indexing is Nothing but ORDERING of the Rows(Actual Table Rows or Indexed Rows(Rows that refer back to the Actual Rows in the Table)
+               based on the LIST OF COLUMNS used for Indexing, for faster searching(i.e For Avoiding Table Scan).
             -> We can also Specify the Nature of the Ordering for each Columns in the INDEX.(i.e ASC or DESC).
             -> The Actual Table Data is Contained in Multiple DATA pages with each page containing some Table Rows.
             -> They are created on Tables and Views.
@@ -50,17 +50,18 @@ Indexes  -  -> Indexing is Nothing but ORDERING of the Rows(Actual Table Rows or
 
 
                   NON-CLUSTERED     -  -> A NON-CLUSTERED index can be defined on a table or view with a Clustered index or on a Heap.
-                                       -> All the REFERENCE/INDEXED ROWS Combined is called an NON-CLUSTERED INDEX.
+                                       -> All the INDEXED ROWS Combined is called an NON-CLUSTERED INDEX.
                                        -> Each Index row in the NON-CLUSTERED Index contains the NON-CLUSTERED key value and a ROW LOCATOR(The Pointer).
                                        -> The structure of the Row Locator depends on whether the data pages are stored in a heap or a clustered table. For a heap, a row locator is a pointer to the row. For a clustered table,
                                           the row locator is the clustered index key.
                                        -> If the underlying Clustered Index is not Unique, then the locator points/contains both the key value of Clustered index and the Uniqifier Column, newly created Column by the SQL Server for Uniqueness.
                                        -> The rows in the index are stored in the ORDER of the INDEX KEY VALUES, but the data rows are not guaranteed to be in any particular order unless a clustered index is created on the table.
                                        -> The SQL Server picks up Row Address from the Index and directly fetches the record from the Table. This is called as INDEX SEEK.
-                                       -> This is Synonymous to the Index in a Book.
-                                       -> Non-Clustered Indexes have a structure separate from the data rows.
+                                       -> This is Analogous to the Index in a Book.
+                                       -> Non-Clustered Indexes have a Structure Separate from the DATA ROWS.
                                        -> There can any number of NON-CLUSTERED Indexes on a Table. (e.g like the Table Of Contents Index at the Beginning and Data Index at the End).
                                        -> Generally, NON-Clustered indexes are created to improve the performance of frequently used queries not covered by the clustered index or to locate rows in a table without a clustered index (called a heap).
+                                       -> Additional Storage Space is required for Storing the INDEX ROWS. This contains same number of INDEX rows as the Data Rows.
                                        Syntax :
                                           CREATE [ UNIQUE ] INDEX ON Table_Name(Col1 ORDER, Col2 ORDER, ....)
 
@@ -68,6 +69,8 @@ Indexes  -  -> Indexing is Nothing but ORDERING of the Rows(Actual Table Rows or
                                        -> There can be ONLY ONE CLUSTERED INDEX PER TABLE, because the data rows themselves can be sorted in only one order(logical).
                                        -> The only time the data rows in a table are stored in sorted order is when the table contains a clustered index. When a table has a clustered index, the table is called a Clustered Table.
                                           If a table has no clustered index, its data rows are stored in an unordered structure called a HEAP.
+                                       -> This is faster than a NON-Clustered INDEX, because this doesn't need to do an INDEX SEEK to get to the Actual Data Row.
+                                       -> Additional Storage Space is not required.
                                        -> This is analogous to a Telephony Directory.
                                        Syntax :
                                           CREATE [ UNIQUE ] CLUSTERED INDEX ON Table_Name(Col1 ORDER, Col2 ORDER, ....)
