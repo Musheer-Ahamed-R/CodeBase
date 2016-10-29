@@ -1,0 +1,85 @@
+Indexes  -  -> Indexing is Nothing but ORDERING of the Rows(Actual Table Rows or Reference/Indexed Rows(Rows that refer back to the Actual Rows in the Table) based on the LIST OF COLUMNS
+               used for Indexing, for faster searching(i.e For Avoiding Table Scan).
+            -> We can also Specify the Nature of the Ordering for each Columns in the INDEX.(i.e ASC or DESC).
+            -> The Actual Table Data is Contained in Multiple DATA pages with each page containing some Table Rows.
+            -> They are created on Tables and Views.
+            -> Indexes are used by Queries to find data from Tables Quickly. In fact, the Existence of right Indexes can drastically IMPROVE the Performance of the Queries.
+            -> If Indexing is not done on a Table or we use a Column which is not indexed, the Query has to complete a Table Scan to find the required rows, which
+               is Extremely BAD for Performance.
+            -> SQL Server creates a set of INDEX PAGES(for both Clustered and NON-Clustered Indexes), which tells the Range in each page below it(i.e The Page below Could be another Index Page or the Data Page, so that the Query knows where to start the searching from.
+               If this is not used, then it does a table scan(Bad for performance) to find the starting point, but after that, the Query knows where to stop, since it is sorted based on the Indexed Column.
+            -> Each Leaf Node is an DATA PAGE.(Either Containing Actual Rows or Indexed Rows) and all Other Nodes are INDEX PAGE.
+            -> When we create a non unique CLUSTERED index, SQL Server creates a hidden 4 byte uniquifier NEW COLUMN on the actual data table, that ensures that all rows in the index are distinctly identifiable. However, it does not create a
+               uniquifier Column in case of Non_Clustered Index, because the Pointer in the Non_Clustered Index either points to the key value of Clustered index, which is made Unique as mentioned above(If Present),
+               else the Row ID(ROW IDENTIFIERS(RID).Here, RIDs are always Unique.
+            -> The Default Index is NON-UNIQUE and NON-CLUSTERED INDEX.
+            -> The Order of Data Stored in a Table WITHOUT ANY INDEX is like a HEAP. (i.e. No Particular Order)
+            -> Indexes are AUTOMATICALLY MAINTAINED for a Table or View whenever the table data is modified.
+            -> Indexes(if not already Created) are automatically created when PRIMARY KEY and UNIQUE constraints are defined on table columns. By Default, A UNIQUE Clustered Index is created for the Primary Key Column and a UNIQUE NON-Clustered Index
+               is created for a UNIQUE Key. This can be changed if required by specifying the type of the Index Explicitly.
+            -> An index created as part of the constraint is automatically given the same name as the constraint name.
+            -> You can create a clustered index on a column other than primary key column if a NON-Clustered primary key constraint was specified.
+
+            Note :
+               -> Primary Key and a UNIQUE Key Constraint cannot exist without an Index. The Index can be a Default one or an Explicitly specified one. Whereas, an INDEX can exist without a Primary Key or a UNIQUE Key Constraint.
+
+
+
+
+               Finally, to compare indexes and Primary Key. You can create an index without a primary key but you cannot create a primary key without an index.
+
+
+               we can specify on what tree we want our index to be stored.
+
+            unique--   Both clustered and nonclustered indexes can be unique. This means no two rows can have the same value for the index key. Otherwise, the index is not unique and multiple rows can share the same key value. For more information,
+
+
+            -> Different Types of Indexes
+                  -> Hash
+                  -> Memory-optimized NON-Clustered Indexes
+                  -> Clustered
+                  -> Non-Clustered
+                  -> Unique
+                  -> ColumnStore
+                  -> Index with Included Columns
+                  -> Index on Computed Columns
+                  -> Filtered
+                  -> Spatial
+                  -> XML
+                  -> Full-text
+
+
+                  NON-CLUSTERED     -  -> A NON-CLUSTERED index can be defined on a table or view with a Clustered index or on a Heap.
+                                       -> All the REFERENCE/INDEXED ROWS Combined is called an NON-CLUSTERED INDEX.
+                                       -> Each Index row in the NON-CLUSTERED Index contains the NON-CLUSTERED key value and a ROW LOCATOR(The Pointer).
+                                       -> The structure of the Row Locator depends on whether the data pages are stored in a heap or a clustered table. For a heap, a row locator is a pointer to the row. For a clustered table,
+                                          the row locator is the clustered index key.
+                                       -> If the underlying Clustered Index is not Unique, then the locator points/contains both the key value of Clustered index and the Uniqifier Column, newly created Column by the SQL Server for Uniqueness.
+                                       -> The rows in the index are stored in the ORDER of the INDEX KEY VALUES, but the data rows are not guaranteed to be in any particular order unless a clustered index is created on the table.
+                                       -> The SQL Server picks up Row Address from the Index and directly fetches the record from the Table. This is called as INDEX SEEK.
+                                       -> This is Synonymous to the Index in a Book.
+                                       -> Non-Clustered Indexes have a structure separate from the data rows.
+                                       -> There can any number of NON-CLUSTERED Indexes on a Table. (e.g like the Table Of Contents Index at the Beginning and Data Index at the End).
+                                       -> Generally, NON-Clustered indexes are created to improve the performance of frequently used queries not covered by the clustered index or to locate rows in a table without a clustered index (called a heap).
+                                       Syntax :
+                                          CREATE [ UNIQUE ] INDEX ON Table_Name(Col1 ORDER, Col2 ORDER, ....)
+
+                  Clustered        -   -> Clustered indexes SORT and STORE the data rows in the table or view based on their key values(i.e They determine the Physical Order of Data in a Table). These are the columns included in the index definition.
+                                       -> There can be ONLY ONE CLUSTERED INDEX PER TABLE, because the data rows themselves can be sorted in only one order(logical).
+                                       -> The only time the data rows in a table are stored in sorted order is when the table contains a clustered index. When a table has a clustered index, the table is called a Clustered Table.
+                                          If a table has no clustered index, its data rows are stored in an unordered structure called a HEAP.
+                                       -> This is analogous to a Telephony Directory.
+                                       Syntax :
+                                          CREATE [ UNIQUE ] CLUSTERED INDEX ON Table_Name(Col1 ORDER, Col2 ORDER, ....)
+
+
+
+                  UNIQUE           -   -> A unique index ensures that the index key contains no duplicate values and therefore every row in the table or view is in some way unique.
+                                       -> Uniqueness can be a property of both Clustered and NON-Clustered indexes.
+                                       -> A UNIQUE Constraint automatically Creates a UNIQUE Index on that Column.(By Default NON-CLUSTERED).
+                                       -> There are no significant differences between creating a UNIQUE constraint and creating a unique index that is independent of a constraint. Data validation occurs in the same manner, and the query optimizer
+                                          does not differentiate between a unique index created by a constraint or manually created.
+                                       -> We can set an option to ignore duplicate keys. If this option is set to Yes and We attempt to create duplicate keys by adding data that affects multiple rows (with the INSERT statement), the row containing a duplicate
+                                          is not added. If it is set to No, the entire insert operation fails and all the data is rolled back.
+                                       Syntax :
+                                          CREATE UNIQUE [ CLUSTERED | NONCLUSTERED ] INDEX ON Table_Name(Col1 ORDER, Col2 ORDER, ....)
