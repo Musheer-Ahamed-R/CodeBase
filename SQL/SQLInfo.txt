@@ -723,14 +723,6 @@ Important Keywords in SQL
                                              -> EXCEPT and UNION evaluated from left to right based on their position in the expression
          -> WITH
 
-         -> UNION
-
-         -> UNION ALL
-
-         -> INTERSECT
-
-
-
 
 
 
