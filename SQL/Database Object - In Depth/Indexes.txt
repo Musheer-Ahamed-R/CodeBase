@@ -6,33 +6,37 @@ Indexes  -  -> Indexing is Nothing but ORDERING of the Rows(Actual Table Rows or
             -> Indexes are used by Queries to find data from Tables Quickly. In fact, the Existence of right Indexes can drastically IMPROVE the Performance of the Queries.
             -> If Indexing is not done on a Table or we use a Column which is not indexed, the Query has to complete a Table Scan to find the required rows, which
                is Extremely BAD for Performance.
-            -> SQL Server creates a set of INDEX PAGES(for both Clustered and NON-Clustered Indexes), which tells the Range in each page below it(i.e The Page below Could be another Index Page or the Data Page, so that the Query knows where to start the searching from.
-               If this is not used, then it does a table scan(Bad for performance) to find the starting point, but after that, the Query knows where to stop, since it is sorted based on the Indexed Column.
+            -> SQL Server creates a set of INDEX PAGES(for both Clustered and NON-Clustered Indexes), which tells the Range in each page below it(i.e The Page below Could be another Index Page or the Data Page),
+               so that the Query knows where to start the searching from. If this is not used, then it does a Table scan(Bad for performance) to find the starting point, but after that,
+               the Query knows where to stop, since it is sorted based on the Indexed Column.
             -> Each Leaf Node is an DATA PAGE.(Either Containing Actual Rows or Indexed Rows) and all Other Nodes are INDEX PAGE.
-            -> When we create a non unique CLUSTERED index, SQL Server creates a hidden 4 byte uniquifier NEW COLUMN on the actual data table, that ensures that all rows in the index are distinctly identifiable. However, it does not create a
-               uniquifier Column in case of Non_Clustered Index, because the Pointer in the Non_Clustered Index either points to the key value of Clustered index, which is made Unique as mentioned above(If Present),
-               else the Row ID(ROW IDENTIFIERS(RID).Here, RIDs are always Unique.
-            -> The Default Index is NON-UNIQUE and NON-CLUSTERED INDEX.
+            -> When we create a non unique CLUSTERED index, SQL Server creates a hidden 4 byte uniquifier NEW COLUMN on the actual data table, that ensures that all rows in the index are distinctly identifiable.
+               However, it does not create a uniquifier Column in case of Non_Clustered Index, because the Pointer in the Non_Clustered Index either points to the key value of Clustered index,
+               which is made Unique as mentioned above(If Present), else the Row ID(ROW IDENTIFIERS(RID).Here, RIDs are always Unique.
+            -> The Default Index is NON-UNIQUE NON-CLUSTERED INDEX.
             -> The Order of Data Stored in a Table WITHOUT ANY INDEX is like a HEAP. (i.e. No Particular Order)
             -> Indexes are AUTOMATICALLY MAINTAINED for a Table or View whenever the table data is modified.
-            -> Indexes(if not already Created) are automatically created when PRIMARY KEY and UNIQUE constraints are defined on table columns. By Default, A UNIQUE Clustered Index is created for the Primary Key Column and a UNIQUE NON-Clustered Index
+            -> Indexes(if not already Created) are automatically created when PRIMARY KEY and UNIQUE constraints are defined on table columns. By Default, A UNIQUE Clustered Index
+               is created for the Primary Key Column and a UNIQUE NON-Clustered Index
                is created for a UNIQUE Key. This can be changed if required by specifying the type of the Index Explicitly.
+            -> We can also specify the type of the Index during Primary Key or UNIQUE Key Creation.
             -> An index created as part of the constraint is automatically given the same name as the constraint name.
             -> You can create a clustered index on a column other than primary key column if a NON-Clustered primary key constraint was specified.
-
+            -> We can also specify the INDEX to be utilized by the QUERY Execution Plan by specifying them explicitly.
+               Syntax :
+               SELECT exp1, exp2 WITH ( INDEX ( Index_Name ) )
+            -> An INDEX SCAN(usually Clustered Index Scan) operation happens when every row of an INDEX must be examined in order to find values
+               in columns that the index does not cover.
             Note :
-               -> Primary Key and a UNIQUE Key Constraint cannot exist without an Index. The Index can be a Default one or an Explicitly specified one. Whereas, an INDEX can exist without a Primary Key or a UNIQUE Key Constraint.
+               -> Primary Key and a UNIQUE Key Constraint CANNOT EXIST without an Index. The Index can be a Default one or an Explicitly specified one.
+                  Whereas, an INDEX can exist without a Primary Key or a UNIQUE Key Constraint.
 
 
 
 
-               Finally, to compare indexes and Primary Key. You can create an index without a primary key but you cannot create a primary key without an index.
 
 
                we can specify on what tree we want our index to be stored.
-
-            unique--   Both clustered and nonclustered indexes can be unique. This means no two rows can have the same value for the index key. Otherwise, the index is not unique and multiple rows can share the same key value. For more information,
-
 
             -> Different Types of Indexes
                   -> Hash
@@ -61,9 +65,10 @@ Indexes  -  -> Indexing is Nothing but ORDERING of the Rows(Actual Table Rows or
                                        -> Non-Clustered Indexes have a Structure Separate from the DATA ROWS.
                                        -> There can any number of NON-CLUSTERED Indexes on a Table. (e.g like the Table Of Contents Index at the Beginning and Data Index at the End).
                                        -> Generally, NON-Clustered indexes are created to improve the performance of frequently used queries not covered by the clustered index or to locate rows in a table without a clustered index (called a heap).
-                                       -> Additional Storage Space is required for Storing the INDEX ROWS. This contains same number of INDEX rows as the Data Rows.
+                                       -> Additional Storage Space is required for Storing the INDEX ROWS. The amount of the space required will depend on the Size of the Table, and the Number and the Type of the Columns used in the INDEX.
+                                       -> This contains same number of INDEX rows as the Data Rows.
                                        Syntax :
-                                          CREATE [ UNIQUE ] INDEX ON Table_Name(Col1 ORDER, Col2 ORDER, ....)
+                                          CREATE [ UNIQUE ] INDEX Index_Name ON Table_Name(Col1 ORDER, Col2 ORDER, ....)
 
                   Clustered        -   -> Clustered indexes SORT and STORE the data rows in the table or view based on their key values(i.e They determine the Physical Order of Data in a Table). These are the columns included in the index definition.
                                        -> There can be ONLY ONE CLUSTERED INDEX PER TABLE, because the data rows themselves can be sorted in only one order(logical).
@@ -73,16 +78,89 @@ Indexes  -  -> Indexing is Nothing but ORDERING of the Rows(Actual Table Rows or
                                        -> Additional Storage Space is not required.
                                        -> This is analogous to a Telephony Directory.
                                        Syntax :
-                                          CREATE [ UNIQUE ] CLUSTERED INDEX ON Table_Name(Col1 ORDER, Col2 ORDER, ....)
+                                          CREATE [ UNIQUE ] CLUSTERED INDEX Index_Name ON Table_Name(Col1 ORDER, Col2 ORDER, ....)
 
 
 
                   UNIQUE           -   -> A unique index ensures that the index key contains no duplicate values and therefore every row in the table or view is in some way unique.
                                        -> Uniqueness can be a property of both Clustered and NON-Clustered indexes.
-                                       -> A UNIQUE Constraint automatically Creates a UNIQUE Index on that Column.(By Default NON-CLUSTERED).
-                                       -> There are no significant differences between creating a UNIQUE constraint and creating a unique index that is independent of a constraint. Data validation occurs in the same manner, and the query optimizer
-                                          does not differentiate between a unique index created by a constraint or manually created.
-                                       -> We can set an option to ignore duplicate keys. If this option is set to Yes and We attempt to create duplicate keys by adding data that affects multiple rows (with the INSERT statement), the row containing a duplicate
-                                          is not added. If it is set to No, the entire insert operation fails and all the data is rolled back.
+                                       -> A UNIQUE Constraint automatically Creates a UNIQUE Index on that Column. By Default NON-CLUSTERED Index is created, but we can also explicitly specify the INDEX Type.
+                                       -> There are no significant differences between creating a UNIQUE constraint and creating a unique index that is independent of a constraint. Data validation occurs in the same manner,
+                                          and the query optimizer does not differentiate between a unique index created by a constraint or manually created. However, creating a UNIQUE constraint
+                                          on the column makes the objective of the index clear.
+                                       -> We can set an option to ignore duplicate keys. If this option is set to Yes and We attempt to create duplicate keys by adding data that affects multiple rows (with the INSERT statement),
+                                          the row containing a duplicate is not added. If it is set to No, the entire insert operation fails and all the data is rolled back.
+                                       -> We cannot create a Unique index on a single column if that column contains NULL in more than one row. Similarly, we cannot create a Unique index on multiple columns if the combination of columns contains
+                                          NULL in more than one row. These are treated as duplicate values for indexing purposes.
                                        Syntax :
-                                          CREATE UNIQUE [ CLUSTERED | NONCLUSTERED ] INDEX ON Table_Name(Col1 ORDER, Col2 ORDER, ....)
+                                          CREATE UNIQUE [ CLUSTERED | NONCLUSTERED ] INDEX Index_Name ON Table_Name(Col1 ORDER, Col2 ORDER, ....)
+
+                  INDEX WITH       -   -> We can add included(non-key) Columns to extend the functionality of NON-Clustered indexes.
+                  INCLUDED COLUMNS     -> By including non-key columns, we can create NON-Clustered indexes that cover more queries. This is because the non-key columns have the following benefits:
+                                             -> They can be data types not allowed as index key columns.
+                                             -> They are not considered by the Database Engine when calculating the number of index key columns or index key size.
+                                       -> An index with non-key columns can significantly improve query performance when all columns in the query are included/found in the index either as key or non-key columns.
+                                       -> Performance gains are achieved because the query optimizer can locate all the column values within the index; table or clustered index data is not accessed resulting in fewer disk I/O operations.
+                                       -> They can only be defined in NON-Clustered Indexes.
+                                       -> Computed columns that are deterministic and either precise or imprecise can be non-key columns.
+                                       -> Limitations
+                                             -> Non-key columns cannot be dropped from a table unless that table’s index is dropped first.
+                                             -> Non-key columns cannot be changed, except to do the following:
+                                                   -> Change the nullability of the column from NOT NULL to NULL.
+                                                   -> Increase the length of varchar, nvarchar, or varbinary columns.
+                                       Syntax :
+                                          CREATE NONCLUSTERED INDEX Index_Name
+                                          ON Table_Name (Col1 ORDER, Col2 ORDER, ....)
+                                          INCLUDE (Col1, Col2, Col3, ...)
+
+                  FILTERED        -    -> A filtered index is an optimized "NON-CLUSTERED" index especially suited to cover queries that select from a well-defined subset of data.(i.e) Filtered indexes are NON-Clustered indexes
+                  INDEXES                 that have the addition of a WHERE clause.
+                                       -> It uses a filter predicate to index a portion of rows in the table.
+                                       -> A well-designed filtered index can improve query performance as well as reduce index maintenance and storage costs compared with full-table indexes.
+                                       -> Filtered indexes can provide the following advantages over full-table indexes:
+                                             -> Improved query performance and plan quality
+                                                   -> A well-designed filtered index improves query performance and execution plan quality because it is smaller than a full-table NON-Clustered index and has filtered statistics.
+                                                   -> The filtered statistics are more accurate than full-table statistics because they cover only the rows in the filtered index.
+                                             -> Reduced index maintenance costs
+                                                   -> An index is maintained only when data manipulation language (DML) statements affect the data in the index.
+                                                   -> A filtered index reduces index maintenance costs compared with a full-table NON-Clustered index because it is smaller and is only maintained when the
+                                                      data in the index is changed. It is possible to have a large number of filtered indexes, especially when they contain data that is changed infrequently.
+                                                   -> Similarly, if a filtered index contains only the frequently modified data, the smaller size of the index reduces the cost of updating the statistics.
+                                             -> Reduced index storage costs
+                                                   -> Creating a filtered index can reduce disk storage for NON-Clustered indexes when a full-table index is not necessary.
+                                                   -> We can REPLACE a full-table NON-Clustered index with MULTIPLE FILTERED indexes without significantly increasing the storage requirements.
+                                       -> Filtered indexes have the following advantages over indexed views:
+                                             -> Reduced index maintenance costs
+                                                   -> The query processor uses fewer CPU resources to update a filtered index than an indexed view.
+                                             -> Improved plan quality
+                                                   -> During query compilation, the query optimizer considers using a filtered index in more situations than the equivalent indexed view.
+                                             -> Online index rebuilds
+                                                   -> we can rebuild filtered indexes while they are available for queries. Online index rebuilds are not supported for indexed views.
+                                             -> Non-unique indexes
+                                                   -> Filtered indexes can be non-unique, whereas indexed views must be unique.
+                                       -> Limitations
+                                             -> We cannot create a filtered index on a view. However, the query optimizer can benefit from a filtered index defined on a table that is referenced in a view.
+                                             -> Filtered indexes are defined on one table and only support Simple comparison operators. If we need a filter expression that references multiple tables
+                                                or has complex logic, we should create a view.
+                                             -> A column in the filtered index expression does not need to be a key or included column in the filtered index definition, if the filtered index expression
+                                                is equivalent to the query predicate and the query does not return the column in the filtered index expression with the query results.
+                                                If any one of this fails, the column should be a key or included column in the filtered index definition.
+                                             -> A Column in the filtered index expression is required to be a key or included column in the filtered index definition, because when the first criteria(actual criteria of the Filter Index)is satisfied
+                                                the Filter Indexed is selected in the Query Execution plan, but for subsequent criteria on the Column it has be a key or included column for efficient Searching.
+                                       Syntax :
+                                          CREATE NONCLUSTERED INDEX Index_Name
+                                          ON Table_Name (Col1 ORDER, Col2 ORDER, ....)
+                                          WHERE Criteria;
+
+
+                  INDEX ON        -    ->
+                  COMPUTED COLS
+
+            Disadvantages of       -   -> When DML Statements modifies data in a Table, the Data in all the Indexes also needs to be updated. Indexes can help to search and locate the rows that we want to manipulate,
+            Using Index                   but TOO MANY INDEXES to update can actually hurt the performance of the Data Modifications.
+                                       -> Additional Storage Space is required for Storing, in case of NON-Clustered Indexes.
+
+            Covering Query         -   -> If all the Columns that we have requested in the SELECT Clause of a Query, are present in the Index, then there is no need to lookup
+                                          in the Table again. The requested Column data can simply be returned from the Index. This query is called as a Covering Query(i.e The Index Covers the Requested Query).
+                                       -> A Clustered Index always Covers a Query, since it contains all of the Data in a Table.
+                                       -> TO a Certain Extent, a Composite Index(Index on two or more Columns) and Included Columns can Cover a Query.
