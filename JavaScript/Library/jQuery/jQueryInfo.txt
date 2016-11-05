@@ -1,0 +1,37 @@
+jQuery   -  -> jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation,
+               event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers.
+
+Advantages of jQuery -  -> It is Cross-Browser.
+                        -> It is easier to use than Native JavaScript.
+                        -> It is Extensible.
+                        -> Simplifies and has Rich AJAX Support.
+                        -> It has Large Development Community and Many Plugins.
+
+Notes :
+      -> $ is a shortcut for jQuery Object.
+
+CDN                  -  -> Content Delivery Network(CDN) is a System of Distributed Servers that host resources such as Images, CSS, JavaScript Files etc..
+                        -> Benefits of Using CDN   -
+                              -> Distributed CDN Servers -  -> The jQuery file can be Downloaded from the CDN Server that is Closest to the User.
+                              -> Browser Caching         -  -> If a User visits a Web Page that loads jQuery from a CDN Server, the Browser automatically Caches the File,
+                                                               Thus, if he visits our website, the jQuery file NEED NOT be download it again.
+                              -> Parallel Downloads      -  ->              
+jQuery Functions     -
+      -> .ready()    -  -> This method offers a way to run JavaScript code as soon as the page's Document Object Model (DOM) becomes SAFE to manipulate/the DOM is fully loaded.
+                        -> This doesn't wait for Images, CSS, Frames to be Fully Loaded.
+                        Syntax :
+                           $( document ).ready( handler )
+                           $( handler )      // Preferred
+                           $().ready( handler )
+
+      -> .load()     -  -> The load event is sent to an element when it and all sub-elements have been COMPLETELY loaded.
+                        -> This event fires after the "ready" Event.
+                        -> This event can be sent to any element associated with a URL: images, scripts, frames, iframes, and the window object.
+                        -> In general, it is not necessary to wait for all images to be fully loaded. If code can be executed earlier, it is usually
+                           best to place it in a handler sent to the .ready() method.
+                        -> This is removed in Version 3.0.
+                        Syntax :
+                           .load( handler )
+                           .load( [eventData ], handler )
+
+      ->

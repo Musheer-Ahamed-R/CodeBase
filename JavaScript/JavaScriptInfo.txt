@@ -1,0 +1,61 @@
+JavaScript -   -> JavaScript is a cross-platform, object-oriented scripting language.
+               -> It is a small and lightweight language.
+               -> Inside a host environment (for example, a web browser), JavaScript can be connected to the objects of its environment to provide programmatic control over them.
+               -> JavaScript is the Language which implements a standard called ECMAScript.
+               -> There are also other noticeable languages that implement ECMAScript such as ActionScript (used for Flash), JScript (Microsoft).
+               -> Each Browser implement their own JavaScript Engine. They implement ECMAScript. (e.g V8 - Google Chrome, SpiderMonkey - Mozilla etc..)
+
+
+Transpiler -   -> Transpilers, or source-to-source compilers, are tools that read source code written in one programming language, and produce the equivalent code in another language.
+               -> Languages you write that transpile to JavaScript are often called compile-to-JS languages, and are said to target JavaScript. (e.g TypeScript and CoffeeScript)
+               -> This also transforms NEW JavaScript ES6 to OLD JavaScript ES5. Thus, its possible for writing the next generation of JavaScript today.
+               -> BabelJS is the most popular transpiler.
+
+Languages based on          -     -> TypeScript and CoffeeScript, they both provides syntactic sugar for a number of features not yet native to JavaScript, while discouraging some of JavaScript's "bad parts".
+JavaScript                        -> They are Built on top of ES5 and then are transcompiled into ES5 compliant JavaScript. (i.e) We write TypeScript or CoffeeScript then the transpiler transforms it into ES5 JavaScript.
+                                  -> Anything we can write in JavaScript, we can write in CoffeeScript or TypeScript.
+
+
+
+Types of JavaScript         -     -> JavaScript contains a standard library of objects, such as Array, Date, and Math, and
+                                     a core set of language elements such as operators, control structures, and statements.
+                                  -> Core JavaScript can be extended for a variety of purposes by supplementing it with additional objects; for example:
+                                       -> Client-side JavaScript -   -> This extends the core language by supplying objects to control a browser and its Document Object Model (DOM).
+                                                                     -> For example, client-side extensions allow an application to place elements on an HTML form and
+                                                                        respond to user events such as mouse clicks, form input, and page navigation.
+                                       -> Server-side JavaScript -   -> This extends the core language by supplying objects relevant to running JavaScript on a server.
+                                                                     -> For example, server-side extensions allow an application to communicate with a database, provide continuity of information
+                                                                        from one invocation to another of the application, or perform file manipulations on a server.
+
+Client-Side JavaScript      -     -> JavaScript can be stored either Inline on the Page(Anywhere(i.e Head/Body etc..)) or in an External js File.
+Storage                           -> Advantages of External Over Inline JavaScript
+                                       -> Maintainability   -        -> External JavaScript can be referenced on Multiple Pages without having to duplicate the Code Inline on Every Page.
+                                                                     -> Changes in the File gets reflected on Every Page.
+                                       -> Separation of     -        -> Good Practice to Separate HTML, CSS and JS Files as it makes working easier with them.
+                                          Concerns
+                                       -> Performance       -        -> An External JavaScript can be cached by the Browser, where as an Inline JavaScript on the Page is Loaded Every Time the Page Loads.
+
+                                  Notes :
+                                       -> Its a Good Practice to Keep Script Tags in the Bottom, so that the HTML Rendering is Completed as Fast as Possible.
+                                       -> Normally, The script is fetched and executed immediately, before the browser continues parsing the page.
+                                       -> If async is used, browsers that support it will download that script in the background without blocking the rest of the content on the page(HTML Parser).
+                                          The script will execute whenever it is finished downloading.
+                                       -> if defer is used, The loading and execution of scripts that are not necessary for the initial page render may be deferred until after the initial render
+                                          or other critical parts of the page have finished loading.
+
+
+Beginning Javascript        -     Data Types -
+                                    -> Number
+                                    -> boolean
+                                    -> String
+
+-> We use "var" keyword to declare all types of Variables.
+
+
+
+
+Disadvantages of JavaScript -
+         -> Security        -     -> Since JavaScript runs on the Client Machine, a Malicious user could use JavaScript to do a Variety of things like Tracking Browser History,
+                                     Stealing Passwords.
+         -> Browser         -     -> Not all Browsers treat the Same piece of Javascript in the Same manner.(i.e, The Functionality and User-Interface may vary from Browser to Browser.
+            Compatibility            This can be solved using Javascript Libraries like jQuery.

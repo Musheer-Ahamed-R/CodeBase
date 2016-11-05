@@ -1,0 +1,2 @@
+Notes :
+   -> The jQuery function can take Document Object or CSS Selector.(e.g img etc..)
