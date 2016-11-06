@@ -5,9 +5,11 @@ Events               -  -> An Event is a user Interaction with the Browser.
                         -> Each Event Type is a SEPARATE JavaScript OBJECT TYPE(i.e A Constructor is Defined for Each Event Type), having their own properties and Methods.
                         -> Each Event is an Object/Instance of a Particular Event Type.
 
-Event handler        -  -> When an Event Occurs on an Element and that Element has that Event Binded to it, then an Event handler(basically a JavaScript Function) is used/Called
+Event handler/       -  -> Event handler is an object that implements the EventListener interface and provides an EventListener.handleEvent() callback method. Event handlers are language-specific.
+Event listener          -> Event handlers are invoked in the context of a particular object (the current event target)(i.e the Event handler "this" value is set to E's currentTarget and
+                           are provided with the event object itself.
+                        -> When an Event Occurs on an Element and that Element has that Event Binded to it, then an Event handler(basically a JavaScript Function) is used/Called
                            to Handle that Event.
-
 
 Standard events      -  -> These events are defined in official Web specifications, and should be common across browsers.
                         -> We can also find information about the event based on the Object sent with each Event Type.
@@ -96,7 +98,7 @@ Standard events      -  -> These events are defined in official Web specificatio
 |   focusinUnimplemented 	      |    FocusEvent	               |  An element is about to receive focus (bubbles).
 |   (see bug 687787)             |                                |
 |   focusoutUnimplemented 	      |    FocusEvent	               |  An element is about to lose focus (bubbles).
-|   (see bug 687787)             |                                |   
+|   (see bug 687787)             |                                |
 |   fullscreenchange	            |    Event	                     |  An element was turned to fullscreen mode or back to normal mode.
 |   fullscreenerror	            |    Event	                     |  It was impossible to switch to fullscreen mode for technical reasons or because the permission was denied.
 |   gamepadconnected	            |    GamepadEvent	               |  A gamepad has been connected.
