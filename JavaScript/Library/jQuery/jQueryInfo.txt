@@ -84,7 +84,7 @@ jQuery Functions     -
                         Syntax                                 Returns
                            .each( function )                   jQuery
 
-      -> .text()    -   -> Get the combined text contents of each element in the set of matched elements, including their descendants, or set the text contents of the matched elements.
+      -> .text()    -   -> Get the combined text contents of each element in the SET of MATCHED elements, including their Descendants, or set the text contents of the matched elements.
                         -> The .text() method cannot be used on form inputs or scripts. To set or get the text value of input or textarea elements, use the .val() method. To get the value of a script element, use the .html() method.
                         Syntax                                 Returns     Notes
                            .text()
@@ -92,3 +92,10 @@ jQuery Functions     -
                            .text( text )
                               .text( text )                    jQuery
                               .text( function )                jQuery      A function returning the text content to set
+
+      -> .filter()  -   -> Reduce the set of matched elements to those that match the selector or pass the function's test.
+                        Syntax                                 Returns     Notes
+                           .filter( selector )                 jQuery      A string containing a selector expression to match the current set of elements against.
+                           .filter( function )                 jQuery      A function used as a test for each element in the set. The Function returns Boolean.
+                           .filter( elements )                 jQuery      One or more DOM elements to match the current set of elements against.
+                           .filter( selection )                jQuery      An existing jQuery object to match the current set of elements against.
