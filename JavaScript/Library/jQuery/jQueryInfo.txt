@@ -15,7 +15,14 @@ CDN                  -  -> Content Delivery Network(CDN) is a System of Distribu
                               -> Distributed CDN Servers -  -> The jQuery file can be Downloaded from the CDN Server that is Closest to the User.
                               -> Browser Caching         -  -> If a User visits a Web Page that loads jQuery from a CDN Server, the Browser automatically Caches the File,
                                                                Thus, if he visits our website, the jQuery file NEED NOT be download it again.
-                              -> Parallel Downloads      -  ->              
+                              -> Parallel Downloads      -  -> Escapes Parallel Download Restriction on a Domain.
+                              -> Reduced Server Load     -  -> No Page Load will make a jQuery File request to our Server.
+                        -> Disadvantages                 -  -> Our Client/Users Firewall may block the CDN. So, we may have to request to Whitelist the CDN.
+                        Notes :
+                           -> In case of any Failure to load jQuery from the CDN, we have to gracefully switch back to loading jQuery from our Server itself.
+
+
+
 jQuery Functions     -
       -> .ready()    -  -> This method offers a way to run JavaScript code as soon as the page's Document Object Model (DOM) becomes SAFE to manipulate/the DOM is fully loaded.
                         -> This doesn't wait for Images, CSS, Frames to be Fully Loaded.
@@ -34,4 +41,8 @@ jQuery Functions     -
                            .load( handler )
                            .load( [eventData ], handler )
 
-      ->
+      -> .click()    -  -> Bind an event handler to the "click" JavaScript event, or trigger that event on an element.
+                        Syntax :
+                           .click( handler )
+                           .click( [eventData ], handler )
+                           .click()
