@@ -7,7 +7,8 @@ Events               -  -> An Event is a user Interaction with the Browser.
 
 Event handler/       -  -> Event handler is an object that implements the EventListener interface and provides an EventListener.handleEvent() callback method. Event handlers are language-specific.
 Event listener          -> Event handlers are invoked in the context of a particular object (the current event target)(i.e the Event handler "this" value is set to E's currentTarget and
-                           are provided with the event object itself.
+                           are provided with the event object itself(as Parameter).
+                        -> They are invoked with one argument, the value of which is the Event object E.
                         -> When an Event Occurs on an Element and that Element has that Event Binded to it, then an Event handler(basically a JavaScript Function) is used/Called
                            to Handle that Event.
 

@@ -5,3 +5,4 @@ Notes :
    -> To check if an Element Exists/Returned by the jQuery Selector, we should use the length property.
    -> A jQuery object wraps the Raw DOM Object and provides jQuery Methods.
    -> To get the underlying DOM Object from a jQuery object, we have to Index that with the Index Position.(i.e) $("#id")[0]
+   -> Get(something) is done for the First Matched element and Set is Done for all the Matching Elements. 
