@@ -5,7 +5,7 @@ Events               -  -> An Event is a user Interaction with the Browser.
                         -> Each Event Type is a SEPARATE JavaScript OBJECT TYPE(i.e A Constructor is Defined for Each Event Type), having their own properties and Methods.
                         -> Each Event is an Object/Instance of a Particular Event Type.
 
-Event handler        -  -> When an Event Occurs on an Element which has that Event Binded to it, then an Event handler(basically a JavaScript Function) is used
+Event handler        -  -> When an Event Occurs on an Element and that Element has that Event Binded to it, then an Event handler(basically a JavaScript Function) is used/Called
                            to Handle that Event.
 
 
@@ -94,9 +94,9 @@ Standard events      -  -> These events are defined in official Web specificatio
 |   error	                     |    SpeechSynthesisErrorEvent	|  An error occurs that prevents the utterance from being successfully spoken.
 |   focus	                     |    FocusEvent	               |  An element has received focus (does not bubble).
 |   focusinUnimplemented 	      |    FocusEvent	               |  An element is about to receive focus (bubbles).
-|   (see bug 687787)
+|   (see bug 687787)             |                                |
 |   focusoutUnimplemented 	      |    FocusEvent	               |  An element is about to lose focus (bubbles).
-|   (see bug 687787)
+|   (see bug 687787)             |                                |   
 |   fullscreenchange	            |    Event	                     |  An element was turned to fullscreen mode or back to normal mode.
 |   fullscreenerror	            |    Event	                     |  It was impossible to switch to fullscreen mode for technical reasons or because the permission was denied.
 |   gamepadconnected	            |    GamepadEvent	               |  A gamepad has been connected.
@@ -123,7 +123,7 @@ Standard events      -  -> These events are defined in official Web specificatio
 |   message	                     |    MessageEvent	               |  A message is received from a child (i)frame or a parent window.
 |   message	                     |    MessageEvent	               |  A message is received through an event source.
 |   message 	                  |    ServiceWorkerMessageEvent   |  A message is received from a service worker, or a message is received in a service worker from another context.
-|                                |    or ExtendableMessageEvent,
+|                                |    or ExtendableMessageEvent,  |
 |   mousedown	                  |    MouseEvent	               |  A pointing device button (usually a mouse) is pressed on an element.
 |   mouseenter	                  |    MouseEvent	               |  A pointing device is moved onto the element that has the listener attached.
 |   mouseleave	                  |    MouseEvent	               |  A pointing device is moved off the element that has the listener attached.
@@ -195,7 +195,7 @@ Standard events      -  -> These events are defined in official Web specificatio
 |   SVGScroll	                  |    SVGEvent                    |  An SVG document is being scrolled.
 |   SVGUnload	                  |    SVGEvent                    |  An SVG document has been removed from a window or frame.
 |   SVGZoom	                     |    SVGZoomEvent	               |  An SVG document is being zoomed.
-|   timeout	                     |    ProgressEvent
+|   timeout	                     |    ProgressEvent               |
 |   timeupdate	                  |    Event	                     |  The time indicated by the currentTime attribute has been updated.
 |   touchcancel                  |    TouchEvent	               |  A touch point has been disrupted in an implementation-specific manners (too many touch points for example).
 |   touchend	                  |    TouchEvent	               |  A touch point is removed from the touch surface.
