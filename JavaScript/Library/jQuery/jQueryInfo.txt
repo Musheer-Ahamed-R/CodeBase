@@ -76,7 +76,7 @@ jQuery Functions     -
                            .hover( handlerInOut )              jQuery      handlerInOut   - A function to execute when the mouse pointer enters or leaves the element.
 
       -> .mouseenter()  -> Bind an event handler to be fired when the mouse enters an element, or trigger that handler on an element.
-                        -> This method is a shortcut for .on( "mouseenter", handler ) in the first two variations, and .trigger( "mouseenter" ) in the third.   
+                        -> This method is a shortcut for .on( "mouseenter", handler ) in the first two variations, and .trigger( "mouseenter" ) in the third.
                         Syntax                                 Returns
                            .mouseenter( handler )              jQuery
                            .mouseenter( [eventData ], handler) jQuery
@@ -136,9 +136,43 @@ jQuery Functions     -
                         -> The .find() and .children() methods are similar, except that the latter only travels a single level down the DOM tree.
                         -> Unlike most of the tree traversal methods, the selector expression is required in a call to .find(). If we need to retrieve all of the descendant elements,
                            we can pass in the universal selector '*' to accomplish this.
+                        Syntax                                 Returns     Notes
+                           .find( selector )                   jQuery      The Selector should be the Descendant of the main Element and not the Main Element Itself.
+                           .find( element )                    jQuery      The Element should be the Descendant of the main Element and not the Main Element Itself.
+
+      -> .parent()   -  -> This method traverses to the IMMEDIATE Parent(optionally filtered by a selector) of each of these elements in the DOM tree
+                           and constructs a new jQuery object from the matching elements.
+                        -> This method is similar to .parents(), except .parent() only travels a Single level up the DOM tree. Also, $( "html" ).parent() method
+                           returns a set containing document whereas $( "html" ).parents() returns an empty set.
+                        -> If the Parent Element does not match the Selector(if provided), then it is IGNORED.(i.e The method DOES NOT Traverse to the Next Level to find its Ancestor).
+                        Syntax                                 Returns     Notes
+                           .parent( [selector ] )              jQuery      A string containing a selector expression to match elements against.
+
+      -> .parents()  -  -> Get the ancestors of each element in the current set of matched elements, optionally filtered by a selector.
+                        -> This method allows us to search through the ALL the Ancestors of these elements in the DOM tree and construct a new jQuery object
+                           from the matching elements ordered from immediate parent on up.
+                        -> The elements are returned in order from the closest parent to the outer ones. When multiple DOM elements are in the original set,
+                           the resulting set will be in reverse order of the original elements as well, with duplicates removed.
                         Syntax                                 Returns
-                           .find( selector )                   jQuery
-                           .find( element )                    jQuery
+                           .parents( [selector ] )             jQuery
+
+      -> .closest()  -  -> For each element in the set, gets the first element that matches the selector by starting from the ELEMENT ITSELF and traversing up through its ancestors in the DOM tree.
+                        -> The .parents() and .closest() methods are similar in that they both traverse up the DOM tree. The differences between the two, though subtle, are significant:
+                                       .closest()	                                                                      .parents()
+                              -> Begins with the current element	                                            Begins with the parent element
+                              -> Travels up the DOM tree until it finds a match for the supplied selector     Travels up the DOM tree to the document's root element, adding each ancestor element to a
+                                                                                                              temporary collection; it then filters that collection based on a selector if one is supplied
+                              -> The returned jQuery object contains zero or one element 	                    The returned jQuery object contains zero or more elements
+                                 for each element in the original set, in document order                      for each element in the original set, in reverse document order
+                        Syntax                                 Returns     Notes
+                        .closest( selector )
+                           .closest( selector )                jQuery
+                           .closest( selector [, context ] )   jQuery      context - A DOM element within(limit) which a matching element may be found(It Does not Traverse the (Other)Children of the Context).
+                                                                           This is used to find an Element Within a Given Context.
+                           .closest( selection )               jQuery
+                           .closest( element )                 jQuery
+                        .closest( selectors [, context ] )                 Removed in jQuery 1.8
+                           .closest( selectors [, context ] )  Array
 
       -> .remove()   -  -> Remove the set of matched elements from the DOM.
                         -> Similar to .empty(), except that .remove() also removes the element itself.
