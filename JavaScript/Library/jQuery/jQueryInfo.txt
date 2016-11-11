@@ -53,7 +53,7 @@ jQuery Functions     -
                            .click( [eventData ], handler )     jQuery      eventData is an object containing data that will be passed to the event handler.
                            .click()                            jQuery      Trigger a Click Event
 
-      -> .css()     -   -> Get the value of a computed style property for the FIRST element in the set of matched elements or set one or more CSS properties for every matched element.
+      -> .css()      -  -> Get the value of a computed style property for the FIRST element in the set of matched elements or set one or more CSS properties for every matched element.
                         -> This accepts RELATIVE values similar to .animate(). Relative values are a string starting with += or -= to increment or decrement the current value. based on its previous values.
                         Syntax                                 Returns     Notes
                            .css( propertyName )
@@ -64,7 +64,25 @@ jQuery Functions     -
                               .css( propertyName, function )   jQuery      A function returning the value to set.
                               .css( properties )               jQuery      properties is an Object containing list of propertyName and Value.
 
-      -> .html()    -   -> Get the HTML contents of the first element in the set of matched elements or set the HTML contents of every matched element.
+      -> .hover()    -  -> Bind one or two handlers to the matched elements, to be executed when the mouse pointer enters and leaves the elements.
+                        -> The .hover() method binds handlers for both mouseenter and mouseleave events.
+                        -> $( selector ).hover( handlerIn, handlerOut ) is shorthand for: $( selector ).mouseenter( handlerIn ).mouseleave( handlerOut );
+                        -> Also $(selector).hover(handlerInOut) is shorthand for $( selector ).on( "mouseenter mouseleave", handlerInOut );
+                        Syntax                                 Returns     Notes
+                        .hover( handlerIn, handlerOut )
+                           .hover( handlerIn, handlerOut )     jQuery      handlerIn      - A function to execute when the mouse pointer enters the element.
+                                                                           handlerOut     - A function to execute when the mouse pointer leaves the element.
+                        .hover( handlerInOut )
+                           .hover( handlerInOut )              jQuery      handlerInOut   - A function to execute when the mouse pointer enters or leaves the element.
+
+      -> .mouseenter()  -> Bind an event handler to be fired when the mouse enters an element, or trigger that handler on an element.
+                        -> This method is a shortcut for .on( "mouseenter", handler ) in the first two variations, and .trigger( "mouseenter" ) in the third.   
+                        Syntax                                 Returns
+                           .mouseenter( handler )              jQuery
+                           .mouseenter( [eventData ], handler) jQuery
+                           .mouseenter()
+
+      -> .html()     -  -> Get the HTML contents of the first element in the set of matched elements or set the HTML contents of every matched element.
                         -> This method uses the browser's innerHTML property.
                         -> Additionally, jQuery removes other constructs such as data and event handlers from child elements before replacing those elements with the new content.
                         -> In Internet Explorer up to and including version 9, setting the text content of an HTML element may corrupt the text nodes of its children that are being removed from the document
@@ -77,14 +95,14 @@ jQuery Functions     -
                            .html( htmlString )                 jQuery
                            .html( function )                   jQuery      A function returning the HTML content to set.
 
-      -> .each()    -   -> It iterates over the DOM elements that are part of the jQuery object, executing a function for each matched element.
+      -> .each()     -  -> It iterates over the DOM elements that are part of the jQuery object, executing a function for each matched element.
                         -> Most jQuery methods that return a jQuery object also loop through the set of elements in the jQuery collection — a process known as implicit iteration.
                            When this occurs, it is often unnecessary to explicitly iterate with the .each() method:
                         -> We can stop the loop from within the callback function by returning false.
                         Syntax                                 Returns
                            .each( function )                   jQuery
 
-      -> .text()    -   -> Get the combined text contents of each element in the SET of MATCHED elements, including their Descendants, or set the text contents of the matched elements.
+      -> .text()     -  -> Get the combined text contents of each element in the SET of MATCHED elements, including their Descendants, or set the text contents of the matched elements.
                         -> The .text() method cannot be used on form inputs or scripts. To set or get the text value of input or textarea elements, use the .val() method. To get the value of a script element, use the .html() method.
                         Syntax                                 Returns     Notes
                            .text()
@@ -93,9 +111,50 @@ jQuery Functions     -
                               .text( text )                    jQuery
                               .text( function )                jQuery      A function returning the text content to set
 
-      -> .filter()  -   -> Reduce the set of matched elements to those that match the selector or pass the function's test.
+      -> .filter()   -  -> Reduce the set of matched elements to those that match the selector or pass the function's test.
                         Syntax                                 Returns     Notes
                            .filter( selector )                 jQuery      A string containing a selector expression to match the current set of elements against.
                            .filter( function )                 jQuery      A function used as a test for each element in the set. The Function returns Boolean.
                            .filter( elements )                 jQuery      One or more DOM elements to match the current set of elements against.
                            .filter( selection )                jQuery      An existing jQuery object to match the current set of elements against.
+
+      -> .contents() -  -> This method allows us to search through the IMMEDIATE Children of all the matched elements in the DOM tree and construct a new jQuery object from the matching elements.
+                        -> The .contents() and .children() methods are similar, except that the former includes text nodes and comment nodes as well as HTML elements in the resulting jQuery object.
+                        -> Most jQuery operations don't support text nodes and comment nodes. The few that do will have an explicit note on their API documentation page.
+                        -> The .contents() method can also be used to get the content document of an iframe, if the iframe is on the same domain as the main page.
+                        Syntax                                 Returns
+                           .contents()                         jQuery
+
+      -> .children() -  -> Get the Children of each element in the set of matched elements, optionally filtered by a selector.
+                        -> The .children() method differs from .find() in that .children() only travels a SINGLE LEVEL down the DOM tree while .find() can traverse down multiple levels
+                           to select descendant elements (grandchildren, etc.) as well.
+                        -> Note also that like most jQuery methods, .children() does not return text nodes; to get all children including text and comment nodes, use .contents().
+                        Syntax                                 Returns     Notes
+                           .children( [selector ] )            jQuery      The Selector should be the Direct Child of the main Element and not the Main Element Itself.
+
+      -> .find()     -  -> Get the DESCENDANTS of each element in the current set of matched elements, filtered by a selector, jQuery object, or element.
+                        -> The .find() and .children() methods are similar, except that the latter only travels a single level down the DOM tree.
+                        -> Unlike most of the tree traversal methods, the selector expression is required in a call to .find(). If we need to retrieve all of the descendant elements,
+                           we can pass in the universal selector '*' to accomplish this.
+                        Syntax                                 Returns
+                           .find( selector )                   jQuery
+                           .find( element )                    jQuery
+
+      -> .remove()   -  -> Remove the set of matched elements from the DOM.
+                        -> Similar to .empty(), except that .remove() also removes the element itself.
+                        -> In addition to the elements themselves, all bound events and jQuery data associated with the elements are removed.
+                        -> To remove the elements without removing data and events, use .detach() instead(so they can be RE-ADDED later).
+                        Syntax                                 Returns     Notes
+                           .remove( [selector ] )              jQuery      The Selector should be the MAIN Element amongst the List and NOT a Child of that Main Element.
+
+      -> .empty()    -  -> Remove all child nodes of the set of matched elements from the DOM.
+                        -> This method removes not only child (and other descendant) elements, but also any text within the set of matched elements.
+                        -> To avoid memory leaks, jQuery removes other constructs such as data and event handlers from the child elements before removing the elements themselves.
+                        Syntax                                 Returns
+                           .empty()                            jQuery
+
+      -> .detach()   -  -> Remove the set of matched elements from the DOM.
+                        -> The .detach() method is the same as .remove(), except that .detach() keeps all jQuery data associated with the removed elements.
+                        -> This method is useful when removed elements are to be reinserted into the DOM at a later time.
+                        Syntax                                 Returns     Notes
+                           .detach( [selector ] )              jQuery      The Selector should be the MAIN Element amongst the List and NOT a Child of that Main Element.
