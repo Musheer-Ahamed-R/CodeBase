@@ -7,3 +7,9 @@ Notes :
    -> To get the underlying DOM Object from a jQuery object, we have to Index that with the Index Position.(i.e) $("#id")[0]
    -> Get(something) is done for the First Matched element and Set is Done for all the Matching Elements in most cases.
    -> According to the DOM specification, any string of text within an element is considered a child node(Text Node) of that element.
+   -> $("input") will only return elements with the input tag, whereas $(":input") selects all input, select, textarea and button elements.
+   -> Input elements can be Wrapped inside a Label Element to make the Input element to be Selected when we click on its associated Text Content.
+      The for attribute of Label, should be given the ID of the associated input Element.
+   -> The value Property doesn't reflect the value Attribute, Instead, it's the current value of the input. When the user manually changes
+      the value of the input box, the value property will reflect this change. (i.e) The value Attribute is NOT CHANGED When the user changes
+      the Value of an Element.(e.g Input Text Element)
