@@ -13,3 +13,4 @@ Notes :
    -> The value Property doesn't reflect the value Attribute, Instead, it's the current value of the input. When the user manually changes
       the value of the input box, the value property will reflect this change. (i.e) The value Attribute is NOT CHANGED When the user changes
       the Value of an Element.(e.g Input Text Element)
+   -> The Height and Weight of an Element is Constant, but its Position may Change.  

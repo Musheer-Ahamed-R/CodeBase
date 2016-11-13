@@ -183,7 +183,7 @@ jQuery Functions     -
                         Syntax                                 Returns
                            .contents()                         jQuery
 
-      -> .children() -  -> Get the Children of each element in the set of matched elements, optionally filtered by a selector.
+      -> .children() -  -> Get the IMMEDIATE Children of each element in the set of matched elements, optionally filtered by a selector.
                         -> The .children() method differs from .find() in that .children() only travels a SINGLE LEVEL down the DOM tree while .find() can traverse down multiple levels
                            to select descendant elements (grandchildren, etc.) as well.
                         -> Note also that like most jQuery methods, .children() does not return text nodes; to get all children including text and comment nodes, use .contents().
@@ -322,9 +322,129 @@ jQuery Functions     -
                         .toggleClass( [state ] )               jQuery      Deprecated
                            .toggleClass( [state ] )
 
+      -> .hasClass() -  -> Determine whether any of the matched elements are assigned the given class.
+                        Syntax                                 Returns
+                           .hasClass( className )              jQuery
+
+
       -> .removeClass() -> Remove a single class, multiple classes, or all classes from each element in the set of matched elements.
                         -> If no class names are specified in the parameter, all classes will be removed.
                         -> To replace all existing classes with another class, we can use .attr( "class", "newClass" ) instead.
                         Syntax                                 Returns
                            .removeClass( [className ] )        jQuery
                            .removeClass( function )            jQuery
+
+      -> .scrollTop()   -> Get the current vertical position of the scroll bar for the first element in the set of matched elements or set the vertical position of the scroll bar
+                           for every matched element.
+                        -> The vertical scroll position is the same as the number of pixels that are HIDDEN from view above the scrollable area. If the scroll bar is at the very top,
+                           or if the element is not scrollable, this number will be 0.
+                        Syntax                                 Returns
+                        .scrollTop()                           Number
+                           .scrollTop()
+                        .scrollTop( value )                    jQuery
+                           .scrollTop( value )
+
+      -> .scrollLeft()  -> Get the current horizontal position of the scroll bar for the first element in the set of matched elements or set the horizontal position of the scroll bar
+                           for every matched element.
+                        -> The horizontal scroll position is the same as the number of pixels that are hidden from view to the left of the scrollable area. If the scroll bar is at the very left,
+                           or if the element is not scrollable, this number will be 0.
+                        Syntax                                 Returns
+                           .scrollLeft()                       Integer
+                              .scrollLeft()
+                           .scrollLeft( value )                jQuery
+                              .scrollLeft( value )
+
+                        Note  :
+                           -> .scrollLeft(), when called directly or animated as a property using .animate(), will not work if the element it is being applied to is hidden.
+
+      -> .height()   -  -> Get the current computed height for the first element in the set of matched elements or set the height of every matched element.
+                        -> The difference between .css( "height" ) and .height() is that the latter returns a unit-less pixel value (for example, 400) while the former returns a value
+                           with units intact (for example, 400px).
+                        -> The .height() method is recommended when an element's height needs to be used in a mathematical calculation.
+                        -> Height Property of an Element "NORMALLY" DOES NOT INCLUDE Padding or Border or Margin of that Element.
+                        -> The .height() will always return the content height, regardless of the value of the CSS box-sizing property. To avoid this penalty,
+                           use .css( "height" ) rather than .height(), in this case.
+                        Syntax                                 Returns
+                        .height()                              Number
+                           .height()
+                        .height( value )                       jQuery
+                           .height( value )
+                           .height( function )
+
+                        Notes :
+                           -> The "box-sizing" property is used to tell the browser what the sizing properties (width and height) should include(like padding, border etc..).
+                           -> Although style and script tags will report a value for .width() or height() when ABSOLUTELY positioned and given display:block,
+                              it is STRONGLY DISCOURAGED to call those methods on these tags. In addition to being a bad practice, the results may also prove unreliable.
+                           -> The number returned by dimensions-related APIs, including .height(), may be fractional in some cases. Code should not assume it is an integer.
+                              Also, dimensions may be incorrect when the page is zoomed by the user; browsers do not expose an API to detect this condition.
+                           -> The value reported by .height() is not guaranteed to be accurate when the element or its parent is hidden. To get an accurate value,
+                              ensure the element is visible before using .height(). jQuery will attempt to temporarily show and then re-hide an element in order to measure its dimensions,
+                              but this is unreliable and (even when accurate) can significantly impact page performance. This show-and-rehide measurement feature may be removed
+                              in a future version of jQuery.
+
+      -> .innerHeight() -> Get the current computed inner height (including padding but not border) for the first element in the set of matched elements or set the inner height
+                           of every matched element.
+                        -> This method returns the height of the element, including top and bottom padding, in pixels.
+                        -> This method is not applicable to window and document objects. For these, use .height() instead.
+                        -> When the Inner Height is SET, it is ADJUSTED from the ACTUAL HEIGHT(i.e Padding is not changed).
+                        Syntax                                 Returns
+                           .innerHeight()                      Number
+                                .innerHeight()
+                           .innerHeight( value )               jQuery
+                                .innerHeight( value )
+                                .innerHeight( function )
+
+      -> .outerHeight() -> Get the current computed height for the first element in the set of matched elements, including padding, border, and optionally margin
+                           or set the CSS outer Height of each element in the set of matched elements.
+                        -> Returns a number (without "px") representation of the value or null if called on an empty set of elements.
+                        -> The top and bottom padding and border are always included in the .outerHeight() calculation; if the includeMargin argument is set to true,
+                           the margin (top and bottom) is also included.
+                        -> When the Outer Height is SET, it is ADJUSTED from the ACTUAL HEIGHT(i.e Padding/Border is not changed).
+                        Syntax                                          Returns
+                           .outerHeight( [includeMargin ] )             Number
+                              .outerHeight( [includeMargin ] )
+                           .outerHeight( value )                        jQuery
+                              .outerHeight( value )
+                              .outerHeight( function(index, height) )
+
+      -> .width()    -  -> Get the current computed width for the first element in the set of matched elements or set the width of every matched element.
+                        -> The difference between .css(width) and .width() is that the latter returns a unit-less pixel value (for example, 400) while the former
+                           returns a value with units intact (for example, 400px).
+                        -> The .width() method is recommended when an element's width needs to be used in a mathematical calculation.
+                        -> WIDTH Property of an Element "NORMALLY" DOES NOT INCLUDE Padding or Border or Margin of that Element.
+                        -> The .width() will always return the content height, regardless of the value of the CSS box-sizing property. To avoid this penalty,
+                           use .css( "width" ) rather than .width(), in this case.
+                        Syntax                                 Returns
+                           .width()                            Number
+                              .width()
+                           .width( value )                     jQuery
+                              .width( value )
+                              .width( function )
+                        Notes :
+                           -> Same as for .height()
+
+      -> .innerWidth()  -> Get the current computed inner width (including padding but not border) for the first element in the set of matched elements
+                           or set the inner width of every matched element.
+                        -> This method returns the width of the element, including top and bottom padding, in pixels.
+                        -> This method is not applicable to window and document objects. For these, use .width() instead.
+                        -> When the Inner Width is SET, it is ADJUSTED from the ACTUAL WIDTH(i.e Padding is not changed).
+                        Syntax                                 Returns
+                           .innerWidth()                       Number
+                                .innerWidth()
+                           .innerWidth( value )                jQuery
+                                .innerWidth( value )
+                                .innerWidth( function )
+
+      -> .outerWidth()  -> Get the current computed width for the first element in the set of matched elements, including padding, border, and optionally margin
+                           or set the CSS outer width of each element in the set of matched elements.
+                        -> Returns a number (without "px") representation of the value or null if called on an empty set of elements.
+                        -> The top and bottom padding and border are always included in the .outerWidth() calculation; if the includeMargin argument is set to true,
+                           the margin (top and bottom) is also included.
+                        -> When the Outer WIDTH is SET, it is ADJUSTED from the ACTUAL WIDTH(i.e Padding/Border is not changed).
+                        -> Although .outerWidth() can be used on table elements, it may give unexpected results on tables using the border-collapse : collapse CSS property.
+                        Syntax                                          Returns
+                           .outerWidth( [includeMargin ] )              Number
+                              .outerWidth( [includeMargin ] )
+                           .outerWidth( value )                         jQuery
+                              .outerWidth( value )
+                              .outerWidth( function(index, height) )
