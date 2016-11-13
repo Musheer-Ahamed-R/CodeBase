@@ -21,7 +21,6 @@ CDN                  -  -> Content Delivery Network(CDN) is a System of Distribu
                         Notes :
                            -> In case of any Failure to load jQuery from the CDN, we have to gracefully switch back to loading jQuery from our Server itself.
 
-
 Additional Notes
    -> function -  -> Receives the index position of the element in the set and the old value(that will be returned by the Outer Function(e.g html() etc..)) / Elements as arguments(index because set is done on all the Set Elements(i.e) Not the First one).
                   -> We can use the old value argument to reference the previous content.
@@ -259,3 +258,31 @@ jQuery Functions     -
                            .change( handler )                  jQuery
                            .change( [eventData ], handler )    jQuery
                            .change()                           jQuery
+
+      -> .slideUp()  -  -> Hide the matched elements with a sliding motion.
+                        -> The .slideUp() method animates the height of the matched elements. This causes lower parts of the page to slide up,
+                           appearing to conceal the items. Once the height reaches 0 (or, if set, to whatever the CSS min-height property is),
+                           the display style property is set to none to ensure that the element no longer affects the layout of the page.
+                        Syntax                                             Returns     Notes
+                           .slideUp([duration] [, complete])               jQuery
+                           .slideUp( options )                             jQuery      options - Plain Object. Refer Documentation for other Properties.
+                           .slideUp([duration][, easing][, complete])      jQuery
+
+      -> .slideDown()   -> Display the matched elements with a sliding motion.
+                        -> The .slideDown() method animates the height of the matched elements. This causes lower parts of the page to slide down, making way for the revealed items.
+                        Syntax                                             Returns     Notes
+                           .slideDown([duration][, complete])              jQuery
+                           .slideDown( options )                           jQuery      options - Plain Object. Refer Documentation for other Properties.
+                           .slideDown([duration][, easing][, complete])    jQuery
+
+                        Notes
+                           -> complete - A function to call once the animation is complete, called ONCE PER MATCHED Element.
+                           -> 'fast' - 200 and 'slow' - 600 milliseconds. default is 400 milliseconds.
+
+      -> .slideToggle() -> Display or hide the matched elements with a sliding motion.
+                        -> The .slideToggle() method animates the height of the matched elements. This causes lower parts of the page to slide up or down,
+                           appearing to reveal or conceal the items.
+                        Syntax
+                           .slideToggle([duration][, complete])
+                           .slideToggle( options )
+                           .slideToggle([duration][, easing][, complete])
