@@ -109,6 +109,10 @@ jQuery Functions     -
                            .attr( attributes )
                            .attr( attributeName, function )
 
+      -> .removeAttr()  -> Remove an attribute from each element in the set of matched elements.
+                        Syntax                                 Returns
+                           .removeAttr( attributeName )        jQuery
+
       -> .val()      -  -> Get the current value of the first element in the set of matched elements or set the value of every matched element.
                         -> This method is primarily used to get the values of FORM ELEMENTS such as input, select and textarea.
                         -> This method returns the VALUE PROPERTY and not the VALUE ATTRIBUTE.
@@ -152,7 +156,7 @@ jQuery Functions     -
       -> .each()     -  -> It iterates over the DOM elements that are part of the jQuery object, executing a function for each matched element.
                         -> Most jQuery methods that return a jQuery object also loop through the set of elements in the jQuery collection — a process known as implicit iteration.
                            When this occurs, it is often unnecessary to explicitly iterate with the .each() method:
-                        -> We can stop the loop from within the callback function by returning false.
+                        -> We can stop the loop from within the callback function by returning false(NOT undefined or null).
                         Syntax                                 Returns
                            .each( function )                   jQuery
 
@@ -286,3 +290,41 @@ jQuery Functions     -
                            .slideToggle([duration][, complete])
                            .slideToggle( options )
                            .slideToggle([duration][, easing][, complete])
+
+      -> jQuery.each()  -> A generic iterator function, which can be used to seamlessly iterate over both objects and arrays. Arrays and array-like objects with a length property
+                           (such as a function's arguments object) are iterated by numeric index, from 0 to length-1. Other objects are iterated via their named properties.
+                        -> The $.each() function is not the same as $(selector).each(), which is used to iterate, exclusively, over a jQuery object.
+                        -> The $.each() function can be used to iterate over any collection, whether it is an object or an array(but not a jQuery Object).
+                        -> The value can also be accessed through the "this" keyword(in each iteration), but Javascript will always wrap the this value as an Object even if it is a simple string or number value.)
+                        -> This Also iterates Over the INHERITED PROPERTIES(Normal).
+                        -> We can break the $.each() loop at a particular iteration by making the callback function return false. Returning non-false is the same as a continue statement
+                           in a for loop; it will skip immediately to the next iteration.
+                        Syntax                                 Returns     Notes
+                           jQuery.each( array, callback )      jQuery      Function( Integer indexInArray, Object value ), The function that will be executed on every object.
+                           jQuery.each( object, callback )     jQuery      Function( String propertyName, Object valueOfProperty ), The function that will be executed on every object.
+                        Notes :
+                           -> The $.each() function internally retrieves and uses the length property of the passed collection. So, if the collection has a property called length
+                              e.g. {bar: 'foo', length: 10} — the function might not work as expected.
+
+      -> .addClass() -  -> Adds the specified class(es) to each element in the set of matched elements.
+                        -> This method does not replace a class. It simply adds the class, appending it to any which may already be assigned to the elements.
+                        Syntax                                 Returns
+                           .addClass( className )              jQuery
+                           .addClass( function )               jQuery
+
+      -> .toggleClass() -> Add or remove one or more classes from each element in the set of matched elements, depending on either the class's presence or the value of the state argument.
+                        -> As of jQuery 1.4, if no arguments are passed to .toggleClass(), all class names on the element the first time .toggleClass() is called will be toggled.
+                        Syntax                                 Returns     Notes
+                        .toggleClass( className )              jQuery
+                           .toggleClass( className )
+                           .toggleClass( className, state )                state - A Boolean (not just truthy/falsy) value to determine whether the class should be added or removed.
+                           .toggleClass( function [, state ] )
+                        .toggleClass( [state ] )               jQuery      Deprecated
+                           .toggleClass( [state ] )
+
+      -> .removeClass() -> Remove a single class, multiple classes, or all classes from each element in the set of matched elements.
+                        -> If no class names are specified in the parameter, all classes will be removed.
+                        -> To replace all existing classes with another class, we can use .attr( "class", "newClass" ) instead.
+                        Syntax                                 Returns
+                           .removeClass( [className ] )        jQuery
+                           .removeClass( function )            jQuery
