@@ -448,3 +448,111 @@ jQuery Functions     -
                            .outerWidth( value )                         jQuery
                               .outerWidth( value )
                               .outerWidth( function(index, height) )
+
+      -> .after()    -  -> Insert content, specified by the parameter, after each element in the set of matched elements.
+                        -> The .after() and .insertAfter() methods perform the same task. The major difference is in the syntax—specifically, in the placement of
+                           the content and target. With .after(), the content to be inserted comes from the method's argument(e.g $(target).after(contentToBeInserted)),
+                           but with .insertAfter(), on the other hand, the content precedes the method and is inserted after the target, which in turn is passed as the
+                           .insertAfter() method's argument(e.g. $(contentToBeInserted).insertAfter(target)).
+                        -> If an element selected from the DOM and passed as an Argument, it will be MOVED(from its Current Location in the DOM) to the target(Irrespective of the Number of targets),
+                           rather than cloned.
+                        -> If there is more than one target element, however, cloned copies of the inserted element will be created for each target except for the last one.
+                        -> This returns the ORIGINAL UNMODIFIED set as retrieved by the Selector(Syntactically before .after()), unlike insertAfter.
+                        Syntax                                 Returns     Notes
+                           .after(content [, content])         jQuery      content - htmlString or Element or Text or Array or jQuery
+                           .after( function )                  jQuery      function - Function( Integer index ) => htmlString or Element or Text or jQuery
+                           .after( function-html )             jQuery      function-html - Function( Integer index, String html ) => htmlString or Element or Text or jQuery
+
+                        Notes :
+                           -> By design, any jQuery constructor or method that accepts an HTML string — jQuery(), .append(), .after(), etc. — can potentially execute code.
+                              This can occur by injection of script tags or use of HTML attributes that execute code (for example, <img onload="">). Do not use these methods
+                              to insert strings obtained from untrusted sources such as URL query parameters, cookies, or form inputs. Doing so can introduce cross-site-scripting (XSS)
+                              vulnerabilities. Remove or escape any user input before adding content to the document.
+
+      -> .insertAfter() -> Insert every element in the set of matched elements after the target.
+                        -> The .after() and .insertAfter() methods perform the same task. The major difference is in the syntax-specifically, in the placement of the content and target.
+                           With .after(), the selector expression preceding the method is the container after which the content is inserted. With .insertAfter(), on the other hand,
+                           the content precedes the method, either as a selector expression or as markup created on the fly, and it is inserted after the target container.
+                        -> If an element selected from the DOM and passed as an Argument, it will be MOVED(from its Current Location in the DOM) to the target(Irrespective of the Number of targets),
+                           rather than cloned.
+                        -> If an element selected from DOM is inserted into a single location elsewhere in the DOM, it will be MOVED after the target (not cloned) and a
+                           NEW set consisting of the INSERTED ELEMENTS is returned.
+                        -> If there is more than one target element, however, cloned copies of the inserted element will be created for each target after the first,
+                           and that new set (the original element plus clones) is returned.
+                        Syntax                                 Returns
+                           .insertAfter( target )              jQuery
+
+      -> .before()   -  -> Insert content, specified by the parameter, before each element in the set of matched elements.
+                        -> The .before() and .insertBefore() methods perform the same task. The major difference is in the syntax—specifically, in the placement of the content and target.
+                           With .before(), the content to be inserted comes from the method's argument(e.g. $(target).before(contentToBeInserted)).
+                           With .insertBefore(), on the other hand, the content precedes the method and is inserted before the target, which in turn is passed as the
+                           .insertBefore() method's argument(e.g. $(contentToBeInserted).insertBefore(target)).
+                        -> If an element selected from the DOM and passed as an Argument, it will be MOVED(from its Current Location in the DOM) to the target(Irrespective of the Number of targets),
+                           rather than cloned.
+                        -> If there is more than one target element, however, cloned copies of the inserted element will be created for each target except for the last one.
+                        -> This returns the ORIGINAL UNMODIFIED set as retrieved by the Selector(Syntactically before .before()), unlike insertBefore.
+                        Syntax                                 Returns     Notes
+                           .before( content [, content ] )     jQuery      content - htmlString or Element or Text or Array or jQuery
+                           .before( function )                 jQuery      function - Function( Integer index ) => htmlString or Element or Text or jQuery
+                           .before( function-html )            jQuery      function-html - Function( Integer index, String html ) => htmlString or Element or Text or jQuery
+
+      -> .insertBefore()-> Insert every element in the set of matched elements before the target.
+                        -> The .before() and .insertBefore() methods perform the same task. The major difference is in the syntax-specifically, in the placement of the content and target.
+                           With .before(), the selector expression preceding the method is the container before which the content is inserted. With .insertBefore(), on the other hand,
+                           the content precedes the method, either as a selector expression or as markup created on the fly, and it is inserted before the target container.
+                        -> If an element selected from the DOM and passed as an Argument, it will be MOVED(from its Current Location in the DOM) to the target(Irrespective of the Number of targets),
+                           rather than cloned.
+                        -> If an element selected from DOM is inserted into a single location elsewhere in the DOM, it will be MOVED before the target (not cloned) and a
+                           NEW set consisting of the INSERTED ELEMENTS is returned.
+                        -> If there is more than one target element, however, cloned copies of the inserted element will be created for each target after the first,
+                           and that new set (the original element plus clones) is returned.
+                        Syntax                                 Returns
+                           .insertBefore( target )             jQuery
+
+      -> .append()   -  -> This method inserts the specified content as the LAST child of each element in the jQuery collection
+                        -> The .append() and .appendTo() methods perform the same task. The major difference is in the syntax-specifically, in the placement of the content and target.
+                           With .append(), the selector expression preceding the method is the container into which the content is inserted. With .appendTo(), on the other hand,
+                           the content precedes the method, either as a selector expression or as markup created on the fly, and it is inserted into the target container.
+                        -> If an element selected from the DOM and passed as an Argument, it will be MOVED(from its Current Location in the DOM) to the target(Irrespective of the Number of targets),
+                           rather than cloned.
+                        -> If there is more than one target element, however, cloned copies of the inserted element will be created for each target except for the last one.
+                        -> This returns the ORIGINAL UNMODIFIED set as retrieved by the Selector(Syntactically before .append()).
+                        Syntax                                 Returns     Notes
+                           .append( content [, content ] )     jQuery      content - htmlString or Element or Text or Array or jQuery
+                           .append( function )                 jQuery
+
+      -> .appendTo()    -> Insert every element in the set of matched elements to the end of the target.
+                        -> The .append() and .appendTo() methods perform the same task. The major difference is in the syntax-specifically, in the placement of the content and target.
+                           With .append(), the selector expression preceding the method is the container into which the content is inserted. With .appendTo(), on the other hand,
+                           the content precedes the method, either as a selector expression or as markup created on the fly, and it is inserted into the target container.
+                        -> If an element selected from the DOM and passed as an Argument, it will be MOVED(from its Current Location in the DOM) to the target(Irrespective of the Number of targets),
+                           rather than cloned.
+                        -> If an element selected from DOM is inserted into a single location elsewhere in the DOM, it will be MOVED as the target's Last Child(not cloned) and a
+                           NEW set consisting of the INSERTED ELEMENTS is returned.
+                        -> If there is more than one target element, however, cloned copies of the inserted element will be created for each target after the first,
+                           and that new set (the original element plus clones) is returned.
+                        Syntax                                 Returns
+                           .appendTo( target )                 jQuery
+
+      -> .prepend()  -  -> The .prepend() method inserts the specified content as the FIRST child of each element in the jQuery collection.
+                        -> The .prepend() and .prependTo() methods perform the same task. The major difference is in the syntax—specifically, in the placement of the content and target.
+                           With .prepend(), the selector expression preceding the method is the container into which the content is inserted. With .prependTo(), on the other hand,
+                           the content precedes the method, either as a selector expression or as markup created on the fly, and it is inserted into the target container.
+                        -> If an element selected from the DOM and passed as an Argument, it will be MOVED(from its Current Location in the DOM) to the target(Irrespective of the Number of targets),
+                           rather than cloned.
+                        -> If there is more than one target element, however, cloned copies of the inserted element will be created for each target except for the last one.
+                        -> This returns the ORIGINAL UNMODIFIED set as retrieved by the Selector(Syntactically before .prepend()).
+                        Syntax                                 Returns     Notes
+                           .prepend( content [, content ] )    jQuery      content - htmlString or Element or Text or Array or jQuery
+                           .prepend( function )                jQuery
+
+      -> .prependTo()   -> Insert every element in the set of matched elements to the beginning of the target.
+                        -> The .prepend() and .prependTo() methods perform the same task. The major difference is in the syntax-specifically, in the placement of the content and target.
+                           With .prepend(), the selector expression preceding the method is the container into which the content is inserted. With .prependTo(), on the other hand,
+                           the content precedes the method, either as a selector expression or as markup created on the fly, and it is inserted into the target container.
+                        -> If an element selected from the DOM and passed as an Argument, it will be MOVED(from its Current Location in the DOM) to the target(Irrespective of the Number of targets),
+                           rather than cloned.
+                        -> If an element selected from DOM is inserted into a single location elsewhere in the DOM, it will be MOVED as the target's First Child(not cloned) and a
+                           NEW set consisting of the INSERTED ELEMENTS is returned.
+                        -> If there is more than one target element, however, cloned copies of the inserted element will be created for each target after the first,
+                           and that new set (the original element plus clones) is returned.
