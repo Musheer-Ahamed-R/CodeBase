@@ -556,3 +556,18 @@ jQuery Functions     -
                            NEW set consisting of the INSERTED ELEMENTS is returned.
                         -> If there is more than one target element, however, cloned copies of the inserted element will be created for each target after the first,
                            and that new set (the original element plus clones) is returned.
+                        Syntax                                 Returns
+                           .prependTo( target )                jQuery
+
+      -> .wrap()     -  -> Wrap an HTML structure around each element in the set of matched elements.
+                        -> The .wrap() function can take any string or object that could be passed to the $() factory function to specify a DOM structure.
+                        -> This structure may be nested several levels deep, but should contain ONLY ONE inmost element.
+                        -> A copy of this structure will be wrapped around each of the elements in the set of matched elements.
+                        -> This method returns the original set of elements for chaining purposes.
+                        -> If a Html Element(retrieved by the Selector) is specified as a Wrapper Element, that Element is NOT MOVED, but Cloned for each Matching Element.
+                        Syntax                                 Returns     Notes
+                           .wrap( wrappingElement )            jQuery      wrappingElement - Selector or htmlString or Element or jQuery
+                           .wrap( function )                   jQuery
+
+                        Notes :
+                           -> The Opening Div(s) Should all be in a Single line for the Wrap function to work properly.
