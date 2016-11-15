@@ -571,3 +571,13 @@ jQuery Functions     -
 
                         Notes :
                            -> The Opening Div(s) Should all be in a Single line for the Wrap function to work properly.
+
+      -> .wrapAll()  -  -> Wrap an HTML structure around all elements in the set of matched elements.
+                        -> The .wrap() function can take any string or object that could be passed to the $() factory function to specify a DOM structure.
+                        -> This structure may be nested several levels deep, but should contain ONLY ONE inmost element.
+                        -> All the Elements to be Wrapped around are MOVED together and the Wrapper Element(htmlString) is wrapped around it.
+                        -> This method returns the original set of elements for chaining purposes.
+                        -> If a Html Element(retrieved by the Selector) is specified as a Wrapper Element, that Element is NOT MOVED, but Cloned.
+                        Syntax                                 Returns     Notes
+                           .wrapAll( wrappingElement )         jQuery      wrappingElement - Selector or htmlString or Element or jQuery
+                           .wrapAll( function )                jQuery
