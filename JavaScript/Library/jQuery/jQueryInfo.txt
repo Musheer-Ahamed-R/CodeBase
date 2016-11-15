@@ -581,3 +581,13 @@ jQuery Functions     -
                         Syntax                                 Returns     Notes
                            .wrapAll( wrappingElement )         jQuery      wrappingElement - Selector or htmlString or Element or jQuery
                            .wrapAll( function )                jQuery
+
+      -> .wrapInner()   -> Wrap an HTML structure around the CONTENTS(HTML Content/Nodes) of each element in the set of matched elements.
+                        -> The .wrapInner() function can take any string or object that could be passed to the $() factory function to specify a DOM structure.
+                        -> This structure may be nested several levels deep, but should contain only one inmost element.
+                        -> A copy of this structure will be wrapped around each of the Contents in the set of matched elements.
+                        -> This method returns the original set of elements for chaining purposes.
+                        -> If a Html Element(retrieved by the Selector) is specified as a Wrapper Element, that Element is NOT MOVED, but Cloned for each Matching Element.
+                        Syntax                                 Returns     Notes
+                           .wrapInner( wrappingElement )       jQuery      wrappingElement - Selector or htmlString or Element or jQuery
+                           .wrapInner( function )              jQuery
