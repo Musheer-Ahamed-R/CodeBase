@@ -591,3 +591,55 @@ jQuery Functions     -
                         Syntax                                 Returns     Notes
                            .wrapInner( wrappingElement )       jQuery      wrappingElement - Selector or htmlString or Element or jQuery
                            .wrapInner( function )              jQuery
+
+      -> .unwrap()   -  -> Remove the parents(NOT ANCESTORS) of the set of matched elements from the DOM, leaving the matched elements in their place.
+                        -> The matched elements (and their siblings, if any) replace their parents within the DOM structure.
+                        -> If an element's parent does not match the selector, the element won't be unwrapped.
+                        -> This method returns the original set of elements for chaining purposes.
+                        Syntax                                 Returns
+                           .unwrap()                           jQuery
+                           .unwrap( [selector ] )              jQuery
+
+      -> .replaceWith() -> Replace each element in the set of matched elements with the provided new content and return the set of Elements that was REMOVED.
+                        -> If an element selected from the DOM and passed as an Argument, it will be MOVED(from its Current Location in the DOM), not cloned.
+                        -> The .replaceWith() method removes all data and event handlers associated with the removed nodes.
+                        Syntax                                 Returns
+                           .replaceWith( newContent )          jQuery
+                           .replaceWith( function )            jQuery
+
+                        Notes :
+                           -> If we try to pass an element to replace(new Content) which does not exist in the DOM, all the Matches elements are Removed.
+
+      -> .replaceAll()  -> Replace each target element with the set of matched elements.
+                        -> The .replaceAll() method is similar to .replaceWith(), but with the source and target reversed.
+                        -> Rest same as with replaceWith() method.
+                        Syntax                                 Returns
+                           .replaceAll( target )               jQuery
+
+
+      -> .offset()   -  -> Get the current coordinates of the first element, or set the coordinates of every element, in the set of matched elements,
+                           relative to the DOCUMENT.
+                        Syntax                                 Returns
+                           .offset()                           An Object containing the offsets top and left.
+                              .offset()
+                           .offset( coordinates )              jQuery
+                              .offset( coordinates )
+                              .offset( function )
+
+
+      -> .position() -  -> Get the current coordinates of the first element in the set of matched elements, relative to the offset parent.
+                        -> Contrast this with .offset(), which retrieves the current position relative to the document.
+                        -> When positioning a new element near another one and within the same containing DOM element, .position() is the more useful.
+                        Syntax                                 Returns
+                           .position()                         An Object containing the properties top and left.
+
+                        Notes :
+                           -> jQuery does not support getting the position coordinates of hidden elements or accounting for borders, margins,
+                              or padding set on the body element.
+                           -> The number returned by dimensions-related APIs, including .position(), may be fractional in some cases. Code should not assume it is an integer.
+                           -> Also, dimensions may be incorrect when the page is zoomed by the user; browsers do not expose an API to detect this condition.
+
+
+jQuery.htmlPrefilter()
+jQuery.cssNumber
+.clone()
