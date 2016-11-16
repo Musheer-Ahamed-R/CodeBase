@@ -13,4 +13,18 @@ Notes :
    -> The value Property doesn't reflect the value Attribute, Instead, it's the current value of the input. When the user manually changes
       the value of the input box, the value property will reflect this change. (i.e) The value Attribute is NOT CHANGED When the user changes
       the Value of an Element.(e.g Input Text Element)
-   -> The Height and Weight of an Element is Constant, but its Position may Change.  
+   -> The Height and Weight of an Element is Constant, but its Position may Change.
+   -> The Difference .data(), .attr() and .prop()
+         .attr() - attr() is used to get the value of an attribute of a DOM element which are publicly VISIBLE upon inspection. The attribute
+                   can be predefined attributes(e.g id, class) or our own Custom Attributes(e.g data-foo, data-baz-daz etc..)
+         .prop() - This is intended for setting valid HTML Element properties, rather than arbitrary data.(e.g class, value etc..). Though, we can have
+                   have arbitrary/Custom data set/get using .prop().
+         .data() - This is used to Store arbitrary data associated with the matched elements.
+
+         Notes :
+            -> If we are passing data to a DOM element from the server, you should set the data on the element.( e.g <a id="foo" data-foo="bar" href="#">foo!</a>)
+            -> When you store data on a DOM node in jQuery using data, the variables are stored on the NODE OBJECT. This is to accommodate
+               COMPLEX OBJECTS and references as storing the data on the node element as an attribute will only accommodate STRING values.
+            -> The .data() method will also perform some basic AUTO-CASTING if the value matches a recognized pattern.
+            -> The data can then be accessed using .data() and ALSO using .attr(), since that is an attribute on the element. But, changes made to that Data using .data()
+               is reflected only if we get data using the .data().

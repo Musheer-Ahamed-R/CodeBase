@@ -206,13 +206,17 @@ jQuery Functions     -
                         Syntax                                 Returns     Notes
                            .parent( [selector ] )              jQuery      A string containing a selector expression to match elements against.
 
-      -> .parents()  -  -> Get the ancestors of each element in the current set of matched elements, optionally filtered by a selector.
-                        -> This method allows us to search through the ALL the Ancestors of these elements in the DOM tree and construct a new jQuery object
-                           from the matching elements ordered from immediate parent on up.
+      -> .parents()  -  -> Get ALL the ancestors of each element in the current set of matched elements, optionally filtered by a selector.
                         -> The elements are returned in order from the closest parent to the outer ones. When multiple DOM elements are in the original set,
                            the resulting set will be in reverse order of the original elements as well, with duplicates removed.
                         Syntax                                 Returns
                            .parents( [selector ] )             jQuery
+
+      -> .parentsUntil()-> Get the ancestors of each element in the current set of matched elements, up to but Not Including the element matched by the selector, DOM node, or jQuery object.
+                        Syntax                                 Returns
+                           .parentsUntil([selector][, filter]) jQuery
+                           .parentsUntil([element][, filter])  jQuery
+
 
       -> .closest()  -  -> For each element in the set, gets the first element that matches the selector by starting from the ELEMENT ITSELF and traversing up through its ancestors in the DOM tree.
                         -> The .parents() and .closest() methods are similar in that they both traverse up the DOM tree. The differences between the two, though subtle, are significant:
@@ -232,12 +236,56 @@ jQuery Functions     -
                         .closest( selectors [, context ] )                 Removed in jQuery 1.8
                            .closest( selectors [, context ] )  Array
 
+      -> .siblings() -  -> Get the siblings of each element in the set of matched elements, optionally filtered by a selector.
+                        -> If the selector is supplied, the elements will be filtered by testing whether they match it.
+                        -> The original element is not included among the siblings, which is important to remember when we wish to find all elements at a particular level of the DOM tree.
+                        -> However, if the original collection contains more than one element, they might be mutual siblings and will both be found.
+                        -> If an Element is already included, as a Sibling of an Element, it will be not be added again as a Sibling of another element.
+                        Syntax                                 Returns
+                           .siblings( [selector ] )            jQuery
+      -> .next()     -  -> Get the immediately following sibling of each element in the set of matched elements.
+                        -> If a selector is provided, it retrieves the next sibling only if it matches that selector.
+                        -> If no next sibling exists, or if the previous sibling element does not match a supplied selector, an empty jQuery object is returned.
+                        Syntax                                 Returns
+                           .next( [selector ] )                jQuery
+
+      -> .nextAll()  -  -> Get all following siblings of each element in the set of matched elements, optionally filtered by a selector.
+                        Synatx                                 Returns
+                           .nextAll( [selector ] )             jQuery
+
+      -> .nextUntil()   -> Get all following siblings of each element up to but Not Including the element matched by the selector, DOM node, or jQuery object passed.
+                        Syntax                                 Returns
+                           .nextUntil([selector][, filter])    jQuery
+                           .nextUntil([element][, filter])     jQuery
+
+      -> .prev()     -  -> Get the immediately preceding sibling of each element in the set of matched elements.
+                        -> If a selector is provided, it retrieves the previous sibling only if it matches that selector.
+                        -> If no previous sibling exists, or if the previous sibling element does not match a supplied selector, an empty jQuery object is returned.
+                        Syntax                                 Returns
+                           .prev( [selector ] )                jQuery
+
+      -> .prevAll()  -  -> Get all preceding siblings of each element in the set of matched elements, optionally filtered by a selector.
+                        Syntax                                 Returns
+                           .prevAll( [selector ] )             jQuery
+
+      -> .prevUntil()   -> Get all preceding siblings of each element up to but Not Including the element matched by the selector, DOM node, or jQuery object.
+                        Syntax                                 Returns
+                           .prevUntil([selector][, filter])    jQuery
+                           .prevUntil([element][, filter ])    jQuery
+
       -> .remove()   -  -> Remove the set of matched elements from the DOM.
                         -> Similar to .empty(), except that .remove() also removes the element itself.
                         -> In addition to the elements themselves, all bound events and jQuery data associated with the elements are removed.
                         -> To remove the elements without removing data and events, use .detach() instead(so they can be RE-ADDED later).
                         Syntax                                 Returns     Notes
                            .remove( [selector ] )              jQuery      The Selector should be the MAIN Element amongst the List and NOT a Child of that Main Element.
+
+      -> .first()    -  -> Reduce the set of matched elements to the first in the set.
+                        Syntax                                 Returns
+                           .first()                            jQuery
+      -> .last()     -  -> Reduce the set of matched elements to the final one in the set.
+                        Syntax                                 Returns
+                           .last()                             jQuery
 
       -> .empty()    -  -> Remove all child nodes of the set of matched elements from the DOM.
                         -> This method removes not only child (and other descendant) elements, but also any text within the set of matched elements.
@@ -618,28 +666,59 @@ jQuery Functions     -
 
 
       -> .offset()   -  -> Get the current coordinates of the first element, or set the coordinates of every element, in the set of matched elements,
-                           relative to the DOCUMENT.
-                        Syntax                                 Returns
-                           .offset()                           An Object containing the offsets top and left.
+                           RELATIVE to the DOCUMENT.
+                        -> When positioning a new element on top of an existing one for global manipulation (in particular, for implementing drag-and-drop),
+                           .offset() is more useful.
+                        -> The .offset() setter method allows us to reposition an element. The element's position is specified relative to the document.
+                           If the element's position style property is currently static, it will be SET to RELATIVE to allow for this repositioning.
+                        Syntax                                 Returns                                            Notes
+                           .offset()                           An Object containing the offsets top and left.     coordinates - An object containing the properties top and left
                               .offset()
                            .offset( coordinates )              jQuery
                               .offset( coordinates )
                               .offset( function )
-
-
-      -> .position() -  -> Get the current coordinates of the first element in the set of matched elements, relative to the offset parent.
-                        -> Contrast this with .offset(), which retrieves the current position relative to the document.
-                        -> When positioning a new element near another one and within the same containing DOM element, .position() is the more useful.
-                        Syntax                                 Returns
-                           .position()                         An Object containing the properties top and left.
 
                         Notes :
                            -> jQuery does not support getting the position coordinates of hidden elements or accounting for borders, margins,
                               or padding set on the body element.
                            -> The number returned by dimensions-related APIs, including .position(), may be fractional in some cases. Code should not assume it is an integer.
                            -> Also, dimensions may be incorrect when the page is zoomed by the user; browsers do not expose an API to detect this condition.
+                           -> While it is possible to get the coordinates of elements with visibility:hidden set, display:none is excluded from the
+                              rendering tree and thus has a position that is undefined.
+
+      -> .position() -  -> Get the current coordinates of the first element in the set of matched elements, RELATIVE to the OFFSET PARENT.
+                        -> Contrast this with .offset(), which retrieves the current position relative to the Document.
+                        -> When positioning a new element near another one and within the same containing DOM element, .position() is the more useful.
+                        Syntax                                 Returns
+                           .position()                         An Object containing the properties top and left.
+
+      -> .clone()    -  -> The .clone() method performs a deep copy of the set of matched elements,(i.e) that it copies the matched elements as well as all of
+                           their descendant elements and text nodes.
+                        -> When used in conjunction with one of the insertion methods(e.g append, prepend), .clone() is a convenient way to duplicate elements on a page. Since,
+                           the Elements will be Otherwise MOVED from their position to the target.
+                        -> All element data (attached by the .data() method) is also copied to the new copy.
+                        -> However, the Objects and Arrays within element DATA are not copied and will continue to be shared between the cloned element and the original element.
+                           To deep copy all data, copy each one manually.
+                        Syntax                                                         Returns     Notes
+                           .clone( [withDataAndEvents ] )                              jQuery      withDataAndEvents - A Boolean indicating whether EVENT Handlers
+                                                                                                                       should be copied along with the elements(data copied by default)
+                           .clone( [withDataAndEvents ] [, deepWithDataAndEvents ] )   jQuery       deepWithDataAndEvents - A Boolean indicating whether EVENT Handlers and DATA
+                                                                                                                            for all children of the cloned element should be copied.
+
+                        Notes :
+                           -> For performance reasons, the dynamic state of certain form elements (e.g., user data typed into textarea and user selections made to a select) is
+                              not copied to the cloned elements. When cloning input elements, the dynamic state of the element (e.g., user data typed into text inputs and
+                              user selections made to a checkbox) is retained in the cloned elements.
+                           -> When using the .clone() method, we can modify the cloned elements or their contents before (re-)inserting them into the document.
+                           -> Using .clone() has the side-effect of producing elements with duplicate id attributes, which are supposed to be unique. Where possible,
+                              it is recommended to avoid cloning elements with this attribute or using class attributes as identifiers instead.
 
 
-jQuery.htmlPrefilter()
-jQuery.cssNumber
-.clone()
+      -> jQuery.cssNumber-> An object containing all CSS properties that may be used WITHOUT a unit. The .css() method uses this object to see if it may append px to unitless values.
+                        -> The keys of the jQuery.cssNumber object are camel-cased and the values are all set to true
+                        -> If we want to prevent the .css() method from automatically adding the px unit for a specific CSS property,
+                           we can add an extra property to the jQuery.cssNumber object.
+                        Syntax (e.g)
+                           jQuery.cssNumber.someCSSProp = true;
+
+      ->
