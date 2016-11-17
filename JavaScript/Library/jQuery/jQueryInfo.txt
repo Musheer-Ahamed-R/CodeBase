@@ -55,6 +55,18 @@ jQuery Functions     -
                            .click( [eventData ], handler )     jQuery      eventData is an object containing data that will be passed to the event handler.
                            .click()                            jQuery      Trigger a Click Event
 
+      -> .dblclick() -  -> Bind an event handler to the "dblclick" JavaScript event, or trigger that event on an element.
+                        Syntax                                 Returns
+                           .dblclick( handler )                jQuery
+                           .dblclick([eventData], handler)     jQuery
+                           .dblclick()                         jQuery
+
+                        Notes :
+                           -> It is inadvisable to bind handlers to both the click and dblclick events for the same element. The sequence of events triggered
+                              varies from browser to browser, with some receiving two click events before the dblclick and others only one.
+                              Double-click sensitivity (maximum time between clicks that is detected as a double click) can vary by operating system and browser,
+                              and is often user-configurable.
+
       -> .css()      -  -> Get the value of a computed style property for the FIRST element in the set of matched elements or set one or more CSS properties for every matched element.
                         -> This accepts RELATIVE values similar to .animate(). Relative values are a string starting with += or -= to increment or decrement the current value. based on its previous values.
                         Syntax                                 Returns     Notes
@@ -213,6 +225,17 @@ jQuery Functions     -
                         Notes :
                            -> Since positional selectors(such as :first, :gt(), or :even) are jQuery additions and not W3C standard, we recommend using the W3C selectors whenever feasible.
 
+      -> .not()      -  -> Given a jQuery object that represents a set of DOM elements, the .not() method constructs a new jQuery object from a subset of the matching elements.
+                        -> The supplied selector is tested against each element; the elements that don't match the selector will be included in the result.
+                        Syntax                                 Returns     Notes
+                           .not( selector )                    jQuery
+                           .not( function )                    jQuery      Elements for which the Function returns true are Excluded from the filtered set. All other elements are included.
+                           .not( selection )                   jQuery
+
+                        Notes :
+                           -> When a CSS selector string is passed to .not(), text and comment nodes will always be removed from the resulting jQuery object during the filtering process.
+                              When a specific node or array of nodes are provided, text or comment nodes will only be removed from the jQuery object if they match one of the nodes
+                              in the filtering array.
 
       -> .end()      -  -> End the most recent filtering operation in the current chain and return the set of matched elements to its previous state.
                         -> Most of jQuery's DOM traversal methods operate on a jQuery object instance and produce a new one, matching a different set of DOM elements.
@@ -833,4 +856,6 @@ jQuery Functions     -
                         Syntax (e.g)
                            jQuery.cssNumber.someCSSProp = true;
 
-      ->
+      -> .blur()     -  -> Bind an event handler to the "blur" JavaScript event, or trigger that event on an element.
+                        -> The blur event is sent to an element when it loses focus and an element can lose focus via keyboard commands, such as the Tab key,
+                           or by mouse clicks elsewhere on the page.
