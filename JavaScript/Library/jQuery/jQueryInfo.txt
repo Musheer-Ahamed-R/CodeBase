@@ -9,6 +9,9 @@ Advantages of jQuery -  -> It is Cross-Browser.
 
 Notes :
       -> $ is a shortcut for jQuery Object.
+      -> jQuery objects maintain an internal STACK that keeps track of changes to the matched set of elements. When one of the DOM traversal methods(e.g add, filter etc..) is called,
+         the New SET of elements is pushed onto the stack. (i.e. jQuery Object contains a STACK OF SETS(MATCHED SETS of Elements).
+         Thus, jQuery Chaining involves a Single jQuery Object with Current SET of Matched Elements on TOP of the STACK.
 
 CDN                  -  -> Content Delivery Network(CDN) is a System of Distributed Servers that host resources such as Images, CSS, JavaScript Files etc..
                         -> Benefits of Using CDN   -
@@ -153,6 +156,15 @@ jQuery Functions     -
                         -> Do not use this method to remove native properties such as checked, disabled, or selected. This will remove the property completely and,
                            once removed, cannot be added again to element. Use .prop() to set these properties to false instead.
 
+      -> .text()     -  -> Get the combined text contents of each element in the SET of MATCHED elements, including their Descendants, or set the text contents of the matched elements.
+                        -> The .text() method cannot be used on form inputs or scripts. To set or get the text value of input or textarea elements, use the .val() method. To get the value of a script element, use the .html() method.
+                        Syntax                                 Returns     Notes
+                           .text()
+                              .text()                          String
+                           .text( text )
+                              .text( text )                    jQuery
+                              .text( function )                jQuery      A function returning the text content to set
+
       -> .each()     -  -> It iterates over the DOM elements that are part of the jQuery object, executing a function for each matched element.
                         -> Most jQuery methods that return a jQuery object also loop through the set of elements in the jQuery collection — a process known as implicit iteration.
                            When this occurs, it is often unnecessary to explicitly iterate with the .each() method:
@@ -175,16 +187,6 @@ jQuery Functions     -
                            -> The $.each() function internally retrieves and uses the length property of the passed collection. So, if the collection has a property called length
                               e.g. {bar: 'foo', length: 10} — the function might not work as expected.
 
-
-      -> .text()     -  -> Get the combined text contents of each element in the SET of MATCHED elements, including their Descendants, or set the text contents of the matched elements.
-                        -> The .text() method cannot be used on form inputs or scripts. To set or get the text value of input or textarea elements, use the .val() method. To get the value of a script element, use the .html() method.
-                        Syntax                                 Returns     Notes
-                           .text()
-                              .text()                          String
-                           .text( text )
-                              .text( text )                    jQuery
-                              .text( function )                jQuery      A function returning the text content to set
-
       -> .filter()   -  -> Reduce the set of matched elements to those that match the selector or pass the function's test.
                         Syntax                                 Returns     Notes
                            .filter( selector )                 jQuery      A string containing a selector expression to match the current set of elements against.
@@ -197,10 +199,76 @@ jQuery Functions     -
                            .has( selector )                    jQuery
                            .has( contained )                   jQuery
 
-      -> .map()      -  -> Pass each element in the current matched set through a function, producing a NEW jQuery OBJECT containing the return values.
+      -> .is()       -  -> Check the current matched set of elements against a selector, element, or jQuery object and return true if AT LEAST ONE of these elements matches the given arguments.
+                        -> Unlike other filtering methods, .is() does not create a new jQuery object. Instead, it allows you to test the contents of a jQuery object without modification.
+                        -> This is often useful inside callbacks, such as event handlers.(i.e can be used to know if a Particular element(and NOT its Descendants) was clicked).
+                        -> The selector strings with positional selectors(such as :first, :gt(), or :even) apply the selector against the Document, and then determine whether the element
+                           of the current jQuery set matches any of the resulting elements.
+                        Syntax                                 Returns
+                           .is( selector )                     Boolean
+                           .is( function )                     Boolean
+                           .is( selection )                    Boolean
+                           .is( elements )                     Boolean
+
+                        Notes :
+                           -> Since positional selectors(such as :first, :gt(), or :even) are jQuery additions and not W3C standard, we recommend using the W3C selectors whenever feasible.
+
+
+      -> .end()      -  -> End the most recent filtering operation in the current chain and return the set of matched elements to its previous state.
+                        -> Most of jQuery's DOM traversal methods operate on a jQuery object instance and produce a new one, matching a different set of DOM elements.
+                           When this happens, it is as if the New SET of Elements is pushed onto a Stack that is maintained inside the object.
+                           Each SUCCESSIVE FILTERING method pushes a New Element "SET" onto the stack.
+                           If we need an older element set, we can use end() to pop the sets back off of the stack.
+                        -> The end() method is useful primarily when exploiting jQuery's chaining properties.
+                        -> A long jQuery chain can be visualized as a structured code block, with filtering methods providing the openings of nested blocks
+                           and end() methods closing them.
+                        Syntax                                 Returns
+                           .end()                              jQuery
+
+      -> .map()      -  -> Pass each element in the current matched set through a function, producing a NEW jQuery OBJECT containing the RETURN VALUES.
                         -> If you wish to process a plain array or object, use the jQuery.map() instead.
+                        -> As the return value is a jQuery object, which CONTAINS AN ARRAY, it's very common to call .get() on the result to work with a basic array.
+                        -> The .map() method is particularly useful for getting or setting the value of a collection of elements.
+                        -> The function/callback can return an individual data item or an array of data items(Data can be ANYTHING) to be inserted into the resulting set. If an array is returned,
+                           the elements inside the array are inserted into the set. If the function returns null or undefined, no element will be inserted.
+                        -> This method is different from .each() in the sense that, .each() is just like a for loop which iterates over the matched set of items(and does some operation using them),
+                           whereas .map() is used to RETURN some VALUE(that will be part of the NEW jQuery Object) for every matched element in the set.
                         Syntax                                 Returns
                            .map( callback )                    jQuery
+
+      -> jQuery.map()   -> Translate all items in an Array or Object to new array of items.
+                        -> The $.map() method applies a function/callback to each item in an Array or Object and maps the results into a new array.
+                        -> Array-like objects — those with a .length property and a value on the .length - 1 index — must be converted to actual arrays before being passed to $.map().
+                           The jQuery library provides $.makeArray() for such conversions.
+                        -> The function can return
+                              -> The translated value, which will be mapped to the resulting array
+                              -> null or undefined, to remove the item
+                              -> An array of values, which will be flattened into the full array
+                        Syntax                                 Returns     Notes
+                           jQuery.map( array, callback )       Array       callback - Function( Object elementOfArray, Integer indexInArray ) => Object
+                           jQuery.map( object, callback )      Array       callback - Function( Object propertyOfObject, String key ) => Object
+
+
+      -> .get()      -  -> Retrieve the DOM elements matched by the jQuery object(as a Single Element or entirely as an Array).
+                        -> Each jQuery object also masquerades as an array, so we can use the array dereferencing operator to get at the list item instead. However,
+                           this syntax lacks some of the additional capabilities of .get(), such as specifying a negative index.
+                        Syntax                                 Returns     Notes
+                        .get( index )                          Element     index - A zero-based integer indicating which element to retrieve.
+                           .get( index )
+                        .get()                                 Array
+                           .get()
+
+                        Notes :
+                           -> A negative index is counted from the end of the matched set, so this example returns the last item in the list.
+
+      -> .eq()       -  -> Reduce the set of matched elements to the one at the specified index.
+                        -> If an element cannot be found at the specified zero-based index, the method constructs a new jQuery object
+                           with an empty set and a length property of 0.
+                        -> The Difference between .get() and .eq() is that, .get(0) returns the first DOM element matched by the selector,
+                           Whereas, .eq(0) returns a jQuery object containing the first DOM element matched by the selector.
+                        Syntax                                 Returns
+                           .eq( index )                        jQuery
+                           .eq( indexFromEnd )                 jQuery
 
       -> .contents() -  -> This method allows us to search through the IMMEDIATE Children of all the matched elements in the DOM tree and construct a new jQuery object from the matching elements.
                         -> The .contents() and .children() methods are similar, except that the former includes text nodes and comment nodes as well as HTML elements in the resulting jQuery object.
@@ -269,6 +337,14 @@ jQuery Functions     -
                         -> If an Element is already included, as a Sibling of an Element, it will be not be added again as a Sibling of another element.
                         Syntax                                 Returns
                            .siblings( [selector ] )            jQuery
+
+      -> .offsetParent()-> Given a jQuery object that represents a set of DOM elements, the .offsetParent() method allows us to search through the ancestors of these elements in the DOM tree and
+                           construct a new jQuery object wrapped around the closest positioned ancestor.
+                        -> An element is said to be positioned if it has a CSS position attribute of relative, absolute, or fixed.
+                        -> This information is useful for calculating offsets for performing animations and placing objects on the page.
+                        Syntax                                 Returns
+                           .offsetParent()                     jQuery
+
       -> .next()     -  -> Get the immediately following sibling of each element in the set of matched elements.
                         -> If a selector is provided, it retrieves the next sibling only if it matches that selector.
                         -> If no next sibling exists, or if the previous sibling element does not match a supplied selector, an empty jQuery object is returned.
@@ -513,6 +589,25 @@ jQuery Functions     -
                            .outerWidth( value )                         jQuery
                               .outerWidth( value )
                               .outerWidth( function(index, height) )
+
+      -> .add()      -  -> Given a jQuery object that represents a set of DOM elements, the .add() method constructs a new jQuery object from the UNION of those elements
+                           and the ones passed into the method.
+                        -> This method does not appends the elements to the existing collection in the order they are passed to the .add() method,
+                           but, instead creates a New SET and Returns that SET.
+                        -> We can create additional elements on the fly and add those elements to the matched set of elements, but it still does not appear on the page.
+                           To place it on the page, we could add one of the insertion methods to the chain.
+                        Syntax                                       Returns
+                           .add( selector )                          jQuery
+                           .add( elements )                          jQuery
+                           .add( html )                              jQuery
+                           .add( selection )                         jQuery
+                           .add( selector, context )                 jQuery
+
+      -> .addBack()  -  -> Add the previous set of elements on the stack to the current set, optionally filtered by a selector.
+                        -> This method is simply a Combination of Current Set of matches elements + .end(). Though, in this case, the TOP of Stack is
+                           a New SET containing the Combination of Current SET and the Previous SET.
+                           Syntax                                    Returns
+                              .addBack( [selector ] )                jQuery
 
       -> .after()    -  -> Insert content, specified by the parameter, after each element in the set of matched elements.
                         -> The .after() and .insertAfter() methods perform the same task. The major difference is in the syntax—specifically, in the placement of
