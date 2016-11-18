@@ -30,6 +30,13 @@ Event listener          -> Event handlers are invoked in the context of a partic
                            to Handle that Event.
                         -> The event.target ALWAYS points to the Element on which the Event is Triggered, Even if that Element does not have any Event handlers associated with it.
 
+Event Delegations    -  -> DOM event delegation is a mechanism of responding to ui-events via a single common parent rather than each child, through the magic of event
+                           "bubbling" (aka event propagation).
+                        -> Event Delegation allows us to AVOID Adding Event Listeners to Specific Nodes, instead the Event Listener is added to ONE PARENT.
+                           That Event Listener analyzes the Bubbled Events to find a match on Child Elements.
+                        -> This is more like a CONTROLLER, Which Controls/Handles the Events ON ALL OF ITS DESCENDANTS.
+                        -> Another benefit to event delegation is that the total memory footprint used by event listeners goes down (since the number of event bindings go down).
+
 Properties/Functions    -> e.stopPropagation()  -  -> To interrupt an Event and Permanently derail it from its Path Entirely(i.e The Event is COMPLETELY Stopped from advancing/The Event is DONE).
 of Event Object
 
