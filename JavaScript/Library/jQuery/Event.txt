@@ -5,12 +5,33 @@ Events               -  -> An Event is a user Interaction with the Browser.
                         -> Each Event Type is a SEPARATE JavaScript OBJECT TYPE(i.e A Constructor is Defined for Each Event Type), having their own properties and Methods.
                         -> Each Event is an Object/Instance of a Particular Event Type.
 
+WorkFlow             -  -> When an Event is Triggered on an Element, it DOES NOT START from that Element.
+                        -> Event START AT THE ROOT(window Element), and slowly make its way all the way Down until it Hits the Destination(The Element on which the Event was Triggered).
+                        -> ALL EVENTS TRAVERSE till the Destination, even IF THE Destination Element DOES NOT HAVE any Handler associated for that Event. This is done to support
+                           Event Capturing and Event Bubbling.
+                        -> This is the case for all Events.(i.e Even if we use an onclick attribute on an Element).
+                        -> In the Process of the Event Going Down to the Destination(Actual Element on which the Event is Triggered), it actually TOUCHES each and Every Element on its Path
+                           (i.e All the Ancestors of the Element) and INFORMS every elements that an Event has taken place.
+                           This is called as the Phase 1 or Event CAPTURING Phase.
+                        -> The Event, Once it has Reached its Destination also makes its way all the way back to the ROOT Element and Notifies Every Element on its path that an Event has occurred.
+                           This is called as the Phase 2 or Event BUBBLING Phase.
+                        -> Thus, when an Element is Clicked, all of its Ancestors are Notified TWICE.(While Coming Down and Going Up)
+                        -> The third parameter in the addEventListener, specifies whether the Event Will be Listened in the Capturing Phase or in the Bubbling Phase.
+                           true means capturing Phase, whereas false means Bubbling Phase.
+                        -> If we want a Particular Event on an Element to be handled on Both phases, we should have Two Event Handlers for that Event on that Element(One for Each Phase).
+
+
 Event handler/       -  -> Event handler is an object that implements the EventListener interface and provides an EventListener.handleEvent() callback method. Event handlers are language-specific.
 Event listener          -> Event handlers are invoked in the context of a particular object (the current event target)(i.e the Event handler "this" value is set to E's currentTarget and
-                           are provided with the event object itself(as Parameter).
+                           are also provided with the event object itself(as Parameter).
+                        -> When a Function is invoked through onclick, the "this" does not point to the Current Element, but instead it points to its Usual value.
                         -> They are invoked with one argument, the value of which is the Event object E.
                         -> When an Event Occurs on an Element and that Element has that Event Binded to it, then an Event handler(basically a JavaScript Function) is used/Called
                            to Handle that Event.
+                        -> The event.target ALWAYS points to the Element on which the Event is Triggered, Even if that Element does not have any Event handlers associated with it.
+
+Properties/Functions    -> e.stopPropagation()  -  -> To interrupt an Event and Permanently derail it from its Path Entirely(i.e The Event is COMPLETELY Stopped from advancing/The Event is DONE).
+of Event Object
 
 Standard events      -  -> These events are defined in official Web specifications, and should be common across browsers.
                         -> We can also find information about the event based on the Object sent with each Event Type.
