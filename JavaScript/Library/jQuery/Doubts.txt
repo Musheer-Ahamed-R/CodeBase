@@ -1,1 +1,2 @@
 1 -> What is $.fn
+2 -> event.result not working as excepted(while bubbling)

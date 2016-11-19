@@ -38,7 +38,34 @@ Event Delegations    -  -> DOM event delegation is a mechanism of responding to 
                         -> Another benefit to event delegation is that the total memory footprint used by event listeners goes down (since the number of event bindings go down).
 
 Properties/Functions    -> e.stopPropagation()  -  -> To interrupt an Event and Permanently derail it from its Path Entirely(i.e The Event is COMPLETELY Stopped from advancing/The Event is DONE).
-of Event Object
+of Event Object                                    -> We can also return false from an Event Handler to stop the Event from Propagating.
+                                                   -> This method works for custom events triggered with trigger() as well.
+
+                           event.currentTarget  -  -> The current DOM element within the event bubbling phase.
+                                                   -> This property will typically be equal to the this of the function.
+                                                   -> If you are using jQuery.proxy or another form of scope manipulation, this will be equal to whatever context you have provided, not event.currentTarget
+
+                           e.target             -  -> The DOM element that initiated the event.
+                                                   -> It is often useful to compare event.target to this in order to determine if the event is being handled due to event bubbling.
+                                                      This property is very useful in event delegation, when events bubble.
+
+                           e.data               -  -> An optional object of data passed to an event method when the current executing handler is bound.
+
+                           e.type               -  -> Describes the nature of the event.
+
+                           e.which              -  -> For key or mouse events, this property indicates the specific key or button that was pressed.
+
+                           e.timeStamp          -  -> The difference in milliseconds between the time the browser created the event and January 1, 1970.
+                                                   -> This property can be useful for profiling event performance by getting the event.timeStamp value at two points in the code(for different instance of an Event)
+                                                      and noting the difference.
+                                                   -> To simply determine the current time inside an event handler, use (new Date).getTime() instead.
+
+                           e.result             -  -> The last value returned by an event handler that was triggered by this event, unless the value was undefined.           
+
+                           e.preventDefault()   -  -> If this method is called, the default action of the event will not be triggered.
+
+                           e.isDefaultPrevented()  -> Returns whether event.preventDefault() was EVER called on THIS Event object.
+
 
 Standard events      -  -> These events are defined in official Web specifications, and should be common across browsers.
                         -> We can also find information about the event based on the Object sent with each Event Type.

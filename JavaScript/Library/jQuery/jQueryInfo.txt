@@ -957,6 +957,14 @@ jQuery Functions     -
                               Double-click sensitivity (maximum time between clicks that is detected as a double click) can vary by operating system and browser,
                               and is often user-configurable.
 
+      -> .contextmenu() -> Bind an event handler to the "contextmenu" JavaScript event, or trigger that event on an element.
+                        -> The contextmenu event is sent to an element when the right button of the mouse is clicked on it, but before the context menu is displayed.
+                           In case the context menu key is pressed, the event is triggered on the html element.
+                        Syntax                                 Returns
+                           .contextmenu( handler )             jQuery
+                           .contextmenu([eventData], handler)  jQuery
+                           .contextmenu()                      jQuery
+
       -> .change()   -  -> Bind an event handler to the "change" JavaScript event, or trigger that event on an element.
                         -> This method is a shortcut for .on( "change", handler ) in the first two variations, and .trigger( "change" ) in the third.
                         -> The change event is sent to an element when its value changes. This event is limited to <input> elements, <textarea> boxes and <select> elements.
@@ -1030,3 +1038,21 @@ jQuery Functions     -
                         Syntax                                 Returns     Notes
                            .load( handler )                    jQuery
                            .load( [eventData ], handler )      jQuery      eventData is an object containing data that will be passed to the event handler.
+
+      -> .unload()   -  -> Bind an event handler to the "unload" JavaScript event.
+                        -> The unload event is sent to the window element when the user navigates away from the page. This could mean one of many things.
+                           The user could have clicked on a link to leave the page, or typed in a new URL in the address bar. The forward and back buttons will trigger the event. Closing the browser window
+                           will cause the event to be triggered. Even a page reload will first create an unload event.
+                        Syntax                                 Returns     Notes
+                           .unload( handler )                  jQuery
+                           .unload( [eventData ], handler )    jQuery      eventData is an object containing data that will be passed to the event handler.
+
+                        Notes :
+                           -> This event is available so that scripts can perform cleanup when the user leaves the page.
+                           -> Most browsers will ignore calls to alert(), confirm() and prompt() inside the event handler. The string we return may be used in a confirmation dialog, but not all browsers support this.
+                              It is not possible to cancel the unload event with .preventDefault().
+
+      -> .trigger()  -  -> Execute all handlers and behaviors attached to the matched elements for the given event type.
+                        Syntax                                          Returns
+                           .trigger(eventType[, extraParameters ])      jQuery
+                           .trigger(eventType[, extraParameters ])      jQuery
