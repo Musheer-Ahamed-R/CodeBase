@@ -32,23 +32,6 @@ Additional Notes
                         Function( Integer index, Element element )
 
 jQuery Functions     -
-      -> .ready()    -  -> This method offers a way to run JavaScript code as soon as the page's Document Object Model (DOM) becomes SAFE to manipulate/the DOM is fully loaded.
-                        -> This doesn't wait for Images, CSS, Frames to be Fully Loaded.
-                        Syntax                                 Returns
-                           $( document ).ready( handler )      jQuery
-                           $( handler )      // Preferred      jQuery
-                           $().ready( handler )                jQuery
-
-      -> .load()     -  -> The load event is sent to an element when it and all sub-elements have been COMPLETELY loaded.
-                        -> This event fires after the "ready" Event.
-                        -> This event can be sent to any element associated with a URL: images, scripts, frames, iframes, and the window object.
-                        -> In general, it is not necessary to wait for all images to be fully loaded. If code can be executed earlier, it is usually
-                           best to place it in a handler sent to the .ready() method.
-                        -> This is removed in Version 3.0.
-                        Syntax                                 Returns     Notes
-                           .load( handler )                    jQuery
-                           .load( [eventData ], handler )      jQuery      eventData is an object containing data that will be passed to the event handler.
-
       -> .css()      -  -> Get the value of a computed style property for the FIRST element in the set of matched elements or set one or more CSS properties for every matched element.
                         -> This accepts RELATIVE values similar to .animate(). Relative values are a string starting with += or -= to increment or decrement the current value. based on its previous values.
                         Syntax                                 Returns     Notes
@@ -393,18 +376,6 @@ jQuery Functions     -
                         -> This method is useful when removed elements are to be reinserted into the DOM at a later time.
                         Syntax                                 Returns     Notes
                            .detach( [selector ] )              jQuery      The Selector should be the MAIN Element amongst the List and NOT a Child of that Main Element.
-
-      -> .change()   -  -> Bind an event handler to the "change" JavaScript event, or trigger that event on an element.
-                        -> This method is a shortcut for .on( "change", handler ) in the first two variations, and .trigger( "change" ) in the third.
-                        -> The change event is sent to an element when its value changes. This event is limited to <input> elements, <textarea> boxes and <select> elements.
-                        -> For select boxes, checkboxes, and radio buttons, the event is fired immediately when the user makes a selection with the mouse, but for the other element types
-                           the event is deferred until the element loses focus.
-                        -> To trigger the event manually, apply .change() without arguments.
-                        -> Changing the value of an input element using JavaScript, using .val() for example, won't fire the event.
-                        Syntax                                 Returns
-                           .change( handler )                  jQuery
-                           .change( [eventData ], handler )    jQuery
-                           .change()                           jQuery
 
       -> .slideUp()  -  -> Hide the matched elements with a sliding motion.
                         -> The .slideUp() method animates the height of the matched elements. This causes lower parts of the page to slide up,
@@ -966,7 +937,7 @@ jQuery Functions     -
                            -> A common pattern is to bind the mousemove handler from within a mousedown hander, and to unbind it from a
                               corresponding mouseup handler. If implementing this sequence of events, remember that the mouseup event might be sent
                               to a different HTML element than the mousemove event was. To account for this, the mouseup handler should typically
-                              be bound to an element high up in the DOM tree, such as <body>.   
+                              be bound to an element high up in the DOM tree, such as <body>.
 
       -> .click()    -  -> Bind an event handler to the "click" JavaScript event, or trigger that event on an element.
                         Syntax                                 Returns     Notes
@@ -985,3 +956,77 @@ jQuery Functions     -
                               varies from browser to browser, with some receiving two click events before the dblclick and others only one.
                               Double-click sensitivity (maximum time between clicks that is detected as a double click) can vary by operating system and browser,
                               and is often user-configurable.
+
+      -> .change()   -  -> Bind an event handler to the "change" JavaScript event, or trigger that event on an element.
+                        -> This method is a shortcut for .on( "change", handler ) in the first two variations, and .trigger( "change" ) in the third.
+                        -> The change event is sent to an element when its value changes. This event is limited to <input> elements, <textarea> boxes and <select> elements.
+                        -> For select boxes, checkboxes, and radio buttons, the event is fired immediately when the user makes a selection with the mouse, but for the other element types
+                           the event is deferred until the element loses focus.
+                        -> To trigger the event manually, apply .change() without arguments.
+                        -> Changing the value of an input element using JavaScript, using .val() for example, won't fire the event.
+                        Syntax                                 Returns
+                           .change( handler )                  jQuery
+                           .change( [eventData ], handler )    jQuery
+                           .change()                           jQuery
+
+      -> .keydown()  -  -> Bind an event handler to the "keydown" JavaScript event, or trigger that event on an element.
+                        -> The keydown event is sent to an element when the user presses a key on the keyboard. If the key is kept pressed, the event is sent every time the operating system
+                           repeats the key.
+                        -> It can be attached to any element, but the event is only sent to the element that has the focus. Focusable elements can vary between browsers, but form elements
+                           can always get focus so are reasonable candidates for this event type.
+                        -> For catching actual text entry, .keypress() may be a better choice.
+                        Syntax                                 Returns
+                           .keydown( handler )                 jQuery
+                           .keydown( [eventData ], handler )   jQuery
+                           .keydown()                          jQuery
+
+                        Notes :
+                           -> If key presses anywhere need to be caught (for example, to implement global shortcut keys on a page), it is useful to attach this behavior to the document object.
+                              Because of event bubbling, all key presses will make their way up the DOM to the document object unless explicitly stopped.
+                           -> To determine which key was pressed, examine the event object that is passed to the handler function. While browsers use differing properties to store this information,
+                              jQuery normalizes the .which property so you can reliably use it to retrieve the key code.
+
+      -> .keyup()    -  -> Bind an event handler to the "keyup" JavaScript event, or trigger that event on an element.
+                        -> The keydown event is sent to an element when the user presses a key on the keyboard. If the key is kept pressed, the event is sent every time the operating system
+                           repeats the key.
+                        -> It can be attached to any element, but the event is only sent to the element that has the focus. Focusable elements can vary between browsers, but form elements
+                           can always get focus so are reasonable candidates for this event type.
+                        -> For catching actual text entry, .keypress() may be a better choice.
+                        Syntax                                 Returns
+                           .keyup( handler )                   jQuery
+                           .keyup( [eventData ], handler )     jQuery
+                           .keyup()                            jQuery
+
+                        Notes :
+                           -> Same as Above
+
+      -> .keypress() -  -> Bind an event handler to the "keypress" JavaScript event, or trigger that event on an element.
+                        -> The keypress event is sent to an element when the browser registers keyboard input. This is similar to the keydown event, except that modifier and non-printing keys such as
+                           Shift, Esc, and delete trigger keydown events but NOT keypress events.
+                        -> It can be attached to any element, but the event is only sent to the element that has the focus. Focusable elements can vary between browsers, but form elements
+                           can always get focus so are reasonable candidates for this event type.
+                        -> When catching special keystrokes such as arrow keys, .keydown() or .keyup() is a better choice.
+                        Syntax                                 Returns
+                           .keypress( handler )                jQuery
+                           .keypress( [eventData ], handler )  jQuery
+                           .keypress()                         jQuery
+
+                        Notes :
+                           -> As the keypress event isn't covered by any official specification, the actual behavior encountered when using it may differ across browsers, browser versions, and platforms.
+
+      -> .ready()    -  -> This method offers a way to run JavaScript code as soon as the page's Document Object Model (DOM) becomes SAFE to manipulate/the DOM is fully loaded.
+                        -> This doesn't wait for Images, CSS, Frames to be Fully Loaded.
+                        Syntax                                 Returns
+                           $( document ).ready( handler )      jQuery
+                           $( handler )      // Preferred      jQuery
+                           $().ready( handler )                jQuery
+
+      -> .load()     -  -> The load event is sent to an element when it and all sub-elements have been COMPLETELY loaded.
+                        -> This event fires after the "ready" Event.
+                        -> This event can be sent to any element associated with a URL: images, scripts, frames, iframes, and the window object.
+                        -> In general, it is not necessary to wait for all images to be fully loaded. If code can be executed earlier, it is usually
+                           best to place it in a handler sent to the .ready() method.
+                        -> This is removed in Version 3.0.
+                        Syntax                                 Returns     Notes
+                           .load( handler )                    jQuery
+                           .load( [eventData ], handler )      jQuery      eventData is an object containing data that will be passed to the event handler.
