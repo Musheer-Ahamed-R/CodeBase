@@ -22,8 +22,10 @@ WorkFlow             -  -> When an Event is Triggered on an Element, it DOES NOT
 
 
 Event handler/       -  -> Event handler is an object that implements the EventListener interface and provides an EventListener.handleEvent() callback method. Event handlers are language-specific.
-Event listener          -> Event handlers are invoked in the context of a particular object (the current event target)(i.e the Event handler "this" value is set to E's currentTarget and
+Event listener          -> This object is a normalized subset of data provided by the browser; the browser's unmodified native event object is available in event.originalEvent.
+                        -> Event handlers are invoked in the context of a particular object/Matching Selector(Incase of Delegates) (the current event target)(i.e the Event handler "this" value is set to E's currentTarget and
                            are also provided with the event object itself(as Parameter).
+                        -> For directly bound events, "this"(e.currenttarget) is the element where the event was attached and for delegated events "this"(e.currenttarget) is an element Matching Selector.
                         -> When a Function is invoked through onclick, the "this" does not point to the Current Element, but instead it points to its Usual value.
                         -> They are invoked with one argument, the value of which is the Event object E.
                         -> When an Event Occurs on an Element and that Element has that Event Binded to it, then an Event handler(basically a JavaScript Function) is used/Called
@@ -37,11 +39,59 @@ Event Delegations    -  -> DOM event delegation is a mechanism of responding to 
                         -> This is more like a CONTROLLER, Which Controls/Handles the Events ON ALL OF ITS DESCENDANTS.
                         -> Another benefit to event delegation is that the total memory footprint used by event listeners goes down (since the number of event bindings go down).
 
+Direct and delegated    -> If selector is omitted or is null, the event handler is referred to as Direct or directly-bound. The handler is called every time an event occurs on the selected elements,
+events                      whether it occurs directly on the element or bubbles from a descendant (inner) element.
+                        -> When a selector is provided, the event handler is referred to as delegated. The handler is not called when the event occurs directly on the bound element,
+                           but only for descendants (inner elements) that match the selector.
+                        -> Event handlers are bound only to the currently selected elements; they must exist at the time your code makes the call to .on().
+                           To ensure the elements are present and can be selected, place scripts after the elements in the HTML markup or perform event binding inside a document ready handler.
+                           Alternatively, use delegated events to attach event handlers(explained below).
+                        -> Delegated events have the advantage that they can process events from descendant elements that are added to the document at a later time
+                        -> By picking an element that is guaranteed to be present at the time the delegated event handler is attached, you can use delegated events
+                           to avoid the need to frequently attach and remove event handlers.
+                        -> This element could be the container element of a view in a Model-View-Controller design, for example, or document
+                        -> In addition to their ability to handle events on descendant elements NOT YET CREATED, another advantage of delegated events is their potential for much lower overhead
+                           when many elements must be monitored.
+
+Event names and      -  -> An event name can be qualified by event namespaces that simplify removing or triggering the event.(e.g click.sample, custom.musheer etc..)
+namespaces              -> jQuery will pass through the browser's standard JavaScript event types, calling the handler function when the browser generates events due to user actions such as click
+                        -> In addition, the .trigger() method can trigger both standard browser event names and CUSTOM EVENT names to call attached handlers.
+                        -> Event names should only contain alphanumerics, underscore, and colon characters.
+                        -> An event name can be qualified by event namespaces that simplify removing or triggering the event. For example, "click.myPlugin.simple" defines
+                           both the myPlugin and simple namespaces for this particular click event.
+                        -> A click event handler attached via that string could be removed with .off("click.myPlugin") or .off("click.simple")
+                           without disturbing other click handlers attached to the elements.
+                        -> Namespaces are similar to CSS classes(Multiple Namespace for Single Event Starting with ".") in that they are not hierarchical. Only one name needs to match.
+                        -> Namespaces beginning with an underscore are reserved for jQuery's use.
+
+Event performance    -  -> Attaching many delegated event handlers near the TOP of the document tree can degrade performance. (i.e) For best performance, attach delegated events
+                           at a document location as close as possible to the target elements.
+                        -> Delegated events that use more complex selectors, particularly hierarchical ones, can be several times slower--although they are still fast enough for most applications.
+                           (e.g "#commentForm .addNew" ). Hierarchical selectors can often be avoided simply by attaching the handler to a more appropriate point in the document.
+                           (e.g. $( "#commentForm" ).on( "click", ".addNew", addComment ))
+                        -> Care should be taken when using Event handlers for Events that fire Multiple Times per Second.
+
+
 Properties/Functions    -> e.stopPropagation()  -  -> To interrupt an Event and Permanently derail it from its Path Entirely(i.e The Event is COMPLETELY Stopped from advancing/The Event is DONE).
-of Event Object                                    -> We can also return false from an Event Handler to stop the Event from Propagating.
+of Event Object                                    -> Returning false from an event handler will automatically call event.stopPropagation() and event.preventDefault().
                                                    -> This method works for custom events triggered with trigger() as well.
 
-                           event.currentTarget  -  -> The current DOM element within the event bubbling phase.
+                           e.isPropagationStopped()-> Returns whether event.stopPropagation() was ever called on this event object.
+
+                           e.stopImmediatePropagation
+                                                   -> Keeps/Prevents the rest of the handlers from being executed on an Element(Could be Handler for Different Events on the Element) and prevents
+                                                      the event from bubbling up the DOM tree by implicitly calling event.stopPropagation().
+
+                           e.isImmediatePropagationStopped()
+                                                   -> Returns whether event.stopImmediatePropagation() was ever called on this event object.
+
+                           e.preventDefault()   -  -> If this method is called, the default action of the event will not be triggered.
+                                                   -> Returning false from an event handler will automatically call event.stopPropagation() and event.preventDefault().
+
+                           e.isDefaultPrevented()  -> Returns whether event.preventDefault() was EVER called on THIS Event object.
+
+
+                           e.currentTarget      -  -> The current DOM element within the event bubbling phase.
                                                    -> This property will typically be equal to the this of the function.
                                                    -> If you are using jQuery.proxy or another form of scope manipulation, this will be equal to whatever context you have provided, not event.currentTarget
 
@@ -49,7 +99,26 @@ of Event Object                                    -> We can also return false f
                                                    -> It is often useful to compare event.target to this in order to determine if the event is being handled due to event bubbling.
                                                       This property is very useful in event delegation, when events bubble.
 
+                           e.relatedTarget      -  -> The other DOM element involved in the event, if any.
+                                                   -> For mouseout, indicates the element being entered; for mouseover, indicates the element being exited.
+
+                           e.delegateTarget        -> The element where the currently-called jQuery event handler was attached.
+                                                   -> This property is most often useful in delegated events attached by .delegate() or .on(), where the event handler is attached at an ancestor of the element being processed.
+                                                   -> It can be used, for example, to identify and remove event handlers at the delegation point.
+                                                   -> For non-delegated event handlers attached directly to an element, event.delegateTarget will always be equal to event.currentTarget.
+
                            e.data               -  -> An optional object of data passed to an event method when the current executing handler is bound.
+
+                           e.pageX              -  -> The mouse position relative to the left edge of the document.
+                                                   -> Used in mousemove.
+
+                           e.pageY              -  -> The mouse position relative to the top edge of the document.
+
+                           e.namespace          -  -> The namespace specified when the event was triggered.
+                                                   -> This will likely be used primarily by plugin authors who wish to handle tasks differently depending on the event namespace used.
+
+                           e.metaKey            -  -> Returns a boolean value (true or false) that indicates whether or not the META key was pressed at the time the event fired.
+                                                   -> On Macintosh keyboards, the META key maps to the Command key (⌘). While, On Windows keyboards, the META key maps to the Windows key.
 
                            e.type               -  -> Describes the nature of the event.
 
@@ -60,11 +129,17 @@ of Event Object                                    -> We can also return false f
                                                       and noting the difference.
                                                    -> To simply determine the current time inside an event handler, use (new Date).getTime() instead.
 
-                           e.result             -  -> The last value returned by an event handler that was triggered by this event, unless the value was undefined.           
+                           e.result             -  -> The last value returned by an event handler that was triggered by this event, unless the value was undefined.
 
-                           e.preventDefault()   -  -> If this method is called, the default action of the event will not be triggered.
 
-                           e.isDefaultPrevented()  -> Returns whether event.preventDefault() was EVER called on THIS Event object.
+
+Notes :
+   -> If we do not have a parameter in an Event Handler Function, then by default an "event" object is present(variable name is also event). But, that Object is a Raw JavaScript Event Object.
+   -> $.event.fix(javascriptEvent) can be used to convert a Raw javascript Event object to a jQuery Event Object.
+   -> When we register an event for the Element(s) using "on" method or any of its shortcuts, then an Event is actually Attached/Stored on EACH Element at THAT VERY MOMENT.
+      Thus, if we add an Element LATER, which matches the Selector Expression used EARLIER to create an Event on the Matched Elements,
+      the Newly Added Element WILL NOT have that EVENT BINDED to it. This is where Event Delegation comes into handy.
+   -> Most/All of the Event Methods in jQuery Implicitly points to the "on" method.
 
 
 Standard events      -  -> These events are defined in official Web specifications, and should be common across browsers.

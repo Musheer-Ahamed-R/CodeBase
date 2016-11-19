@@ -30,3 +30,4 @@ Notes :
                is reflected only if we get data using the .data().
       -> To use a handler for Multiple Events, use $( selector ).on( "event1 event2 ...", handler );
       -> if document.write is used After the DOM has been Loaded, then it OverWrites the Entire Dom.
+      

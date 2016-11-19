@@ -1040,7 +1040,7 @@ jQuery Functions     -
                            .load( [eventData ], handler )      jQuery      eventData is an object containing data that will be passed to the event handler.
 
       -> .unload()   -  -> Bind an event handler to the "unload" JavaScript event.
-                        -> The unload event is sent to the window element when the user navigates away from the page. This could mean one of many things.
+                        -> The unload event is sent to the "window" element when the user navigates away from the page. This could mean one of many things.
                            The user could have clicked on a link to leave the page, or typed in a new URL in the address bar. The forward and back buttons will trigger the event. Closing the browser window
                            will cause the event to be triggered. Even a page reload will first create an unload event.
                         Syntax                                 Returns     Notes
@@ -1051,6 +1051,93 @@ jQuery Functions     -
                            -> This event is available so that scripts can perform cleanup when the user leaves the page.
                            -> Most browsers will ignore calls to alert(), confirm() and prompt() inside the event handler. The string we return may be used in a confirmation dialog, but not all browsers support this.
                               It is not possible to cancel the unload event with .preventDefault().
+
+      -> .error()    -  -> Bind an event handler to the "error" JavaScript event.
+                        -> The error event is sent to elements, such as images, that are referenced by a document and loaded by the browser. It is called if the element was NOT Loaded correctly.
+                        Syntax                                 Returns
+                           .error( handler )                   jQuery
+                           .error( [eventData ], handler )     jQuery
+
+                        Notes :
+                           -> The event handler must be attached before the browser fires the error event.(i.e The error Handler should be set on the Element before the src Attribute is set on that Element).
+                           -> error relies on HTTP status codes and will generally not be triggered if the URL uses the file: protocol.
+                           -> The error event on the window object uses nonstandard arguments and return value conventions, so it is not supported by jQuery.
+
+      -> .resize()   -  -> Bind an event handler to the "resize" JavaScript event, or trigger that event on an element.
+                        -> The resize event is sent to the "window" element when the size of the browser window changes:
+                        Syntax                                 Returns
+                           .resize( handler )                  jQuery
+                           .resize( [eventData ], handler )    jQuery
+                           .resize()                           jQuery
+
+                        Notes :
+                           -> Code in a resize handler should NEVER rely on the number of times the handler is called. Depending on implementation, resize events can be sent continuously as the resizing is in progress
+                              (the typical behavior in Internet Explorer and WebKit-based browsers such as Safari and Chrome), or only once at the end of the resize operation
+                              (the typical behavior in some other browsers such as Opera).
+
+      -> .scroll()   -  -> Bind an event handler to the "scroll" JavaScript event, or trigger that event on an element.
+                        -> The scroll event is sent to an element when the user scrolls to a different place in the element.
+                        -> It applies to window objects, but also to scrollable frames and elements with the overflow CSS property set to scroll (or auto when the element's explicit height or width
+                           is less than the height or width of its contents).
+                        Syntax                                 Returns
+                           .scroll( handler )                  jQuery
+                           .scroll( [eventData ], handler )    jQuery
+                           .scroll()                           jQuery
+
+                        Notes :
+                           -> A scroll event is sent whenever the element's scroll position changes, regardless of the cause. A mouse click or drag on the scroll bar, dragging inside the element,
+                              pressing the arrow keys, or using the mouse's scroll wheel could cause this event.
+
+      -> .select()   -  -> Bind an event handler to the "select" JavaScript event, or trigger that event on an element.
+                        -> The select event is sent to an element when the user makes a text selection inside it. This event is limited to <input type="text"> fields and <textarea> boxes.
+                        Syntax                                 Returns
+                           .select( handler )                  jQuery
+                           .select( [eventData ], handler )    jQuery
+                           .select()                           jQuery
+
+      -> .submit()   -  -> Bind an event handler to the "submit" JavaScript event, or trigger that event on an element.
+                        -> The submit event is sent to an element when the user is attempting to submit a form. It can only be attached to <form> elements.
+                           Forms can be submitted either by clicking an explicit <input type="submit">, <input type="image">, or <button type="submit">, or by pressing Enter when certain form elements have focus.
+                        Syntax                                 Returns
+                           .submit( handler )                  jQuery
+                           .submit( [eventData ], handler )    jQuery
+                           .submit()                           jQuery
+
+                        Notes :
+                           -> Forms and their child elements should not use input names or ids that conflict with properties of a form, such as submit, length, or method. Name conflicts can cause confusing failures.
+
+      -> .on()       -  -> Attach an event handler function for one or more events to the selected elements.
+                        -> Here, the Event is actually bind to the Element(s) on which the "on" is invoked. The Second Selector lets us to specify the Matching Descendant Elements on which the Event Should be invoked.
+                           Here, the Event is NOT Bound to the Elements that Match the Second Selector(EVENT DELEGATION). This is possible due to Bubbling.
+                        Syntax                                                Returns     Notes
+                           .on( events[, selector][, data ], handler)         jQuery      selector - A selector string to filter the descendants of the selected elements that trigger the event.
+                                                                                                     If the selector is null or omitted, the event is always triggered when it reaches the selected element.
+                           on( events [, selector ] [, data ] )               jQuery      events   - One or more space-separated event types and optional namespaces.
+                                                                                                                                 OR
+                                                                                                     An object in which the string keys represent one or more space-separated event types and optional namespaces,
+                                                                                                     and the values represent a handler function to be called for the event(s).
+
+      -> .off()      -  -> Remove an event handler.
+                        -> The .off() method removes event handlers that were attached with .on().
+                        -> When multiple filtering arguments are given, all of the arguments provided must match for the event handler to be removed.
+                        -> When writing code that will be used as a plugin, or simply when working with a large code base, best practice is to attach and remove events using namespaces so that the code
+                           will not inadvertently remove event handlers attached by other code.
+                        -> At minimum, either a namespace or event name must be provided.   
+                        -> To remove specific delegated event handlers, provide a selector argument. The selector string must exactly match the one passed to .on() when the event handler was attached.
+                           To remove all delegated events from an element without removing non-delegated events, use the special value "**".
+                        Syntax                                                Returns
+                           .off( events [, selector ] [, handler ] )          jQuery
+                           .off( events [, selector ] )                       jQuery
+                           .off( event )                                      jQuery
+                           .off()                                             jQuery
+
+      -> .one()      -  -> Attach a handler to an event for the elements. The handler is executed at most once per element per event type.
+                        -> The .one() method is identical to .on(), except that the handler for a given element and event type is unbound after its first invocation
+                        Syntax                                                Returns
+                           .one(events[, data ], handler)                     jQuery
+                           .one( events [, selector ] [, data ], handler )    jQuery
+                           .one( events[, selector][, data ])                 jQuery
+
 
       -> .trigger()  -  -> Execute all handlers and behaviors attached to the matched elements for the given event type.
                         Syntax                                          Returns
