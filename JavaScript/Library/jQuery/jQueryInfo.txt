@@ -49,24 +49,6 @@ jQuery Functions     -
                            .load( handler )                    jQuery
                            .load( [eventData ], handler )      jQuery      eventData is an object containing data that will be passed to the event handler.
 
-      -> .click()    -  -> Bind an event handler to the "click" JavaScript event, or trigger that event on an element.
-                        Syntax                                 Returns     Notes
-                           .click( handler )                   jQuery
-                           .click( [eventData ], handler )     jQuery      eventData is an object containing data that will be passed to the event handler.
-                           .click()                            jQuery      Trigger a Click Event
-
-      -> .dblclick() -  -> Bind an event handler to the "dblclick" JavaScript event, or trigger that event on an element.
-                        Syntax                                 Returns
-                           .dblclick( handler )                jQuery
-                           .dblclick([eventData], handler)     jQuery
-                           .dblclick()                         jQuery
-
-                        Notes :
-                           -> It is inadvisable to bind handlers to both the click and dblclick events for the same element. The sequence of events triggered
-                              varies from browser to browser, with some receiving two click events before the dblclick and others only one.
-                              Double-click sensitivity (maximum time between clicks that is detected as a double click) can vary by operating system and browser,
-                              and is often user-configurable.
-
       -> .css()      -  -> Get the value of a computed style property for the FIRST element in the set of matched elements or set one or more CSS properties for every matched element.
                         -> This accepts RELATIVE values similar to .animate(). Relative values are a string starting with += or -= to increment or decrement the current value. based on its previous values.
                         Syntax                                 Returns     Notes
@@ -77,24 +59,6 @@ jQuery Functions     -
                               .css( propertyName, value )      jQuery
                               .css( propertyName, function )   jQuery      A function returning the value to set.
                               .css( properties )               jQuery      properties is an Object containing list of propertyName and Value.
-
-      -> .hover()    -  -> Bind one or two handlers to the matched elements, to be executed when the mouse pointer enters and leaves the elements.
-                        -> The .hover() method binds handlers for both mouseenter and mouseleave events.
-                        -> $( selector ).hover( handlerIn, handlerOut ) is shorthand for: $( selector ).mouseenter( handlerIn ).mouseleave( handlerOut );
-                        -> Also $(selector).hover(handlerInOut) is shorthand for $( selector ).on( "mouseenter mouseleave", handlerInOut );
-                        Syntax                                 Returns     Notes
-                        .hover( handlerIn, handlerOut )
-                           .hover( handlerIn, handlerOut )     jQuery      handlerIn      - A function to execute when the mouse pointer enters the element.
-                                                                           handlerOut     - A function to execute when the mouse pointer leaves the element.
-                        .hover( handlerInOut )
-                           .hover( handlerInOut )              jQuery      handlerInOut   - A function to execute when the mouse pointer enters or leaves the element.
-
-      -> .mouseenter()  -> Bind an event handler to be fired when the mouse enters an element, or trigger that handler on an element.
-                        -> This method is a shortcut for .on( "mouseenter", handler ) in the first two variations, and .trigger( "mouseenter" ) in the third.
-                        Syntax                                 Returns
-                           .mouseenter( handler )              jQuery
-                           .mouseenter( [eventData ], handler) jQuery
-                           .mouseenter()
 
       -> .html()     -  -> Get the HTML contents of the first element in the set of matched elements or set the HTML contents of every matched element.
                         -> This method uses the browser's innerHTML property.
@@ -856,6 +820,137 @@ jQuery Functions     -
                         Syntax (e.g)
                            jQuery.cssNumber.someCSSProp = true;
 
+      -> .focus()    -  -> Bind an event handler to the "focus" JavaScript event, or trigger that event on an element.
+                        -> The focus event is sent to an element when it gains focus.
+                        -> In recent browser versions, the event can be extended to include all element types by explicitly setting the element's tabindex property.
+                        -> The focus event does not bubble in Internet Explorer. Therefore, scripts that rely on event delegation with the focus event
+                           will not work consistently across browsers.
+                        -> jQuery works around this limitation by mapping focus to the focusin event in its event delegation methods, .live() and .delegate(). Thus, other than
+                           these two methods, the focus event does not work Consistently incase of bubbling.
+                        Syntax                                 Returns
+                           .focus( handler )                   jQuery
+                           .focus( [eventData ], handler )     jQuery
+                           .focus( [eventData ], handler )     jQuery
+
+                        Notes :
+                           -> Only A, AREA, BUTTON, INPUT, LABEL, SELECT, TEXTAREA create focus/blur events.
+                           -> We should Take care to only use .focus() on elements that are visible.
+                           -> To run an element's focus event handlers without SETTING focus to the element,
+                              use .triggerHandler( "focus" ) instead of .focus().
+                           -> To stop people from writing in input boxes, try:
+                              $( "input" ).focus(function() {
+                                $( this ).blur();
+                              });
+
+      -> .focusin()  -  -> The focusin event is sent to an element when it, or any element inside of it, gains focus.
+                        -> This is distinct from the focus event in that it supports detecting the focus event on descendant elements (in other words, it supports event bubbling).
+                           (i.e The Parent does not gets Focus event on itself, but can react when it happens on its Child Elements that Support focus Event.
+                        Syntax                                 Returns
+                           .focusin( handler )                 jQuery
+                           .focusin( [eventData ], handler )   jQuery
+                           .focusin()                          jQuery
+
       -> .blur()     -  -> Bind an event handler to the "blur" JavaScript event, or trigger that event on an element.
-                        -> The blur event is sent to an element when it loses focus and an element can lose focus via keyboard commands, such as the Tab key,
-                           or by mouse clicks elsewhere on the page.
+                        -> The blur event is sent to an element when it loses focus.
+                        -> In recent browser versions, the event can be extended to include all element types by explicitly setting the element's tabindex property.
+                        -> The blur event does not bubble in Internet Explorer. Therefore, scripts that rely on event delegation with the blur event
+                           will not work consistently across browsers.
+                        -> jQuery works around this limitation by mapping blur to the focusout event in its event delegation methods, .live() and .delegate(). Thus, other than
+                           these two methods, the blur event does not work Consistently incase of bubbling.
+                        Syntax                                 Returns
+                           .blur( handler )                    jQuery
+                           .blur( [eventData ], handler )      jQuery
+                           .blur()                             jQuery
+
+      -> .focusout() -  -> The focusout event is sent to an element when it, or any element inside of it, loses focus.
+                        -> This is distinct from the blur event in that it supports detecting the loss of focus on descendant elements (in other words, it supports event bubbling).
+                           (i.e The Parent does not gets blur event on itself, but can react when it happens on its Child Elements that Support blur Event.
+                        Syntax                                 Returns
+                           .focusout( handler )                 jQuery
+                           .focusout( [eventData ], handler )   jQuery
+                           .focusout()                          jQuery
+
+      -> .hover()    -  -> Bind one or two handlers to the matched elements, to be executed when the mouse pointer enters and leaves the elements.
+                        -> The .hover() method binds handlers for both mouseenter and mouseleave events.
+                        -> $( selector ).hover( handlerIn, handlerOut ) is shorthand for: $( selector ).mouseenter( handlerIn ).mouseleave( handlerOut );
+                        -> Also $(selector).hover(handlerInOut) is shorthand for $( selector ).on( "mouseenter mouseleave", handlerInOut );
+                        Syntax                                 Returns     Notes
+                        .hover( handlerIn, handlerOut )
+                           .hover( handlerIn, handlerOut )     jQuery      handlerIn      - A function to execute when the mouse pointer enters the element.
+                                                                           handlerOut     - A function to execute when the mouse pointer leaves the element.
+                        .hover( handlerInOut )
+                           .hover( handlerInOut )              jQuery      handlerInOut   - A function to execute when the mouse pointer enters or leaves the element.
+
+      -> .mouseenter()  -> Bind an event handler to be fired when the mouse enters an element, or trigger that handler on an element.
+                        -> The mouseenter event differs from mouseover in the way it handles event bubbling. The .mouseenter() does NOT SUPPORT Bubbling,
+                           Whereas the .mouseover() supports bubbling.
+                        -> The .mouseenter() is Triggered AGAIN on an Element, ONLY when .mouseleave() is Triggered on THAT Element(Not on Its Descendants, since this method Does Not Support Bubbling).
+                        Syntax                                 Returns
+                           .mouseenter( handler )              jQuery
+                           .mouseenter( [eventData ], handler) jQuery
+                           .mouseenter()                       jQuery
+
+      -> .mouseleave()  -> Bind an event handler to be fired when the mouse leaves an element, or trigger that handler on an element.
+                        -> Rest same as for .mouseenter()
+                        Syntax                                 Returns
+                           .mouseleave( handler )              jQuery
+                           .mouseleave( [eventData ], handler) jQuery
+                           .mouseleave()                       jQuery
+
+      -> .mouseover()-  -> Bind an event handler to the "mouseover" JavaScript event, or trigger that event on an element.
+                        -> The mouseover event differs from mouseenter in the way it handles event bubbling. The .mouseenter() does NOT SUPPORT Bubbling,
+                           Whereas the .mouseover() supports bubbling.
+                        -> This event type can cause many headaches due to event bubbling.
+                        -> The .mouseover() is Triggered AGAIN on an Element, ONLY when .mouseout() is Triggered on THAT Element.
+                           But, Since this method SUPPORTS Bubbling, mouseout on Element is triggered NOT ONLY when Mouse moves out on of THAT Element,
+                           but also when the Mouse "MOVES OUT" on Its Descendants.
+                        -> Also, mouseout is triggered on the Parent when the Mouse "MOVES IN" on its Descendant.
+                        Syntax                                 Returns
+                           .mouseover( handler )               jQuery
+                           .mouseover([eventData], handler)    jQuery
+                           .mouseover()                        jQuery
+
+      -> .mouseout() -  -> Bind an event handler to the "mouseout" JavaScript event, or trigger that event on an element.
+                        -> Rest same as for .mouseover()
+                        Syntax                                 Returns
+                           .mouseout( handler )                jQuery
+                           .mouseout([eventData], handler)     jQuery
+                           .mouseout()                         jQuery
+
+      -> .mousemove()-  -> Bind an event handler to the "mousemove" JavaScript event, or trigger that event on an element.
+                        -> This does not allow Bubble.
+                        Syntax                                 Returns
+                           .mousemove( handler )                jQuery
+                           .mousemove([eventData], handler)     jQuery
+                           .mousemove()                         jQuery
+
+                        Notes :
+                           -> When tracking mouse movement, you usually need to know the actual position of the mouse pointer.
+                              The event object that is passed to the handler contains some information about the mouse coordinates.
+                              Properties such as .clientX, .offsetX, and .pageX are available, but support for them differs between browsers.
+                              Fortunately, jQuery normalizes the .pageX and .pageY properties so that they can be used in all browsers.
+                              These properties provide the X and Y coordinates of the mouse pointer relative to the top-left corner of the document.
+                           -> Keep in mind that the mousemove event is triggered whenever the mouse pointer moves, even for a pixel.
+                              This means that hundreds of events can be generated over a very small amount of time. If the handler has to do
+                              any significant processing, or if multiple handlers for the event exist, this can be a serious performance drain
+                              on the browser. It is important, therefore, to optimize mousemove handlers as much as possible, and to unbind them
+                              as soon as they are no longer needed.
+
+
+      -> .click()    -  -> Bind an event handler to the "click" JavaScript event, or trigger that event on an element.
+                        Syntax                                 Returns     Notes
+                           .click( handler )                   jQuery
+                           .click( [eventData ], handler )     jQuery      eventData is an object containing data that will be passed to the event handler.
+                           .click()                            jQuery      Trigger a Click Event
+
+      -> .dblclick() -  -> Bind an event handler to the "dblclick" JavaScript event, or trigger that event on an element.
+                        Syntax                                 Returns
+                           .dblclick( handler )                jQuery
+                           .dblclick([eventData], handler)     jQuery
+                           .dblclick()                         jQuery
+
+                        Notes :
+                           -> It is inadvisable to bind handlers to both the click and dblclick events for the same element. The sequence of events triggered
+                              varies from browser to browser, with some receiving two click events before the dblclick and others only one.
+                              Double-click sensitivity (maximum time between clicks that is detected as a double click) can vary by operating system and browser,
+                              and is often user-configurable.

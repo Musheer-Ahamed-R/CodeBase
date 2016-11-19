@@ -28,3 +28,4 @@ Notes :
             -> The .data() method will also perform some basic AUTO-CASTING if the value matches a recognized pattern.
             -> The data can then be accessed using .data() and ALSO using .attr(), since that is an attribute on the element. But, changes made to that Data using .data()
                is reflected only if we get data using the .data().
+      -> To use a handler for Multiple Events, use $( selector ).on( "event1 event2 ...", handler );         
