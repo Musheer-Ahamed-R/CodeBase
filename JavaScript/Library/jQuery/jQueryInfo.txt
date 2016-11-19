@@ -917,6 +917,34 @@ jQuery Functions     -
                            .mouseout([eventData], handler)     jQuery
                            .mouseout()                         jQuery
 
+      -> .mouseup()  -  -> Bind an event handler to the "mouseup" JavaScript event, or trigger that event on an element.
+                        -> The mouseup event is sent to an element when the mouse pointer is over the element, and the mouse button is Released.
+                        Syntax                                 Returns
+                           .mouseup( handler )                 jQuery
+                           .mouseup([eventData], handler)      jQuery
+                           .mouseup()                          jQuery
+
+                        Notes :
+                           -> The mouseup event is sent when any mouse button is clicked. To act only on specific buttons, we can use the event object's
+                              "which" property. Not all browsers support this property (Internet Explorer uses button instead), but jQuery normalizes
+                              the property so that it is safe to use in any browser. The value of which will be 1 for the left button, 2 for the middle button,
+                              or 3 for the right button.
+                           -> This event is primarily useful for ensuring that the primary button was used to begin a drag operation; if ignored,
+                              strange results can occur when the user attempts to use a context menu.
+                           -> If the user clicks on an element, drags away from it, and releases the button, this is still counted as a mouseup event.
+                              This sequence of actions is treated as a "Canceling" of the button press in most user interfaces, so it is usually better
+                              to use the click event unless we know that the mouseup event is preferable for a particular situation.
+
+      -> .mousedown()-  -> Bind an event handler to the "mousedown" JavaScript event, or trigger that event on an element.
+                        -> The mousedown event is sent to an element when the mouse pointer is over the element, and the mouse button is pressed.
+                        Syntax                                 Returns
+                           .mousedown( handler )               jQuery
+                           .mousedown([eventData], handler)    jQuery
+                           .mousedown()                        jQuery
+
+                        Notes :
+                           -> Same as above.
+
       -> .mousemove()-  -> Bind an event handler to the "mousemove" JavaScript event, or trigger that event on an element.
                         -> This does not allow Bubble.
                         Syntax                                 Returns
@@ -935,7 +963,10 @@ jQuery Functions     -
                               any significant processing, or if multiple handlers for the event exist, this can be a serious performance drain
                               on the browser. It is important, therefore, to optimize mousemove handlers as much as possible, and to unbind them
                               as soon as they are no longer needed.
-
+                           -> A common pattern is to bind the mousemove handler from within a mousedown hander, and to unbind it from a
+                              corresponding mouseup handler. If implementing this sequence of events, remember that the mouseup event might be sent
+                              to a different HTML element than the mousemove event was. To account for this, the mouseup handler should typically
+                              be bound to an element high up in the DOM tree, such as <body>.   
 
       -> .click()    -  -> Bind an event handler to the "click" JavaScript event, or trigger that event on an element.
                         Syntax                                 Returns     Notes
