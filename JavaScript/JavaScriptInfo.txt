@@ -54,6 +54,43 @@ Beginning Javascript        -     Data Types -
 
 
 
+
+Covering "this" keyword -
+
+      -> The Rules for the "this" keyword are all based on how we INVOKE the function!!. It's not the object that the method comes from, or the file, or the nesting or anything else,
+         though these can play a part in how you invoke a function.
+      -> Ultimately, though, the 6 rules center around JavaScript's function invocation pattern:
+            -> Raw function calls   -  -> When a function is invoked in this manner, we can classify the value of "this" as the default value, .
+                                       -> The default value is almost always the "global" object for the runtime - but not always.
+                                       -> This function call may or may not have a value for "this". Whether or not it has a value, depends on the runtime environment
+                                          in which the function is being invoked (and whether or not the "new" keyword is used)
+                                       -> To figure out what the value of "this" is, we need to know what environment in which the function is being invoked. The basic environments are:
+                                             -> A browser            -  global or window Object
+                                             -> A browser w/ strict  -  "undefined". Strict mode, then, does not provide direct access to the "global" or "window" object via "this".
+                                                mode enabled
+                                             -> NodeJS               -  global object.(A "global" object that works similarly to the "window" object )
+                                             -> NodeJS w/ strict     -  "undefined". Similarly to how the browser works, NodeJS' "strict mode" turns the default value of "this" in to an undefined value.
+                                                mode enabled
+
+
+            -> Method calls on objects -> Method Calls Assign "this" To The Object From Which They Are Called.
+                                       -> It truly is the INVOCATION pattern that determines the value of "this", and not just the location of the function definition.
+                                       -> There are some exceptions to this rule, of course. The most notable of the exceptions is the use of the "new" keyword,
+
+            -> Function calls with     -> When a function call is combined with the "new" keyword, it is said that the function is a "constructor function"(A function that intends
+               "new" keyword              to construct (or create) a new object instance), the value of "this" within that function becomes something new and unique.
+                                          It becomes an object instance, of the "type" that the function represents.
+                                       -> "this" inside a function called with "new", points to a NEWLY Created Instance of the Function.
+
+            -> Using .call and .apply  ->
+               to invoke a function
+            -> Function binding with   ->
+               .bind
+            -> ES6 Arrow Functions     -> 
+
+
+
+
 Disadvantages of JavaScript -
          -> Security        -     -> Since JavaScript runs on the Client Machine, a Malicious user could use JavaScript to do a Variety of things like Tracking Browser History,
                                      Stealing Passwords.
