@@ -82,11 +82,13 @@ Covering "this" keyword -
                                           It becomes an object instance, of the "type" that the function represents.
                                        -> "this" inside a function called with "new", points to a NEWLY Created Instance of the Function.
 
-            -> Using .call and .apply  ->
-               to invoke a function
+            -> Using .call and .apply  -> When using .call on a function, the first parameter will be the context("this"). Any additional parameters passed in will be pass as arguments to the original function
+               to invoke a function    -> The use of .apply is essentially the same as that of .call, except you pass in an array as the second parameter and that array gets passed through to the original object
+                                          as the list of arguments.
+
             -> Function binding with   ->
                .bind
-            -> ES6 Arrow Functions     -> 
+            -> ES6 Arrow Functions     ->
 
 
 
