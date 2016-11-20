@@ -32,6 +32,17 @@ Additional Notes
                         Function( Integer index, Element element )
 
 jQuery Functions     -
+
+      -> .extend()   -  -> Merge the contents of two or more objects together into the first object.
+                        -> If only one argument is supplied to $.extend(), this means the target argument was omitted. In this case, the jQuery object itself is assumed to be the target. By doing this, you can add new functions to the jQuery namespace.
+                           This can be useful for plugin authors wishing to add new methods to JQuery.
+                        -> Arguments that are null or undefined are ignored.
+                        -> If, however, you want to preserve both of the original objects, you can do so by passing an empty object as the target:
+                        -> Properties that are an object constructed via new MyCustomObject(args), or built-in JavaScript types such as Date or RegExp, are not re-constructed and will appear as plain Objects in the resulting object or array.
+                        Syntax                                             Returns
+                           $.extend(target[, object1][, objectN])          Object
+                           $.extend([deep], target, object1[, objectN])    Object
+
       -> .css()      -  -> Get the value of a computed style property for the FIRST element in the set of matched elements or set one or more CSS properties for every matched element.
                         -> This accepts RELATIVE values similar to .animate(). Relative values are a string starting with += or -= to increment or decrement the current value. based on its previous values.
                         Syntax                                 Returns     Notes
@@ -1175,4 +1186,79 @@ jQuery Functions     -
                            .triggerHandler(eventType[, extraParameters ])     jQuery      extraParameters - Array or PlainObject
                            .triggerHandler(event[, extraParameters ])         jQuery      event - A "jQuery.Event" object.
 
-      -> jQuery.proxy() ->                      
+//TODO -> jQuery.proxy()->
+
+      -> .ajaxStart()-  -> Register a handler to be called when the first Ajax request begins.
+                        -> Whenever an Ajax request is about to be sent, jQuery checks whether there are any other outstanding Ajax requests.
+                           If none are in progress, jQuery triggers the ajaxStart event.
+                        Syntax                                          Returns     Notes
+                           .ajaxStart( handler )                        jQuery      handler - Type: Function()
+
+                        Notes :
+                           -> If $.ajax() or $.ajaxSetup() is called with the global option set to false, the .ajaxStart() method will not fire.
+
+      -> .ajaxSend() -  -> Attach a function to be executed before an Ajax request is sent.
+                        -> Whenever an Ajax request is about to be sent, jQuery triggers the ajaxSend event
+                        Syntax                                          Returns     Notes
+                           .ajaxSend( handler )                         jQuery      handler - Type: Function( Event event, jqXHR jqXHR, PlainObject ajaxOptions )
+
+      -> .ajaxSuccess() -> Attach a function to be executed whenever an Ajax request completes successfully.
+                        -> We can get the returned Ajax contents by looking at xhr.responseXML or xhr.responseText for xml and html respectively.
+                        Syntax                                          Returns     Notes
+                           .ajaxSuccess( handler )                      jQuery      handler - Type: Function( Event event, jqXHR jqXHR, PlainObject ajaxOptions )
+
+      -> .ajaxError()-  -> Register a handler to be called when Ajax requests complete with an error.
+                        -> When an HTTP error occurs, the fourth argument (thrownError) receives the textual portion of the HTTP status, such as "Not Found" or "Internal Server Error."
+                        Syntax                                          Returns     Notes
+                           .ajaxSend( handler )                         jQuery      handler - Type: Function( Event event, jqXHR jqXHR, PlainObject ajaxSettings, String thrownError )
+
+                        Notes :
+                           -> This handler is not called for cross-domain script and cross-domain JSONP requests.
+
+      -> .ajaxComplete()-> Register a handler to be called when Ajax requests complete, regardless of Success or Failure of Ajax Request.
+                        Syntax                                          Returns     Notes
+                           .ajaxComplete( handler )                     jQuery      handler - Type: Function( Event event, jqXHR jqXHR, PlainObject ajaxOptions )
+
+      -> .ajaxStop() -  -> Register a handler to be called when all Ajax requests have completed.
+                        -> Whenever an Ajax request completes, jQuery checks whether there are any other outstanding Ajax requests. If none remain, jQuery triggers the ajaxStop event.
+                        -> The ajaxStop event is also triggered if the last outstanding Ajax request is cancelled by returning false within the beforeSend callback function.
+                        Syntax                                          Returns     Notes
+                           .ajaxStop( handler )                         jQuery      handler - Type: Function()
+
+      -> jQuery.ajaxSetup()
+                        -> Set default values for future Ajax requests. Its use is NOT RECOMMENDED.
+                        -> All subsequent Ajax calls using any function will use the new settings, unless overridden by the individual calls, until the next invocation of $.ajaxSetup().
+                        Syntax                                          Returns     Notes
+                           jQuery.ajaxSetup( options )                  PlainObject A set of key/value pairs that configure the default Ajax request. All options are optional.
+
+                        Notes :
+                           -> The settings specified here will affect all calls to $.ajax or Ajax-based derivatives such as $.get().
+                              This can cause undesirable behavior since other callers (for example, plugins) may be expecting the normal default settings.
+                              For that reason we strongly recommend against using this API. Instead, set the options explicitly in the call or define a simple plugin to do so.
+
+      -> jQuery.ajax()  -> Perform an asynchronous HTTP (Ajax) request.
+                        Syntax                                          Returns     Notes
+                           jQuery.ajax( url [, settings ] )             jqXHR       url - A string containing the URL to which the request is sent.
+                           jQuery.ajax( [settings ] )                   jqXHR       settings - PlainObject
+
+                           settings key-value :
+                                 param          Notes
+                             *-> accepts     -  Type : PlainObject.
+                              -> async       -  Type :Boolean. Cross-domain requests and dataType: "jsonp" requests do not support synchronous operation.
+                                                The synchronous requests may temporarily lock the browser, disabling any actions while the request is active.
+                                                the use of async: false with jqXHR ($.Deferred) is deprecated; you must use the success/error/complete callback options
+                                                instead of the corresponding methods of the jqXHR object such as jqXHR.done().
+                              -> beforeSend  -  Type :  Function( jqXHR jqXHR, PlainObject settings ). A pre-request callback function that can be used to modify the jqXHR object before it is sent.
+                                                Use this to set custom headers, etc. This is an Ajax Event. Returning false in the beforeSend
+                                                function will cancel the request. The beforeSend option will be called regardless of the type of request.
+                             *-> cache       -  Type: Boolean. If set to false, it will force requested pages not to be cached by the browser. Setting cache to false will only work correctly with HEAD and GET requests.
+                              -> complete    -  Type: Function( jqXHR jqXHR, String textStatus ). A function to be called when the request finishes (after success and error callbacks are executed).
+                                                The complete setting can accept an array of functions. Each function will be called in turn.
+                                                The Status of the request can be ("success", "notmodified", "nocontent", "error", "timeout", "abort", or "parsererror").
+                              -> contents    -  Type: PlainObject. An object of string/regular-expression pairs that determine how jQuery will parse the response, given its content type.
+                              -> contentType -  Type: Boolean or String
+
+
+
+                        Notes :
+                           -> A default can be set for any option with $.ajaxSetup().

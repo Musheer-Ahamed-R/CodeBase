@@ -30,4 +30,5 @@ Notes :
                is reflected only if we get data using the .data().
       -> To use a handler for Multiple Events, use $( selector ).on( "event1 event2 ...", handler );
       -> if document.write is used After the DOM has been Loaded, then it OverWrites the Entire Dom.
-      
+      -> When we are Creating Html Elements on the Fly for (e.g. .append, .prepend etc..) along with the String, we can pass in an Object Containing
+         the Attributes for Name and its Value to be Inserted for that Element.(e.g. $("<div><div>", {class="someClass"}).appendTo(target);
