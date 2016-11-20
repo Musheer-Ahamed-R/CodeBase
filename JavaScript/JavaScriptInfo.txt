@@ -86,11 +86,15 @@ Covering "this" keyword -
                to invoke a function    -> The use of .apply is essentially the same as that of .call, except you pass in an array as the second parameter and that array gets passed through to the original object
                                           as the list of arguments.
 
-            -> Function binding with   ->
-               .bind
-            -> ES6 Arrow Functions     ->
+            -> Function binding with   -> The major difference between .bind and .call / .apply, is that .bind will not invoke the function in question. Instead, it returns a new function to you.
+               .bind                   -> Invoking this new function(No Matter how it is invoked) will in turn invoke the original function with the context that was specified in the .bind call.
+                                       -> Even if the Bounded Function reference is passed to another variable, The Context Object will NOT CHANGE when newly assigned variable is invoked.
+                                       -> This is true for all of the patterns, including the use of .call and .apply.
+                                       -> If we wish to permanently override the context of a function on an object, we can do this by assigning the result of the ".bind" call to the original method name on that object.
 
-
+            -> ES6 Arrow Functions     -> When we write an arrow function in JavaScript, the value of "this" is said to be determined through "lexical analysis". (i.e. that "this" comes from the surrounding code,
+                                          where the function is called.)
+                                       -> The arrow function syntax uses the knowledge of where the code lives to see that it should use the value of "this" from the PARENT Function.    
 
 
 Disadvantages of JavaScript -
