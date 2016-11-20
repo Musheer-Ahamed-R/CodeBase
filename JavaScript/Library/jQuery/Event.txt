@@ -22,10 +22,10 @@ WorkFlow             -  -> When an Event is Triggered on an Element, it DOES NOT
 
 
 Event handler/       -  -> Event handler is an object that implements the EventListener interface and provides an EventListener.handleEvent() callback method. Event handlers are language-specific.
-Event listener          -> This object is a normalized subset of data provided by the browser; the browser's unmodified native event object is available in event.originalEvent.
+Event listener          -> This Object is a normalized subset of data provided by the browser; the browser's unmodified native event object is available in event.originalEvent.
                         -> Event handlers are invoked in the context of a particular object/Matching Selector(Incase of Delegates) (the current event target)(i.e the Event handler "this" value is set to E's currentTarget and
                            are also provided with the event object itself(as Parameter).
-                        -> For directly bound events, "this"(e.currenttarget) is the element where the event was attached and for delegated events "this"(e.currenttarget) is an element Matching Selector.
+                       *-> For directly bound events, "this"(e.currenttarget) is the element where the event was attached and for delegated events "this"(e.currenttarget) is an element Matching Selector.
                         -> When a Function is invoked through onclick, the "this" does not point to the Current Element, but instead it points to its Usual value.
                         -> They are invoked with one argument, the value of which is the Event object E.
                         -> When an Event Occurs on an Element and that Element has that Event Binded to it, then an Event handler(basically a JavaScript Function) is used/Called
@@ -41,7 +41,7 @@ Event Delegations    -  -> DOM event delegation is a mechanism of responding to 
 
 Direct and delegated    -> If selector is omitted or is null, the event handler is referred to as Direct or directly-bound. The handler is called every time an event occurs on the selected elements,
 events                      whether it occurs directly on the element or bubbles from a descendant (inner) element.
-                        -> When a selector is provided, the event handler is referred to as delegated. The handler is not called when the event occurs directly on the bound element,
+                       *-> When a selector is provided, the event handler is referred to as delegated. The handler is not called when the event occurs directly on the bound element,
                            but only for descendants (inner elements) that match the selector.
                         -> Event handlers are bound only to the currently selected elements; they must exist at the time your code makes the call to .on().
                            To ensure the elements are present and can be selected, place scripts after the elements in the HTML markup or perform event binding inside a document ready handler.
