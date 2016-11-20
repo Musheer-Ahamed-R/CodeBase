@@ -1122,7 +1122,7 @@ jQuery Functions     -
                         -> When multiple filtering arguments are given, all of the arguments provided must match for the event handler to be removed.
                         -> When writing code that will be used as a plugin, or simply when working with a large code base, best practice is to attach and remove events using namespaces so that the code
                            will not inadvertently remove event handlers attached by other code.
-                        -> At minimum, either a namespace or event name must be provided.   
+                        -> At minimum, either a namespace or event name must be provided.
                         -> To remove specific delegated event handlers, provide a selector argument. The selector string must exactly match the one passed to .on() when the event handler was attached.
                            To remove all delegated events from an element without removing non-delegated events, use the special value "**".
                         Syntax                                                Returns
@@ -1139,7 +1139,40 @@ jQuery Functions     -
                            .one( events[, selector][, data ])                 jQuery
 
 
-      -> .trigger()  -  -> Execute all handlers and behaviors attached to the matched elements for the given event type.
-                        Syntax                                          Returns
-                           .trigger(eventType[, extraParameters ])      jQuery
-                           .trigger(eventType[, extraParameters ])      jQuery
+      -> .trigger()  -  -> Execute all handlers and BEHAVIORS attached to the matched elements for the given event type.
+                        -> To trigger handlers bound via jQuery without also triggering the native event, use .triggerHandler() instead.
+                        -> .trigger()ed events bubble up the DOM tree.
+                        -> The event object is always passed as the first parameter to an event handler. An array of arguments can also be passed to the .trigger() call, and these parameters will be passed
+                           along to the handler as well following the event object(Second Third param etc..). As of jQuery 1.6.2, single string or numeric argument can be passed without being wrapped in an array.
+                        -> Note the difference between the extra parameters passed here and the eventData parameter to the .on() method. Both are mechanisms for passing information to an event handler,
+                           but the extraParameters argument to .trigger() allows information to be determined AT THE TIME the event is triggered, while the eventData argument to .on() requires
+                           the information to be already computed at the time the handler is bound.
+                        Syntax                                          Returns     Notes
+                           .trigger(eventType[, extraParameters ])      jQuery      extraParameters - Array or PlainObject
+                           .trigger(event[, extraParameters ])          jQuery      event - A "jQuery.Event" object.
+
+                        Notes :
+                           -> When triggering with a plain object that is not array-like but still contains a length property, you should pass the object in an array (e.g. [ { length: 1 } ]).
+                           -> To pass arbitrary data through an event object:
+                                 var event = jQuery.Event( "logged" );
+                                 event.user = "foo";
+                                 event.pass = "bar";
+                                 $( "body" ).trigger( event );
+                           -> For both plain objects and DOM objects other than window, if a triggered event name matches the name of a property on the object, jQuery will attempt to invoke(by default) the property as a method
+                              if no event handler calls event.preventDefault(). If this behavior is not desired, use .triggerHandler() instead.
+
+      -> .triggerHandler()
+                        -> Execute all handlers attached to an element for an event.
+                        -> It will also execute(by default) any method called on{eventType}() (PropertyName) found on the element.
+                        -> The behavior of this method is similar to .trigger(), with the following exceptions:
+                              -> The .triggerHandler( "event" ) method will not call .event() on the element it is triggered on. This means .triggerHandler( "submit" ) on a form will not call .submit() on the form.
+                              -> While .trigger() will operate on all elements matched by the jQuery object, .triggerHandler() only affects the first matched element.
+                              -> Events triggered with .triggerHandler() do not bubble up the DOM hierarchy; if they are not handled by the target element directly, they do nothing.
+                              -> Instead of returning the jQuery object (to allow chaining), .triggerHandler() returns whatever value was returned by the last handler it caused to be executed.
+                                 If no handlers are triggered, it returns undefined
+
+                        Syntax                                                Returns     Notes
+                           .triggerHandler(eventType[, extraParameters ])     jQuery      extraParameters - Array or PlainObject
+                           .triggerHandler(event[, extraParameters ])         jQuery      event - A "jQuery.Event" object.
+
+      -> jQuery.proxy() ->                      
