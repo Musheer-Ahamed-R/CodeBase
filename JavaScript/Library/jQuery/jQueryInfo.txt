@@ -1186,7 +1186,15 @@ jQuery Functions     -
                            .triggerHandler(eventType[, extraParameters ])     jQuery      extraParameters - Array or PlainObject
                            .triggerHandler(event[, extraParameters ])         jQuery      event - A "jQuery.Event" object.
 
-//TODO -> jQuery.proxy()->
+      -> jQuery.proxy() -> Takes a function and returns a new one that will always have a particular context.
+                        -> This method is most useful for attaching event handlers to an element where the context is pointing back to a different object.
+                        -> when the context is null or undefined the proxied function will be called with the same this object as the proxy was called with.
+                           This allows $.proxy() to be used to partially apply the arguments of a function Without changing the context.
+                        Syntax                                                         Returns     Notes
+                           jQuery.proxy( function, context )                           Function    context - The object to which the context (this) of the function should be set.
+                           jQuery.proxy( context, name )                               Function
+                           jQuery.proxy( function, context [, additionalArguments ] )  Function
+                           jQuery.proxy( context, name [, additionalArguments ] )      Function
 
       -> .ajaxStart()-  -> Register a handler to be called when the first Ajax request begins.
                         -> Whenever an Ajax request is about to be sent, jQuery checks whether there are any other outstanding Ajax requests.

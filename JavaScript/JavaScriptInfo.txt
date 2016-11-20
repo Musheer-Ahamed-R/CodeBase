@@ -94,7 +94,7 @@ Covering "this" keyword -
 
             -> ES6 Arrow Functions     -> When we write an arrow function in JavaScript, the value of "this" is said to be determined through "lexical analysis". (i.e. that "this" comes from the surrounding code,
                                           where the function is called.)
-                                       -> The arrow function syntax uses the knowledge of where the code lives to see that it should use the value of "this" from the PARENT Function.    
+                                       -> The arrow function syntax uses the knowledge of where the code lives to see that it should use the value of "this" from the PARENT Function.
 
 
 Disadvantages of JavaScript -
