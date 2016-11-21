@@ -1334,11 +1334,33 @@ jQuery Functions     -
       -> .delay()    -  -> Set a timer to delay execution of "Subsequent" items in the queue.
                         -> The .delay() method is best for delaying between queued jQuery effects. Because it is limited and it doesn't, for example, offer a way to cancel the delay.
                         -> Only subsequent events in a queue are delayed. For example this will not delay the no-arguments forms of .show() or .hide() which do not use the effects queue.
+
+
+
                         Syntax                                          Returns
                            .delay( duration [, queueName ] )            jQuery
 
                         Notes :
                            -> .delay() is not a replacement for JavaScript's native setTimeout function, which may be more appropriate for certain use cases.
+
+      -> .animate()  -  -> Perform a custom animation of a set of CSS properties.
+                        -> The .animate() method allows us to create animation effects on any NUMERIC CSS property. The only required parameter is a plain object of CSS properties.
+                           This object is similar to the one that can be sent to the .css() method, except that the range of properties is more restrictive.
+                        -> In addition to numeric values, each property can take the strings 'show', 'hide', and 'toggle'.  In order to use jQuery's built-in toggle state tracking, the 'toggle' keyword
+                           must be Consistently given as the value of the property being animated.(e.g height: "toggle")
+                        -> The callback is executed ONCE per matched element, not once for the animation as a whole. Use the .promise() method to obtain a promise to which you can attach callbacks
+                           that fire once for an animated set of any size, including zero elements.
+                        Syntax                                                      Returns
+                           .animate(properties[, duration][, easing][, complete])   jQuery
+                           .animate(properties, options )                           jQuery
+
+                        Notes
+                           -> Most properties that are non-numeric cannot be animated using basic jQuery functionality.
+                           -> Shorthand CSS properties (e.g. font, background, border) are not fully supported(i.e. 'font' instead of 'font-size' is Not Supported.)
+                           -> Unlike shorthand animation methods such as .slideDown() and .fadeIn(), the .animate() method does not make hidden elements visible
+                              as part of the effect(effects such as Changing Element height, width etc does not show the Element if already Hidden).
+                           -> Directional properties (top, right, bottom, left) have no discernible effect on elements if their  position style property is "static", which it is by default.
+                           -> Look Documentation for "Step" Function. 
 
       -> .ajaxStart()-  -> Register a handler to be called when the first Ajax request begins.
                         -> Whenever an Ajax request is about to be sent, jQuery checks whether there are any other outstanding Ajax requests.
