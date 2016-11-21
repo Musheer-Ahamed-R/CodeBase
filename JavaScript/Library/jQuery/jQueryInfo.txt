@@ -1273,16 +1273,34 @@ jQuery Functions     -
       -> .queue()    -  -> Show the queue of functions to be executed on the matched elements or Manipulate the queue of functions to be executed, once for each matched element.
                         -> Queues allow a sequence of actions to be called on an element asynchronously, without halting program execution. The typical example of this is
                            calling multiple animation methods(chaining) on an element.
+                        -> Also, a Queue of actions for one Element DOES NOT STOP a Queue of Actions of Another Element from Executing.
                         -> The functions/Operations in the Queue are executed the same way a Normal Queue works.(i.e One after the Other)
-                        -> Every element can have one to many queues of functions attached to it by jQuery. In most applications, only one queue (called fx) is used.
-
-                        Syntax                                             Returns     Notes
-                           .queue( [queueName ] )                          Array       queueName - A string containing the name of the queue. Defaults to fx, the standard effects queue.
+                        -> Every Element can have one to many queues of functions attached to it by jQuery. In most applications, only one queue (called fx) is used.
+                           Thus, every Element has its OWN fx Queue to handle a sequence of actions chained together.
+                        -> Calling .queue() with a callback is useful, as it allows us to place a new function at the end of the queue(Not to the Very End, but to the Current End of the Queue).
+                           The callback function is executed once for each element in the jQuery set. This feature is similar to providing a callback function with an animation method,
+                           but does not require the callback to be given at the time the animation is performed.
+                        -> If we want the call to some actions(animations) to be executed in parallel(not as in Queue), then set queue option as false for that particular action(animations method).
+                        Syntax                                          Returns     Notes
+                           .queue( [queueName ] )                       Array       queueName - A string containing the name of the queue. Defaults to fx, the standard effects queue.
                                 .queue( [queueName ] )
-                           .queue( [queueName ], newQueue )                jQuery
+                           .queue( [queueName ], newQueue )             jQuery      newQueue - An array of functions to replace the current queue contents(except those added by this method(before this call) and
+                                                                                               the first action amongst the action(s) to be replaced.
                                 .queue( [queueName ], newQueue )
-                                .queue( [queueName ], callback )
+                                .queue( [queueName ], callback )                    callback - Function( Function next() ). The new function to add to the queue,
+                                                                                               with a function to call(passed as first parameter) that will dequeue the next item.
 
+                        Notes :
+                           -> When adding a function with .queue(), we should ensure that .dequeue() is eventually called so that the next function in line dequeued/executed.
+                              The function that's called is passed another function as the first argument. When called, this automatically dequeues the next item and keeps the queue moving.
+                           -> The length property of jQuery object from .queue() also includes the Currently Executing action(present as "inprogress" in the queue) in the count(i.e. not just those in the Queue).
+                           -> NO-arguments forms of .show() or .hide() DO NOT use the effects queue(fx queue).
+
+      -> .dequeue()  -  -> Execute the next function on the queue for the matched elements.
+                        -> When .dequeue() is called, the next function on the queue is removed from the queue, and then executed. This function should in turn (directly or indirectly) cause .dequeue() to be called,
+                           so that the sequence can continue.
+                        Syntax                                          Returns
+                           .dequeue( [queueName ] )                     jQuery
 
       -> .clearQueue()  -> Remove from the queue all items that have not yet been run.
                         -> When the .clearQueue() method is called, all functions on the queue that have not been executed are removed from the queue.
@@ -1293,13 +1311,34 @@ jQuery Functions     -
                            .clearQueue( [queueName ] )                  jQuery
 
       -> .stop()     -  -> Stop the currently-running animation on the matched elements.
-                        Syntax                                          Returns
-                           .stop([clearQueue ] [, jumpToEnd ] )         jQuery
-                           .stop([queue][,clearQueue][, jumpToEnd])     jQuery
+                        -> Callback functions are not called.
+                        -> If the jumpToEnd argument is provided with a value of true, the current animation stops, but the CURRENT element is immediately given its target values for each CSS property.
+                        -> Stopping a toggled animation prematurely with .stop() will trigger jQuery's internal effects tracking. (i.e. Subsequent toggle actions will start from its initial position(NOT at a new "half-way" state due to premature Stopping]).
+                        -> We can create a nice fade effect without the common problem of multiple queued animations by adding .stop(true, true) to the chain:
+                           e.g. $( "#hoverme-stop-2" ).hover(function() {
+                                   $( this ).find( "img" ).stop( true, true ).fadeOut();
+                                 }, function() {
+                                   $( this ).find( "img" ).stop( true, true ).fadeIn();
+                                 });
+                        Syntax                                          Returns     Notes
+                           .stop([clearQueue ] [, jumpToEnd ] )         jQuery      jumpToEnd - A Boolean indicating whether to complete the current animation immediately.
+                           .stop([queue][,clearQueue][, jumpToEnd])     jQuery      clearQueue - A Boolean indicating whether to remove queued ANIMATION as well.
 
-      -> .delay()    -  -> Set a timer to delay execution of subsequent items in the queue.
+      -> .finish()   -  -> When .finish() is called on an element, the currently-running animation and all queued animations (if any) immediately stop and their CSS properties set to their target values.
+                           All queued animations are removed.
+                        -> The .finish() method is similar to .stop(true, true) in that it clears the queue and the current animation jumps to its end value. It differs, however, in that .finish() also
+                            causes the CSS property of ALL queued animations to jump to their end values, as well.
+                        Syntax                                          Returns
+                           .finish( [queue ] )                          jQuery
+
+      -> .delay()    -  -> Set a timer to delay execution of "Subsequent" items in the queue.
                         -> The .delay() method is best for delaying between queued jQuery effects. Because it is limited and it doesn't, for example, offer a way to cancel the delay.
-                        -> .delay() is not a replacement for JavaScript's native setTimeout function, which may be more appropriate for certain use cases.
+                        -> Only subsequent events in a queue are delayed. For example this will not delay the no-arguments forms of .show() or .hide() which do not use the effects queue.
+                        Syntax                                          Returns
+                           .delay( duration [, queueName ] )            jQuery
+
+                        Notes :
+                           -> .delay() is not a replacement for JavaScript's native setTimeout function, which may be more appropriate for certain use cases.
 
       -> .ajaxStart()-  -> Register a handler to be called when the first Ajax request begins.
                         -> Whenever an Ajax request is about to be sent, jQuery checks whether there are any other outstanding Ajax requests.
