@@ -388,34 +388,6 @@ jQuery Functions     -
                         Syntax                                 Returns     Notes
                            .detach( [selector ] )              jQuery      The Selector should be the MAIN Element amongst the List and NOT a Child of that Main Element.
 
-      -> .slideUp()  -  -> Hide the matched elements with a sliding motion.
-                        -> The .slideUp() method animates the height of the matched elements. This causes lower parts of the page to slide up,
-                           appearing to conceal the items. Once the height reaches 0 (or, if set, to whatever the CSS min-height property is),
-                           the display style property is set to none to ensure that the element no longer affects the layout of the page.
-                        Syntax                                             Returns     Notes
-                           .slideUp([duration] [, complete])               jQuery
-                           .slideUp( options )                             jQuery      options - Plain Object. Refer Documentation for other Properties.
-                           .slideUp([duration][, easing][, complete])      jQuery
-
-      -> .slideDown()   -> Display the matched elements with a sliding motion.
-                        -> The .slideDown() method animates the height of the matched elements. This causes lower parts of the page to slide down, making way for the revealed items.
-                        Syntax                                             Returns     Notes
-                           .slideDown([duration][, complete])              jQuery
-                           .slideDown( options )                           jQuery      options - Plain Object. Refer Documentation for other Properties.
-                           .slideDown([duration][, easing][, complete])    jQuery
-
-                        Notes
-                           -> complete - A function to call once the animation is complete, called ONCE PER MATCHED Element.
-                           -> 'fast' - 200 and 'slow' - 600 milliseconds. default is 400 milliseconds.
-
-      -> .slideToggle() -> Display or hide the matched elements with a sliding motion.
-                        -> The .slideToggle() method animates the height of the matched elements. This causes lower parts of the page to slide up or down,
-                           appearing to reveal or conceal the items.
-                        Syntax
-                           .slideToggle([duration][, complete])
-                           .slideToggle( options )
-                           .slideToggle([duration][, easing][, complete])
-
       -> .addClass() -  -> Adds the specified class(es) to each element in the set of matched elements.
                         -> This method does not replace a class. It simply adds the class, appending it to any which may already be assigned to the elements.
                         Syntax                                 Returns
@@ -1197,7 +1169,137 @@ jQuery Functions     -
                            jQuery.proxy( context, name [, additionalArguments ] )      Function
 
                         Notes :
-                           -> It is better to use .bind() instead of this method.   
+                           -> It is better to use .bind() instead of this method.
+
+      -> .show()     -  -> Display the matched elements.
+                        -> This is roughly equivalent to calling .css( "display", "block"), except that the display property is restored to whatever it was initially.
+                           If an element has a display value of inline, then is hidden and shown, it will once again be displayed inline.
+                        -> When a duration, a plain object, or a "complete" function is provided, .show() becomes an animation method.
+                           The .show() method animates the width, height, and opacity of the matched elements simultaneously.
+                        Syntax                                          Returns     Notes
+                           .show()                                      jQuery
+                           .show( [duration ] [, complete ] )           jQuery      complete - A function to call once the animation is complete, called once per matched element.
+                           .show( options )                             jQuery
+                           .show( duration[, easing][, complete ])      jQuery
+
+                        Notes :
+                           -> If using !important in your styles, such as display: none !important, it is necessary to override the style using .css( "display", "block !important")
+                              should you wish for .show() to function correctly.
+
+      -> .hide()     -  -> Hide the matched elements.
+                        -> This is roughly equivalent to calling .css( "display", "block"), except that the display property is restored to whatever it was initially.
+                           If an element has a display value of inline, then is hidden and shown, it will once again be displayed inline.
+                        -> When a duration, a plain object, or a "complete" function is provided, .hide() becomes an animation method.
+                           The .hide() method animates the width, height, and opacity of the matched elements simultaneously.
+                        Syntax                                          Returns     Notes
+                           .hide()                                      jQuery
+                           .hide( [duration ] [, complete ] )           jQuery      complete - A function to call once the animation is complete, called once per matched element.
+                           .hide( options )                             jQuery
+                           .hide( duration[, easing][, complete ])      jQuery
+
+                        Notes :
+                           -> The .hide() is fired immediately and will override the animation queue if no duration or a duration of 0 is specified.
+
+      -> .toggle()   -  -> Display or hide the matched elements.
+                        -> The matched elements will be revealed or hidden immediately, with no animation, by changing the CSS display property.
+                        -> The display property is saved and restored as needed. If an element has a display value of inline, then is hidden and shown,
+                           it will once again be displayed inline.
+                        -> When a duration, a plain object, or a "complete" function is provided, .hide() becomes an animation method.
+                           The .hide() method animates the width, height, and opacity of the matched elements simultaneously.
+                        Syntax                                          Returns     Notes
+                           .toggle( [duration ] [, complete ] )         jQuery      complete - A function to call once the animation is complete, called once per matched element.
+                           .toggle( options )                           jQuery
+                           .toggle( duration[, easing][, complete])     jQuery
+                           .toggle( display )                           jQuery
+
+      -> .slideUp()  -  -> Hide the matched elements with a sliding motion.
+                        -> The .slideUp() method animates the height of the matched elements. This causes lower parts of the page to slide up,
+                           appearing to conceal the items. Once the height reaches 0 (or, if set, to whatever the CSS min-height property is),
+                           the display style property is set to none to ensure that the element no longer affects the layout of the page.
+                        Syntax                                             Returns     Notes
+                           .slideUp([duration] [, complete])               jQuery
+                           .slideUp( options )                             jQuery      options - Plain Object. Refer Documentation for other Properties.
+                           .slideUp([duration][, easing][, complete])      jQuery
+
+      -> .slideDown()   -> Display the matched elements with a sliding motion.
+                        -> The .slideDown() method animates the height of the matched elements. This causes lower parts of the page to slide down, making way for the revealed items.
+                        Syntax                                             Returns     Notes
+                           .slideDown([duration][, complete])              jQuery
+                           .slideDown( options )                           jQuery      options - Plain Object. Refer Documentation for other Properties.
+                           .slideDown([duration][, easing][, complete])    jQuery
+
+                        Notes
+                           -> complete - A function to call once the animation is complete, called ONCE PER MATCHED Element.
+                           -> 'fast' - 200 and 'slow' - 600 milliseconds. default is 400 milliseconds.
+
+      -> .slideToggle() -> Display or hide the matched elements with a sliding motion.
+                        -> The .slideToggle() method animates the height of the matched elements. This causes lower parts of the page to slide up or down,
+                           appearing to reveal or conceal the items.
+                        Syntax
+                           .slideToggle([duration][, complete])
+                           .slideToggle( options )
+                           .slideToggle([duration][, easing][, complete])
+
+      -> .fadeIn()   -  -> Display the matched elements by fading them to opaque.
+                        -> The .fadeIn() method animates the opacity of the matched elements. It is similar to the .fadeTo() method but that method
+                           does not unhide the element and can specify the final opacity level.
+                        Syntax                                             Returns     Notes
+                           .fadeIn([duration][, complete])                 jQuery      complete - A function to call once the animation is complete, called once per matched element.
+                           .fadeIn( options )                              jQuery
+                           .fadeIn([duration][, easing][, complete ])      jQuery
+
+      -> fadeOut()   -  -> Hide the matched elements by fading them to transparent.
+                        -> The .fadeOut() method animates the opacity of the matched elements. Once the opacity reaches 0, the display style property is set to none,
+                           so the element no longer affects the layout of the page.
+                        Syntax                                             Returns     Notes
+                           .fadeIn([duration][, complete])                 jQuery      complete - A function to call once the animation is complete, called once per matched element.
+                           .fadeIn( options )                              jQuery
+                           .fadeIn([duration][, easing][, complete ])      jQuery
+
+      -> .fadeTo()   -  -> Adjust the opacity of the matched elements.
+                        -> The .fadeTo() method animates the opacity of the matched elements. It is similar to the .fadeIn() method but that method unhides the element and always fades to 100% opacity.
+                        -> With duration set to 0, this method just changes the opacity CSS property, so .fadeTo( 0, opacity ) is the same as .css( "opacity", opacity ).
+                        Syntax                                             Return      Notes
+                           .fadeTo(duration,opacity[, complete ] )         jQuery      complete - A function to call once the animation is complete, called once per matched element.
+                           .fadeTo(duration,opacity[,easing][, complete])  jQuery
+
+      -> fadeToggle()-  -> Display or hide the matched elements by animating their opacity.
+                        -> The .fadeToggle() method animates the opacity of the matched elements. When called on a visible element, the element's display style property is set to none
+                           once the opacity reaches 0, so the element no longer affects the layout of the page.
+                        Syntax                                             Returns     Notes
+                           .fadeToggle([duration][, easing][, complete ])  jQuery      complete - A function to call once the animation is complete, called once per matched element.
+                           .fadeToggle( options )                          jQuery
+
+      -> .queue()    -  -> Show the queue of functions to be executed on the matched elements or Manipulate the queue of functions to be executed, once for each matched element.
+                        -> Queues allow a sequence of actions to be called on an element asynchronously, without halting program execution. The typical example of this is
+                           calling multiple animation methods(chaining) on an element.
+                        -> The functions/Operations in the Queue are executed the same way a Normal Queue works.(i.e One after the Other)
+                        -> Every element can have one to many queues of functions attached to it by jQuery. In most applications, only one queue (called fx) is used.
+
+                        Syntax                                             Returns     Notes
+                           .queue( [queueName ] )                          Array       queueName - A string containing the name of the queue. Defaults to fx, the standard effects queue.
+                                .queue( [queueName ] )
+                           .queue( [queueName ], newQueue )                jQuery
+                                .queue( [queueName ], newQueue )
+                                .queue( [queueName ], callback )
+
+
+      -> .clearQueue()  -> Remove from the queue all items that have not yet been run.
+                        -> When the .clearQueue() method is called, all functions on the queue that have not been executed are removed from the queue.
+                        -> When used without an argument, .clearQueue() removes the remaining functions from fx, the standard effects queue.
+                        -> In this way it is similar to .stop(true). However, while the .stop() method is meant to be used only with animations, .clearQueue() can also be used
+                           to remove any function that has been added to a generic jQuery queue with the .queue() method.
+                        Syntax                                          Returns
+                           .clearQueue( [queueName ] )                  jQuery
+
+      -> .stop()     -  -> Stop the currently-running animation on the matched elements.
+                        Syntax                                          Returns
+                           .stop([clearQueue ] [, jumpToEnd ] )         jQuery
+                           .stop([queue][,clearQueue][, jumpToEnd])     jQuery
+
+      -> .delay()    -  -> Set a timer to delay execution of subsequent items in the queue.
+                        -> The .delay() method is best for delaying between queued jQuery effects. Because it is limited and it doesn't, for example, offer a way to cancel the delay.
+                        -> .delay() is not a replacement for JavaScript's native setTimeout function, which may be more appropriate for certain use cases.
 
       -> .ajaxStart()-  -> Register a handler to be called when the first Ajax request begins.
                         -> Whenever an Ajax request is about to be sent, jQuery checks whether there are any other outstanding Ajax requests.
