@@ -140,7 +140,8 @@ Notes :
       Thus, if we add an Element LATER, which matches the Selector Expression used EARLIER to create an Event on the Matched Elements,
       the Newly Added Element WILL NOT have that EVENT BINDED to it. This is where Event Delegation comes into handy.
    -> Most/All of the Event Methods in jQuery Implicitly points to the "on" method.
-
+   -> To find which event handlers are registered over an Element, use jQuery._data( rawDOMElement, "events" ). This only works if we have attached the Event Handler using jQuery. 
+elem should be an HTML Element, not a jQuery object, or selector.
 
 Standard events      -  -> These events are defined in official Web specifications, and should be common across browsers.
                         -> We can also find information about the event based on the Object sent with each Event Type.

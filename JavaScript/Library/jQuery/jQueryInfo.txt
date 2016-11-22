@@ -1114,6 +1114,9 @@ jQuery Functions     -
                            .off( event )                                      jQuery
                            .off()                                             jQuery
 
+                        Notes :
+                           -> This method along with "on" method can be used to unbind any(multiple no) Existing Event of a Particular Type on an Element and Add a New Event to that Element.
+                           
       -> .one()      -  -> Attach a handler to an event for the elements. The handler is executed at most once per element per event type.
                         -> The .one() method is identical to .on(), except that the handler for a given element and event type is unbound after its first invocation
                         Syntax                                                Returns
@@ -1360,7 +1363,7 @@ jQuery Functions     -
                            -> Unlike shorthand animation methods such as .slideDown() and .fadeIn(), the .animate() method does not make hidden elements visible
                               as part of the effect(effects such as Changing Element height, width etc does not show the Element if already Hidden).
                            -> Directional properties (top, right, bottom, left) have no discernible effect on elements if their  position style property is "static", which it is by default.
-                           -> Look Documentation for "Step" Function. 
+                           -> Look Documentation for "Step" Function.
 
       -> .ajaxStart()-  -> Register a handler to be called when the first Ajax request begins.
                         -> Whenever an Ajax request is about to be sent, jQuery checks whether there are any other outstanding Ajax requests.
