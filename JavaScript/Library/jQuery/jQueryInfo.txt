@@ -43,6 +43,12 @@ jQuery Functions     -
                            $.extend(target[, object1][, objectN])          Object
                            $.extend([deep], target, object1[, objectN])    Object
 
+      -> jQuery.inArray()
+                        -> Search for a specified value within an array and return its index (or -1 if not found).
+                        -> The $.inArray() method is similar to JavaScript's native .indexOf(). But, the comparison between values is strict(!== or ===).
+                        Syntax                                             Returns
+                           jQuery.inArray( value, array [, fromIndex ] )   Number
+
       -> .css()      -  -> Get the value of a computed style property for the FIRST element in the set of matched elements or set one or more CSS properties for every matched element.
                         -> This accepts RELATIVE values similar to .animate(). Relative values are a string starting with += or -= to increment or decrement the current value. based on its previous values.
                         Syntax                                 Returns     Notes
@@ -1116,7 +1122,7 @@ jQuery Functions     -
 
                         Notes :
                            -> This method along with "on" method can be used to unbind any(multiple no) Existing Event of a Particular Type on an Element and Add a New Event to that Element.
-                           
+
       -> .one()      -  -> Attach a handler to an event for the elements. The handler is executed at most once per element per event type.
                         -> The .one() method is identical to .on(), except that the handler for a given element and event type is unbound after its first invocation
                         Syntax                                                Returns
