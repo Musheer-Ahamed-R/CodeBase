@@ -38,6 +38,109 @@ In-Built Functions -
                              Compatibility :
                                  PostgreSQL
 
+      ASCII         -     -> Returns the ASCII Code of the Given Character Expression.
+                             Syntax
+                                 ASCII(Character_Expression)
+                             Compatibility :
+                                 SQLServer
+
+      CHAR          -     -> Converts an Int ASCII Code to a Character Expression(Reverse of ASCII function).
+                             Syntax
+                                 CHAR(Integer_Expression)
+                             Compatibility :
+                                 SQLServer
+
+      LTRIM         -     -> Removes Blanks on the Left hand-side of the Character Expression.
+                             Syntax
+                                 LTRIM(Character_Expression)
+                             Compatibility :
+                                 SQLServer
+
+      RTRIM         -     -> Removes Blanks on the Right hand-side of the Character Expression.
+                             Syntax
+                                 RTRIM(Character_Expression)
+                             Compatibility :
+                                 SQLServer
+
+      LOWER        -     -> Converts all the Character in the given Character Expression to LowerCase Letters.
+                            Syntax
+                                 LOWER(Character_Expression)
+                            Compatibility :
+                                 SQLServer
+
+      UPPER        -     -> Converts all the Character in the given Character Expression to UpperCase Letters.
+                            Syntax
+                                 UPPER(Character_Expression)
+                            Compatibility :
+                                 SQLServer
+
+      REVERSE      -     -> Reverses all the Character in the given String Expression.
+                            Syntax
+                                 REVERSE(String_Expression)
+                            Compatibility :
+                                 SQLServer
+
+      LEN          -     -> Returns the Count of Total Characters in the given String Expression excluding the Blanks at the End of the Expression.
+                            Syntax
+                                 LEN(String_Expression)
+                            Compatibility :
+                                 SQLServer
+
+      LEFT         -     -> Returns the Specified Number of Characters from the Left hand Side of the Given Character Expression.
+                            Syntax
+                                 LEFT(Character_Expression, Integer_Expression)
+                            Compatibility :
+                                 SQLServer
+
+      RIGHT        -     -> Returns the Specified Number of Characters from the Right hand Side of the Given Character Expression.
+                            Syntax
+                                 RIGHT(Character_Expression, Integer_Expression)
+                            Compatibility :
+                                 SQLServer
+
+      CHARINDEX    -     -> Returns the Starting position of the Specified Expression in a Character String.
+                            Syntax
+                                 CHARINDEX(Expression_to_Find, Expression_to_Search, Start_Location)
+                            Compatibility :
+                                 SQLServer
+
+      SUBSTRING    -     -> Returns the SubString from the Given Character String.
+                            Syntax
+                                 SUBSTRING(Expression, Start_Location, length)
+                            Compatibility :
+                                 SQLServer
+
+      REPLICATE    -      -> Repeats the Given String for the Specified Number of Times.
+                             Syntax
+                                 Replicate(String_To_Be_Replicated, Number_of_Times)
+                             Compatibility :
+                                 SQLServer
+
+      SPACE        -      -> Returns the Specified Number of Spaces.
+                             Syntax
+                                 SPACE(Number_of_Times)
+                             Compatibility :
+                                 SQLServer
+
+      PATINDEX     -      -> Returns the Starting Position of the First Occurrence of a Pattern in a Specified Expression.
+                          -> With CharIndex, we cannot use Wildcards, whereas PatIndex() providers this Capability.
+                             Syntax
+                                 PATINDEX(Pattern_To_Be_Searched, Expression)
+                             Compatibility :
+                                 SQLServer
+
+      REPLACE      -      -> Replaces all Occurrences of a Specified value with another String Value.
+                             Syntax
+                                 REPLACE(String_Expression, Pattern, Replacement_Value)
+                             Compatibility :
+                                 SQLServer
+
+      STUFF        -      -> Inserts Replacement_Expression, at the Start Position Specified, along with removing the Characters Specified using length parameter.
+                             Syntax
+                                 STUFF(Original_Expression, Start, Length, Replacement_Expression)
+                             Compatibility :
+                                 SQLServer
+
 
 Aggregate Functions -   -> The Function is applied to the whole Group,
                            but we can use a Condition(Corresponding to every Single Row in the GROUP) to determine whether to pass an expression(to be included in the result) or Not as an Argument to the Function
