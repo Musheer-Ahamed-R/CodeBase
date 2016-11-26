@@ -64,6 +64,16 @@ Views    -     -> A View is a SAVED SELECT QUERY or a VIRTUAL TABLE whose conten
                                                                -> The OPTION clause
                                                                -> A reference to a temporary table or a table variable.
                                                          -> We cannot create temporary views
+                                                   SCHEMABINDING   - -> Binds the view to the schema of the underlying table or tables. When SCHEMABINDING is specified, the base table or tables cannot be modified in a way
+                                                                        that would affect the view definition. The view definition itself must first be modified or dropped to remove dependencies on the table that is to be modified.
+                                                                     -> When we use SCHEMABINDING, the select_statement must include the two-part names (schema.object) of tables, views, or user-defined functions that are referenced.
+                                                                        All referenced objects must be in the same database.
+                                                                     -> Views or tables that participate in a view created with the SCHEMABINDING clause cannot be dropped unless that view is dropped or changed so that it no longer
+                                                                        has schema binding. Otherwise, the Database Engine raises an error. Also, executing ALTER TABLE statements on tables that participate in views
+                                                                        that have schema binding fail when these statements affect the view definition.
+
+                                                                     Notes :
+                                                                        -> This is CRUEL(but Useful) as we let the View Control the Definition of the base Table.
 
                                                    Updatable Views - -> We can modify the data of an underlying base table through a view, as long as the following conditions are true:
                                                                            -> Any modifications, including UPDATE, INSERT, and DELETE statements, must reference Columns from only ONE BASE Table.
@@ -88,6 +98,44 @@ Views    -     -> A View is a SAVED SELECT QUERY or a VIRTUAL TABLE whose conten
                                                                            trace modifications from the view definition to one base table.
                                                                         -> If a view is NOT created with the SCHEMABINDING clause, sp_refreshview should be run when changes are made to the objects underlying the view that affect the DEFINITION of the view.
                                                                            Otherwise, the view might produce unexpected results when it is queried.
+
+                                                   Creating Indexed  -> The first index created on a view must be a unique clustered index. After the unique clustered index has been created, you can create more nonclustered indexes.
+                                                   Views             -> Creating a unique clustered index on a view improves query performance because the view is stored in the database in the same way a table with a clustered index is stored.
+                                                                        The query optimizer may use indexed views to speed up the query execution. The view does not have to be referenced in the query for the optimizer to consider that view for a substitution.
+                                                                     -> The following steps are required to create an indexed view and are critical to the successful implementation of the indexed view:
+                                                                           -> Verify the SET options are correct for all existing tables that will be referenced in the view.
+                                                                           -> Verify that the SET options for the session are set correctly before you create any tables and the view.
+                                                                           -> Verify that the view definition is deterministic.
+                                                                           -> Create the view by using the WITH SCHEMABINDING option.
+                                                                           -> Create the unique clustered index on the view.
+                                                                     -> Deterministic expressions that do not contain float expressions are called precise. Only precise deterministic expressions can participate in key columns and in WHERE or GROUP BY clauses of indexed views.
+                                                                     Required SET Options -  -> To make sure that the views can be maintained correctly and return consistent results, indexed views require fixed values for several SET options.
+                                                                     for Indexed Views          The SET options in the Following Table(Refer Docs) must be set to the values shown in the Required Value column whenever the following conditions occur:
+                                                                                                   -> The view and subsequent indexes on the view are created.
+                                                                                                   -> The base tables referenced in the view at the time the table is created.
+                                                                                                   -> There is any insert, update, or delete operation performed on any table that participates in the indexed view. This requirement includes operations
+                                                                                                      such as bulk copy, replication, and distributed queries.
+                                                                                                   -> The indexed view is used by the query optimizer to produce the query plan.
+
+                                                                                             Notes :
+                                                                                                -> The Database Docs strongly recommend that we set the ARITHABORT user option to ON server-wide as soon as the first indexed view or index on a computed column
+                                                                                                   is created in any database on the server.
+
+                                                                     Notes :
+                                                                        -> A view is deterministic if all expressions in the select list, as well as the WHERE and GROUP BY clauses, are deterministic. Deterministic expressions always return
+                                                                           the SAME Result any time they are evaluated with a specific set of input values. Only deterministic functions can participate in deterministic expressions.
+                                                                           For example, the DATEADD function is deterministic because it always returns the same result for any given set of argument values for its three parameters.
+                                                                           GETDATE is not deterministic because it is always invoked with the same argument, but the value it returns changes each time it is executed.
+                                                                        -> To determine whether a view column is deterministic, use the IsDeterministic property of the COLUMNPROPERTY function.
+                                                                        -> To determine if a deterministic column in a view with schema binding is precise, use the IsPrecise property of the COLUMNPROPERTY function.
+                                                                        -> Tables must be referenced by two-part names, schema.tablename in the view definition.
+                                                                        -> Any user-defined functions referenced in the view must be referenced by two-part names, schema.function. Also, User-defined functions referenced in the view must be created by using the WITH SCHEMABINDING option.
+
+                                                   Modify Views       - -> Modifying a view(Definition) does not affect any dependent objects, such as stored procedures or triggers, unless the definition of the view changes in such a way that the dependent object is no longer valid.
+                                                                        -> If a view currently used is modified by using ALTER VIEW, the Database Engine takes an exclusive schema lock on the view. When the lock is granted, and there are no active users of the view,
+                                                                           the Database Engine deletes all copies of the view from the procedure cache. Existing plans referencing the view remain in the cache but are recompiled when invoked.
+                                                                        -> ALTER VIEW can be applied to indexed views; however, ALTER VIEW unconditionally drops all indexes on the view.
+
                                                    Syntax
                                                       CREATE [ OR ALTER ] VIEW [ schema_name . ] view_name [ (column [ ,...n ] ) ]
                                                       [ WITH <view_attribute> [ ,...n ] ]
@@ -108,4 +156,3 @@ Views    -     -> A View is a SAVED SELECT QUERY or a VIRTUAL TABLE whose conten
                                                          If the new table or view structure changes, the view must be dropped and re-created.
                                                       -> A query that uses an index on a view defined with numeric or float expressions may have a result that is different from a similar query that does not use the index on the view.
                                                          This difference may be caused by rounding errors during INSERT, DELETE, or UPDATE actions on underlying tables.
-                                                      -> It is NOT Possible to use DELETE to update a view that is defined as a JOIN.
