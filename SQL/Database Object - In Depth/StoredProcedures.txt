@@ -5,7 +5,7 @@ Stored Procedures -  -> A stored procedure in SQL Server is a group of one or mo
                            -> Contain programming statements that perform operations in the database. These include calling other procedures.
                            -> Return a status value to a calling program to indicate success or failure (and the reason for failure).
                      -> Stored procedures returns Output parameters,return codes (which are always an integer value), a result set for each SELECT statement contained in the stored procedure or any other stored procedures called by the stored procedure,
-                        a global cursor that can be referenced outside the stored procedure.      
+                        a global cursor that can be referenced outside the stored procedure.
 
                      Benefits of Using Stored Procedures -
                            -> Reduced server/client      -     -> The commands in a procedure are executed as a single batch of code.
@@ -35,7 +35,7 @@ Stored Procedures -  -> A stored procedure in SQL Server is a group of one or mo
 
                      Notes :
                         -> The Stored Procedure can literally be used to perform any Kind of Operation(i.e Having Select Statement(returning Table) or Updating a table or Deleting Table Contents etc..).
-
+                        -> Ad-Hoc Queries can reuse Query Execution Plan, but even a Slightest Change in the Query(e.g. even a Space or Change in parameter Values) can force it to generate a New Execution Plan.
                      Types :
                            -> User-Defined Stored Procedures
                            -> Temporary Stored Procedures
@@ -59,7 +59,6 @@ Stored Procedures -  -> A stored procedure in SQL Server is a group of one or mo
                                                                                                                                -> As with OUTPUT parameters, you must save the return code in a variable when the procedure is executed in order to use the return code value in the calling program.
                                                                                                                                -> Return codes are commonly used in control-of-flow blocks within procedures to set the return code value for each possible error situation.
                                                                                                                                -> We can use the @@ERROR function after a Transact-SQL statement to detect whether an error occurred during the execution of the statement.
-
                                                                Syntax
                                                                   CREATE [ OR ALTER ] { PROC | PROCEDURE } [schema_name.] procedure_name [ ; number ]
                                                                   [ { @parameter [ type_schema_name. ] data_type }
