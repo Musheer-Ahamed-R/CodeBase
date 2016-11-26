@@ -44,4 +44,185 @@ Aggregate Functions -   -> The Function is applied to the whole Group,
                            Expression  can be Column Expression or a Condition(on Every Single Row of the Group) that returns an Expression or Some Constant).
                            Selected Group.(e.g Condition - DISTINCT, CASE(returning 1 or 0) OR ANY NORMAL CONDITION ON ANY NUMBER OF COLUMNS that returns an EXPRESSION... )                   -------- IMPORTANT   ------------
 
-Table - Valued Functions -
+User-Defined Functions  -> SQL Server user-defined functions are routines that accept parameters, perform an action, such as a complex calculation, and return the result of that action as a value.
+                           The return value can either be a single scalar value or a result set(TVF).
+                        -> Limitations and restrictions
+                              -> User-defined functions cannot contain an OUTPUT INTO clause that has a table as its target.
+                              -> User-defined functions can not return multiple result sets. Use a stored procedure if you need to return multiple result sets.
+                              -> Error handling is restricted in a user-defined function. A UDF does not support TRY…CATCH, @ERROR or RAISERROR.
+                              -> User-defined functions cannot call a stored procedure, but can call an extended stored procedure.
+                              -> User-defined functions cannot make use of dynamic SQL or temp tables. Table variables are allowed.
+                              -> SET statements are not allowed in a user-defined function.
+                             *-> User-defined functions CANNOT be used to perform actions that MODIFY the Database state(NO DML QUERIES).
+                                 Because a function may not have side effects (change the permanent database structure), the optimiser is free to run it as many times as makes sense for a query plan.
+                                 If it had side effects (eg creating a temp table) then if the optimizer chose a different plan the results would be different and that is not permitted.
+                              -> Frameworks such as ADO.NET, etc. can't call a function directly, but they can call a stored proc directly. Stored procs are used to bind SQL queries together in a transaction,
+                                 and interface with the Outside world.
+                             *-> At runtime Views and Inline TVFs are both inlined and treated similarly to derived tables or CTEs.
+                                 Views
+                                    Accepts Parameters               - No
+                                    Expanded out by Optimiser        - Yes
+                                    Can be Materialized in advance   - Yes (through indexed views)
+                                    Is Updatable                     - Yes
+                                    Can contain Multiple Statements  - No
+                                    Can have triggers                - Yes
+                                    Can use side-effecting operator  - Yes
+
+                                 Inline TVFs
+                                    Accepts Parameters               - Yes
+                                    Expanded out by Optimiser        - Yes
+                                    Can be Materialized in advance   - No
+                                    Is Updatable                     - Yes
+                                    Can contain Multiple Statements  - No
+                                    Can have triggers                - No
+                                    Can use side-effecting operator  - No
+
+                                 MultiStatement TVFs
+                                    Accepts Parameters               - Yes
+                                    Expanded out by Optimiser        - No
+                                    Can be Materialized in advance   - No
+                                    Is Updatable                     - No
+                                    Can contain Multiple Statements  - Yes
+                                    Can have triggers                - No
+                                    Can use side-effecting operator  - No
+
+
+                              +---------------------------------+----------------------------------------+
+                              | Stored Procedure (SP)           | Function (UDF - User Defined           |
+                              |                                 | Function)                              |
+                              +---------------------------------+----------------------------------------+
+                              | SP can return zero , single or  | Function must return a single value    |
+                              | multiple values.                | (which may be a scalar or a table).    |
+                              +---------------------------------+----------------------------------------+
+                              | We can use transaction in SP.   | We can't use transaction in UDF.       |
+                              +---------------------------------+----------------------------------------+
+                              | SP can have input/output        | Only input parameter.                  |
+                              | parameter.                      |                                        |
+                              +---------------------------------+----------------------------------------+
+                              | We can call function from SP.   | We can't call SP from function.        |
+                              +---------------------------------+----------------------------------------+
+                              | We can't use SP in SELECT/      | We can use UDF in SELECT/ WHERE/       |
+                              | WHERE/ HAVING statement.        | HAVING statement.                      |
+                              +---------------------------------+----------------------------------------+
+                              | We can use exception handling   | We can't use Try-Catch block in UDF.   |
+                              | using Try-Catch block in SP.    |                                        |
+                              +---------------------------------+----------------------------------------+
+
+                        Advantages  -  -> They allow faster execution. Similar to stored procedures, Transact-SQL user-defined functions reduce the compilation cost of Transact-SQL code by caching the plans
+                                          and reusing them for repeated executions.
+                                       -> CLR functions offer significant performance advantage over Transact-SQL functions for computational tasks, string manipulation, and business logic.
+                                          Transact-SQL functions are better suited for data-access intensive logic.
+                                       -> They can reduce network traffic.
+                        Types       -  -> Scalar Function   -  -> User-defined scalar functions return a single data value of the type defined in the RETURNS clause. For an inline scalar function,
+                                                                  there is no function body; the scalar value is the result of a single statement. For a multistatement scalar function, the function body,
+                                                                  defined in a BEGIN...END block, contains a series of Transact-SQL statements that return the single value.
+                                                               -> The return type can be any data type except text, ntext, image, cursor, and timestamp
+                                                               Syntax
+                                                                  CREATE [ OR ALTER ] FUNCTION [ schema_name. ] function_name
+                                                                  ( [ { @parameter_name [ AS ][ type_schema_name. ] parameter_data_type
+                                                                  [ = default ] [ READONLY ] }
+                                                                  [ ,...n ]
+                                                                  ]
+                                                                  )
+                                                                  RETURNS return_data_type
+                                                                  [ WITH <function_option> [ ,...n ] ]
+                                                                  [ AS ]
+                                                                  BEGIN
+                                                                       function_body
+                                                                       RETURN scalar_expression
+                                                                  END
+                                                                  [ ; ]
+
+                                       -> Table-Valued      -  -> User-defined table-valued functions return a table data type.
+                                          Functions            -> For an inline table-valued function, there is no function body; the table is the result set of a SINGLE SELECT statement
+                                                               Syntax
+                                                                  -- Transact-SQL Inline Table-Valued Function Syntax
+                                                                  CREATE [ OR ALTER ] FUNCTION [ schema_name. ] function_name
+                                                                  ( [ { @parameter_name [ AS ] [ type_schema_name. ] parameter_data_type
+                                                                  [ = default ] [ READONLY ] }
+                                                                  [ ,...n ]
+                                                                  ]
+                                                                  )
+                                                                  RETURNS TABLE
+                                                                  [ WITH <function_option> [ ,...n ] ]
+                                                                  [ AS ]
+                                                                  RETURN [ ( ] select_stmt [ ) ]
+                                                                  [ ; ]
+
+                                                                  -- Transact-SQL Multistatement Table-valued Function Syntax
+                                                                  CREATE [ OR ALTER ] FUNCTION [ schema_name. ] function_name
+                                                                  ( [ { @parameter_name [ AS ] [ type_schema_name. ] parameter_data_type
+                                                                      [ = default ] [READONLY] }
+                                                                      [ ,...n ]
+                                                                    ]
+                                                                  )
+                                                                  RETURNS @return_variable TABLE <table_type_definition>
+                                                                      [ WITH <function_option> [ ,...n ] ]
+                                                                      [ AS ]
+                                                                      BEGIN
+                                                                          function_body
+                                                                          RETURN
+                                                                      END
+                                                                  [ ; ]
+
+                                                                  -- Transact-SQL Function Clauses
+                                                                  <function_option>::=
+                                                                  {
+                                                                      [ ENCRYPTION ]
+                                                                    | [ SCHEMABINDING ]
+                                                                    | [ RETURNS NULL ON NULL INPUT | CALLED ON NULL INPUT ]
+                                                                    | [ EXECUTE_AS_Clause ]
+                                                                  }
+
+                                                                  <table_type_definition>:: =
+                                                                  ( { <column_definition> <column_constraint>
+                                                                    | <computed_column_definition> }
+                                                                      [ <table_constraint> ] [ ,...n ]
+                                                                  )
+                                                                  <column_definition>::=
+                                                                  {
+                                                                      { column_name data_type }
+                                                                      [ [ DEFAULT constant_expression ]
+                                                                        [ COLLATE collation_name ] | [ ROWGUIDCOL ]
+                                                                      ]
+                                                                      | [ IDENTITY [ (seed , increment ) ] ]
+                                                                      [ <column_constraint> [ ...n ] ]
+                                                                  }
+
+                                                                  <column_constraint>::=
+                                                                  {
+                                                                      [ NULL | NOT NULL ]
+                                                                      { PRIMARY KEY | UNIQUE }
+                                                                        [ CLUSTERED | NONCLUSTERED ]
+                                                                        [ WITH FILLFACTOR = fillfactor
+                                                                          | WITH ( < index_option > [ , ...n ] )
+                                                                        [ ON { filegroup | "default" } ]
+                                                                    | [ CHECK ( logical_expression ) ] [ ,...n ]
+                                                                  }
+
+                                                                  <computed_column_definition>::=
+                                                                  column_name AS computed_column_expression
+
+                                                                  <table_constraint>::=
+                                                                  {
+                                                                      { PRIMARY KEY | UNIQUE }
+                                                                        [ CLUSTERED | NONCLUSTERED ]
+                                                                        ( column_name [ ASC | DESC ] [ ,...n ] )
+                                                                          [ WITH FILLFACTOR = fillfactor
+                                                                          | WITH ( <index_option> [ , ...n ] )
+                                                                    | [ CHECK ( logical_expression ) ] [ ,...n ]
+                                                                  }
+
+                                                                  <index_option>::=
+                                                                  {
+                                                                      PAD_INDEX = { ON | OFF }
+                                                                    | FILLFACTOR = fillfactor
+                                                                    | IGNORE_DUP_KEY = { ON | OFF }
+                                                                    | STATISTICS_NORECOMPUTE = { ON | OFF }
+                                                                    | ALLOW_ROW_LOCKS = { ON | OFF }
+                                                                    | ALLOW_PAGE_LOCKS ={ ON | OFF }
+                                                                  }
+
+                        Notes :
+                           -> Transact-SQL errors that cause a statement to be canceled and continue with the next statement in the module (such as triggers or stored procedures) are treated differently inside a function.
+                              In functions, such errors cause the execution of the function to stop. This in turn causes the statement that invoked the function to be canceled.
