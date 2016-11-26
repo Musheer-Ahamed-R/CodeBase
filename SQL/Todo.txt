@@ -1,3 +1,5 @@
 1 -> Declare and use a Variable in PostgreSQL.
 
 2 -> The View definition has been Computed and the resulting data STORED just LIKE A TABLE with a clustered index is stored
+
+3 -> What are CURSORS.

@@ -4,7 +4,8 @@ Stored Procedures -  -> A stored procedure in SQL Server is a group of one or mo
                            -> Accept input parameters and return multiple values in the form of output parameters to the calling program.
                            -> Contain programming statements that perform operations in the database. These include calling other procedures.
                            -> Return a status value to a calling program to indicate success or failure (and the reason for failure).
-
+                     -> Stored procedures returns Output parameters,return codes (which are always an integer value), a result set for each SELECT statement contained in the stored procedure or any other stored procedures called by the stored procedure,
+                        a global cursor that can be referenced outside the stored procedure.      
 
                      Benefits of Using Stored Procedures -
                            -> Reduced server/client      -     -> The commands in a procedure are executed as a single batch of code.
@@ -43,17 +44,18 @@ Stored Procedures -  -> A stored procedure in SQL Server is a group of one or mo
                            -> User-Defined Stored       -      -> A user-defined procedure can be created in a user-defined database or in all system databases except the Resource database.
                               Procedures                          The procedure can be developed in either Transact-SQL or as a reference to a Microsoft .NET Framework common runtime language (CLR) method.
                                                                Return Data       -  -> There are two ways of returning result sets or data from a procedure to a calling program: Output Parameters and Return codes.
-                                                               from Procedure       Returning Data Using an Output Parameter - -> If you specify the OUTPUT keyword for a parameter in the procedure definition, the procedure can return the current value of the parameter
+                                                               from Procedure       Returning Data Using an Output Parameter - -> If we specify the OUTPUT keyword for a parameter in the procedure definition, the procedure can return the current value of the parameter
                                                                                                                                   to the calling program when the procedure exits.
-                                                                                                                               -> To save the value of the parameter in a variable that can be used in the calling program, the CALLING program must use the OUTPUT keyword
+                                                                                                                               -> To save the value of the parameter in a variable that can be used in the calling program, the CALLING program MUST use the OUTPUT keyword
                                                                                                                                   when executing the procedure.
                                                                                                                                -> Input values can also be specified for OUTPUT parameters when the procedure is executed. This allows the procedure to receive a value
                                                                                                                                   from the calling program, change or perform operations with the value, and then return the new value to the calling program.
                                                                                                                                Notes :
                                                                                                                                  -> We cannot send back a whole table as an output parameter.
+                                                                                                                                 -> Variables/Parameters have an @ prefix before their name.
 
-                                                                                    Returning Data Using a Return Code       - -> A procedure can return an integer value called a return code to indicate the execution status of a procedure.
-                                                                                                                               -> We specify the return code for a procedure using the RETURN statement.
+                                                                                    Returning Data Using a Return Code       - -> A procedure can return an INTEGER value(Only ONE) called a return code to indicate the execution status of a procedure.
+                                                                                                                               -> We specify the return code for a procedure USING the RETURN statement.
                                                                                                                                -> As with OUTPUT parameters, you must save the return code in a variable when the procedure is executed in order to use the return code value in the calling program.
                                                                                                                                -> Return codes are commonly used in control-of-flow blocks within procedures to set the return code value for each possible error situation.
                                                                                                                                -> We can use the @@ERROR function after a Transact-SQL statement to detect whether an error occurred during the execution of the statement.
@@ -73,7 +75,9 @@ Stored Procedures -  -> A stored procedure in SQL Server is a group of one or mo
                                                                   [ RECOMPILE ]
                                                                   [ EXECUTE AS Clause ]
 
-
+                                                               Notes :
+                                                                  -> When we don't specify the names of the Parameters(as used in the Stored Procedure) while Calling it, we have to call the Procedure with arguments in the Same order as Specified.
+                                                                     Otherwise, Order of the Arguments is not required.
 
                            -> Temporary                 -      -> Temporary procedures are a form of user-defined procedures. The temporary procedures are like a permanent procedure, except temporary procedures are stored in tempdb.
                                                                -> There are two types of temporary procedures:
