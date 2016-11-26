@@ -109,7 +109,7 @@ Indexes  -  -> Indexing is Nothing but ORDERING of the Rows(Actual Table Rows or
                                                    -> Change the nullability of the column from NOT NULL to NULL.
                                                    -> Increase the length of varchar, nvarchar, or varbinary columns.
                                        Syntax :
-                                          CREATE NONCLUSTERED INDEX Index_Name  
+                                          CREATE NONCLUSTERED INDEX Index_Name
                                           ON Table_Name (Col1 ORDER, Col2 ORDER, ....)
                                           INCLUDE (Col1, Col2, Col3, ...)
 
@@ -158,11 +158,18 @@ Indexes  -  -> Indexing is Nothing but ORDERING of the Rows(Actual Table Rows or
                   INDEX ON        -    ->
                   COMPUTED COLS
 
-            Disadvantages of       -   -> When DML Statements modifies data in a Table, the Data in all the Indexes also needs to be updated. Indexes can help to search and locate the rows that we want to manipulate,
-            Using Index                   but TOO MANY INDEXES to update can actually hurt the performance of the Data Modifications.
+                  Columnstore     -    ->
+
+                  Memory-optimized     ->
+                  nonclustered indexes
+
+                  Hash            -    ->
+
+            Disadvantages of      -    -> When DML Statements modifies data in a Table, the Data in all the Indexes also needs to be updated. Indexes can help to search and locate the rows that we want to manipulate,
+            Using Index                  but TOO MANY INDEXES to update can actually hurt the performance of the Data Modifications.
                                        -> Additional Storage Space is required for Storing, in case of NON-Clustered Indexes.
 
-            Covering Query         -   -> If all the Columns that we have requested in the SELECT Clause of a Query, are present in the Index, then there is no need to lookup
-                                          in the Table again. The requested Column data can simply be returned from the Index. This query is called as a Covering Query(i.e The Index Covers the Requested Query).
+            Covering Query        -    -> If all the Columns that we have requested in the SELECT Clause of a Query, are present in the Index, then there is no need to lookup
+                                       in the Table again. The requested Column data can simply be returned from the Index. This query is called as a Covering Query(i.e The Index Covers the Requested Query).
                                        -> A Clustered Index always Covers a Query, since it contains all of the Data in a Table.
                                        -> TO a Certain Extent, a Composite Index(Index on two or more Columns) and Included Columns can Cover a Query.

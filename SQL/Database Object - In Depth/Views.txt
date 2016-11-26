@@ -2,14 +2,15 @@ Views    -     -> A View is a SAVED SELECT QUERY or a VIRTUAL TABLE whose conten
                -> Like a table, a view consists of a set of named columns and rows of data.
                -> Unless indexed, a view DOES NOT EXIST as a stored set of data values in a Database. The rows and columns of data come from tables referenced
                   in the query defining the view and are PRODUCED DYNAMICALLY when the View is referenced.
-               -> A view acts as a Filter on the underlying tables referenced in the view. The query that defines the view can be from one or more tables
-                  or from other views in the current or other databases
+               -> A View acts as a Filter on the underlying tables referenced in the view. The query that defines the View can be from one or more tables
+                  or from other Views in the current or other databases
                -> Distributed queries can also be used to define views that use data from multiple heterogeneous sources. This is useful, for example, if you want
                   to combine similarly structured data from Different Servers, each of which stores data for a different region of your organization.
                -> Views are generally used to focus, simplify, and customize the perception each user has of the database.
                -> Views can be used as security mechanisms by letting users access data through the view, without granting the users permissions
                   to directly access the underlying base tables of the view.
                -> Views can be used to provide a backward compatible interface to emulate a table that used to exist but whose schema has changed.(i.e The End User need not know or Do Anything about the changes).
+                  (i.e. The View(having old name) will internally call the newly Created or Modified Table(e.g Table Name Changed)).
                -> Views can also be used when you copy data to and from SQL Server to improve performance and to partition data.
                -> Types of VIEWS
                      -> User-Defined Views
@@ -17,12 +18,94 @@ Views    -     -> A View is a SAVED SELECT QUERY or a VIRTUAL TABLE whose conten
                      -> Partitioned Views
                      -> System Views
 
-                     User-Defined Views      -     ->
 
 
 
-                     Indexed Views           -     -> An indexed view is a view that has been materialized. (i.e) The View definition has been Computed and the resulting data STORED just LIKE A TABLE with a clustered index is stored.
+
+                     Indexed Views           -     -> An indexed view is a view that has been MATERIALIZED. (i.e) The View definition has been Computed and the resulting data STORED just LIKE A, TABLE with a clustered index is stored.
                                                    -> You index a view by creating a unique clustered index on it.
                                                    -> Indexed Views can dramatically improve the performance of some types of queries.(Since all the Computations are already done and stored).
-                                                   -> Indexed Views work best for queries that aggregate many rows.
+                                                   -> Indexed Views work best for queries that Aggregate many rows.
                                                    -> They are not well-suited for underlying data sets that are FREQUENTLY UPDATED.
+
+                     Partitioned Views       -     -> A partitioned View joins horizontally partitioned data from a set of member tables ACROSS ONE OR MORE SERVERS. This makes the data appear as if from one table.
+                                                   -> A partitioned View is a View defined by a UNION ALL of member tables structured in the same way, but stored separately as multiple tables in either the same instance of SQL Server
+                                                      or in a group of autonomous instances of SQL Server servers, called federated database servers.
+                                                   -> A View that joins member tables on the same instance of SQL Server is a LOCAL Partitioned View.
+                                                   Syntax
+                                                      SELECT <select_list1>
+                                                      FROM T1
+                                                      UNION ALL
+                                                      SELECT <select_list2>
+                                                      FROM T2
+                                                      UNION ALL
+                                                      ...
+                                                      SELECT <select_listn>
+                                                      FROM Tn;
+
+                     System Views            -     -> System views expose catalog metadata. You can use system views to return information about the instance of SQL Server or the objects defined in the instance.
+                                                      For example, you can query the sys.databases catalog view to return information about the user-defined databases available in the instance.
+
+                     User-Defined Views      -     -> A View can be used for the following purposes:
+                                                         -> To focus, simplify, and customize the perception each user has of the database.
+                                                         -> As a security mechanism by allowing users to access data through the View, without granting the users permissions to directly access the underlying base tables.
+                                                         -> To provide a backward compatible interface to emulate a table whose schema has changed.
+                                                   -> We can build Views on other Views and on procedures that reference views. Also, Functions and multiple SELECT statements separated by UNION or UNION ALL can be used
+                                                      in select_statement.
+                                                   -> Limitations
+                                                         -> Views can be created referencing tables and views only in the current database.
+                                                         -> A View name must not be the same as any table owned by that user.
+                                                         -> Only INSTEAD OF triggers can be associated with views.
+                                                         -> The SELECT clauses in a view definition cannot include the following:
+                                                               -> An ORDER BY clause, unless there is also a TOP clause in the select list of the SELECT statement. The ORDER BY clause is used only to determine
+                                                                  the rows that are returned by the TOP or OFFSET clause in the view definition. The ORDER BY clause does not guarantee ordered results when the view is queried,
+                                                                  unless ORDER BY is also specified in the query itself.
+                                                               -> The INTO keyword
+                                                               -> The OPTION clause
+                                                               -> A reference to a temporary table or a table variable.
+                                                         -> We cannot create temporary views
+
+                                                   Updatable Views - -> We can modify the data of an underlying base table through a view, as long as the following conditions are true:
+                                                                           -> Any modifications, including UPDATE, INSERT, and DELETE statements, must reference Columns from only ONE BASE Table.
+                                                                           -> The columns being modified in the view must directly reference the underlying data in the table columns. The columns cannot be derived in any other way, such as through the following:
+                                                                              -> An aggregate function: AVG, COUNT, SUM, MIN, MAX, GROUPING, STDEV, STDEVP, VAR, and VARP.
+                                                                              -> A computation. The column cannot be computed from an expression that uses other columns. Columns that are formed by using the set operators UNION, UNION ALL, CROSSJOIN, EXCEPT, and INTERSECT
+                                                                                 amount to a computation and are also not updatable.
+                                                                              -> The columns being modified are not affected by GROUP BY, HAVING, or DISTINCT clauses.
+                                                                           -> TOP is not used anywhere in the select_statement of the view together with the WITH CHECK OPTION clause.
+                                                                        -> If the previous restrictions prevent us from modifying data directly through a view, consider the following options:
+                                                                              -> INSTEAD OF Triggers
+                                                                                    INSTEAD OF triggers can be created on a view to make a view updatable. The INSTEAD OF trigger is executed instead of the data modification statement on which the trigger is defined.
+                                                                                    This trigger lets the user specify the set of actions that must happen to process the data modification statement. Therefore, if an INSTEAD OF trigger exists for a view
+                                                                                    on a specific data modification statement (INSERT, UPDATE, or DELETE), the corresponding view is updatable through that statement.
+                                                                              -> Partitioned Views
+                                                                                    If the view is a partitioned view, the view is updatable, subject to certain restrictions. When it is needed, the Database Engine distinguishes local partitioned views as the views
+                                                                                    in which all participating tables and the view are on the same instance of SQL Server, and distributed partitioned views as the views in which at least one of the tables in the view
+                                                                                    resides on a different or remote server.
+
+                                                                     Notes :
+                                                                        -> The previous restrictions apply to any subqueries in the FROM clause of the view, just as they apply to the view itself. Generally, the Database Engine must be able to unambiguously
+                                                                           trace modifications from the view definition to one base table.
+                                                                        -> If a view is NOT created with the SCHEMABINDING clause, sp_refreshview should be run when changes are made to the objects underlying the view that affect the DEFINITION of the view.
+                                                                           Otherwise, the view might produce unexpected results when it is queried.
+                                                   Syntax
+                                                      CREATE [ OR ALTER ] VIEW [ schema_name . ] view_name [ (column [ ,...n ] ) ]
+                                                      [ WITH <view_attribute> [ ,...n ] ]
+                                                      AS select_statement
+                                                      [ WITH CHECK OPTION ]
+                                                      [ ; ]
+
+                                                      <view_attribute> ::=
+                                                      {
+                                                      [ ENCRYPTION ]
+                                                      [ SCHEMABINDING ]
+                                                      [ VIEW_METADATA ]
+                                                      }
+
+                                                   Notes :
+                                                      -> When a View depends on a Table or View that was dropped, the Database Engine produces an error message when anyone tries to use the View.
+                                                         If a new Table or View is created and the table structure does not change from the previous base table to replace the one dropped, the view again becomes usable.
+                                                         If the new table or view structure changes, the view must be dropped and re-created.
+                                                      -> A query that uses an index on a view defined with numeric or float expressions may have a result that is different from a similar query that does not use the index on the view.
+                                                         This difference may be caused by rounding errors during INSERT, DELETE, or UPDATE actions on underlying tables.
+                                                      -> It is NOT Possible to use DELETE to update a view that is defined as a JOIN.
