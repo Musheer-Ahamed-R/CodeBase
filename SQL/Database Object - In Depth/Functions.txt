@@ -141,6 +141,59 @@ In-Built Functions -
                              Compatibility :
                                  SQLServer
 
+      ISDATE       -      -> Checks if the given Value is a Valid Date, Time or DataTime.
+                             Syntax
+                                 ISDATE(String_Expression)
+                             Compatibility :
+                                 SQLServer
+
+      DAY          -      -> Returns the "Day Number of the Month" of the Given Date.
+                             Syntax
+                                 DAY(String_Expression)
+                             Compatibility :
+                                 SQLServer
+
+      MONTH        -      -> Returns the "Month Number of the Year" of the Given Date.
+                             Syntax
+                                 MONTH(String_Expression)
+                             Compatibility :
+                                 SQLServer
+
+      YEAR         -      -> Returns the "Year Number" of the Given Date.
+                          Syntax
+                              YEAR(String_Expression)
+                          Compatibility :
+                              SQLServer
+
+      DATENAME     -      -> Returns a String, that represents a Part of the Given Date.
+                          -> Date_Part can take WEEKDAY, DAY, MONTH, YEAR etc..
+                          Syntax
+                              DATENAME(Date_Part, Date)
+                          Compatibility :
+                              SQLServer
+
+      DATEPART     -      -> Returns a integer, that represents a Part of the Given Date.
+                          -> Date_Part can take WEEKDAY, DAY, MONTH, YEAR etc..
+                          -> This is Similar to DateName. DateName returns nvarhcar whereas DATEPART Integer.
+                          Syntax
+                              DATEPART(Date_Part, Date)
+                          Compatibility :
+                              SQLServer
+
+      DATEADD      -      -> Returns a integer after adding the Specified Number to the DATEPART(value that represents a Part of the Given Date).
+                          -> Date_Part can take WEEKDAY, DAY, MONTH, YEAR etc..
+                          Syntax
+                              DATEADD(Date_Part, numberToAdd, Date)
+                          Compatibility :
+                              SQLServer
+
+      DATEDIFF     -      -> Returns the Count of the Specified DATEPART boundaries crossed between the Specified Start Date and the End Date.
+                          -> Date_Part can take WEEKDAY, DAY, MONTH, YEAR etc..
+                          Syntax
+                              DATEDIFF(Date_Part, startDate, endDate)
+                          Compatibility :
+                              SQLServer
+
 
 Aggregate Functions -   -> The Function is applied to the whole Group,
                            but we can use a Condition(Corresponding to every Single Row in the GROUP) to determine whether to pass an expression(to be included in the result) or Not as an Argument to the Function
