@@ -46,6 +46,7 @@ Views    -     -> A View is a SAVED SELECT QUERY or a VIRTUAL TABLE whose conten
                                                          -> Views can be created referencing tables and views only in the current database.
                                                          -> A View name must not be the same as any table owned by that user.
                                                          -> Only INSTEAD OF triggers can be associated with views.
+                                                         -> We cannot Pass Arguments to a View.(Inline Table Valued Functions are an Excellent Replacement for Parameterized Views).
                                                          -> The SELECT clauses in a view definition cannot include the following:
                                                                -> An ORDER BY clause, unless there is also a TOP clause in the select list of the SELECT statement. The ORDER BY clause is used only to determine
                                                                   the rows that are returned by the TOP or OFFSET clause in the view definition. The ORDER BY clause does not guarantee ordered results when the view is queried,
@@ -130,6 +131,8 @@ Views    -     -> A View is a SAVED SELECT QUERY or a VIRTUAL TABLE whose conten
                                                                         -> To determine if a deterministic column in a view with schema binding is precise, use the IsPrecise property of the COLUMNPROPERTY function.
                                                                         -> Tables must be referenced by two-part names, schema.tablename in the view definition.
                                                                         -> Any user-defined functions referenced in the view must be referenced by two-part names, schema.function. Also, User-defined functions referenced in the view must be created by using the WITH SCHEMABINDING option.
+                                                                        -> The Best way to load the Data in Table, When we have Indexed Views is to DROP the Index load the Data and then Recompute/Recreate the Indexed View.
+                                                                        -> The Cost of Maintaining Indexed Views is MUCH MORE than the Cost of Maintaining Indexed Tables.
 
                                                    Modify Views       - -> Modifying a view(Definition) does not affect any dependent objects, such as stored procedures or triggers, unless the definition of the view changes in such a way that the dependent object is no longer valid.
                                                                         -> If a view currently used is modified by using ALTER VIEW, the Database Engine takes an exclusive schema lock on the view. When the lock is granted, and there are no active users of the view,
