@@ -743,13 +743,9 @@ Important Keywords in SQL
          -> PARTITION
 
 
-         -> WHILE       -    ->  
+         -> WHILE       -    ->
 
-         -> CAST        -    -> Converts one Datatype to Other Data Type. Provided the Data can be Converted to the Other Data Type.
-                             Syntax :
-                                 CAST(Value AS OTHER_DATA_TYPE)
-                              Note -
-                                 -> Value can be a Column.
+         
 
          -> CASE        -    -> It is very similar to switch case.
                              Syntax :

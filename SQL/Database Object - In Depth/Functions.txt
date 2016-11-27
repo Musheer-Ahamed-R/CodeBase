@@ -194,8 +194,62 @@ In-Built Functions -
                           Compatibility :
                               SQLServer
 
+       CAST        -      -> Converts one Datatype to Other Data Type. Provided the Data can be Converted to the Other Data Type.
+                          Syntax :
+                               CAST ( expression AS data_type [ ( length ) ] )
+                          Compatibility :
+                               SQLServer
+                          Note -
+                            -> Value can be a Column.
 
-Aggregate Functions -   -> The Function is applied to the whole Group,
+      CONVERT      -      -> Converts one Datatype to Other Data Type. Provided the Data can be Converted to the Other Data Type.
+                          -> Using this Function, we can Style our Date Output(Not Available in CAST))
+                          Syntax :
+                               CONVERT ( data_type [ ( length ) ] , expression [ , style ] )
+                          Compatibility :
+                               SQLServer
+
+      ABS          -      -> This Returns the Absolute Positive Number.
+                          Syntax
+                              ABS(Numeric_Expression)
+
+      CEILING      -      -> This returns the Smallest Integer Value, greater than or equal to the Parameter.
+                          Syntax
+                              CEILING(Numeric_Expression)
+
+      FLOOR        -      -> This returns the Largest Integer Value, less than or equal to the Parameter.
+                          Syntax
+                              FLOOR(Numeric_Expression)
+
+      POWER        -      -> This returns the Power value of the Specified Expression to the Specified Power.
+                          Syntax
+                              POWER(Numeric_Expression, toPower)
+
+      SQUARE       -      -> This returns the Square value of the Specified Expression.
+                          Syntax
+                              SQUARE(Numeric_Expression)
+
+      SQRT         -      -> This returns the Square Root value of the Specified Expression.
+                          Syntax
+                              SQRT(Numeric_Expression)
+
+      RAND         -      -> This returns a Random Float Number between o and 1.
+                          -> When the Seed value is Specified, the Random function always returns the Same Value for the Same Seed.
+                          Syntax
+                              RAND( [Seed_Value] )
+
+      ROUND         -     -> Rounds the given Numeric Expression based on the length. This returns a Random Float Number between o and 1.
+                          -> When the Seed value is Specified, the Random function always returns the Same Value for the Same Seed.
+                          Syntax
+                              ROUND( Numeric_Expression, length [, function] )
+
+                           Notes :
+                              -> length   - Specifies the Number of Digits that we want to round to. If the Length is positive, then the Rounding
+                                            is applied to the Decimal Part. If negative, then the Rounding is applied to the Number before Decimal.
+                                 function - It is used to Indicate Rounding or Truncating Operation. 0 - Rounding(default) and 1 - Truncating.
+
+
+Aggregate Functions -     -> The Function is applied to the whole Group,
                            but we can use a Condition(Corresponding to every Single Row in the GROUP) to determine whether to pass an expression(to be included in the result) or Not as an Argument to the Function
                            Expression  can be Column Expression or a Condition(on Every Single Row of the Group) that returns an Expression or Some Constant).
                            Selected Group.(e.g Condition - DISTINCT, CASE(returning 1 or 0) OR ANY NORMAL CONDITION ON ANY NUMBER OF COLUMNS that returns an EXPRESSION... )                   -------- IMPORTANT   ------------
@@ -269,10 +323,14 @@ User-Defined Functions  -> SQL Server user-defined functions are routines that a
                                        -> CLR functions offer significant performance advantage over Transact-SQL functions for computational tasks, string manipulation, and business logic.
                                           Transact-SQL functions are better suited for data-access intensive logic.
                                        -> They can reduce network traffic.
-                        Types       -  -> Scalar Function   -  -> User-defined scalar functions return a single data value of the type defined in the RETURNS clause. For an inline scalar function,
-                                                                  there is no function body; the scalar value is the result of a single statement. For a multistatement scalar function, the function body,
-                                                                  defined in a BEGIN...END block, contains a series of Transact-SQL statements that return the single value.
-                                                               -> The return type can be any data type except text, ntext, image, cursor, and timestamp
+                        Types       -  -> Scalar Function   -  -> User-defined scalar functions return a SINGLE data value of the type defined in the RETURNS clause.
+                                                               -> This consists of Two Types :
+                                                                     -> Inline Scalar function
+                                                                     -> Multi-Statement Scalar function
+                                                               -> For an inline scalar function, there is no function body. The scalar value is the result of a single statement.
+                                                               -> For a multi-statement scalar function, the function body, defined in a BEGIN...END block, contains a series of Transact-SQL statements that return the single value.
+                                                               -> They can be USED IN SELECT OR WHERE CLAUSE.
+                                                               -> The return type can be any data type EXCEPT text, ntext, image, cursor, and timestamp
                                                                Syntax
                                                                   CREATE [ OR ALTER ] FUNCTION [ schema_name. ] function_name
                                                                   ( [ { @parameter_name [ AS ][ type_schema_name. ] parameter_data_type
@@ -290,7 +348,19 @@ User-Defined Functions  -> SQL Server user-defined functions are routines that a
                                                                   [ ; ]
 
                                        -> Table-Valued      -  -> User-defined table-valued functions return a table data type.
-                                          Functions            -> For an inline table-valued function, there is no function body; the table is the result set of a SINGLE SELECT statement
+                                          Functions            -> The Table returned by the TVF, can be used JUST LIKE A TABLE(i.e Can be Used anywhere a Table can be Used).
+                                                               -> This consists of Two Types :
+                                                                     -> Inline Table-valued function
+                                                                     -> Multi-Statement Table-valued function
+
+                                                                     -> Inline Table-valued function  -  -> For an inline table-valued function, there is no function body(No Begin and End); the table is the result set of a SINGLE SELECT statement
+                                                                                                         -> And the Structure of the Table Returned depends/determined by the Select Statement within the Function.
+                                                                                                         -> Inline Table Valued Functions are an EXCELLENT Replacement for PARAMETERIZED VIEWS.
+                                                                                                         -> Inline Table Valued Functions are BETTER for Performance, because statistics on the underlying tables will be used when generating an execution plan for the query.
+                                                                                                         -> It is possible to Update the Underlying Table using an Inline Table Valued Functions, but not possible using Multi-Select TVF
+
+                                                                     -> Multi-Statement TVF           -  -> Exact Opposite of Inline TVF                                       
+
                                                                Syntax
                                                                   -- Transact-SQL Inline Table-Valued Function Syntax
                                                                   CREATE [ OR ALTER ] FUNCTION [ schema_name. ] function_name
