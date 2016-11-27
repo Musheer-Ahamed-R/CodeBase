@@ -43,6 +43,7 @@ Stored Procedures -  -> A stored procedure in SQL Server is a group of one or mo
 
                            -> User-Defined Stored       -      -> A user-defined procedure can be created in a user-defined database or in all system databases except the Resource database.
                               Procedures                          The procedure can be developed in either Transact-SQL or as a reference to a Microsoft .NET Framework common runtime language (CLR) method.
+                                                               -> Use SCHEMABINDING option(Refer Functions).
                                                                -> Return Data       -  -> There are two ways of returning result sets or data from a procedure to a calling program: Output Parameters and Return codes.
                                                                   from Procedure          Returning Data Using an Output Parameter - -> If we specify the OUTPUT keyword for a parameter in the procedure definition, the procedure can return the current value of the parameter
                                                                                                                                         to the calling program when the procedure exits.

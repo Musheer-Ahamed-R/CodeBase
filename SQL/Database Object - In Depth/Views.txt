@@ -18,16 +18,6 @@ Views    -     -> A View is a SAVED SELECT QUERY or a VIRTUAL TABLE whose conten
                      -> Partitioned Views
                      -> System Views
 
-
-
-
-
-                     Indexed Views           -     -> An indexed view is a view that has been MATERIALIZED. (i.e) The View definition has been Computed and the resulting data STORED just LIKE A, TABLE with a clustered index is stored.
-                                                   -> You index a view by creating a unique clustered index on it.
-                                                   -> Indexed Views can dramatically improve the performance of some types of queries.(Since all the Computations are already done and stored).
-                                                   -> Indexed Views work best for queries that Aggregate many rows.
-                                                   -> They are not well-suited for underlying data sets that are FREQUENTLY UPDATED.
-
                      Partitioned Views       -     -> A partitioned View joins horizontally partitioned data from a set of member tables ACROSS ONE OR MORE SERVERS. This makes the data appear as if from one table.
                                                    -> A partitioned View is a View defined by a UNION ALL of member tables structured in the same way, but stored separately as multiple tables in either the same instance of SQL Server
                                                       or in a group of autonomous instances of SQL Server servers, called federated database servers.
@@ -99,8 +89,16 @@ Views    -     -> A View is a SAVED SELECT QUERY or a VIRTUAL TABLE whose conten
                                                                         -> If a view is NOT created with the SCHEMABINDING clause, sp_refreshview should be run when changes are made to the objects underlying the view that affect the DEFINITION of the view.
                                                                            Otherwise, the view might produce unexpected results when it is queried.
 
-                                                   Creating Indexed  -> The first index created on a view must be a unique clustered index. After the unique clustered index has been created, you can create more nonclustered indexes.
-                                                   Views             -> Creating a unique clustered index on a view improves query performance because the view is stored in the database in the same way a table with a clustered index is stored.
+
+                                                                           Indexed Views           -
+
+
+                                                   Creating Indexed  -> An indexed view is a view that has been MATERIALIZED. (i.e) The View definition has been Computed and the resulting data STORED just LIKE A, TABLE with a clustered index is stored.
+                                                   Views             -> The first index created on a view must be a unique clustered index. After the unique clustered index has been created, you can create more nonclustered indexes.
+                                                                     -> Indexed Views can dramatically improve the performance of some types of queries.(Since all the Computations are already done and stored).
+                                                                     -> Indexed Views work best for queries that Aggregate many rows.
+                                                                     -> They are not well-suited for underlying data sets that are FREQUENTLY UPDATED.
+                                                                     -> Creating a unique clustered index on a view improves query performance because the view is stored in the database in the same way a table with a clustered index is stored.
                                                                         The query optimizer may use indexed views to speed up the query execution. The view does not have to be referenced in the query for the optimizer to consider that view for a substitution.
                                                                      -> The following steps are required to create an indexed view and are critical to the successful implementation of the indexed view:
                                                                            -> Verify the SET options are correct for all existing tables that will be referenced in the view.
@@ -108,6 +106,8 @@ Views    -     -> A View is a SAVED SELECT QUERY or a VIRTUAL TABLE whose conten
                                                                            -> Verify that the view definition is deterministic.
                                                                            -> Create the view by using the WITH SCHEMABINDING option.
                                                                            -> Create the unique clustered index on the view.
+                                                                           -> If an Aggregate Function in the Select List, references an Expression, and if there is a Possibility for that Expression to become NULL, then a Replacement Value Should be Specified.
+                                                                           -> if Group By is Specified, the View Select List must Contain a COUNT_BIG(*) Expression.(COUNT Not available in Indexed Views)
                                                                      -> Deterministic expressions that do not contain float expressions are called precise. Only precise deterministic expressions can participate in key columns and in WHERE or GROUP BY clauses of indexed views.
                                                                      Required SET Options -  -> To make sure that the views can be maintained correctly and return consistent results, indexed views require fixed values for several SET options.
                                                                      for Indexed Views          The SET options in the Following Table(Refer Docs) must be set to the values shown in the Required Value column whenever the following conditions occur:

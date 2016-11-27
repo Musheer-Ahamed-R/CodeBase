@@ -21,7 +21,7 @@ Indexes  -  -> Indexing is Nothing but ORDERING of the Rows(Actual Table Rows or
                is created for a UNIQUE Key. This can be changed if required by specifying the type of the Index Explicitly.
             -> We can also specify the type of the Index during Primary Key or UNIQUE Key Creation.
             -> An index created as part of the constraint is automatically given the same name as the constraint name.
-            -> You can create a clustered index on a column other than primary key column if a NON-Clustered primary key constraint was specified.
+            -> We can create a clustered index on a column other than primary key column if a NON-Clustered primary key constraint was specified.
             -> We can also specify the INDEX to be utilized by the QUERY Execution Plan by specifying them explicitly.
                Syntax :
                SELECT exp1, exp2 WITH ( INDEX ( Index_Name ) )
