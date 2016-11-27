@@ -79,7 +79,9 @@ Terms       -  -> Deterministic     -  -> Deterministic Functions always Return 
 
                   Non-Deterministic -  -> These Functions may Return Different Results each Time they are Called with a Specific Set of Input values even if the Database State Remains the SAME.
                   Functions               e.g GETDATE(), Current_TimeStamp
-                                       -> RAND() is a Non-Deterministic Function, but if we provide a Seed value, the Function becomes Deterministic.   
+                                       -> RAND() is a Non-Deterministic Function, but if we provide a Seed value, the Function becomes Deterministic.
+
+                  SCHEMABINDING     -  -> REFER Views for This.                       
 
 
 Types       -  -> Scalar Function   -  -> User-defined scalar functions return a SINGLE data value of the type defined in the RETURNS clause.
