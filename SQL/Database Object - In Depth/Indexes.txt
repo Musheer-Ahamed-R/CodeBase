@@ -32,11 +32,7 @@ Indexes  -  -> Indexing is Nothing but ORDERING of the Rows(Actual Table Rows or
                   Whereas, an INDEX can exist without a Primary Key or a UNIQUE Key Constraint.
 
 
-
-
-
-
-               we can specify on what tree we want our index to be stored.
+      // ------------         we can specify on what tree we want our index to be stored.  ---------------
 
             -> Different Types of Indexes
                   -> Hash

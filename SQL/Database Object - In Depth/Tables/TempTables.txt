@@ -1,0 +1,20 @@
+Temporary Tables  -  -> Temporary Tables are very Similar to the Permanent Tables. Permanent Tables get created in the Database
+                        we Specify and remain in the Database Permanently, until we Drop Them. Whereas, Temporary Tables
+                        get Created in the TempDB and are AUTOMATICALLY DELETED, when they are No Longer Used.
+
+Types             -  -> Local Temporary Tables
+                     -> Global Temporary Tables
+
+                     Local Temporary Tables -   -> The Local Temporary Table is available only for the Connection that has Created the Table.
+                                                -> This is Automatically Dropped when the Connection that has Created it is Closed.
+                                                -> If the Temporary Table is Created inside the Stored Procedure, it gets DROPPED Automatically
+                                                   upon the Completion of the Stored procedure Execution.
+                                                -> It is also possible for Different Connections to Create a LOCAL Temporary Table with the Same Name.
+
+                     Global Temporary Tables -  -> Global Temporary Tables are Visible to all the Connections of the Sql Server and are Only Destroyed
+                                                   When the Last Connection Referencing the Table is Closed.
+                                                -> Global Temporary Tables has to be Unique Across User User Connections.
+
+
+Creation          -  -> We use the Same Syntax for the Creation of Temporary Tables, except that we prefix the name of that Table
+                        With a #(Local TT) or ##(Global TT).

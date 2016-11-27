@@ -12,7 +12,7 @@ User-Defined Functions  -> SQL Server user-defined functions are routines that a
                                  If it had side effects (eg creating a temp table) then if the optimizer chose a different plan the results would be different and that is not permitted.
                               -> Frameworks such as ADO.NET, etc. can't call a function directly, but they can call a stored proc directly. Stored procs are used to bind SQL queries together in a transaction,
                                  and interface with the Outside world.
-                             *-> At runtime Views and Inline TVFs are both inlined and treated similarly to derived tables or CTEs.
+
                                  Views
                                     Accepts Parameters               - No
                                     Expanded out by Optimiser        - Yes
@@ -81,7 +81,7 @@ Terms       -  -> Deterministic     -  -> Deterministic Functions always Return 
                   Functions               e.g GETDATE(), Current_TimeStamp
                                        -> RAND() is a Non-Deterministic Function, but if we provide a Seed value, the Function becomes Deterministic.
 
-                  SCHEMABINDING     -  -> REFER Views for This.                       
+                  SCHEMABINDING     -  -> REFER Views for This.
 
 
 Types       -  -> Scalar Function   -  -> User-defined scalar functions return a SINGLE data value of the type defined in the RETURNS clause.
@@ -119,6 +119,7 @@ Types       -  -> Scalar Function   -  -> User-defined scalar functions return a
                                                                                  -> Inline Table Valued Functions are an EXCELLENT Replacement for PARAMETERIZED VIEWS.
                                                                                  -> Inline Table Valued Functions are BETTER for Performance, because statistics on the underlying tables will be used when generating an execution plan for the query.
                                                                                  -> It is possible to Update the Underlying Table using an Inline Table Valued Functions, but not possible using Multi-Select TVF
+                                                                                *-> At runtime Views and Inline TVFs are both inlined and treated similarly to derived tables or CTEs.
 
                                              -> Multi-Statement TVF           -  -> Exact Opposite of Inline TVF
 
