@@ -2,4 +2,5 @@
 
 2 -> Keep the CONDITION(if condition or loop continuation condition) as simple as possible. HUGELY reduces occurrence of bugs.
 
-3 -> HashTable can be used to check the Presence of an Element and also useful for many manipulations in an Array.
+3 -> HashTable can be used to check the Presence and also useful for many manipulations(Count occurrence) of an Element in an Array. But, the
+     Drawback is that we should know the MAX Range of Elements.
