@@ -401,6 +401,7 @@ Important Keywords in SQL
                                                        -> The keyword EXISTS is not preceded by a column name, constant, or other expression.
                                                        -> The select list of a subquery introduced by EXISTS almost always consists of an asterisk (*).
                                                           There is no reason to list column names because you are just testing whether rows that meet the conditions specified in the subquery exist.
+                                                       -> This can be used ANYWHERE(i.e Outside the Where/Having Clause too).   
 
                                     IN              -  -> The Possible Values for IN WITH A SUBQUERY is, all the Values for the related Column in the other table. It is as Efficient as Exists(Discussed above).
                                                        -> The SubQuery can have only one Column
@@ -745,7 +746,7 @@ Important Keywords in SQL
 
          -> WHILE       -    ->
 
-         
+
 
          -> CASE        -    -> It is very similar to switch case.
                              Syntax :

@@ -1,3 +1,5 @@
 1 -> NEVER EVER USE a value as a loop continuation condition whose value could CHANGE during ITERATION, Unless we explicitly want that behaviour.(e.g list size)
 
 2 -> Keep the CONDITION(if condition or loop continuation condition) as simple as possible. HUGELY reduces occurrence of bugs.
+
+3 -> HashTable can be used to check the Presence of an Element and also useful for many manipulations in an Array.

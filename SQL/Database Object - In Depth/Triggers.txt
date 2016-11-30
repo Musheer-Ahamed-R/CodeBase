@@ -1,3 +1,28 @@
+
+
+Types of Triggers    -  -> DML Triggers
+                        -> DDL Triggers
+                        -> LOGON Triggers
+
+DML Triggers         -  -> DML triggers is a special type of STORED PROCEDURES that automatically takes effect when a data manipulation language (DML) event takes place that affects
+                           the table or view defined in the trigger.
+                        -> DML events include INSERT, UPDATE, or DELETE statements.
+                        -> DML triggers can be used to enforce business rules and data integrity, query other tables, and include complex Transact-SQL statements.
+                        -> The trigger and the statement that fires it are treated as a single transaction, which can be rolled back from within the trigger.
+                        -> If a severe error is detected (for example, insufficient disk space), the entire transaction automatically rolls back.
+
+DML Trigger Benefits -  -> 
+
+Types of DML Triggers-  -> AFTER trigger  -  -> AFTER triggers are executed after the action of the INSERT, UPDATE, MERGE, or DELETE statement is performed.
+                                             -> AFTER triggers are never executed if a constraint violation occurs. Therefore, these triggers cannot be used for any processing that might prevent constraint violations.
+                                             -> For every INSERT, UPDATE, or DELETE action specified in a MERGE statement, the corresponding trigger is fired for each DML operation.
+
+                           INSTEAD OF trigger-> INSTEAD OF triggers override the standard actions of the triggering statement.
+                                             -> Therefore, they can be used to perform error or value checking on one or more columns and the perform additional actions before insert, updating or deleting the row or rows.
+
+
+
+
 DDL Triggers   -  -> DDL triggers fire in response to a variety of Data Definition Language (DDL) events. These events primarily correspond to Transact-SQL statements that start
                      with the keywords CREATE, ALTER, DROP, GRANT, DENY, REVOKE or UPDATE STATISTICS.
                   -> Use DDL triggers when you want to do the following:
