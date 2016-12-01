@@ -9,7 +9,7 @@ public class MajorityElement {
    // This can be solved using Three Techniques
    // 1 -> Using Two Loops - O(n^2)
    // 2 -> Sort, then make a Linear Traversal for finding Max Element - O(nlog n)
-   // 3 -> Boyer Moore Voting Algorithm   -  O(n)
+   // 3 -> ALGO - Boyer Moore Voting Algorithm   -  O(n)
            //  - Iterate Over the Array Once and Find a CANDIDATE for the Majority Element.(The Candidate is ALMOST FOUND in this Step).
            //  - Check if that is the Majority Element, else No Majority Element
    // 4 -> Using a HashTable(Array) or a HashMap   -  O(n)

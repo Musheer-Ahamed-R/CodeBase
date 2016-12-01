@@ -15,7 +15,7 @@ public class Application {
 
       //new FindString().finalAttempt(matrix, "GEEKS");
 
-      int[] a = {2, 2, 1, 2, 2};
+      int[] a = {5, 10, 5};
 
       //int sum = 10;
       //PairNumberSum.pairNoSum1(a, sum);
@@ -26,9 +26,12 @@ public class Application {
 
       //CountPairs.pairsCount(a, 4);
 
-      int[] b = {2, 2, 2, 2};
-      LostElement.lostElement1(a, b);
+      int[] b = {5, 5};
+      //LostElement.lostElement1(a, b);
       //LostElement.lostElement2(a, b);
+      LostElement.binarySearch(a, b);
+      LostElement.usingXor(a, b);
+      LostElement.usingSumDiff(a, b);
    }
 
 
