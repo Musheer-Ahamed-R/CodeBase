@@ -81,6 +81,7 @@ public class MajorityElement {
       if(count == 0) {  // If there Exists any Majority Element, then Count can never be Zero.
          System.out.println("No Majority Element Found");
       }
+      // This is required because Candidate obtained from above Step may not be the Majority Element. If not, then there is no Majority Element.
       int actualCount = 0;
       for(int i=0;i<a.length;i++) {
          if(candidate == a[i]) {
