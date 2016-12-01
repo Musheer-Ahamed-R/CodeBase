@@ -1,5 +1,7 @@
 public class LostElement {
 
+   // Find lost element from a duplicated array
+
    // 1 -> using two loop and a Boolean Array   -  O(n^2)
    // 2 -> using HashTable/HashMap  -  O(n)
    // 3 -> XOR             - O(n)   // Recommended
@@ -11,7 +13,8 @@ public class LostElement {
    // 1 -> Linear Search   - O(n)
    // 2 -> Binary Search   - O(log n)
    // 3 -> XOR             - O(n)   // Recommended
-   //       -> XOR is both Commutative and Associative
+   //       -> XOR is both Commutative and ASSOCIATIVE
+   //       -> XOR of a number with itself is 0.
    //       -> XOR with a Number and 0 returns the Number itself
    // 4 -> sum             - O(n)   // Recommended
 

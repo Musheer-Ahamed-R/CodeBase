@@ -9,4 +9,6 @@
 
 5 -> Binary Search SHOULD be ALWAYS in MIND when working with Arrays.(Especially when SEARCHING for an Element)
 
-5 -> Sorting/Using Two Loops can save our day SOMETIMES.
+6 -> Try XOR if SINGLE UNIQUE Value is to be found amongst Duplicate Values.
+
+7 -> Sorting/Using Two Loops can save our day SOMETIMES.
