@@ -22,7 +22,9 @@ public class Application {
       //PairNumberSum.pairNoSum2(a, sum);
 
       //MajorityElement.majorityElem1(a);
-      MajorityElement.boyerMooreAlgorithn(a);
+      //MajorityElement.boyerMooreAlgorithn(a);
+
+      CountPairs.pairsCount(a, 4);
    }
 
 

@@ -2,6 +2,9 @@ public class PairNumberSum {
 
    /** Given an array A[] and a number x, check for pair in A[] with sum as x */
 
+   // 1 -> Using Two For Loops   -  O(n^2)
+   // 2 -> Using a HashTable or a HashMap -  O(n)
+   //       -> Here the Problem occurs if the Number to add is the Number itself. Handle this properly.
 
    // Complexity - O(n^2)
    public static void pairNoSum1(int[] a, int sum) {
