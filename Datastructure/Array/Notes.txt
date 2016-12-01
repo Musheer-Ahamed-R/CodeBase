@@ -5,4 +5,6 @@
 3 -> HashTable(Array) can be used to check the Presence and also useful for many manipulations(Count occurrence) of an Element in an Array. But, the
      Drawback is that we should know the MAX Range of Elements.(THUS NOT PREFERRED)
 
-4 -> We can use a HashMap instead of a HashTable(Array) for checking occurrences or counting occurences. 
+4 -> We can use a HashMap instead of a HashTable(Array) for checking occurrences or counting occurrences.
+
+5 -> Sorting/Using Two Loops can save our day SOMETIMES.
