@@ -1,8 +1,8 @@
 public class PairNumberSum {
 
-   /** Question
-      Given an array A[] and a number x, check for pair in A[] with sum as x
-   */
+   /** Given an array A[] and a number x, check for pair in A[] with sum as x */
+
+
    // Complexity - O(n^2)
    public static void pairNoSum1(int[] a, int sum) {
 
@@ -16,10 +16,10 @@ public class PairNumberSum {
       }
    }
 
-   // It is enough to say whether a pair Exists or Not by Checking if the No obtained by Subtracting
-   // the Current No and Sum is Present in the Array. For that, a Simple way to Check Presence of an Element is
-   // to use a Hash Table
-   // Complexity - O(n)
+   /* It is enough to say whether a pair Exists or Not by Checking if the No obtained by Subtracting
+      the Current No and Sum is Present in the Array. For that, a Simple way to Check Presence of an Element is
+      to use a Hash Table*/
+   // Complexity - O(n) -- NOT PREFFERED, Since we are using a Max Array
    // Space Complexity - O(R), R - Max Integer
    public static void pairNoSum2(int[] a, int sum) {
 

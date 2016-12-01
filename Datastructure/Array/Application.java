@@ -15,10 +15,14 @@ public class Application {
 
       //new FindString().finalAttempt(matrix, "GEEKS");
 
-      int[] a = {2, 5, 3, 7, 8};
-      int sum = 10;
-      PairNumberSum.pairNoSum2(a, sum);
+      int[] a = {2, 1, 2, 4, 2};
 
+      //int sum = 10;
+      //PairNumberSum.pairNoSum1(a, sum);
+      //PairNumberSum.pairNoSum2(a, sum);
+
+      //MajorityElement.majorityElem1(a);
+      MajorityElement.boyerMooreAlgorithn(a);
    }
 
 
