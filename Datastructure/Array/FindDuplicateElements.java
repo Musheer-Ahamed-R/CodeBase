@@ -1,19 +1,12 @@
 public class FindDuplicateElements {
 
+   // Find the two repeating elements in a given array
+
+   // Note that this method modifies the original array and may not be a recommended method if we are not allowed to modify the array.
+
+   // 1 -> Using Array Index itself as Element Index  - O(n)
+
    public static void findDuplicate(int[] a) {
-      /*int result = 0;
-      for(int i=0;i<a.length;i++) {
-         System.out.println("The result is "+result+"         ");
-         if((result ^ a[i]) == result - a[i]) {
-            a[i] = -1;
-            System.out.println("index "+i+" is already found");
-         } else {
-            result += a[i];
-         }
-      }
-      for(int elem : a) {
-         System.out.println(elem);
-      }*/
 
       for(int i=0;i<a.length;i++) {
          if(a[Math.abs(a[i])] > 0) {
