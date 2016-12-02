@@ -13,10 +13,11 @@ public class CountOne {
       while(low < high) {
          int mid = (low + high)/2;
          if(a[mid] == 0) {
-            high = low;
+            high = mid;
          } else {
-            low = mid;
+            low = mid + 1;
          }
+         System.out.println("---------");
       }
       if(a[low] == 0) {
          low--;

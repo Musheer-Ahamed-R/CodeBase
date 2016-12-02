@@ -1,0 +1,35 @@
+Binary Search  -  Binary Search SHOULD be ALWAYS in MIND when working with Arrays When the Array Elements are in SOME ORDER (e.g Sorted Order, Increasing then Decreasing,
+                  Order Maintained between Arrays etc..) and we need to FIND/SEARCH for an Element or a Change in the Order in such an Array.
+
+Binary Search involves two types
+                  -> Find an Exact Match
+                        Cases :
+                           1 -> Exact Match
+                           2 -> Greater Than
+                           3 -> Less Than
+                  -> Normal Find
+                        Cases
+                           1 -> Exact Match
+                           2 -> Otherwise
+
+
+Algorithm :
+
+   int low = 0;
+   int high = a.length-1;
+   while(low < high) {
+      int mid = (low + high)/2;
+      if(a[mid] SOME_CONDITION SOME_VALUE) {
+         low = mid + 1;
+      } else {
+         high = mid;
+      }
+   }
+
+   Points to Remember
+      -> low is always incremented by 1 from mid, whereas high is NOT incremented.
+
+
+   Notes :
+      -> Here, mid will always be NEARER or EQUAL to low, because of "Integer Division". Thus, low is incremented from mid. Whereas, high is not incremented.
+      -> This also makes sure that at Some Point the low and high will be equal.(Loop Breaking Condition).
