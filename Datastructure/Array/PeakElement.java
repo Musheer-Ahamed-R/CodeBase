@@ -37,7 +37,7 @@ public class PeakElement {
       int low = 0;
       int high = a.length-1;
       boolean isFound = false;
-      while(low < high) {
+      while(low <= high) {
          int mid = (low + high)/2;
          if(isPeak(a, mid)) {
             isFound = true;
