@@ -26,6 +26,22 @@ Algorithm :
       }
    }
 
+   Method 2 :
+
+   int start = 0;
+   int end = a.length-1;
+   while(start < end) {                   // Change
+      int mid = (start + end)/2;
+      if(a[mid] SOME_CONDITION SOME_VALUE) {
+         start = mid + 1;
+      } else {
+         end = mid;                       // Change
+      }
+   }
+
+   This Method Guarantees that the start and the end will be EQUAL after the While Loop.
+   But, the Only Disadvantage is that the final Case(start and end are equal) should be handled after the While Loop.
+
    Points to Remember
       -> The start, end and mid can all be used in determining which way to go.(i.e Not just MID).
       -> There is NO NEED to Check ARRAY OUT OF BOUND for either start or mid or end.

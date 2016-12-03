@@ -27,7 +27,7 @@ public class Application {
 
       //CountPairs.pairsCount(a, 4);
 
-      int[] b = {1, 0};
+      int[] b = {1, 2, 3, 5};
       //LostElement.lostElement1(a, b);
       //LostElement.lostElement2(a, b);
       //LostElement.binarySearch(a, b);
@@ -57,8 +57,10 @@ public class Application {
       //System.out.println(PeakElement.isPeak(a, 9));
 
       //Pivot.findPivot(a);
-      PivotSearch.findPivotElem(a, 31);
+      //PivotSearch.findPivotElem1(a, 20);
+      //PivotSearch.findPivotElem2(a, 20);
 
+      MissingNumber.missingNo(b);
    }
 
 
