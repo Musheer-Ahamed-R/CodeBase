@@ -27,9 +27,14 @@ Algorithm :
    }
 
    Points to Remember
-      -> low is always incremented by 1 from mid, whereas high is NOT incremented.
+      -> low is always incremented by 1 from mid, whereas high is NOT incremented. Since, if High is Decremented, then it could become lesser(if mid is low) than the
+         low as Mid is always NEARER or EQUAL to low.
 
+   Drawbacks :
+      -> We should be checking the case for when low == high(loop breaking Condition) SEPARATELY.      
 
    Notes :
       -> Here, mid will always be NEARER or EQUAL to low, because of "Integer Division". Thus, low is incremented from mid. Whereas, high is not incremented.
-      -> This also makes sure that at Some Point the low and high will be equal.(Loop Breaking Condition).
+      -> This also makes sure that at Some Point the low and high will be equal.(Loop Breaking Condition). Thus, outside of the Loop, both the low and High will always be equal.
+
+   D
