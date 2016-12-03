@@ -15,23 +15,20 @@ Binary Search involves two types
 
 Algorithm :
 
-   int low = 0;
-   int high = a.length-1;
-   while(low <= high) {
-      int mid = (low + high)/2;
+   int start = 0;
+   int end = a.length-1;
+   while(start <= end) {
+      int mid = (start + end)/2;
       if(a[mid] SOME_CONDITION SOME_VALUE) {
-         low = mid + 1;
+         start = mid + 1;
       } else {
-         high = mid;
+         end = mid - 1;
       }
    }
 
    Points to Remember
-      -> low is always incremented by 1 from mid, whereas high is NOT incremented. Since, if High is Decremented, then it could become lesser(if mid is low) than the
-         low as Mid is always NEARER or EQUAL to low.
       -> The start, end and mid can all be used in determining which way to go.(i.e Not just MID).
-      -> There is NO NEED to Check ARRYA OUT OF BOUND for either low or mid or high.
+      -> There is NO NEED to Check ARRAY OUT OF BOUND for either start or mid or end.
 
    Notes :
-      -> Here, mid will always be NEARER or EQUAL to low, because of "Integer Division". Thus, low is incremented from mid. Whereas, high is not incremented.
-      -> This also makes sure that at Some Point(Last Case) the low and high will be equal.
+      -> Here, mid will always be NEARER or EQUAL to low, because of "Integer Division".
