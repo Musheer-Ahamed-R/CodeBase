@@ -14,13 +14,7 @@ public class FindDuplicateElements {
          } else {
             System.out.println("The Element is duplicate "+Math.abs(a[i]));
          }
-
       }
-      /*for(int i=0;i<a.length;i++) {
-         if(a[i] < 0) {
-            System.out.println()
-         }
-      }*/
    }
 
 

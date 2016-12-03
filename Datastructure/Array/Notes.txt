@@ -10,10 +10,13 @@
 5 -> Binary Search SHOULD be ALWAYS in MIND when working with Arrays When the Array Elements are in SOME ORDER (e.g Sorted Order, Increasing then Decreasing,
      Order Maintained between Arrays etc..) and we need to FIND/SEARCH for an Element or a Change in the Order in such an Array.
 
-6 -> If the RANGE of Elements are KNOWN(), then the Array Index can be useful in many ways.( e.g finding Element Occurrences,
+6 -> If the RANGE of Elements are KNOWN(), then the Array Index can be useful(Counting Sort) in many ways.( e.g finding Element Occurrences,
      occurrence count etc..). In this case, the INDEX OF SAME ARRAY ITSELF can ALSO be used.(e.g Finding Duplicate Elements).
 
-7 -> Try XOR if Array has DUPLICATE Values. This approach can be used to Find SINGLE UNIQUE Element and also DUBLE DUPLICATE Elements.
+7 -> Try XOR if Array has DUPLICATE/REPEATING Values. This approach can be used to Find SINGLE UNIQUE Element or DOUBLE UNIQUE and also DUBLE DUPLICATE Elements.
+        -> XOR is both Commutative and ASSOCIATIVE
+        -> XOR of a number with itself is 0.
+        -> XOR with a Number and 0 returns the Number itself
 
 8 -> Try SUM of Numbers and then Manipulating (like finding DIFF between two SUM etc..)
 

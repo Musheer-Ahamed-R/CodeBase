@@ -15,7 +15,7 @@ public class Application {
 
       //new FindString().finalAttempt(matrix, "GEEKS");
 
-      int[] a = {1, 2, 3, 5, 2, 3};
+      int[] a = {1, 2, 1, 2, 4, 3};
 
       //int sum = 10;
       //PairNumberSum.pairNoSum1(a, sum);
@@ -37,7 +37,10 @@ public class Application {
 
       //CountOne.binarySearch(b);
 
-      FindDuplicateElements.findDuplicate(a);
+      //FindDuplicateElements.findDuplicate(a);
+
+      TwoNonRepeatingElements.findNonRepeatingElem(a);
+
    }
 
 
