@@ -56,7 +56,9 @@ public class Application {
 
       //System.out.println(PeakElement.isPeak(a, 9));
 
-      Pivot.findPivot(a);
+      //Pivot.findPivot(a);
+      PivotSearch.findPivotElem(a, 31);
+
    }
 
 

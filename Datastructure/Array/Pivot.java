@@ -20,7 +20,7 @@ public class Pivot {
             System.out.println("The Pivot Index is "+(mid+1));
             break;
          } else if(a[mid] - a[low] < 0) {
-            high = mid;
+            high = mid-1;
          } else {
             low = mid+1;
          }

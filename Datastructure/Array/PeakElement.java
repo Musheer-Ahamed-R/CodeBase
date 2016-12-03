@@ -44,7 +44,7 @@ public class PeakElement {
             System.out.println("The Peak Element is "+a[mid]);
             break;
          } else if(mid-1 >= 0 && a[mid-1] > a[mid]) {
-            high = mid;
+            high = mid - 1;
          } else if(mid + 1 <= a.length-1 && a[mid+1] > a[mid]) {
             low = mid + 1;
          }
@@ -53,8 +53,9 @@ public class PeakElement {
 
    // NO NEED TO CHECK FOR ARRAY OUT OF BOUND for Index
    public static boolean isPeak(int[] a, int index) {
+
       boolean isPeak = false;
-      isPeak = (index - 1 < 0 ? true : ( a[index-1] <= a[index] ? true : false)) && (index + 1 > a.length-1 ? true : ( a[index+1] <= a[index] ? true : false));
+      isPeak = (a[index-1] <= a[index] && a[index+1] <= a[index]) ? true : false;
 
       return isPeak;
    }
