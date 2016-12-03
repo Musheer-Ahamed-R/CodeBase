@@ -29,7 +29,9 @@ Algorithm :
    Points to Remember
       -> low is always incremented by 1 from mid, whereas high is NOT incremented. Since, if High is Decremented, then it could become lesser(if mid is low) than the
          low as Mid is always NEARER or EQUAL to low.
+      -> The start, end and mid can all be used in determining which way to go.(i.e Not just MID).
+      -> There is NO NEED to Check ARRYA OUT OF BOUND for either low or mid or high.
 
    Notes :
       -> Here, mid will always be NEARER or EQUAL to low, because of "Integer Division". Thus, low is incremented from mid. Whereas, high is not incremented.
-      -> This also makes sure that at Some Point(Last Case) the low and high will be equal. 
+      -> This also makes sure that at Some Point(Last Case) the low and high will be equal.

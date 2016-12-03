@@ -10,8 +10,10 @@
 5 -> Binary Search SHOULD be ALWAYS in MIND when working with Arrays When the Array Elements are in SOME ORDER (e.g Sorted Order, Increasing then Decreasing,
      Order Maintained between Arrays etc..) and we need to FIND/SEARCH for an Element or a Change in the Order in such an Array.
      Note :
+         -> If Problem is to be Solved in less Complexity than O(n), then this Should be the FIRST ALTERNATIVE.
          -> Binary Search can also be used in Array which DO NOT FOLLOW ANY ORDER. We just need to set the Condition Properly.(Condition to go Left or Right)
             (e.g Find the Peak Element.)
+         -> The start, end and mid can all be used in determining which way to go.(i.e Not just MID).   
 
 6 -> If the RANGE of Elements are KNOWN(), then the Array Index can be useful(Counting Sort) in many ways.( e.g finding Element Occurrences,
      occurrence count etc..). In this case, the INDEX OF SAME ARRAY ITSELF can ALSO be used.(e.g Finding Duplicate Elements).
@@ -24,3 +26,5 @@
 8 -> Try SUM of Numbers and then Manipulating (like finding DIFF between two SUM etc..)
 
 9 -> Sorting/Using Two Loops can save our day SOMETIMES.
+
+10 -> Always be Careful when OVERWRITING a Value for a Variable. (i.e Make Sure that it is what you want).

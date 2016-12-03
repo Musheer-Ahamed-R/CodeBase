@@ -16,7 +16,7 @@ public class Application {
       //new FindString().finalAttempt(matrix, "GEEKS");
 
       //int[] a = {40, 10, 20, 5, 45, 50, 65, 90, 35, 25};
-      int[] a = {39, 33, 24, 15, 12, 56, 68, 92, 26, 7};
+      int[] a = {20, 30, 40, 50, 10, 12, 15};
 
       //int sum = 10;
       //PairNumberSum.pairNoSum1(a, sum);
@@ -43,9 +43,20 @@ public class Application {
       //TwoNonRepeatingElements.findNonRepeatingElem(a);
 
       //PeakElement.findPeakElement(a);
-      PeakElement.binarySearchPeakElem(a);
+      //PeakElement.binarySearchPeakElem(a);
+
+
+      // NextPrevGreaterSmaller.printNextGreater(a);
+      // System.out.println("-----------------");
+      // NextPrevGreaterSmaller.printNextSmallest(a);
+      // System.out.println("-----------------");
+      // NextPrevGreaterSmaller.printPrevGreater(a);
+      // System.out.println("-----------------");
+      // NextPrevGreaterSmaller.printPrevSmallest(a);
 
       //System.out.println(PeakElement.isPeak(a, 9));
+
+      Pivot.findPivot(a);
    }
 
 
