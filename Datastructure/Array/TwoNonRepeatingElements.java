@@ -12,6 +12,7 @@ public class TwoNonRepeatingElements {
       // Since a Set(1) bit represents two Opposite Bits. Finding Set Bit and Xor'ing Numbers with Bit Set at that Location will give us one Number and Doing the Opposite Will give us Second Number.
 
       int setBit = result & ~(result-1);     // This should be Remembered
+                                             // Also above step can be achieved using Bit Shifting, but takes an addition For loop to Iterate Over each Bits(32 Bits)
       int x = 0;
       int y = 0;
       for(int i=0;i<a.length;i++) {

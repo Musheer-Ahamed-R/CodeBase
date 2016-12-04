@@ -13,18 +13,23 @@
          -> If Problem is to be Solved in less Complexity than O(n), then this Should be the FIRST ALTERNATIVE.
          -> Binary Search can also be used in Array which DO NOT FOLLOW ANY ORDER. We just need to set the Condition Properly.(Condition to go Left or Right)
             (e.g Find the Peak Element.)
-         -> The start, end and mid can all be used in determining which way to go.(i.e Not just MID).   
+         -> The start, end and mid can all be used in determining which way to go.(i.e Not just MID).
 
 6 -> If the RANGE of Elements are KNOWN(), then the Array Index can be useful(Counting Sort) in many ways.( e.g finding Element Occurrences,
      occurrence count etc..). In this case, the INDEX OF SAME ARRAY ITSELF can ALSO be used.(e.g Finding Duplicate Elements).
 
-7 -> Try XOR if Array has DUPLICATE/REPEATING Values. This approach can be used to Find SINGLE UNIQUE Element or DOUBLE UNIQUE and also DUBLE DUPLICATE Elements.
+7 -> Use STACK if the Current Elements Presence depends on other Elements in the Array. (e.g Previous or Next Elements)
+
+8 -> Try XOR if Array has DUPLICATE/REPEATING Values. This approach can be used to Find SINGLE UNIQUE Element or DOUBLE UNIQUE and also DUBLE DUPLICATE Elements.
+     Other than these Elements, this approach DOES NOT WORK.
         -> XOR is both Commutative and ASSOCIATIVE
         -> XOR of a number with itself is 0.
         -> XOR with a Number and 0 returns the Number itself
 
-8 -> Try SUM of Numbers and then Manipulating (like finding DIFF between two SUM etc..)
+9 -> Try SUM of Numbers and then Manipulating (like finding DIFF between two SUM etc..)
 
-9 -> Sorting/Using Two Loops can save our day SOMETIMES.
+10 -> Bit Manipulation should also be considered as a Final Alternative.(e.g All Elements N Times except 1 Element)
 
-10 -> Always be Careful when OVERWRITING a Value for a Variable. (i.e Make Sure that it is what you want).
+10 -> Sorting/Using Two Loops can save our day SOMETIMES.
+
+11 -> Always be Careful when OVERWRITING a Value for a Variable. (i.e Make Sure that it is what you want).

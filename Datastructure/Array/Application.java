@@ -16,7 +16,7 @@ public class Application {
       //new FindString().finalAttempt(matrix, "GEEKS");
 
       //int[] a = {40, 10, 20, 5, 45, 50, 65, 90, 35, 25};
-      int[] a = {20, 30, 40, 50, 10, 12, 15};
+      int[] a = {10, 5, 25, 15, 20, 12};
 
       //int sum = 10;
       //PairNumberSum.pairNoSum1(a, sum);
@@ -27,7 +27,7 @@ public class Application {
 
       //CountPairs.pairsCount(a, 4);
 
-      int[] b = {1, 2, 3, 5};
+      int[] b = {2, 2, 5};
       //LostElement.lostElement1(a, b);
       //LostElement.lostElement2(a, b);
       //LostElement.binarySearch(a, b);
@@ -60,7 +60,10 @@ public class Application {
       //PivotSearch.findPivotElem1(a, 20);
       //PivotSearch.findPivotElem2(a, 20);
 
-      MissingNumber.missingNo(b);
+      //Leaders.leaders1(a);
+      //Leaders.leaders2(a);
+
+      OddOccurence.oddOccurence(b, 2);
    }
 
 

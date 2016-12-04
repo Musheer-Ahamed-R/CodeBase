@@ -17,6 +17,9 @@ public class SquareRoot {
          } else {
             start = mid + 1;
          }
+         if(Math.abs(prevMid - mid) <= 0.00005) {// Find the Correct Logic
+            System.out.println("The Sqrt is "+mid);
+         }
          prevMid = mid;
       }
 
