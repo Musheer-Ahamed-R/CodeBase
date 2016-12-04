@@ -1,4 +1,4 @@
-public class LostElement {
+public class MissingNumber {
 
    // Find lost element from a duplicated array
 

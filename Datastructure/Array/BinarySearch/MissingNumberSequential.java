@@ -1,4 +1,4 @@
-public class MissingNumber {
+public class MissingNumberSequential {
 
    public static void missingNo(int[] a) {
 
