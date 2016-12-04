@@ -27,7 +27,7 @@ public class Application {
 
       //CountPairs.pairsCount(a, 4);
 
-      int[] b = {2, 2, 5};
+      int[] b = {2, 10, 0, 5, 20, 32, 0, 45, 0, 4, 12, 0, 0, 0, 1};
       //LostElement.lostElement1(a, b);
       //LostElement.lostElement2(a, b);
       //LostElement.binarySearch(a, b);
@@ -63,7 +63,11 @@ public class Application {
       //Leaders.leaders1(a);
       //Leaders.leaders2(a);
 
-      OddOccurence.oddOccurence(b, 2);
+      //OddOccurence.oddOccurence(b, 2);
+
+
+      //RemoveZerosInPlace.removeZerosInPlace(b);
+      
    }
 
 
