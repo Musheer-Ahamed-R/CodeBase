@@ -48,7 +48,7 @@ Algorithm :
       -> There is NO NEED to Check ARRAY OUT OF BOUND for either start or mid or end.
       -> For Finding Diff between two Number, we should Always Prefer the Number to the Right of Mid(mid + 1) and Not Left to it(mid -1).
          Think about the case where only two Numbers are in the Array.((mid + 1) would work, whereas (mid - 1) wont work).
-
+      -> If Duplicates are Present and the Array is Sorted, then also we can use Binary Search to Find the Start and the End of an Element(With Duplicates).
 
    Notes :
       -> Here, mid will always be NEARER or EQUAL to low, because of "Integer Division".
