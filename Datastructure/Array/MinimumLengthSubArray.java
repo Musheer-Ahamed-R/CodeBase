@@ -64,28 +64,6 @@ public class MinimumLengthSubArray {
             return;
          }
       }
-
-
-
-
-
-
-
-      /*for(int i=1;i<=a.length;i++) {               // <= a.length, because to check the sum after adding the last Element
-
-                                             // This check MUST be after removing the Making the Sum Lesser than the Required Sum.(i.e After Removing Front Elements)
-         if(reqSum == sum) {                 // This is Before adding the Current Element because for Considering the First Element too.
-            if(start = i) {
-               start --;
-            }
-            System.out.println("The Sum "+reqSum+" is Found at "+start+" -> "+(i-1));
-            end = i-1;
-            return;
-         }
-         if(i<a.length) {
-            sum += a[i];
-         }
-      }*/
       System.out.println("No SubArray Found");
    }
 
