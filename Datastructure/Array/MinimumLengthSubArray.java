@@ -45,25 +45,22 @@ public class MinimumLengthSubArray {
 
       int sum = a[0];
       int start = 0;
-      int end = 0;
 
       if(sum == reqSum) {
          System.out.println("Sum Found at FIRST INCEX");
       }
-
       for(int i=1;i<a.length;i++) {
          sum += a[i];
          while(reqSum < sum && start <= i) {   // (i-1), because only elements till i-1 has been added in the Sum.(Current Element is added atlast).
-                                                   // start < (i-1), so that the start value is maintained for Printing Below.
             sum -= a[start];
-            start++;
+            start++;                           // Start index could go beyond the Current i value. But, it is not a Problem as it will be matched in the Next Iteration.
          }
-         if(reqSum == sum) {                 // This is Before adding the Current Element because for Considering the First Element too.
+         System.out.println(sum);
+         if(reqSum == sum) {                 // This MUST be Before ADDING the Current Element because we dont want the sum to greater while comparing.
             if(start > i) {
                start --;
             }
-            System.out.println("The Sum "+reqSum+" is Found at "+start+" -> "+(i));
-            end = i-1;
+            System.out.println("The Sum "+reqSum+" is Found at "+start+" -> "+i);
             return;
          }
       }
