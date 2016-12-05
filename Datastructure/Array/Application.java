@@ -16,7 +16,7 @@ public class Application {
       //new FindString().finalAttempt(matrix, "GEEKS");
 
       //int[] a = {40, 10, 20, 5, 45, 50, 65, 90, 35, 25};
-      int[] a = {16, -15, 2};
+      int[] a = {0, 0, 0, 1};
 
       //int sum = 10;
       //PairNumberSum.pairNoSum1(a, sum);
@@ -76,6 +76,12 @@ public class Application {
       //MinimumLengthSubArray.minimumLengthSubArray3(a, -13);
 
       //System.out.println(25+-20);
+
+      //MaxDifference.maximumDifference(a);
+
+      //MinDifference.minDiff(a);
+
+      FlipZero.flipZeroint(a, 4);
    }
 
 

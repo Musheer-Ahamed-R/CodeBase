@@ -32,8 +32,10 @@
 
 11 -> Bit Manipulation should also be considered as a Final Alternative.(e.g All Elements N Times except 1 Element)
 
-12 -> Sorting/Using Two Loops can save our day SOMETIMES.
+12 -> SLIDING WINDOW should be Used/Considered when we are Dealing with a Group of Array Elements Within a "PREDEFINED" Limit or Boundary(like Sub-Array matching a Sum, FlipZeros(Predefined No to be Flipped) to get Max 1's etc..)
 
-13 -> Always be Careful when OVERWRITING a Value for a Variable. (i.e Make Sure that it is what you want).
+13 -> Sorting/Using Two Loops can save our day SOMETIMES.
 
-14 -> It is Sometimes Better to Start from the FIRST Index and having the value at Zeroth Index as the Start Value.
+14 -> Always be Careful when OVERWRITING a Value for a Variable. (i.e Make Sure that it is what you want).
+
+15 -> It is Sometimes Better to Start from the FIRST Index and having the value at Zeroth Index as the Start Value.
