@@ -1,13 +1,22 @@
+import java.util.*;
+
 public class MinimumLengthSubArray {
 
    // Given an unsorted array of nonnegative integers, find a continous subarray which adds to a given number.
 
    // SubArray is Defined as a Continious part of the Given Array.
 
-   // 1 -> Using Two Loops(Brute Force)               -  O(n^2)
-   // 2 -> Using a Single Loops and Eliminating the   -  O(n)
-   //      First Element if sum becomes greater
-   //      than the Required Sum
+   // 1 -> Using Two Loops(Brute Force)                  -  O(n^2)
+   // 2 -> Sliding Window Method. Using a Single Loops   -  O(n)
+   //      and Eliminating the First Element(s) if sum
+   //      becomes greater than the Required Sum
+   // 3 -> Storing Sum Upto It in a Map and Checking it.
+   //          -> Each Element has a SUM(Not Sub-Array) "UPTO IT".(Kadane's Algorithm Stores the Maximum "Sub-Array" ending upto Current Element).
+   //          -> That "ENDING SUM" is Maintained in a Map.
+   //          -> Sum = Curr_Sum - x. (Because Curr_Sum is total Sum and Subtracting it with a Value will Give Sum. That Value is the Ending Value,
+   //             thus we can form Sub-Array after the index Containing that Value)
+   //             x = Curr_Sum - Sum
+   //             If the x value is Available in Map, then we form a SubArray after the Index containing the Value(x).
    // Note :
    //    -> The Second Method Does Not Support Negative Values.
 
@@ -65,6 +74,26 @@ public class MinimumLengthSubArray {
          }
       }
       System.out.println("No SubArray Found");
+   }
+
+   public static void minimumLengthSubArray3(int[] a, int reqSum) {
+      Map<Integer, Integer> map = new HashMap<>();
+
+      int currSum = 0;
+      for(int i=0;i<a.length;i++) {
+         currSum += a[i];
+         if(currSum == reqSum) {
+            System.out.println("Found from 0 -> "+i);
+            return;
+         }
+         if(map.get(currSum - reqSum) != null) {
+            System.out.println("Found from----- "+(map.get(currSum - reqSum)+1) +" -> "+i);
+         }
+         map.put(currSum, i);
+      }
+
+
+
    }
 
 

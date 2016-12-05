@@ -16,7 +16,7 @@ public class Application {
       //new FindString().finalAttempt(matrix, "GEEKS");
 
       //int[] a = {40, 10, 20, 5, 45, 50, 65, 90, 35, 25};
-      int[] a = {16, 17, 2};
+      int[] a = {16, 15, 2};
 
       //int sum = 10;
       //PairNumberSum.pairNoSum1(a, sum);
@@ -72,7 +72,8 @@ public class Application {
       //MaximumSubArray.kadaneMaximumSubArray(a);
 
       //MinimumLengthSubArray.minimumLengthSubArray(a, 15);
-      MinimumLengthSubArray.minimumLengthSubArray2(a, 15);
+      //MinimumLengthSubArray.minimumLengthSubArray2(a, 15);
+      //MinimumLengthSubArray.minimumLengthSubArray3(a, 15);
 
       //System.out.println(25+-20);
    }
