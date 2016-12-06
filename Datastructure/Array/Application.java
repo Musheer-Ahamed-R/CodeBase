@@ -83,7 +83,13 @@ public class Application {
 
       //FlipZero.flipZeroint(a, 4);
 
-      TrappingRainWater.trappingRainWater(a);
+      //TrappingRainWater.trappingRainWater(a);
+
+      //Reverse.reverse(a);
+      //Reverse.reverseRecursion(a, 0);
+      //System.out.println(Arrays.toString(a));
+
+      Rotation.rotation(a, 2);
    }
 
 

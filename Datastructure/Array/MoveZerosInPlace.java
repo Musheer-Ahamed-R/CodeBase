@@ -1,4 +1,4 @@
-public class RemoveZerosInPlace {
+public class MoveZerosInPlace {
 
    // 1 -> Iterative (Using Two For Loops)              -   O(n)(Not Sure)
    // 2 -> Iterative (Using Single For Loop)            -   O(n)  Preffered
