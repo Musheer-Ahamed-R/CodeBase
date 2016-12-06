@@ -2,14 +2,16 @@
 
 2 -> Keep the CONDITION(if condition or loop continuation condition) as simple as possible. HUGELY reduces occurrence of bugs.
 
-3 -> IT IS BETTER TO MAKE THE CODE DIRTY THAN MAKE THE LOGIC CONFUSING. Could Tremendously Reduce Occurrence of Bugs.
+3 -> In case of TWO LOOPS, USE THE PROPER INDEX IN THE PROPER PLACE(i.e use i and j in PROPER PLACES).
 
-4 -> HashTable(Array) can be used to check the Presence and also useful for many manipulations(Count occurrence) of an Element in an Array. But, the
+4 -> IT IS BETTER TO MAKE THE CODE DIRTY THAN MAKE THE LOGIC CONFUSING. Could Tremendously Reduce Occurrence of Bugs. You could make the code BETTER After Completing the Problem.
+
+5 -> HashTable(Array) can be used to check the Presence and also useful for many manipulations(Count occurrence) of an Element in an Array. But, the
      Drawback is that we should know the MAX Range of Elements.(THUS NOT PREFERRED)
 
-5 -> We can use a HashMap instead of a HashTable(Array) for checking occurrences or counting occurrences.
+6 -> We can use a HashMap instead of a HashTable(Array) for checking occurrences or counting occurrences.
 
-6 -> Binary Search SHOULD be ALWAYS in MIND when working with Arrays When the Array Elements are in SOME ORDER (e.g Sorted Order, Increasing then Decreasing,
+7 -> Binary Search SHOULD be ALWAYS in MIND when working with Arrays When the Array Elements are in SOME ORDER (e.g Sorted Order, Increasing then Decreasing,
      Order Maintained between Arrays etc..) and we need to FIND/SEARCH for an Element or a Change in the Order in such an Array.
      Note :
          -> If Problem is to be Solved in less Complexity than O(n), then this Should be the FIRST ALTERNATIVE.
@@ -17,25 +19,25 @@
             (e.g Find the Peak Element.)
          -> The start, end and mid can all be used in determining which way to go.(i.e Not just MID).
 
-7 -> If the RANGE of Elements are KNOWN(), then the Array Index can be useful(Counting Sort) in many ways.( e.g finding Element Occurrences,
+8 -> If the RANGE of Elements are KNOWN(), then the Array Index can be useful(Counting Sort) in many ways.( e.g finding Element Occurrences,
      occurrence count etc..). In this case, the INDEX OF SAME ARRAY ITSELF can ALSO be used.(e.g Finding Duplicate Elements).
 
-8 -> Use STACK if the Current Elements Presence depends on other Elements in the Array. (e.g Previous or Next Elements)
+9 -> Use STACK if the Current Elements Presence depends on other Elements in the Array. (e.g Previous or Next Elements)
 
-9 -> Try XOR if Array has DUPLICATE/REPEATING Values. This approach can be used to Find SINGLE UNIQUE Element or DOUBLE UNIQUE and also DUBLE DUPLICATE Elements.
+10 -> Try XOR if Array has DUPLICATE/REPEATING Values. This approach can be used to Find SINGLE UNIQUE Element or DOUBLE UNIQUE and also DUBLE DUPLICATE Elements.
      Other than these Elements, this approach DOES NOT WORK.
         -> XOR is both Commutative and ASSOCIATIVE
         -> XOR of a number with itself is 0.
         -> XOR with a Number and 0 returns the Number itself
 
-10 -> Try SUM of Numbers and then Manipulating (like finding DIFF between two SUM etc..)
+11 -> Try SUM of Numbers and then Manipulating (like finding DIFF between two SUM etc..)
 
-11 -> Bit Manipulation should also be considered as a Final Alternative.(e.g All Elements N Times except 1 Element)
+12 -> Bit Manipulation should also be considered as a Final Alternative.(e.g All Elements N Times except 1 Element)
 
-12 -> SLIDING WINDOW should be Used/Considered when we are Dealing with a Group of Array Elements Within a "PREDEFINED" Limit or Boundary(like Sub-Array matching a Sum, FlipZeros(Predefined No to be Flipped) to get Max 1's etc..)
+13 -> SLIDING WINDOW should be Used/Considered when we are Dealing with a Group of Array Elements(SUB-ARRAY) Within a "PREDEFINED" Limit or Boundary(like Sub-Array matching a Sum, FlipZeros(Predefined No to be Flipped) to get Max 1's etc..)
 
-13 -> Sorting/Using Two Loops can save our day SOMETIMES.
+14 -> Sorting/Using Two Loops can save our day SOMETIMES. Using Two Loops in case of Sub-Array is a Bit Different. But, it could also save Sometimes.
 
-14 -> Always be Careful when OVERWRITING a Value for a Variable. (i.e Make Sure that it is what you want).
+15 -> Always be Careful when OVERWRITING a Value for a Variable. (i.e Make Sure that it is what you want).
 
-15 -> It is Sometimes Better to Start from the FIRST Index and having the value at Zeroth Index as the Start Value.
+16 -> It is Sometimes Better to Start from the FIRST Index and having the value at Zeroth Index as the Start Value.
