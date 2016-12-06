@@ -5,7 +5,7 @@ public class Application {
    public static void main(String[] args) {
        int[] arr = {1, 4, 3, 2};
       //
-      ArrayZigZag.zigZag(arr);
+      //ArrayZigZag.zigZag(arr);
       //
       // System.out.println(Arrays.toString(arr));
 
@@ -16,7 +16,7 @@ public class Application {
       //new FindString().finalAttempt(matrix, "GEEKS");
 
       //int[] a = {40, 10, 20, 5, 45, 50, 65, 90, 35, 25};
-      int[] a = {0, 0, 0, 1};
+      int[] a = {1, 5, 2, 3, 1, 7, 2};
 
       //int sum = 10;
       //PairNumberSum.pairNoSum1(a, sum);
@@ -82,6 +82,8 @@ public class Application {
       //MinDifference.minDiff(a);
 
       //FlipZero.flipZeroint(a, 4);
+
+      TrappingRainWater.trappingRainWater(a);
    }
 
 

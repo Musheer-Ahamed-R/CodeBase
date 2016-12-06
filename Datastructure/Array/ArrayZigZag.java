@@ -5,6 +5,7 @@ public class ArrayZigZag {
 
    // 1 -> Sort and Then Swap the ALternate Elements
    // 2 -> Swap the Elements if the Elements are not in Order(ZigZag Order).
+   //          The Neighbouring Element can be either be largeer or smaller than the Current Element.
 
    public static void zigZag(int[] arr) {
 

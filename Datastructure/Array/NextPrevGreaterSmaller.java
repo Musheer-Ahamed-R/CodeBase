@@ -11,6 +11,12 @@ public class NextPrevGreaterSmaller {
    // 2 -> Using Stack and Maintaining the Elements in Sorted Order
 
    // The Idea in this method is to keep the Elements in the Stack in Sorted Order.
+
+   // Note :
+   //    -> This is Different from Great(est) Element on its Left, because this Problem Considers only the Previous Greater Element and
+   //       Not the Overall Greatest Element.(Which is easier to Solve).
+
+
    public static void printNextGreater(int[] a) {
 
       Stack<Integer> stack = new Stack<>();
