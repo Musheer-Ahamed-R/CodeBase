@@ -3,9 +3,9 @@ import java.util.*;
 public class Application {
 
    public static void main(String[] args) {
-      // int[] arr = {1, 4, 3, 2};
+       int[] arr = {1, 4, 3, 2};
       //
-      // ArrayZigZag.zigZag(arr);
+      ArrayZigZag.zigZag(arr);
       //
       // System.out.println(Arrays.toString(arr));
 
@@ -81,7 +81,7 @@ public class Application {
 
       //MinDifference.minDiff(a);
 
-      FlipZero.flipZeroint(a, 4);
+      //FlipZero.flipZeroint(a, 4);
    }
 
 
