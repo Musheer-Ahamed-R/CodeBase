@@ -9,7 +9,7 @@ public class Application {
 
       //FlipZero.flipZeroint(a, 4);
 
-      MaximumAverageSubArray.maxAverage(a, 4);
+      MaximumAvgSubArray.maxAverage(a, 4);
    }
 
 
