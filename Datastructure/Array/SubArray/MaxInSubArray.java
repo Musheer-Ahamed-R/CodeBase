@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class MaximumContagiousSubArray {
+public class MaxInSubArray {
 
    // Given an array and an integer k, find the maximum for each and every contiguous subarray of size k.
 

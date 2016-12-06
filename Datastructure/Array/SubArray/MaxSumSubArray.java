@@ -1,4 +1,4 @@
-public class MaximumSubArray {
+public class MaxSumSubArray {
 
    // Given an Array, we have to find the SubArray Whose Sum is Maximum among all Possible SubArrays.
    // This Sub-Array will be Referred to as MAximum Sum Sub-Array(MSS).
