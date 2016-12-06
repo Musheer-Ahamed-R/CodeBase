@@ -27,9 +27,6 @@ public class TrappingRainWater {
             leftGreatest[i] = leftMaxValue;
          }
       }
-      //for(int elem : leftGreatest) {
-         //System.out.println(elem);
-      //}
       System.out.println("----------");
       int rightMax = -1;
       int noOfUnits = 0;
@@ -44,14 +41,6 @@ public class TrappingRainWater {
          noOfUnits += Integer.max(Integer.min(rightGreatest[i], leftGreatest[i]) - a[i], 0);
       }
       System.out.println(noOfUnits);
-      //Iterator<Integer> di = Arrays.asList(rightGreatest).listIterator();
-      //for(int elem : rightGreatest) {
-         //System.out.println(elem);
-      //}
-
-
-
-
    }
 
 }
