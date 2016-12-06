@@ -7,10 +7,7 @@ public class MaximumAvgSubArray {
    // 1 -> Sliding Window Stratergy. Calculate the Sum for Each Window and update the Max
 
 
-   public static void main(String[] args) {
-
-      int[] a = {11, -8, 16, -7, 24, -2, 3};
-      int k = 3;
+   public static void maxAverage(int[] a, int k) {
 
       int currSum = 0;
       int maxSum = -1;
@@ -18,7 +15,7 @@ public class MaximumAvgSubArray {
       for(int i=0;i<k;i++) {
          currSum += a[i];
       }
-      maxSum = currSum;                                // if Average is required, then divide the Sum by k 
+      maxSum = currSum;                                // if Average is required, then divide the Sum by k
       for(int i=1, j=k;j<a.length;i++, j++) {
          currSum -= a[i-1];
          currSum += a[j];
