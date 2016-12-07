@@ -39,7 +39,7 @@
 
 12 -> Bit Manipulation should also be considered as a Final Alternative.(e.g All Elements N Times except 1 Element)
 
-13 -> SLIDING WINDOW should be Used/Considered when we are Dealing with a Group of Array Elements(SUB-ARRAY) Within a "PREDEFINED" Limit or Boundary(like Sub-Array matching a Sum, FlipZeros(Predefined No to be Flipped) to get Max 1's etc..)
+13 -> SLIDING WINDOW should be Used/Considered when we are Dealing with a Group of Array Elements(SUB-ARRAY) Within a "PREDEFINED" Limit or Boundary(like Sub-Array matching a Sum, Problems with Given k Value, FlipZeros(Predefined No to be Flipped) to get Max 1's etc..)
 
 14 -> Sorting/Using Two Loops can save our day SOMETIMES. Using Two Loops in case of Sub-Array is a Bit Different. But, it could also save Sometimes.
 
