@@ -25,10 +25,15 @@
 9 -> Use STACK if the Current Elements Presence depends on other Elements in the Array. (e.g Previous or Next Elements)
 
 10 -> Try XOR if Array has DUPLICATE/REPEATING Values. This approach can be used to Find SINGLE UNIQUE Element or DOUBLE UNIQUE and also DUBLE DUPLICATE Elements.
-     Other than these Elements, this approach DOES NOT WORK.
+      Other than these Elements, this approach DOES NOT WORK.
         -> XOR is both Commutative and ASSOCIATIVE
         -> XOR of a number with itself is 0.
         -> XOR with a Number and 0 returns the Number itself
+
+      Note :
+        -> XOR of a number with itself is 0. But, WE SHOULD NOT DEPEND ON THIS LOGIC FOR OTHER PROBLEMS.(i.e XOR of 2 and 4 equals 6, which on XOR with 6 results Zero).
+           Thus, if a Number got Cancelled(While XOR'ing all Elements) it MAY NOT be a Duplicate in the List.
+
 
 11 -> Try SUM of Numbers and then Manipulating (like finding DIFF between two SUM etc..)
 

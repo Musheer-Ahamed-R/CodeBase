@@ -3,10 +3,12 @@ import java.util.*;
 public class Application {
 
    public static void main(String[] args) {
-      int[] b = {1, 2, 3, 4, 5, 5, 5, 5, 10, 11, 12};
+      int[] b = {-10, -5, 3, 4, 7, 9};
       //MissingNumber.missingNo(b);
 
-      NumberOfDuplicates.findOccurenceCount(b, 5);
+      //NumberOfDuplicates.findOccurenceCount(b, 5);
+
+      FixedPoint.fixedPoint(b);
    }
 
 }

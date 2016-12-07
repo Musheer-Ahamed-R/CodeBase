@@ -16,7 +16,7 @@ public class Application {
       //new FindString().finalAttempt(matrix, "GEEKS");
 
       //int[] a = {40, 10, 20, 5, 45, 50, 65, 90, 35, 25};
-      int[] a = {1, 5, 2, 3, 1, 7, 2};
+      int[] a = {1, 5, 2, 3, 1, 7, 2, 2, 2, 21, 23, 3};
 
       //int sum = 10;
       //PairNumberSum.pairNoSum1(a, sum);
@@ -27,7 +27,7 @@ public class Application {
 
       //CountPairs.pairsCount(a, 4);
 
-      int[] b = {2, 10, 0, 5, 20, 32, 0, 45, 0, 4, 12, 0, 0, 0, 1};
+      int[] b = {-10, -5, 0, 3, 7};
       //LostElement.lostElement1(a, b);
       //LostElement.lostElement2(a, b);
       //LostElement.binarySearch(a, b);
@@ -89,7 +89,12 @@ public class Application {
       //Reverse.reverseRecursion(a, 0);
       //System.out.println(Arrays.toString(a));
 
-      Rotation.rotation(a, 2);
+      //Rotation.rotation(a, 2);
+
+      //Distinct .printDuplicate(a);
+      //System.out.println(2 ^ 4);
+
+      FixedPoint.fixedPoint(a);
    }
 
 
