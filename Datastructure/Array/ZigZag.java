@@ -1,7 +1,6 @@
 //Convert array into Zig-Zag fashion
 
-public class ArrayZigZag {
-
+public class ZigZag {
 
    // 1 -> Sort and Then Swap the ALternate Elements
    // 2 -> Swap the Elements if the Elements are not in Order(ZigZag Order).

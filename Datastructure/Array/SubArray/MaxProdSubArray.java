@@ -11,7 +11,7 @@ public class MaxProdSubArray {
    //       -> This Algorithm works like Dynamic Programming, thus it is Better to Understand from the Start.
    //          Refer - https://youtu.be/86CQq3pKSUw
 
-// ------------------NOT YET COMPLETE --------------------
+// INCOMPLETE 
 
 
    public static void maxProd(int[] a) {

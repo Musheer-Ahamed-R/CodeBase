@@ -1,7 +1,7 @@
 public class MinJumpSteps {
 
 
-// -------------------------INCOMPLETE--------------------
+// INCOMPLETE 
    public static void minJump(int[] a) {
 
 
