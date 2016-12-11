@@ -3,6 +3,9 @@ import java.util.*;
 public class CountingSort {
 
    // This Sorting Algorithm is a Specialised version of Bucket Sort
+   // Note :
+   //    -> This Sorting Algorithm DOES NOT STORE THE COUNT, but Instead the Index UPTO WHICH the Element will get Stored in the NEW Sorted Array.
+
    public static void countingSort(int[] arr) {
 
       // The size of the count array must be known before hand(i.e no element value should exceed the max Index of the count array).
