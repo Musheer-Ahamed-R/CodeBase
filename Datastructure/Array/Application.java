@@ -17,7 +17,7 @@ public class Application {
       //new FindString().finalAttempt(matrix, "GEEKS");
 
       //int[] a = {40, 10, 20, 5, 45, 50, 65, 90, 35, 25};
-      int[] a = {0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1};
+      int[] a = {12, 34, 45, 9, 8, 90, 3};
 
       //int sum = 10;
       //PairNumberSum.pairNoSum1(a, sum);
@@ -97,7 +97,9 @@ public class Application {
 
       //MinJumpSteps.minJump(a);
 
-      SingleScanSort.singleScanSort(a);
+      //SingleScanSort.singleScanSort(a);
+      //SingleScanSort.singleScanSortTwoIndex(a);
+      SingleScanSort.singleScanSortEvenOdd(a);
    }
 
 

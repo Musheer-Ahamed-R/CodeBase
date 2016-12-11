@@ -30,9 +30,46 @@ public class SingleScanSort {
       for(int elem : a) {
          System.out.print(elem+"  ");
       }
+   }
+
+   public static void singleScanSortTwoIndex(int[] a) {
+
+      int i=0;
+      int j=0;
+      while(j<a.length) {
+         if(a[j] == 0) {
+            Swap.swap(a, i, j);
+            i++;
+            j++;              // (Not Necessary). Here j++ because the value being swapped HAS to be White(the Place between i(Inclusive) and j(exclusive) is always White.
+         } else if(a[j] == 1) {
+            j++;
+         }
+      }
+      for(int elem : a) {
+         System.out.print(elem+"  ");
+      }
 
 
    }
+
+   public static void singleScanSortEvenOdd(int[] a) {
+
+      int i=0;
+      int j=0;
+      while(j<a.length) {
+         if(a[j]%2 == 0) {
+            Swap.swap(a, i, j);
+            i++;
+            j++;              // (Not Necessary). Here j++ because the value being swapped HAS to be White(the Place between i(Inclusive) and j(exclusive) is always White.
+         } else {
+            j++;
+         }
+      }
+      for(int elem : a) {
+         System.out.print(elem+"  ");
+      }
+   }
+
 
 
 

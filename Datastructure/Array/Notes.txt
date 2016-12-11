@@ -46,3 +46,5 @@
 15 -> Always be Careful when OVERWRITING a Value for a Variable. (i.e Make Sure that it is what you want).
 
 16 -> It is Sometimes Better to Start from the FIRST Index and having the value at Zeroth Index as the Start Value.
+
+17 -> We can Separate an Array into Three or Two Halves based on Some Criteria using the Dutch National Algorithm(or a variation of It).
