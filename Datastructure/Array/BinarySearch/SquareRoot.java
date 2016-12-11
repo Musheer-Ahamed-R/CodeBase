@@ -1,7 +1,7 @@
 public class SquareRoot {
 
 
-   // Code Incomplete
+   // INCOMPLETE
    public static void findSqrt(int a) {
 
       int start = 0;

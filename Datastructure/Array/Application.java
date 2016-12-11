@@ -16,7 +16,7 @@ public class Application {
       //new FindString().finalAttempt(matrix, "GEEKS");
 
       //int[] a = {40, 10, 20, 5, 45, 50, 65, 90, 35, 25};
-      int[] a = {1, 5, 2, 3, 1, 7, 2, 2, 2, 21, 23, 3};
+      int[] a = {1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9};
 
       //int sum = 10;
       //PairNumberSum.pairNoSum1(a, sum);
@@ -94,7 +94,7 @@ public class Application {
       //Distinct .printDuplicate(a);
       //System.out.println(2 ^ 4);
 
-      FixedPoint.fixedPoint(a);
+      MinJumpSteps.minJump(a);
    }
 
 
