@@ -1,6 +1,7 @@
-//Convert array into Zig-Zag fashion
-
+import java.util.*;
 public class ZigZag {
+
+   // Convert array into Zig-Zag fashion
 
    // 1 -> Sort and Then Swap the ALternate Elements
    // 2 -> Swap the Elements if the Elements are not in Order(ZigZag Order).
@@ -21,11 +22,8 @@ public class ZigZag {
          k ^= 1;
       }
       for(int elem : arr) {
-         System.out.println(elem);
+         System.out.print(elem);
       }
    }
-
-
-
 
 }

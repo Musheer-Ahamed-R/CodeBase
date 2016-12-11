@@ -3,10 +3,11 @@ import java.util.*;
 public class Application {
 
    public static void main(String[] args) {
-       int[] arr = {1, 4, 3, 2};
-      //
-      //ArrayZigZag.zigZag(arr);
-      //
+       int[] arr = {1, 2, 3, 4, 5, 6, 7};
+
+      // ZigZag.zigZag(arr);
+      //System.out.println();
+      //ZigZagOrder.sortZigZag(arr);
       // System.out.println(Arrays.toString(arr));
 
       char[][] matrix = {{'G', 'E', 'E', 'K', 'S', 'F', 'O', 'R', 'G', 'E', 'E', 'K', 'S'},
@@ -16,7 +17,7 @@ public class Application {
       //new FindString().finalAttempt(matrix, "GEEKS");
 
       //int[] a = {40, 10, 20, 5, 45, 50, 65, 90, 35, 25};
-      int[] a = {1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9};
+      int[] a = {0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1};
 
       //int sum = 10;
       //PairNumberSum.pairNoSum1(a, sum);
@@ -94,7 +95,9 @@ public class Application {
       //Distinct .printDuplicate(a);
       //System.out.println(2 ^ 4);
 
-      MinJumpSteps.minJump(a);
+      //MinJumpSteps.minJump(a);
+
+      SingleScanSort.singleScanSort(a);
    }
 
 
