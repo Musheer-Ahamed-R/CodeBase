@@ -7,9 +7,14 @@
 4 -> IT IS BETTER TO MAKE THE CODE DIRTY THAN MAKE THE LOGIC CONFUSING. Could Tremendously Reduce Occurrence of Bugs. You could make the code BETTER After Completing the Problem.
 
 5 -> HashTable(Array) can be used to check the Presence and also useful for many manipulations(Count occurrence) of an Element in an Array. But, the
-     Drawback is that we should know the MAX Range of Elements.(THUS NOT PREFERRED)
+     Drawbacks :
+         -> We should know the MAX Range of Elements.(THUS NOT PREFERRED)
+         -> Only Count/Occurrence of Positive Elements can be Maintained.(Though there is a Work Around for this).
 
-6 -> We can use a HashMap instead of a HashTable(Array) for checking occurrences or counting occurrences.
+6 -> We can use a HashSet/HashMap instead of a HashTable(Array) for checking occurrences or counting occurrences(Solves Drawbacks of Using Hash Table).
+     Notes :
+         -> Use HashSet, if we only want to Check the Occurrence.
+         -> Use HashMap, if we want to Store Additional Details Such as occurrence Count, Occurrence Index.
 
 7 -> Binary Search SHOULD be ALWAYS in MIND when working with Arrays When the Array Elements are in SOME ORDER (e.g Sorted Order, Increasing then Decreasing,
      Order Maintained between Arrays etc..) and we need to FIND/SEARCH for an Element or a Change in the Order in such an Array.
@@ -22,7 +27,9 @@
 8 -> If the RANGE of Elements are KNOWN(), then the Array Index can be useful(Counting Sort) in many ways.( e.g finding Element Occurrences,
      occurrence count etc..). In this case, the INDEX OF SAME ARRAY ITSELF can ALSO be used.(e.g Finding Duplicate Elements).
 
-9 -> Use STACK if the Current Elements Presence depends on other Elements in the Array. (e.g Previous or Next Elements)
+19 -> Zero CANNOT BE NEGATED. This has to be Considered when Storing the Index Value as Negative Value(To Indicate Index of First Occurrence).
+
+9 -> Use STACK if the Current Elements Presence depends on other Elements in the Array (e.g Previous or Next Elements).
 
 10 -> Try XOR if Array has DUPLICATE/REPEATING Values. This approach can be used to Find SINGLE UNIQUE Element or DOUBLE UNIQUE and also DUBLE DUPLICATE Elements.
       Other than these Elements, this approach DOES NOT WORK.
@@ -33,7 +40,6 @@
       Note :
         -> XOR of a number with itself is 0. But, WE SHOULD NOT DEPEND ON THIS LOGIC FOR OTHER PROBLEMS.(i.e XOR of 2 and 4 equals 6, which on XOR with 6 results Zero).
            Thus, if a Number got Cancelled(While XOR'ing all Elements) it MAY NOT be a Duplicate in the List.
-
 
 11 -> Try SUM of Numbers and then Manipulating (like finding DIFF between two SUM etc..)
 
@@ -49,4 +55,4 @@
 
 17 -> We can Separate an Array into Three or Two Halves based on Some Criteria using the Dutch National Algorithm(or a variation of It).
 
-18 -> Iterating Over the Array in the OPPOSITE DIRECTION of the requirement of our Problem set can help us to Solve it with a Single Iteration.(e.g Leaders in an Array).
+18 -> Iterating Over the Array in the OPPOSITE DIRECTION of the requirement of our Problem set can help us to Solve it with a Single Iteration.(e.g Leaders in an Array, First Repeating Integer with Minimum Index).
