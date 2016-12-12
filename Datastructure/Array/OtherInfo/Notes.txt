@@ -48,3 +48,5 @@
 16 -> It is Sometimes Better to Start from the FIRST Index and having the value at Zeroth Index as the Start Value.
 
 17 -> We can Separate an Array into Three or Two Halves based on Some Criteria using the Dutch National Algorithm(or a variation of It).
+
+18 -> Iterating Over the Array in the OPPOSITE DIRECTION of the requirement of our Problem set can help us to Solve it with a Single Iteration.(e.g Leaders in an Array).
