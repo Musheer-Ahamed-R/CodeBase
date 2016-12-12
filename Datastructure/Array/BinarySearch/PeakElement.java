@@ -6,6 +6,9 @@ public class PeakElement {
 
    // 1 -> Stack           -  O(n)
    // 2 -> Binary Search(Only One Peak Element can be Found)   -  O(log n)
+   //          -> There is always a peak element in input array in any input array(including SUB-ARRAY).
+   //          -> If the Left Neighbour is Greater than Current Element, then we are Sure to Find a Peak Element on the Left Side of the Current Element.
+   //             Same goes for Right Neighbour.
 
    public static void findPeakElement(int[] a) {
 
@@ -31,8 +34,7 @@ public class PeakElement {
       }
    }
 
-   // If the Left Neighbour is Greater than Current Element, then we are Sure to Find a Peak Element on the Left Side of the Current Element.
-   // Same goes for Right Neighbour.
+
    public static void binarySearchPeakElem(int[] a) {
       int low = 0;
       int high = a.length-1;
