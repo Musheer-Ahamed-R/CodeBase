@@ -11,7 +11,7 @@ public class Application {
                    {1, 0, 1, 1, 1, 1, 0, 1, 1, 1 },
                    {1, 1, 0, 0, 0, 0, 1, 0, 0, 1 }};
 
-      System.out.println(ShortestPath.shortestPath(a, 0, 0, 2, 0) - 1);    // -1 is Done to negate the Increment Done by the Source Cell.
+      System.out.println(ShortestPath.shortestPath(a, 0, 0, 2, 0, -1, -1) - 1);    // -1 is Done to negate the Increment Done by the Source Cell.
    }
 
 }
