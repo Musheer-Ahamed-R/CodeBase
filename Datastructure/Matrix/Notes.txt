@@ -1,4 +1,8 @@
-1 -> Make sure that the Current CELL "DOES NOT COME BACK TO ITS ANCESTOR CELL"(Not Just its Previous Cell). This AVOIDS
+1 -> Make sure that the Current CELL "DOES NOT COME BACK TO ANY OF ITS ANCESTOR CELLS"(Not Just its Previous Cell). This AVOIDS
      StackOverflow Error.
 
-2 ->
+2 -> The Source/Starting Point will be Given. But, if the Source is "Not Known/Given", then Use TWO FOR LOOPS to Start at Each Cell(e.g. FindString Problem).
+
+3 -> Use the Rows and Cols Array for Traversing the EIGHT Different Paths in Matrix.
+
+4 -> 

@@ -11,10 +11,10 @@ public class Application {
       // System.out.println(Arrays.toString(arr));
 
       char[][] matrix = {{'G', 'E', 'E', 'K', 'S', 'F', 'O', 'R', 'G', 'E', 'E', 'K', 'S'},
-                        {'G', 'E', 'E', 'K', 'S', 'Q', 'U', 'I', 'Z', 'G', 'E', 'E', 'K'},
+                        {'G', 'E', 'E', 'K', 'S', 'S', 'K', 'E', 'E', 'G', 'E', 'E', 'K'},
                         {'I', 'D', 'E', 'Q', 'A', 'P', 'R', 'A', 'C', 'T', 'I', 'C', 'E'}};
 
-      //new FindString().finalAttempt(matrix, "GEEKS");
+      FindString.finalAttempt(matrix, "GEEKS");
 
       //int[] a = {40, 10, 20, 5, 45, 50, 65, 90, 35, 25};
       int[] a = {10, 5, 3, 4, 3, 5, 6};
@@ -101,8 +101,8 @@ public class Application {
       //SingleScanSort.singleScanSortTwoIndex(a);
       //SingleScanSort.singleScanSortEvenOdd(a);
 
-      FirstRepeating.firstRepeating(a);
-      FirstRepeating.firstRepeating2(a);
+      //FirstRepeating.firstRepeating(a);
+      //FirstRepeating.firstRepeating2(a);
    }
 
 

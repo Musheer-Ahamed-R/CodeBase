@@ -1,0 +1,1 @@
+1 -> We can get the Index for Each Character using "Character - a", returning Integer. The can be Extended for Capital Letters too. 
