@@ -1,8 +1,29 @@
 1 -> Make sure that the Current CELL "DOES NOT COME BACK TO ANY OF ITS ANCESTOR CELLS"(Not Just its Previous Cell). This AVOIDS
      StackOverflow Error.
 
-2 -> The Source/Starting Point will be Given. But, if the Source is "Not Known/Given", then Use TWO FOR LOOPS to Start at Each Cell(e.g. FindString Problem).
+2 -> If MEMOIZATION is Used PROPERLY(Refer Next Point), it can Hugely Reduce The Number of Steps Required to Reach the Destination. Even a
+     Slightest Optimization using MEMOIZATION can become a LIFE SAVER.
 
-3 -> Use the Rows and Cols Array for Traversing the EIGHT Different Paths in Matrix.
+     Notes :
+         -> MEMOIZATION is Not Possible while finding the SHORTEST path.(It can be Used to find if a Path Exists).
 
-4 -> 
+
+3 -> If a Cell is Visited Once. Then there are many Cases.
+         -> The Destination Cannot be reached from Current Cell.
+         -> The Destination Cannot be reached from the Current Cell(But Not True) "BECAUSE OF THE CURRENT PATH"(Avoiding Loop by Not Visiting Nodes
+            in the Current Path, Which Could be the Path to the Destination).(MEMOIZATION is Not Possible in this case)
+         -> The Current Path in which the Cell is Visited may NOT BE BEST PATH to reached the Destination(Considering Destination can be reached from the Cell).
+            Thus, a Cell Has to be RE-VISTED if we want to Know the Best Path.(MEMOIZATION is Not Possible in this case TOO)
+
+     Notes :
+         -> The Destination is CONFIRMED to be Unreachable from the Current Only if the Path from Current Cell is Not Blocked its Ancestors.
+            BUT THIS IS NOT POSSIBLE AT ALL, Since from the Current Cell We can Always Reach its Previous Cell.
+            Thus, in Case of DFS, we can NEVER Say for Sure that Destination is Not Reachable from the Current Cell.
+
+4 -> The Source/Starting Point will be Given. But, if the Source is "Not Known/Given", then Use TWO FOR LOOPS to Start at Each Cell(e.g. FindString Problem).
+
+5 -> Use the Rows and Cols Array for Traversing the EIGHT Different Paths in Matrix.
+
+6 -> If we Hear the Word PATH(Yes Path itself MUST be found with BFS) or Shortest Path, then go with BFS.
+
+7 -> If BFS is to be used, the Cells that can be Reached from the Current Cell are Considered as Its Children.
