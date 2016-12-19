@@ -14,11 +14,11 @@ public class Application {
                     { -4, -1, 1, 7, -6 },
                     { 0, -4, 10, -5, 1 }};
 
+      //SpecificPair.specificPair(a);
 
-
-
-
-      SpecificPair.specificPair(a);
+      EggDropping.eggDropping(2, 6);
+      int minDrop = EggDropping.eggDroppingRecur(2, 6);
+      System.out.println(minDrop);
    }
 
 
