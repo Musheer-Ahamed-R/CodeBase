@@ -5,6 +5,24 @@ public class MoveZerosInPlace {
    // 2 -> Use a New Array to store Non-Zero Elements   -   O(n)
    // 3 -> Use a Queue                                  -   O(n)
 
+
+   public static void removeZerosInPlaceSimpleSolution(int[] a) {
+
+      int count = 0;
+      for(int i=0;i<a.length;i++) {
+         if(a[i] != 0) {
+            a[count++] = a[i];
+         }
+      }
+      while(count < a.length) {
+         a[count++] = 0;
+      }
+      for(int elem : a) {
+         System.out.print(elem+"  ");
+      }
+   }
+
+
    public static void removeZerosInPlace(int[] a) {
 
       int lastNonZero = -1;

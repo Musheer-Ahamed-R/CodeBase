@@ -14,10 +14,10 @@ public class Application {
                         {'G', 'E', 'E', 'K', 'S', 'S', 'K', 'E', 'E', 'G', 'E', 'E', 'K'},
                         {'I', 'D', 'E', 'Q', 'A', 'P', 'R', 'A', 'C', 'T', 'I', 'C', 'E'}};
 
-      FindString.finalAttempt(matrix, "GEEKS");
+      //FindString.finalAttempt(matrix, "GEEKS");
 
       //int[] a = {40, 10, 20, 5, 45, 50, 65, 90, 35, 25};
-      int[] a = {10, 5, 3, 4, 3, 5, 6};
+      int[] a = {1, 9, 8, 4, 0, 0, 2, 7, 0, 6, 0, 9};
 
       //int sum = 10;
       //PairNumberSum.pairNoSum1(a, sum);
@@ -28,7 +28,7 @@ public class Application {
 
       //CountPairs.pairsCount(a, 4);
 
-      int[] b = {-10, -5, 0, 3, 7};
+      int[] b = {2, 3, 5, 6};
       //LostElement.lostElement1(a, b);
       //LostElement.lostElement2(a, b);
       //LostElement.binarySearch(a, b);
@@ -68,6 +68,7 @@ public class Application {
 
 
       //RemoveZerosInPlace.removeZerosInPlace(b);
+      MoveZerosInPlace.removeZerosInPlaceSimpleSolution(a);
 
       //MaximumSubArray.maximumSumSubArray(a);
       //MaximumSubArray.kadaneMaximumSubArray(a);
@@ -103,6 +104,8 @@ public class Application {
 
       //FirstRepeating.firstRepeating(a);
       //FirstRepeating.firstRepeating2(a);
+
+      //UnionAndIntersection.unionAndIntersection(a, b);
    }
 
 
