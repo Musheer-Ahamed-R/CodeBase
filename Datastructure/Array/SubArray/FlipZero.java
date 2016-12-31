@@ -1,6 +1,6 @@
 public class FlipZero {
 
-   // Find zeroes to be flipped so that number of consecutive 1’s is maximized
+   // Find zeroes to be flipped so that number of consecutive 1’s is maximized. Number of Zeros that can be Fipped is Given.
 
    // 1 -> Using Two Loops(Just like Finding SubArray)
    // 2 -> Using Sliding Window

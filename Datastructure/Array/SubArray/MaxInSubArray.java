@@ -23,7 +23,7 @@ public class MaxInSubArray {
 
          if(count == k) {          // if End of the Window
             System.out.println(a[aq.getFirst()]);
-            if(aq.getFirst() == i) {
+            if(aq.getFirst() <= i) {
                aq.removeFirst();
             }
             i++;                    // Updating Start for the Next Window

@@ -13,7 +13,7 @@ public class Application {
 
       //UnSortedArrayToCompleteSorted.subArrayToSort(a);
 
-      MaxProdSubArray.maxProd(a);
+      //MaxProdSubArray.maxProd(a);
    }
 
 

@@ -31,12 +31,12 @@ Algorithm :
 
    int start = 0;
    int end = a.length-1;
-   while(start < end) {                   // Change
+   while(start < end) {                   // Diff
       int mid = (start + end)/2;
       if(a[mid] SOME_CONDITION SOME_VALUE) {
          start = mid + 1;
       } else {
-         end = mid;                       // Change
+         end = mid;                       // Diff
       }
    }
 
