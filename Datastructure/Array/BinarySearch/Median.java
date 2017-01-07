@@ -11,7 +11,7 @@ public class Median {
    //    -> If the Median1 > Median 2, then Consider the Elements Upto Median1 and after Median2
    // Notes :
    //    -> In case of Even Elements, Consider both the Numbers Forming the Median
-   //    -> ALWAYS AT ANY POINT, the NUMBER OF ELEMENTS IN BOTH ARRAY Should be Same.
+   //    -> ALWAYS AT ANY POINT, the NUMBER OF ELEMENTS IN BOTH ARRAY Should be Same.(Before Case Automatically Maintains this).
    //    -> If the Number of Elements is Even Numbered, Then it can become Odd Numbered through the Iterations and wise versa.
 
 

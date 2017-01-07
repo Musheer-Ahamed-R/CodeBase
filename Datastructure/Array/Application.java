@@ -3,9 +3,9 @@ import java.util.*;
 public class Application {
 
    public static void main(String[] args) {
-       int[] arr = {1, 2, 3, 4, 5, 6, 7};
+       int[] arr = {10, 5, 6, 3, 2, 20, 100, 80};
 
-      // ZigZag.zigZag(arr);
+      ZigZag.zigZag(arr);
       //System.out.println();
       //ZigZagOrder.sortZigZag(arr);
       // System.out.println(Arrays.toString(arr));
@@ -68,7 +68,7 @@ public class Application {
 
 
       //RemoveZerosInPlace.removeZerosInPlace(b);
-      MoveZerosInPlace.removeZerosInPlaceSimpleSolution(a);
+      //MoveZerosInPlace.removeZerosInPlaceSimpleSolution(a);
 
       //MaximumSubArray.maximumSumSubArray(a);
       //MaximumSubArray.kadaneMaximumSubArray(a);

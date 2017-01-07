@@ -5,9 +5,9 @@ public class Application {
    public static void main(String[] args) {
       int[] arr = new int[12];
 
-      arr[0] = 2;
-      arr[1] = 8;
-      arr[2] = 10;
+      arr[0] = 8;
+      arr[1] = 2;
+      /*arr[2] = 10;
       arr[3] = 3;
       arr[4] = 15;
       arr[5] = 6;
@@ -16,9 +16,16 @@ public class Application {
       arr[8] = 32;
       arr[9] = 4;
       arr[10] = 11;
-      arr[11] = 0;
+      arr[11] = 0;*/
 
-      heapSort(arr);
+      Heap h = new Heap(2, 1);
+      /*h.setArr(arr);
+      h.bubbleDown(0);
+      for(int elem : arr) {
+         System.out.println(elem+"  ");
+      }*/
+      buildHeap(arr);
+      //heapSort(arr);
    }
 
    /*
@@ -35,7 +42,7 @@ public class Application {
    }
 
    public static Heap buildHeap(int[] arr) {
-      Heap heap = new Heap(20, 0);
+      Heap heap = new Heap(2, 0);
       heap.setArr(arr);
       heap.setCount(arr.length);
       int lastNonLeaf = ((heap.getCount()-1)-1)/2;

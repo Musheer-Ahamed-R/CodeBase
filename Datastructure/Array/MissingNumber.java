@@ -11,7 +11,7 @@ public class MissingNumber {
 
    // If the Two Input arrays are Exact Duplicate of Each Other
    // 1 -> Linear Search   - O(n)
-   // 2 -> Binary Search   - O(log n)
+   // 2 -> Binary Search   - O(log n)           // Recommended
    // 3 -> XOR             - O(n)   // Recommended
    //       -> XOR is both Commutative and ASSOCIATIVE
    //       -> XOR of a number with itself is 0.

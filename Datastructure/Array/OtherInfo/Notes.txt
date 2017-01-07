@@ -58,3 +58,7 @@
 18 -> Iterating Over the Array in the OPPOSITE DIRECTION of the requirement of our Problem set can help us to Solve it with a Single Iteration.(e.g Leaders in an Array, First Repeating Integer with Minimum Index).
 
 19 -> If the (endIndex - startIndex) % 2, of an Array is Zero. Then, the Number of Elements from Start to End is ODD NUMBERED.(Because of Zero Based Indexing).
+
+20 -> If k'th Largest/Smallest Element is Asked, then it is a K-Order Statistics Problem. This can be Solved in different ways.
+         -> Using Min/Max Heap
+         -> 

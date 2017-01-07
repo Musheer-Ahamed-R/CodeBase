@@ -6,7 +6,8 @@ public class Heap {
    private int heapType;
 
    public Heap(int capacity, int heapType) {
-      this.capacity = capacity;
+
+      //this.capacity = capacity;
       this.heapType = heapType;
       this.arr = new int[capacity];
    }
