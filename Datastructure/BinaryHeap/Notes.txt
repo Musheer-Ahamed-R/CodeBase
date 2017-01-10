@@ -37,3 +37,10 @@
       -> swap the NEW ROOT with its greatest child and do this recursively till the NODE is greater than its children
 
 6 -> Heapify is the state where the Heap is no longer a Heap and we have to do some changes to make it as a Heap again.(When adding an element or deleting the root).
+
+When Heaps Should be Considered  -
+      -> The Question Involves N-Order Statistics(Selection Algorithm). This Involves
+            -> Find the Nth Maximum/Element).
+            -> Find All the N Maximum/Minimum Elements.
+      -> When we need to Quick Access to the Maximum/Minimum Element at any Given Point.
+      -> When External Sorting is Done.(This is Covered in Point 1).
