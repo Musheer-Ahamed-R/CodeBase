@@ -1,0 +1,10 @@
+Pattern Matching  -
+   Given a String Text and a Pattern, Find the All the Positions in the Text, where the Pattern Appears as a Sub-String.
+
+   -> Exact Pattern Matching  -  -> Where Does the Read(Pattern) match the Reference Genome(Text String) Exactly.
+
+   -> Approximate Pattern     -  -> Where Does the Read(Pattern) match the Reference Genome(Text String) Approximately.
+      Matching                      Here, an Integer will be Given which Decide the ATMOST Number of Mis-Matches.
+
+   -> Multiple Pattern        -  -> Where do Billions of Reads Match in the Reference Genome.??     
+      Matching
