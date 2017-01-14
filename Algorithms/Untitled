@@ -1,0 +1,24 @@
+Please use
+CTIAPI.customCtiApiConfirm(message,onOkfunction,onCancelfunction,okButtonName,cancelButtonName) function
+for custom alert or confirm messages.
+message - to show in alert box
+onOkfunction - to be executed if the user clicks OK button
+onCancelfunction - to be executed if the user clicks Cancel button (Can be ignored if not needed)
+okButtonName - Alternate name for OK button (Default - OK) (Can be ignored if not needed)
+cancelButtonName - Alternate name for Cancel button (Default - Cancel) (Can be ignored if not needed)
+P.S.The Alert will be hidden if the user clicks either Ok or Cancel button automatically - No need to add this in onOkfunction or onCancelfunction
+For reference, see TwilioConf.removePhno() or CTIAPI.showHide_RevokeDiv() functions.
+
+
+
+var reqPool =  new crmRequestPool();
+reqPool.initiate({
+				"action"	:	actionUrl,//No I18n
+				"cache" : false,
+				"type"		:	"POST",//No I18n
+				"data"		:	dataparams,//No I18n
+            "success"	:	function(respJson){//No I18n
+
+
+14
+672

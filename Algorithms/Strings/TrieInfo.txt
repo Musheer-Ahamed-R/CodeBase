@@ -1,0 +1,21 @@
+Trie   -  -> A Trie is a tree data structure that allows strings with similar character prefixes to use the same prefix data
+            and store only the tails as separate data. One character of the string is stored at each level of the tree,  with
+            the first character of the string stored at the root.
+         -> Each Node Contains the Number of Pointers equal to the Number of Characters of the Alphabet.
+         -> A Normal Trie is Constructed from a Set of Patterns(Strings). Whereas, a Suffix Trie is Constructed from All the Suffixes of a
+            Single Text.
+
+
+Advantages -   -> Tries can Insert and Search a String in O(L), L is the Length of a Single Word.
+               -> This is much Faster than Hash Table, Binary Search Implementation, etc..
+
+DisAdvantages  -> The Main Disadvantage of Trie is that they Need a LOT Of Memory for Storing Strings.
+
+Notes :
+   -> There are Some Improved Trie Representations called Trie Compression Technique. But, even with those we can only reduce the Memory at the Leaves but not at the
+      Internal Nodes.
+
+Tricks With   -   -> We can count the number of times a String S Occurs as a SubString of a Text, by Traversing the Nodes in the Suffix Trie and from the end Node of the SubString,
+Suffix Trie         we count the Number of Branches BELOW it(Not From It. i.e We have to go as Deep Till the Leaf Nodes).
+
+                  -> We can get the Longest Repeated SubString, by Finding the Deepest Node with More than One Child.

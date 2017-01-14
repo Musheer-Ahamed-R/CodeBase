@@ -14,17 +14,17 @@ public class TriePatternMatching {
 
    public static void main(String[] args) {
 
-      String[] reads = {"banana", "nana", "band", "zma"};
-
+      String[] reads = {"AA"};
       TrieNode tNode = new TrieNode();
-
+      String text = "AAA";
 
       for(int i=0;i<reads.length;i++) {
          insertWord(reads[i], tNode);
       }
 
-      //findReadOccurence("kazmabananaslk", tNode);
-      printTrie(tNode, 1);
+      findReadOccurence("kazmabananaslk", tNode);
+      //printTrie(tNode, 1);*/
+
 
    }
 
