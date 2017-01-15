@@ -14,15 +14,15 @@ public class TriePatternMatching {
 
    public static void main(String[] args) {
 
-      String[] reads = {"AA"};
+      String[] reads = {"bananas", "nana", "sama"};
       TrieNode tNode = new TrieNode();
-      String text = "AAA";
+      String text = "pananabananas";
 
       for(int i=0;i<reads.length;i++) {
          insertWord(reads[i], tNode);
       }
 
-      findReadOccurence("kazmabananaslk", tNode);
+      findReadOccurence(text, tNode);
       //printTrie(tNode, 1);*/
 
 
@@ -49,21 +49,16 @@ public class TriePatternMatching {
 
       for(int i=0;i<text.length();i++) {
          int j=i;
-         char ch = text.charAt(j);
+         Character ch = null;
          TrieNode temp = tNode;
-         while(temp.map.containsKey(ch)) {
+         while(j < text.length() && temp.map.containsKey(ch = text.charAt(j))) {   // Short
             temp = temp.map.get(ch);
-            if(j+1 < text.length()) {
-               ch = text.charAt(++j);
-            } else {
-               j++;
-            }
-            if(temp.isEndOfWord) {
-               System.out.println(text.substring(i, j));
-            }
-            if(j >= text.length()) {
-               break;
-            }
+            j++;
+         }
+         if(temp.isEndOfWord) {
+            System.out.println(text.substring(i, j)+" At Index "+i);
+         } else {
+            //System.out.println(text.substring(i, j)+" At Index "+i);
          }
       }
    }
