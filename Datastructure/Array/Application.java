@@ -4,8 +4,8 @@ public class Application {
 
    public static void main(String[] args) {
        int[] arr = {10, 5, 6, 3, 2, 20, 100, 80};
-
-      ZigZag.zigZag(arr);
+       System.out.println("Hello World");
+      //ZigZag.zigZag(arr);
       //System.out.println();
       //ZigZagOrder.sortZigZag(arr);
       // System.out.println(Arrays.toString(arr));
