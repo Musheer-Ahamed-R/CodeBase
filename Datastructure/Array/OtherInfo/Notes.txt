@@ -6,6 +6,8 @@
 
 4 -> IT IS BETTER TO MAKE THE CODE DIRTY THAN MAKE THE LOGIC CONFUSING. Could Tremendously Reduce Occurrence of Bugs. You could make the code BETTER After Completing the Problem.
 
+5 -> Always Always Check for the Corner Cases. Logic takes a "Major Hit" in Corner Cases in Most of the Cases.
+
 5 -> HashTable(Array) can be used to check the Presence and also useful for many manipulations(Count occurrence) of an Element in an Array. But, the
      Drawbacks :
          -> We should know the MAX Range of Elements.(THUS NOT PREFERRED)
@@ -60,5 +62,10 @@
 19 -> If the (endIndex - startIndex) % 2, of an Array is Zero. Then, the Number of Elements from Start to End is ODD NUMBERED.(Because of Zero Based Indexing).
 
 20 -> If k'th Largest/Smallest Element is Asked, then it is a K-Order Statistics Problem. This can be Solved in different ways.
-         -> Using Min/Max Heap
-         -> 
+         -> Using Min/Max Heap(Both Min and Max)
+         -> Using Array
+         -> Using Sorting
+         -> Using Optimized Bubble Sort/Selection Sort   
+         -> Using Quick Select
+         -> Using Randomized Quick Select
+
