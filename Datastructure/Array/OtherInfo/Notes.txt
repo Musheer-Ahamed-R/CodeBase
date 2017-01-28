@@ -6,7 +6,7 @@
 
 4 -> IT IS BETTER TO MAKE THE CODE DIRTY THAN MAKE THE LOGIC CONFUSING. Could Tremendously Reduce Occurrence of Bugs. You could make the code BETTER After Completing the Problem.
 
-5 -> Always Always Check for the Corner Cases. Logic takes a "Major Hit" in Corner Cases in Most of the Cases.
+5 -> Always Always Check for the Corner Cases. Most of the Time, the Logic takes a "Major Major Hit" in Corner Cases.
 
 5 -> HashTable(Array) can be used to check the Presence and also useful for many manipulations(Count occurrence) of an Element in an Array. But, the
      Drawbacks :

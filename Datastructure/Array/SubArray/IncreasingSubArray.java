@@ -27,23 +27,41 @@ public class IncreasingSubArray {
 
 	}
 
+	// We keep on moving till we find an Element which is Lesser than or equal to the Previous Element. At that point we stop and Count the Number of SubArrays for Each Element(Strictly Increasing SubArrays).
 	public static void strictlyIncreasing2(int[] a) {
 
-		int prevVal = a[0];
 		int fromIndex = 0;
 		int count = 0;
 		for(int i=1;i<a.length;i++) {
-			if(a[i] <= prevVal) {
+			if(a[i] <= a[i-1]) {
 				System.out.println("Stopping at index "+i+" with count "+count);
 				for(int j=fromIndex;j<i;j++) {
 					count += i-j-1;
 				}
 				fromIndex = i;
 			}
-			prevVal = a[i];
 		}
 		for (int i=fromIndex; i<a.length; i++) {
 			count += a.length-i-1;
+		}
+		System.out.println(count);
+	}
+
+	// The idea is based on fact that a sorted subarray of length ‘len’ adds len*(len-1)/2 to result.
+	public static void strictlyIncreasing3(int[] a) {
+
+		int length = 1;
+		int count= 0;
+		for(int i=0;i<a.length-1;i++) {
+			if(a[i+1] > a[i]) {
+				length++;
+			} else {
+				count += ((length - 1) * length )/2;
+				length = 1;
+			}
+		}
+		if(length > 1) {
+			count += ((length - 1) * length )/2;
 		}
 		System.out.println(count);
 	}
