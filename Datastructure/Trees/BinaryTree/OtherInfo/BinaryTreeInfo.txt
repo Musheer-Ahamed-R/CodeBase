@@ -1,0 +1,31 @@
+Binary Tree Properties	-	
+	
+	-> The maximum number of nodes at level ‘l’ of a binary tree is 2^n.
+	-> Maximum number of nodes in a binary tree of height ‘h’ is 2^(n+1) – 1.
+	-> In Binary tree, number of leaf nodes is always one more than nodes with two children. 
+
+Binary Tree Types 	-	
+	
+	-> Full Binary Tree 
+	   		A Binary Tree is full if every node has 0 or 2 children.	
+
+	-> Complete Binary Tree
+			A Binary Tree is complete Binary Tree if all levels are completely filled except possibly the last level and the last level has all keys as  
+			left as possible   		
+
+	-> Perfect/Strict Binary Tree		   
+			A Binary tree is Perfect Binary Tree in which all internal nodes have two children and all leaves are at same level.
+
+	-> A degenerate (or pathological) tree
+			A Tree where every internal node has one child. Such trees are performance-wise same as linked list.		
+
+Tree Traversals	-	
+
+	-> Unlike linear data structures (Array, Linked List, Queues, Stacks, etc) which have only one logical way to traverse them, trees can be traversed in 
+	   different ways.			
+
+	    -> Depth First Traversals:
+	   		-> Inorder Traversal
+	   		-> Preorder Traversal
+	   		-> Postorder Traversal
+	   	-> Breadth First or Level Order Traversal 	
