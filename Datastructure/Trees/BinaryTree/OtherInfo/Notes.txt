@@ -26,3 +26,14 @@ Important Points
 4 -> The return value(Base Case) in a recursive call has a MAJOR MAJOR impact in the problem solution.(i.e They should be used wisely)
 
 5 -> Using root instead of the Current Node can lead to UNNECESSARY TROUBLE. Always take care of this BIG careless mistake.
+
+6 -> Traversals Quick Note (Iterative):
+          -> PreOrderTraversal  - 2
+          -> InOrderTraversal   - 3
+          -> PostOrderTraversal - 3
+
+          Relationships - 
+              -> PreOrder and InOrder     -> Morris travsersal
+              -> PreOrder and PostOrder   -> Level Order Traversal(In case of PostOrder Traversal, we have to Print in Reverse Order(Opposite of Normal Case)).
+              -> InOrder and PostOrder    -> "Current Pointer is always before".(In postorder Traversel, the Current Node Stays null in First part of Second case)).
+                                             Visited Map.     (We Keep on going LEFT till we reach the End. From there we start Processing).(NOT IDEAL)
