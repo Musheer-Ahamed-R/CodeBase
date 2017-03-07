@@ -4,6 +4,11 @@ public class InOrderAndPostOrder {
 
 	// Notes :
 	//	-> Here, the postEnd variable is Static because we need to keep track of the Root Index(int PostOrder) as it goes down the Tree.
+	
+
+	// Time Complexity - O(n^2). 
+	// The Time Complexity can be reduced to O(n) using a Map for Finding the Root Index.
+
 
 	private static int postEnd = 14;
 	public static Node constructTree(int[] inOrder, int inStart, int inEnd, int[] postOrder) {

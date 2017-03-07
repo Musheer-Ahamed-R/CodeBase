@@ -6,6 +6,9 @@ public class InOrderAndPreOrder {
 	// Notes :
 	//	-> Here, the preStart variable is Static because we need to keep track of the Root Index(in PreOrder) as it goes down the Tree.
 
+	// Time Complexity - O(n^2). 
+	// The Time Complexity can be reduced to O(n) using a Map for Finding the Root Index.
+
 	private static int preStart = 0;
 	public static Node constructTree(int[] inOrder, int inStart, int inEnd, int[] preOrder) {
 
