@@ -1,0 +1,12 @@
+Notes :
+
+1 -> Use Stack if Balancing Paranthesis or Infix to Postfix or Evaluation of Expression(PreFix or PostFix) is asked.
+	 Also(in case of balanced paranthesis), The last Open Paranthesis is the One that will be get Closed First(Matches the Policy of Stack)..
+
+**2 -> Consider Using Stack if the Problem Involves BACKTRACKING(Including Tree Traversals).
+
+3 -> Use STACK if the Current Element depends on other Elements in the Array (e.g Previous or Next Elements).
+
+4 -> In case of Stack, the Problem should always be Considered "STEP BY STEP". (Just like Recursion). Otherwise, we "COULD NOT POSSIBLY SOLVE" the Problem.
+
+5 -> Popping from one stack and pushing that into another stack actually Reverses the Stack Elements.(Speciality of Stack)

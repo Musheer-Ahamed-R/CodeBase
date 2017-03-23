@@ -1,0 +1,39 @@
+Important Points
+
+1 -> Don't use root.getLChild() or root.getRChild() for NULL check(unless entirely necessary). It causes a lot of trouble with null pointer exception
+
+2 -> The Order in which Left and the Right Child are added is extremely important(e.g, Iterative PreOrderTraversal, tree to doubly linked list)
+
+3 -> Traversal Findings
+           PreOrder Traversal :
+                1 -> A Node will always have its left child after it.
+
+          InOrder Traversal :
+                1 -> flattens the Tree.(used in converting Tree to a Linked List)
+                2 -> gives Nodes in increasing order if the tree is a BinarySearch Tree
+                3 -> for a particular node, its left and right children are on its left and right respectively.(used in constructing a tree, if another traversal is given)
+                4 -> The Successor of a Node is
+                              1 -> The Right Child or the Left Most Child in the Right SubTree of the Current Node(Top to Bottom - Presence of Right Child)
+                              2 -> The First Ancestor Node for which the current node is in the Left SubTree of that Node(Bottom to Top - Absence of a Right Child)
+                5 -> The predecessor of a Node is
+                              1 -> The Left Child or the Right Most Node in the Left Subtree of the Current Node(Top to Bottom - Presence of a Left Child)
+                              2 -> The First Ancestor Node for which the Current Node is in the Right SubTree of that Node(Bottom to Top - Absence of a Left Child)
+
+          PostOrder Traversal
+                1 -> A Node will always have its right child before it.(used in case of Iterative Traversal)
+
+
+4 -> The return value(Base Case) in a recursive call has a MAJOR MAJOR impact in the problem solution.(i.e They should be used wisely)
+
+5 -> Using root instead of the Current Node can lead to UNNECESSARY TROUBLE. Always take care of this BIG careless mistake.
+
+6 -> Traversals Quick Note (Iterative):
+          -> PreOrderTraversal  - 2
+          -> InOrderTraversal   - 3
+          -> PostOrderTraversal - 3
+
+          Relationships - 
+              -> PreOrder and InOrder     -> Morris travsersal
+              -> PreOrder and PostOrder   -> Level Order Traversal(In case of PostOrder Traversal, we have to Print in Reverse Order(Opposite of Normal Case)).
+              -> InOrder and PostOrder    -> "Current Pointer is always before".(In postorder Traversel, the Current Node Stays null in First part of Second case)).
+                                             Visited Map.     (We Keep on going LEFT till we reach the End. From there we start Processing).(NOT IDEAL)

@@ -1,5 +1,7 @@
 public class BinaryToThreaded {
 
+  // This is achieved using Morris Traversal.
+
   public static void convertTreeToThreaded(Node root) {
 
     Node current = root;

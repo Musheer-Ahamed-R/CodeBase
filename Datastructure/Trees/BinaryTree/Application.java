@@ -55,6 +55,10 @@ public class Application {
       // tree.getRChild().getRChild().getRChild().setLChild(new Node(30));
       // tree.getRChild().getRChild().getRChild().setRChild(new Node(31));
 
+      int[] inOrder = new int[]{8, 4, 9, 2, 10, 5, 11, 1, 12, 6, 13, 3, 14, 7, 15};
+      int[] preOrder = new int[]{1, 2, 4, 8, 9, 5, 10, 11, 3, 6, 12, 13, 7, 14, 15};
+      int[] postOrder = new int[]{8, 9, 4, 10, 11, 5, 2, 12, 13, 6, 14, 15, 7, 3, 1};
+
       //PreOrderTraversal.recurPreOrder(tree);
       //PreOrderTraversal.iterPreOrder(tree);
       //PreOrderTraversal.iterPreOrder2(tree);
@@ -69,6 +73,11 @@ public class Application {
       //PostOrderTraversal.iterPostOrder3(tree);
 
       //LevelOrderTraversal.levelOrder(tree);
+
+      //Random.makeThreaded(tree);
+
+      //boolean isIdentical = Identical.isIdentical(tree, skewedTree);
+      //System.out.println(isIdentical);
 
       //int max = MaxElement.getMax(tree);
       //int max = MaxElement.iterGetMax(tree);
@@ -124,9 +133,14 @@ public class Application {
       //MorrisTraversal.morrisInorder(tree);
       //MorrisTraversal.morrisPreOrder(tree);
 
-      PrintBinaryTree.printTree(tree);
+      //PrintBinaryTree.printTree(tree);
 
       //System.out.println(sum);
+
+      //Node root = InOrderAndPreOrder.constructTree(inOrder, 0, 14, preOrder);
+      //PrintBinaryTree.printTree(root);
+      Node root = InOrderAndPostOrder.constructTree(inOrder, 0, 14, postOrder);
+      PrintBinaryTree.printTree(root);
   }
 
 }
