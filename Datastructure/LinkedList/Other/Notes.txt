@@ -1,0 +1,10 @@
+1 -> Caching a node (especially indirect hierachy of a node(node->next-> next)) while doing some operations can become TRAGIC.(Caching while Swapping 
+	 Adjacent nodes).
+
+2 -> It is EXTREMELY ADVISABLE to keep both the Current Node and the Previous Node while finding/deleting/swapping etc..
+
+3 -> Keep a HOLD on to the Current Node even if it is not necessary.(like we could manage with its previous nodes, but that could involve caching which 
+	 is against Rule 1)
+
+4 -> In some cases where an action needs to happen after a specific point and continue to happen after that(e.g Delete from end). In this case, we may 	
+	 have to check the condition from where it has to start as seperately.

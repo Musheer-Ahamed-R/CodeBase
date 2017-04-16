@@ -3,7 +3,9 @@ import java.util.Arrays;
 public class SortLL {
 
    // Sort LinkedList with 0, 1 and 2's Node Values
-   public static void sortLL(Node head) {
+   
+
+   /*public static void sortLL(Node head) {
       Node[] nodeArray = new Node[3];
 
       while(head != null) {
@@ -38,7 +40,7 @@ public class SortLL {
 	System.out.println(root);
 	root = root.getNext();
       }
-   }
+   }*/
 
 
 

@@ -1,0 +1,7 @@
+1 -> Working algorithm for detecting loop in a Linked List.
+
+2 -> Swapping. Use currentNode also and don't cache node -> next -> next.
+
+3 -> palindrome
+
+4 -> Intersection point
