@@ -2,22 +2,21 @@ public class Application {
 
    public static void main(String[] args) {
 
-         Node head = new Node(9, null);
-         head.setNext(new Node(9, null));
-         head.getNext().setNext(new Node(9, null));
-         head.getNext().getNext().setNext(new Node(9, null));
-         //head.getNext().getNext().getNext().setNext(new Node(1, null));
-         //head.getNext().getNext().getNext().getNext().setNext(new Node(2, null));
-         //head.getNext().getNext().getNext().getNext().getNext().setNext(new Node(3, null));
+         Node head = new Node(1, null);
+         head.setNext(new Node(2, null));
+         head.getNext().setNext(new Node(3, null));
+         head.getNext().getNext().setNext(new Node(4, null));
+         head.getNext().getNext().getNext().setNext(new Node(5, null));
+         head.getNext().getNext().getNext().getNext().setNext(new Node(2, null));
+         head.getNext().getNext().getNext().getNext().getNext().setNext(new Node(3, null));
 
 
-         Node head2 = new Node(2, null);
-         head2.setNext(new Node(3, null));
-         head2.getNext().setNext(new Node(20, null));
-         //head2.getNext().getNext().setNext(new Node(13, null));
-         //head2.getNext().getNext().getNext().setNext(new Node(20, null));
-         //head2.getNext().getNext().getNext().getNext().setNext(head.getNext());
-         //head2.getNext().getNext().getNext().getNext().setNext(new Node(14, null));
+         Node head2 = new Node(20, null);
+         head2.setNext(new Node(30, null));
+         head2.getNext().setNext(new Node(50, null));
+         head2.getNext().getNext().setNext(new Node(13, null));
+         head2.getNext().getNext().getNext().setNext(new Node(56, null));
+         head2.getNext().getNext().getNext().getNext().setNext(new Node(14, null));
          
 
          //print(head);
@@ -55,7 +54,9 @@ public class Application {
 
          //Duplicates.duplicates(head);
          
-         AddNumber.addNumberRecurMain(head);
+         // AddNumber.addNumberRecurMain(head);
+         // OddEven.oddEven(head);
+         MergeAlternate.mergeAlternate(head, head2);
       
    }
    
