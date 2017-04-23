@@ -4,10 +4,10 @@ public class Reverse {
 
 	// Reversing a Linked list is same logic for both iterative and recursive implementation 
 
-	public static void reverse(Node head) {
+	public static Node reverse(Node head) {
 		
 		if(head == null) {
-			return;
+			return head;
 		}
 
 		Node prevNode = null;
@@ -21,6 +21,7 @@ public class Reverse {
 		}
 		head = prevNode;
 		Application.print(head);
+		return head;
 	}
 
 	public static Node reverseRecur(Node prevNode, Node currNode) {
@@ -28,7 +29,7 @@ public class Reverse {
 		if(currNode == null) {
 			Application.print(prevNode);
 			return prevNode;
-		} 
+		}
 		Node nextCurr = currNode.getNext();
 		currNode.setNext(prevNode);
 		prevNode = currNode;

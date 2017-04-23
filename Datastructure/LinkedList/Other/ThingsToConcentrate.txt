@@ -5,3 +5,5 @@
 3 -> palindrome
 
 4 -> Intersection point
+
+5 -> Rotate

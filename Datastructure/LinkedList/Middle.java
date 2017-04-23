@@ -11,22 +11,22 @@ public class Middle {
 	// 1 -> We do not have the length of the liked list
 	// 2 -> 
 
-	public static void middle(Node head) {
+	public static Node middle(Node head) {
 
 		if(head == null) {
-			return;
+			return head;
 		}
 
 		Node firstNode = head;
 		Node secondNode = head;
 
-		while(firstNode != null && firstNode.getNext() != null && firstNode.getNext().getNext()) {
+		while(firstNode != null && firstNode.getNext() != null && firstNode.getNext().getNext() != null) {
 			firstNode = firstNode.getNext().getNext();
 			secondNode = secondNode.getNext();
 		}
 
 		System.out.println(secondNode);
-
+		return secondNode;
 	}
 
 }

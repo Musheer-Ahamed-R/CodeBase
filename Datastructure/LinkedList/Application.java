@@ -6,17 +6,17 @@ public class Application {
          head.setNext(new Node(2, null));
          head.getNext().setNext(new Node(3, null));
          head.getNext().getNext().setNext(new Node(4, null));
-         head.getNext().getNext().getNext().setNext(new Node(5, null));
-         head.getNext().getNext().getNext().getNext().setNext(new Node(2, null));
-         head.getNext().getNext().getNext().getNext().getNext().setNext(new Node(3, null));
+         //head.getNext().getNext().getNext().setNext(new Node(5, null));
+         //head.getNext().getNext().getNext().getNext().setNext(new Node(6, null));
+         //head.getNext().getNext().getNext().getNext().getNext().setNext(new Node(7, null));
 
 
          Node head2 = new Node(20, null);
-         head2.setNext(new Node(30, null));
-         head2.getNext().setNext(new Node(50, null));
-         head2.getNext().getNext().setNext(new Node(13, null));
+         head2.setNext(new Node(3, null));
+         head2.getNext().setNext(new Node(5, null));
+         head2.getNext().getNext().setNext(new Node(1, null));
          head2.getNext().getNext().getNext().setNext(new Node(56, null));
-         head2.getNext().getNext().getNext().getNext().setNext(new Node(14, null));
+         //head2.getNext().getNext().getNext().getNext().setNext(new Node(14, null));
          
 
          //print(head);
@@ -56,7 +56,20 @@ public class Application {
          
          // AddNumber.addNumberRecurMain(head);
          // OddEven.oddEven(head);
-         MergeAlternate.mergeAlternate(head, head2);
+         //MergeAlternate.mergeAlternate(head, head2);
+
+         //DeleteAtIndex.deleteAtIndex(head, 0);
+
+         //ShiftNodes.shiftNodes(head, 7);
+
+         //DeleteAlternate.deleteAlternte(head);
+         //Application.print(DeleteAlternate.deleteAlternteRecur(head));
+
+         //UnionAndIntersection.unionAndIntersection(head, head2);
+
+         //PairwiseSwap.pairwiseSwap(head);
+
+         Rearrange.rearrange(head);
       
    }
    
