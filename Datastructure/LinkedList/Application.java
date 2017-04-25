@@ -4,8 +4,8 @@ public class Application {
 
          Node head = new Node(1, null);
          head.setNext(new Node(2, null));
-         head.getNext().setNext(new Node(3, null));
-         head.getNext().getNext().setNext(new Node(4, null));
+         //head.getNext().setNext(new Node(3, null));
+         //head.getNext().getNext().setNext(new Node(4, null));
          //head.getNext().getNext().getNext().setNext(new Node(0, null));
          //head.getNext().getNext().getNext().getNext().setNext(new Node(1, null));
          //head.getNext().getNext().getNext().getNext().getNext().setNext(new Node(11, null));
@@ -96,7 +96,9 @@ public class Application {
          //IntersectionSorted.intersectionSortedRecur(head, head2, dummy);
          //Application.print(dummy.getNext());
 
-         Identical.identical(head, head2);
+         //Identical.identical(head, head2);
+
+         DeleteConstraint.deleteConstraint(head, 1);
    }
    
    public static void print(Node head) {
