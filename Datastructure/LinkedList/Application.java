@@ -6,17 +6,23 @@ public class Application {
          head.setNext(new Node(2, null));
          head.getNext().setNext(new Node(3, null));
          head.getNext().getNext().setNext(new Node(4, null));
-         //head.getNext().getNext().getNext().setNext(new Node(5, null));
-         //head.getNext().getNext().getNext().getNext().setNext(new Node(6, null));
-         //head.getNext().getNext().getNext().getNext().getNext().setNext(new Node(7, null));
+         //head.getNext().getNext().getNext().setNext(new Node(0, null));
+         //head.getNext().getNext().getNext().getNext().setNext(new Node(1, null));
+         //head.getNext().getNext().getNext().getNext().getNext().setNext(new Node(11, null));
+         //head.getNext().getNext().getNext().getNext().getNext().getNext().setNext(new Node(8, null));
+         //head.getNext().getNext().getNext().getNext().getNext().getNext().getNext().setNext(new Node(9, null));
+         //head.getNext().getNext().getNext().getNext().getNext().getNext().getNext().getNext().setNext(new Node(10, null));
+         //head.getNext().getNext().getNext().getNext().getNext().getNext().getNext().getNext().getNext().setNext(new Node(11, null));
 
 
-         Node head2 = new Node(20, null);
-         head2.setNext(new Node(3, null));
-         head2.getNext().setNext(new Node(5, null));
-         head2.getNext().getNext().setNext(new Node(1, null));
-         head2.getNext().getNext().getNext().setNext(new Node(56, null));
-         //head2.getNext().getNext().getNext().getNext().setNext(new Node(14, null));
+
+         Node head2 = new Node(1, null);
+         head2.setNext(new Node(2, null));
+         head2.getNext().setNext(new Node(3, null));
+         head2.getNext().getNext().setNext(new Node(4, null));
+         //head2.getNext().getNext().getNext().setNext(new Node(5, null));
+         //head2.getNext().getNext().getNext().getNext().setNext(new Node(7, null));
+         //head2.getNext().getNext().getNext().getNext().getNext().setNext(new Node(9, null));
          
 
          //print(head);
@@ -54,7 +60,7 @@ public class Application {
 
          //Duplicates.duplicates(head);
          
-         // AddNumber.addNumberRecurMain(head);
+         //AddNumber.addNumberRecurMain(head, 1);
          // OddEven.oddEven(head);
          //MergeAlternate.mergeAlternate(head, head2);
 
@@ -69,8 +75,28 @@ public class Application {
 
          //PairwiseSwap.pairwiseSwap(head);
 
-         Rearrange.rearrange(head);
-      
+         //Rearrange.rearrange(head);
+
+         //AddTwoNumberList.addTwoNumberList(head2, head);
+         //Node summedList = AddTwoNumberList.addTwoNumberListNoModify(head, head2);
+         
+         //Application.print(head);
+         //Application.print(head2);
+         //AddTwoNumberList.addTwoNumberListNoModify(head, head2);
+         //AddTwoNumberList.addTwoNumberListNoModifyRecurMain(head, head2);
+         /*if(summedList.getData() == 0) {
+            summedList = summedList.getNext();
+         }*/
+         //Application.print(summedList);
+         //DeleteSomeAfterSome.deleteSomeAfterSome(head, 1, 1);
+
+         //MoveLastToFirst.moveLastToFirst(head);
+         //IntersectionSorted.intersectionSorted(head, head2);
+         //Node dummy = new Node(-1, null);
+         //IntersectionSorted.intersectionSortedRecur(head, head2, dummy);
+         //Application.print(dummy.getNext());
+
+         Identical.identical(head, head2);
    }
    
    public static void print(Node head) {
@@ -80,6 +106,23 @@ public class Application {
          head = head.getNext();
       }
       System.out.println();
+   }
+
+   public static int getLength(Node head) {
+
+      Node curr = head;
+      int count = 0;
+      while(curr != null) {
+         curr = curr.getNext();
+         count++;
+      }
+      return count;
+   }
+
+   public static void swap(Node node1, Node node2) {
+      Node temp = node1;
+      node1 = node2;
+      node2 = temp;
    }
 
 

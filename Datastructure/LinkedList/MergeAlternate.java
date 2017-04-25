@@ -1,5 +1,7 @@
 public class MergeAlternate {
 
+	// Merge a linked list into another linked list at alternate positions
+
 	public static Node mergeAlternate(Node head1, Node head2) {
 
 		if(head1 == null) {

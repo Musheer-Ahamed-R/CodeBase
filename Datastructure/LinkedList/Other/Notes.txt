@@ -12,11 +12,21 @@
 
 5 -> Using the condition "curr != null and curr.next != null" can be useful in cases where we have split the list.(curr.next.next is also used sometimes).
 
+6 -> Use a DUMMY node where we do not want to have null as starting value.(i.e while building a new list). This can be used in many 
+	 cases.
+
 6 -> In some cases where an action needs to happen after a specific point and continue to happen after that(e.g Delete from end). In this case, we may 	
 	 have to check the condition from where it has to start as seperately.
 
 7 -> Always look for possiblity of changing links in cases where we have to putting elements one after the after.(e.g ShiftNodes/Rotate)
 
-8 -> When we are populating a new list( or lists) from an actual list based on some criteria(new list of even numbers), it is MANDATORY to set the NEXT 
-	 of the new list to NULL.(Otherwise, it could cause some trouble in the end).
+8 -> When we are populating a new list( or lists) from an actual list based on some criteria(new list of even numbers), it is MANDATORY 
+	 to set the NEXT of the new list to NULL.(Otherwise, it could cause some trouble in the end).
 
+9 -> When adding a number use Modulo and Division.(can make the code general)
+
+10 -> When dealing with two lists which are not of the same size, then we can consider 0 as the default value.(i.e head == null ? 0 : 
+	  head.getNext().(Add Two List - reversed)
+
+11 -> Prefer using a loop inside of a loop, rather than just a single loop with multiple CONFUSING conditions inside it.(Delete N nodes
+	  after M nodes of a linked list)	  
