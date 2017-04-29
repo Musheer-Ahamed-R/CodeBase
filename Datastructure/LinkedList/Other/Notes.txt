@@ -11,7 +11,7 @@
 		-> current pointer alone (checking for current.next)
 
 5 -> We can solve problems in two ways,(Almost ALWAYS consider these two cases) 
-		-> By Changing links
+		-> By Changing links(We can shift links directly(sometimes) rather than changing one by one. in of ShiftNodes/Rotate)
 		-> By Changing data
 
 6 -> Using the condition "curr != null and curr.next != null" can be useful in cases where we have split the list.(curr.next.next is 
@@ -34,8 +34,10 @@
 11 -> Prefer using a loop inside of a loop, rather than just a single loop with multiple CONFUSING conditions inside it.(Delete N nodes
 	  after M nodes of a linked list).
 
-12 -> We can split the list based on some condition in two ways
+**12 -> We can split the list based on some condition in two ways
+		 -> Moving elements to the front	// EXTREMELY PREFFERED
 		 -> Using a head and the tail pointer and putting the other nodes at the tail pointer.	// Preffered way of doing
 		 -> Creating small small lists and finally joining them.
+
 
 13 -> We should Highly Consider using Recursion if we are not allowed to reverse the list. 
