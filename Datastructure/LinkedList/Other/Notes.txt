@@ -37,3 +37,5 @@
 12 -> We can split the list based on some condition in two ways
 		 -> Using a head and the tail pointer and putting the other nodes at the tail pointer.	// Preffered way of doing
 		 -> Creating small small lists and finally joining them.
+
+13 -> We should Highly Consider using Recursion if we are not allowed to reverse the list. 

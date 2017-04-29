@@ -16,13 +16,14 @@ public class Application {
 
 
 
-         Node head2 = new Node(2, null);
-         //head2.setNext(new Node(2, null));
-         //head2.getNext().setNext(new Node(2, null));
-         //head2.getNext().getNext().setNext(new Node(1, null));
-         //head2.getNext().getNext().getNext().setNext(new Node(0, null));
-         //head2.getNext().getNext().getNext().getNext().setNext(new Node(2, null));
-         //head2.getNext().getNext().getNext().getNext().getNext().setNext(new Node(0, null));
+         Node head2 = new Node(12, null);
+         head2.setNext(new Node(15, null));
+         head2.getNext().setNext(new Node(10, null));
+         head2.getNext().getNext().setNext(new Node(11, null));
+         head2.getNext().getNext().getNext().setNext(new Node(5, null));
+         head2.getNext().getNext().getNext().getNext().setNext(new Node(6, null));
+         head2.getNext().getNext().getNext().getNext().getNext().setNext(new Node(2, null));
+         head2.getNext().getNext().getNext().getNext().getNext().getNext().setNext(new Node(3, null));
          
 
          //print(head);
@@ -30,7 +31,7 @@ public class Application {
             System.out.println(head.getData());
             head = head.getNext();
          }*/
-         SortLL.sortLL(head2);
+         //SortLL.sortLL(head2);
          //print(head);
          //SwapNodes.swapNodes(head, 12, 13);
 
@@ -101,6 +102,11 @@ public class Application {
          //Identical.identical(head, head2);
 
          //DeleteConstraint.deleteConstraint(head, 1);
+
+         //AlternateSplit.alternateSplit(head2);
+
+         DeleteNodeWithGreater.deleteNodeWithGreater(head2);
+         //Application.print(DeleteNodeWithGreater.deleteNodeWithGreaterRecur(head2));
    }
    
    public static void print(Node head) {
