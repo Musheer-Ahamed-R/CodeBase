@@ -6,7 +6,7 @@ public class Interscetion {
 	// 4 -> make a loop in the first list
 	// 5 -> hashing
 
-	
+	// INCOMPLETE
 
 	public static void interscetion(Node head) {
 
