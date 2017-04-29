@@ -34,8 +34,9 @@
 
 9 -> Use STACK if the Current Elements Presence depends on other Elements in the Array (e.g Previous or Next Elements).
      Note : 
-        -> Next/Prev Greater/Smaller requires using a Stack, whereas the greater to its right or left should be solved by traversing in
-           the opposite direction.(greatest on its right means traverse from right)
+        -> Next/Prev Greater/Smaller requires using a Stack(can be solved from either direction for the same problem), whereas
+           greater to its right or left (overall) should be solved by traversing in the opposite direction.(greatest on its right means 
+           traverse from right)
 
 10 -> Try XOR if Array has DUPLICATE/REPEATING Values. This approach can be used to Find SINGLE UNIQUE Element or DOUBLE UNIQUE and also DUBLE DUPLICATE Elements.
       Other than these Elements, this approach DOES NOT WORK.

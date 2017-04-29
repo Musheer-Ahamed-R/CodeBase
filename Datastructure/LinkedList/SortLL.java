@@ -2,45 +2,85 @@ import java.util.Arrays;
 
 public class SortLL {
 
-   // Sort LinkedList with 0, 1 and 2's Node Values
+   // Sort a linked list of 0s, 1s and 2s
+
+
    
 
-   /*public static void sortLL(Node head) {
-      Node[] nodeArray = new Node[3];
-
-      while(head != null) {
-         //System.out.println("----------------");
-         int nodeData = head.getData();
-         Node next = head.getNext();
-         if(nodeArray[nodeData] == null) {
-            nodeArray[nodeData] = head;
-            head.setNext(null);
-         } else {
-	    Node tailNode = nodeArray[nodeData]; 	
-            head.setNext(tailNode);
-            nodeArray[nodeData] = head;
+   public static void sortLL(Node head) {
+       
+      int zeroCount = 0;
+      int oneCount = 0;
+      int twoCount = 0;
+      Node curr = head;
+      while(curr != null) {
+         switch(curr.getData()) {
+            case 0 : 
+               zeroCount++; break;
+            case 1 : 
+               oneCount++; break;
+            case 2 : 
+               twoCount++; break;  
          }
-         //System.out.println(Arrays.toString(nodeArray));
-         //System.out.println("***********************"+head);
-         head = next;
+         curr = curr.getNext();
       }
-	Node root = nodeArray[0];
-	while(root != null) {
 
-	        System.out.println(root);
-		        root = root.getNext();
-			}
-
-      System.out.println(Arrays.toString(nodeArray));
-      System.out.println("The root is"+root);
-      nodeArray[0].setNext(nodeArray[1]);
-      nodeArray[1].setNext(nodeArray[2]);
-      while(root != null) {
-
-	System.out.println(root);
-	root = root.getNext();
+      /*Node newList = null;
+      Node newListHead = null;
+      for(int i=0;i<zeroCount;i++) {
+         Node node = new Node(0, null);
+         if(newList == null) {
+            newList = node;
+            newListHead = node;
+         } else {
+            newList.setNext(node);
+            newList = newList.getNext();
+         }
       }
-   }*/
+      for(int i=0;i<oneCount;i++) {
+         Node node = new Node(1, null);
+         if(newList == null) {
+            newList = node;
+            newListHead = node;
+         } else {
+            newList.setNext(node);
+            newList = newList.getNext();
+         }
+      }
+      for(int i=0;i<twoCount;i++) {
+         Node node = new Node(2, null);
+         if(newList == null) {
+            newList = node;
+            newListHead = node;
+         } else {
+            newList.setNext(node);
+            newList = newList.getNext();
+         }
+      }*/
+      
+      Node newListHead = new Node(-1, null);
+      Node newList = formLink(newListHead, 0, zeroCount);
+      newList = formLink(newList, 1, oneCount);
+      newList = formLink(newList, 2, twoCount);
+      newListHead = newListHead.getNext();
+      Application.print(newListHead);
+   }
+
+   public static Node formLink(Node head, int data, int count) {
+
+      Node curr = head;
+      for(int i=0;i<count;i++) {
+         Node node = new Node(data, null);
+         if(curr == null) {
+            curr = node;
+            head = curr;
+         } else {
+            curr.setNext(node);
+            curr = curr.getNext();
+         }
+      }
+      return curr;
+   }
 
 
 
