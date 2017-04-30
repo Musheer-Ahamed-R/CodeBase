@@ -21,6 +21,8 @@
 7 -> Use a DUMMY node where we do not want to have null as starting value.(i.e while building a new list). This can be used in many 
 	 cases.
 
+8 -> While shifting nodes, if the prev value is null, then make that node as head of the linked list.
+
 8 -> In some cases where an action needs to happen after a specific point and continue to happen after that(e.g Delete from end). In 
 	 this case, we may have to check the condition from where it has to start as seperately.
 
@@ -40,5 +42,5 @@
 		 -> Using a head and the tail pointer and putting the other nodes at the tail pointer.	// Preffered way of doing
 		 -> Creating small small lists and finally joining them.
 
-
-13 -> We should Highly Consider using Recursion if we are not allowed to reverse the list. 
+13 -> We should Highly Consider pushing elements to front(Automatic reverse while splitting the list) or using Recursion(Normal and
+	  splitting cases) if we are not allowed to reverse the list. 

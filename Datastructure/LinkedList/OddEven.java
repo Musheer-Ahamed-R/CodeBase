@@ -1,5 +1,11 @@
 public class OddEven {
 
+	// Rearrange a linked list such that all even and odd positioned nodes are together
+
+	// 1 -> Changing links
+	// 2 -> Pushing odd elements to the front
+	// 3 -> pushing odd elements to the tail
+
 	public static void oddEven(Node head) {
 
 		if(head == null || head.getNext() == null) {

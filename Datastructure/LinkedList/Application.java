@@ -2,14 +2,14 @@ public class Application {
 
    public static void main(String[] args) {
 
-         Node head = new Node(1, null);
-         head.setNext(new Node(12, null));
-         head.getNext().setNext(new Node(-13, null));
-         head.getNext().getNext().setNext(new Node(23, null));
-         head.getNext().getNext().getNext().setNext(new Node(-34, null));
-         head.getNext().getNext().getNext().getNext().setNext(new Node(39, null));
-         head.getNext().getNext().getNext().getNext().getNext().setNext(new Node(41, null));
-         head.getNext().getNext().getNext().getNext().getNext().getNext().setNext(new Node(-48, null));
+         Node head = new Node(10, null);
+         head.setNext(new Node(40, null));
+         head.getNext().setNext(new Node(53, null));
+         head.getNext().getNext().setNext(new Node(30, null));
+         head.getNext().getNext().getNext().setNext(new Node(67, null));
+         head.getNext().getNext().getNext().getNext().setNext(new Node(12, null));
+         head.getNext().getNext().getNext().getNext().getNext().setNext(new Node(89, null));
+         //head.getNext().getNext().getNext().getNext().getNext().getNext().setNext(new Node(-48, null));
          //head.getNext().getNext().getNext().getNext().getNext().getNext().getNext().setNext(new Node(9, null));
          //head.getNext().getNext().getNext().getNext().getNext().getNext().getNext().getNext().setNext(new Node(10, null));
          //head.getNext().getNext().getNext().getNext().getNext().getNext().getNext().getNext().getNext().setNext(new Node(12, null));
@@ -136,7 +136,10 @@ public class Application {
 
          //System.out.println(StringCompare.stringCompare(headChar, headChar2));
 
-         DeleteLastOccur.deleteLastOccur(head2, 23);
+         //DeleteLastOccur.deleteLastOccur(head2, 23);
+         //ZigZagOrder.zigZagOrder(head);
+
+         SortAscDesc.sortAscDesc(head);
    }
    
    public static void print(Node head) {
