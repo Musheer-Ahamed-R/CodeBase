@@ -10,7 +10,6 @@ public class SortAscDesc {
 		Application.print(head);
 		Node firstList = head;
 		Node firstHead = head;
-		//Node secondList = head.getNext();
 		Node secondHead = head.getNext();
 		Node curr = head.getNext().getNext();
 		secondHead.setNext(null);
@@ -19,15 +18,11 @@ public class SortAscDesc {
 			Node next = curr.getNext().getNext();
 			firstList.setNext(curr);
 			
-
 			curr.getNext().setNext(secondHead);
 			secondHead = curr.getNext();
-			//secondList.setNext(curr.getNext());
-			
 
 			firstList = firstList.getNext();
 			firstList.setNext(null);
-			
 
 			curr = next;
 		}
@@ -35,11 +30,8 @@ public class SortAscDesc {
 			firstList.setNext(curr);
 		}
 
-		//secondHead = Reverse.reverse(secondHead);
-
 		Application.print(firstHead);
 		Application.print(secondHead);
-
 
 		Node mergedHead = MergeSorted.merge(firstHead, secondHead);
 	}

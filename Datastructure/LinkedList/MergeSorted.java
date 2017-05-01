@@ -14,8 +14,8 @@ public class MergeSorted {
 		Node targetList = null;
 		Node targetHead = null;
 
-		Application.print(head1);
-		Application.print(head2);
+		//Application.print(head1);
+		//Application.print(head2);
 
 		while(currFirst != null && currSecond != null) {
 
@@ -49,7 +49,7 @@ public class MergeSorted {
 		} else {
 			targetList.setNext(currSecond);
 		}
-		Application.print(targetHead);
+		//Application.print(targetHead);
 
 		return targetHead;
 	}
