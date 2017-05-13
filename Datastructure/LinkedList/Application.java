@@ -173,7 +173,7 @@ public class Application {
          //MaximumSum.maximumSum(head, head2);
          //Application.print(head);
 
-         InsertionSort.insertionSort(head);
+         //InsertionSort.insertionSort(head);
    }
    
    public static void print(Node head) {

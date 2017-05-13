@@ -47,6 +47,6 @@
 		 -> Creating small small lists and finally joining them.
 
 16 -> We should Highly Consider pushing elements to front(Automatic reverse while splitting the list) or using Recursion(Normal and
-	  splitting cases) if we are not allowed to reverse the list. 
+	  splitting cases) if we are not allowed to reverse the list.
 
-
+17 -> 
