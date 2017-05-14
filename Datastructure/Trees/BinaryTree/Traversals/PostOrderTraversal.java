@@ -32,7 +32,7 @@ public class PostOrderTraversal {
             System.out.println(target.getData());
             visitedMap.put(target, "Visited");
             stack.pop();
-          } else if(target.getRChild() != null){
+          } else {
             stack.push(target.getRChild());
           }
       }

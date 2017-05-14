@@ -37,3 +37,6 @@ Important Points
               -> PreOrder and PostOrder   -> Level Order Traversal(In case of PostOrder Traversal, we have to Print in Reverse Order(Opposite of Normal Case)).
               -> InOrder and PostOrder    -> "Current Pointer is always before".(In postorder Traversel, the Current Node Stays null in First part of Second case)).
                                              Visited Map.     (We Keep on going LEFT till we reach the End. From there we start Processing).(NOT IDEAL)
+
+7 -> While dealing with any of the traversals(Known or Unknown), WRITE DOWN the Traversal before making ANY MOVE.
+
