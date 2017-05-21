@@ -2,6 +2,7 @@ public class Node {
   private int data;
   private Node rChild;
   private Node lChild;
+  private Node nextRight;
 
   public Node(int data) {
     this(data, null, null);
@@ -35,6 +36,14 @@ public class Node {
 
   public void setRChild(Node rChild) {
     this.rChild = rChild;
+  }
+
+  public Node getNextRight() {
+    return this.nextRight;
+  }
+
+  public void setNextRight(Node nextRight) {
+    this.nextRight = nextRight;
   }
 
   @Override

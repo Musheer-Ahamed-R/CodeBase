@@ -1,6 +1,9 @@
 import java.util.*;
 
 public class MaxElement {
+  
+  // Find maximum (or minimum) in Binary Tree
+
   public static int recurGetMax(Node root) {
     if(root == null) {
       return 0;

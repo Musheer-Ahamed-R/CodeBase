@@ -40,3 +40,6 @@ Important Points
 
 7 -> While dealing with any of the traversals(Known or Unknown), WRITE DOWN the Traversal before making ANY MOVE.
 
+8 -> Incase of Level Order Traversel - Level Printing, Consider doing operations(e.g adding to stack) while REMOVING Node rather than while adding.
+
+9 -> If we are dealing with a tree which has some Property, try to take ADVANTAGE OF THAT PROPERTY.(Sum Tree)

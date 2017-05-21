@@ -1,0 +1,7 @@
+1 -> Send Pair object in case of Find Diameter.
+
+2 -> Check if a given Binary Tree is SumTree(Use Sum Tree Property).
+
+3 -> Print in spiral form.(Remember Both methods)
+
+4 -> Right and Left view of the tree can be also solved using recursion using a maxLevel variable(right view go from right).

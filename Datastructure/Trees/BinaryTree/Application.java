@@ -24,7 +24,7 @@ public class Application {
       tree.getLChild().setRChild(new Node(5, null, null));
       tree.getRChild().setLChild(new Node(6, null, null));
       tree.getRChild().setRChild(new Node(7, null, null));
-
+//
       tree.getLChild().getLChild().setLChild(new Node(8, null, null));
       tree.getLChild().getLChild().setRChild(new Node(9, null, null));
       tree.getLChild().getRChild().setLChild(new Node(10, null, null));
@@ -35,20 +35,20 @@ public class Application {
       tree.getRChild().getRChild().setRChild(new Node(15, null, null));
       
       //
-      // tree.getLChild().getLChild().getLChild().setLChild(new Node(16));
-      // tree.getLChild().getLChild().getLChild().setRChild(new Node(17));
-      // tree.getLChild().getLChild().getRChild().setLChild(new Node(18));
-      // tree.getLChild().getLChild().getRChild().setRChild(new Node(19));
-      //
-      // tree.getLChild().getRChild().getLChild().setLChild(new Node(20));
-      // tree.getLChild().getRChild().getLChild().setRChild(new Node(21));
-      // tree.getLChild().getRChild().getRChild().setLChild(new Node(22));
-      // tree.getLChild().getRChild().getRChild().setRChild(new Node(23));
-      //
-      // tree.getRChild().getLChild().getLChild().setLChild(new Node(24));
-      // tree.getRChild().getLChild().getLChild().setRChild(new Node(25));
-      // tree.getRChild().getLChild().getRChild().setLChild(new Node(26));
-      // tree.getRChild().getLChild().getRChild().setRChild(new Node(27));
+      //tree.getLChild().getLChild().getLChild().setLChild(new Node(16));
+      //tree.getLChild().getLChild().getLChild().setRChild(new Node(17));
+      //tree.getLChild().getLChild().getRChild().setLChild(new Node(18));
+      //tree.getLChild().getLChild().getRChild().setRChild(new Node(19));
+      ///
+      //tree.getLChild().getRChild().getLChild().setLChild(new Node(20));
+      //tree.getLChild().getRChild().getLChild().setRChild(new Node(21));
+      //tree.getLChild().getRChild().getRChild().setLChild(new Node(22));
+      //tree.getLChild().getRChild().getRChild().setRChild(new Node(23));
+      ///
+      //tree.getRChild().getLChild().getLChild().setLChild(new Node(24));
+      //tree.getRChild().getLChild().getLChild().setRChild(new Node(25));
+      //tree.getRChild().getLChild().getRChild().setLChild(new Node(26));
+      //tree.getRChild().getLChild().getRChild().setRChild(new Node(27));
       //
       // tree.getRChild().getRChild().getLChild().setLChild(new Node(28));
       // tree.getRChild().getRChild().getLChild().setRChild(new Node(29));
@@ -100,8 +100,8 @@ public class Application {
 
       //TreeView.leftView(tree);
       //TreeView.rightView(tree);
-      //TreeView.topView(skewedTree);
-      //TreeView.bottomView(skewedTree);
+      //TreeView.topView(tree);
+      TreeView.bottomView(tree);
 
 
       //int sum = TreeSum.getSumRecur(tree);
@@ -139,8 +139,34 @@ public class Application {
 
       //Node root = InOrderAndPreOrder.constructTree(inOrder, 0, 14, preOrder);
       //PrintBinaryTree.printTree(root);
-      Node root = InOrderAndPostOrder.constructTree(inOrder, 0, 14, postOrder);
-      PrintBinaryTree.printTree(root);
+      //Node root = InOrderAndPostOrder.constructTree(inOrder, 0, 14, postOrder);
+      //PrintBinaryTree.printTree(root);
+
+      //int leafCount = CountLeaf.countLeaf(tree);
+      //System.out.println(leafCount);
+
+      //Pair pair = Diameter.diameter(tree);
+      //System.out.println(pair.diameter);
+
+      //int height = Height.height(tree);
+      //System.out.println(height);
+
+      //MaxWidth.maxWidth(tree);
+
+      //PrintNodesFromRoot.printNodesFromRoot(tree, 2);
+
+      //int level = NodeLevel.nodeLevel(tree, 1);
+      //System.out.println(level);
+
+      //ConnectLevel.connectLevel(tree);
+
+      //boolean isSumTree = SumTree.isSumTree(tree);
+      //System.out.println(isSumTree);
+
+      //ZigZagTraversal.spiralPrint(tree);
+
+      //TreeView.recursiveRightView(tree, 1);
+
   }
 
 }
