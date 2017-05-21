@@ -4,6 +4,10 @@ Important Points
 
 2 -> The Order in which Left and the Right Child are added is extremely important(e.g, Iterative PreOrderTraversal, tree to doubly linked list)
 
+3 -> For EACH AND EVERY TREE Problem, find if it can be solved using BFS or DFS(or Both). From that use the best approach.
+
+4 -> If the word MINIMUM is used, then consider using BFS first.
+
 3 -> Traversal Findings
            PreOrder Traversal :
                 1 -> A Node will always have its left child after it.
@@ -43,3 +47,12 @@ Important Points
 8 -> Incase of Level Order Traversel - Level Printing, Consider doing operations(e.g adding to stack) while REMOVING Node rather than while adding.
 
 9 -> If we are dealing with a tree which has some Property, try to take ADVANTAGE OF THAT PROPERTY.(Sum Tree)
+
+10 -> Level Order Traversal and other such things that uses level order Traversal(Print Vertical View) can also be done using Preoder order traversal
+      (Traversing for each level). But, this happens at O(n^2).
+
+11 -> When we want to know if there exists a value(or sum) equal to the given no or while wanting to reach a specific level, CONSIDER DECREMENTING the 
+      value untill it reaches 0. (e.g RootToLeafSum, Level Order Printing using recusrsion).
+
+12 -> Instead of appending the number, we can multiply the by no by 10 each time before adding the value(e.g Sum of all the numbers that are formed from
+      root to leaf paths)

@@ -15,24 +15,24 @@ public class Application {
       skewedTree.getRChild().getRChild().getRChild().getRChild().setRChild(new Node(63, null, null));
 
 
-      Node tree = new Node(1, null, null);
+      Node tree = new Node(20, null, null);
 
-      tree.setLChild(new Node(2, null, null));
-      tree.setRChild(new Node(3, null, null));
+      tree.setLChild(new Node(9, null, null));
+      tree.setRChild(new Node(49, null, null));
 
-      tree.getLChild().setLChild(new Node(4, null, null));
-      tree.getLChild().setRChild(new Node(5, null, null));
-      tree.getRChild().setLChild(new Node(6, null, null));
-      tree.getRChild().setRChild(new Node(7, null, null));
+      tree.getLChild().setLChild(new Node(5, null, null));
+      tree.getLChild().setRChild(new Node(12, null, null));
+      tree.getRChild().setLChild(new Node(23, null, null));
+      tree.getRChild().setRChild(new Node(52, null, null));
 //
-      tree.getLChild().getLChild().setLChild(new Node(8, null, null));
-      tree.getLChild().getLChild().setRChild(new Node(9, null, null));
-      tree.getLChild().getRChild().setLChild(new Node(10, null, null));
-      tree.getLChild().getRChild().setRChild(new Node(11, null, null));
-      tree.getRChild().getLChild().setLChild(new Node(12, null, null));
-      tree.getRChild().getLChild().setRChild(new Node(13, null, null));
-      tree.getRChild().getRChild().setLChild(new Node(14, null, null));
-      tree.getRChild().getRChild().setRChild(new Node(15, null, null));
+      //tree.getLChild().getLChild().setLChild(new Node(8, null, null));
+      //tree.getLChild().getLChild().setRChild(new Node(9, null, null));
+      //tree.getLChild().getRChild().setLChild(new Node(7, null, null));
+      tree.getLChild().getRChild().setRChild(new Node(15, null, null));
+      //tree.getRChild().getLChild().setLChild(new Node(12, null, null));
+      //tree.getRChild().getLChild().setRChild(new Node(13, null, null));
+      tree.getRChild().getRChild().setLChild(new Node(50, null, null));
+      //tree.getRChild().getRChild().setRChild(new Node(15, null, null));
       
       //
       //tree.getLChild().getLChild().getLChild().setLChild(new Node(16));
@@ -101,7 +101,7 @@ public class Application {
       //TreeView.leftView(tree);
       //TreeView.rightView(tree);
       //TreeView.topView(tree);
-      TreeView.bottomView(tree);
+      //TreeView.bottomView(tree);
 
 
       //int sum = TreeSum.getSumRecur(tree);
@@ -166,6 +166,20 @@ public class Application {
       //ZigZagTraversal.spiralPrint(tree);
 
       //TreeView.recursiveRightView(tree, 1);
+
+      //RootToLeafPath.rootToLeafPath(tree);
+
+      //System.out.println(RootToLeafSum.rootToLeafSum(tree, 0, 11));
+
+      //CheckCompleteBinaryTree.checkCompleteBinaryTree(tree);
+
+      //System.out.println(DeepestLeafNode.deepestLeafNode(tree, 0, 'L'));
+      //System.out.println(DeepestLeafNode.result);
+      //System.out.println(DeepestLeafNode.maxLevel);
+
+      //System.out.println(RootToLeafPathSum.rootToLeafPathSum(tree, 0));
+
+      System.out.println(LeftLeafSum.leftLeafSum(tree, 'N'));
 
   }
 
