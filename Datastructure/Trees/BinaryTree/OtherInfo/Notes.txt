@@ -4,9 +4,13 @@ Important Points
 
 2 -> The Order in which Left and the Right Child are added is extremely important(e.g, Iterative PreOrderTraversal, tree to doubly linked list)
 
-3 -> For EACH AND EVERY TREE Problem, find if it can be solved using BFS or DFS(or Both). From that use the best approach.
+******
+3 -> For EACH AND EVERY TREE Problem, find if it can be solved using BFS or DFS(or Both)(RECURSIVE AND ITERATIVE). From that use the best approach.
 
 4 -> If the word MINIMUM is used, then consider using BFS first.
+
+5 -> When dealing with recursion, ALWAYS KNOW THAT THE METHODS ARE GOING TO BE EXECUTED and that methid call same ""FIRST"" method again and again 
+     untill the base case is reached, thus the second method call will have to wait till that. THIS causes problems because of LESS understanding of the method call execution.(e.g see not working method - Perfect Binary Tree Specific Level Order Traversal).
 
 3 -> Traversal Findings
            PreOrder Traversal :
@@ -48,8 +52,13 @@ Important Points
 
 9 -> If we are dealing with a tree which has some Property, try to take ADVANTAGE OF THAT PROPERTY.(Sum Tree)
 
+*****
 10 -> Level Order Traversal and other such things that uses level order Traversal(Print Vertical View) can also be done using Preoder order traversal
       (Traversing for each level). But, this happens at O(n^2).
+
+*****
+11 - > The above method involves calculating height and traversing for each level(O(n^2)). REMEMBER THIS CAN SAVE A DAY, especially when space complexity
+       is to be optimized.
 
 11 -> When we want to know if there exists a value(or sum) equal to the given no or while wanting to reach a specific level, CONSIDER DECREMENTING the 
       value untill it reaches 0. (e.g RootToLeafSum, Level Order Printing using recusrsion).

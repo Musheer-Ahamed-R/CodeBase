@@ -1,19 +1,5 @@
 public class AncestorTree {
 
-  public static boolean printAncestor(Node root, int data) {
-    if(root == null) {
-      return false;
-    }
-    if(root.getData() == data) {
-      return true;
-    }
-    boolean isAncestor = printAncestor(root.getLChild(), data) || printAncestor(root.getRChild(), data);
-    if(isAncestor) {
-      System.out.println(root.getData());
-    }
-    return isAncestor;
-  }
-
   //This is valid if the second node is not a Child of the first node.Since, we dont iterate after we found either of the nodes
   public static boolean printLCA(Node root, int data1, int data2) {
     if(root == null) {
@@ -36,6 +22,7 @@ public class AncestorTree {
     }
     int leftValue = printLCA2(root.getLChild(), data1, data2);
     int rightValue = printLCA2(root.getRChild(), data1, data2);
+    
     if(leftValue + rightValue == 2) {
       System.out.println("The Lowest Common Ancestor is "+root.getData());
       return 0; // Since only the Lowest Common Ancestor is Required
