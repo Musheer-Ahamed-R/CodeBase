@@ -50,6 +50,9 @@ Important Points
 
 8 -> Incase of Level Order Traversel - Level Printing, Consider doing operations(e.g adding to stack) while REMOVING Node rather than while adding.
 
+9 -> Incase of Level Order Traversel, we can also keep track of the current level of the node by having another queue adjacent of it that holds the level.
+     e.g Find next right node of a given key. Here, we get the level of target node and put the level for children as level + 1.
+
 9 -> If we are dealing with a tree which has some Property, try to take ADVANTAGE OF THAT PROPERTY.(Sum Tree)
 
 *****

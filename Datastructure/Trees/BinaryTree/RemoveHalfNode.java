@@ -1,5 +1,8 @@
 public class RemoveHalfNode {
 
+	// Given a binary tree, how do you remove all the half nodes?
+
+
 	public static Node removeHalfNode(Node root) {
 		if(root == null) {
 			return null;
@@ -19,5 +22,5 @@ public class RemoveHalfNode {
 		
 		return root;
 	}
-	
+
 }
