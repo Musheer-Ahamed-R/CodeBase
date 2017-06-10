@@ -244,9 +244,11 @@ public class Application {
       System.out.println(RemoveNodesPath.removeNodesPath(tree, 6, 1));
       levelOrder(tree);*/
 
-      levelOrder(tree);
+      /*levelOrder(tree);
       System.out.println(RemoveNodesPath.removeNodesPathSum(tree, 20, 0));
-      levelOrder(tree);
+      levelOrder(tree);*/
+
+      System.out.println("Hello World sample");
   }
 
   public static void levelOrder(Node root) {
