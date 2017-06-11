@@ -9,3 +9,9 @@
 5 -> Use PrintDownMethod in case of (lLevel != 0), this should be called with the opposite node.(i.e if from left call right).
 
 6 -> Look into the perfectBinaryLevelOrderRecur method for - Perfect Binary Tree Specific Level Order Traversal.
+
+7 -> Difference between sums of odd level and even level nodes of a Binary Tree(Diff of root - (diff upto lChild + diff upto rChild))
+
+********
+8 -> JUST USE INORDER TRSVERSAL AND A GLOBAL VARIABLE FOR CONVERT TREE TO DLL or 
+	 FOR EACH NODE(Naive Approach) Use the Property of Inorder Successor and Predessor.(Incereased Time Complexity).
