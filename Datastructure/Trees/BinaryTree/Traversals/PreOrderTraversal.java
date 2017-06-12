@@ -19,6 +19,7 @@ public class PreOrderTraversal {
     // 1 -> Morris PreOrder Traversal
     // 2 -> Single Stack - Adding the right Child then adding the left Child
 
+    // Iterative Preorder Traversal
     public static void iterPreOrder2(Node root) {
       if(root == null) {
         return;

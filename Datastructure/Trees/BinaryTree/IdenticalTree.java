@@ -1,5 +1,7 @@
 public class IdenticalTree {
 
+	// Write Code to Determine if Two Trees are Identical
+
 	public static boolean isIdentical(Node root1, Node root2) {
 		
 		if(root1 == null && root1 == null) {

@@ -68,12 +68,12 @@ public class Application {
 		stack.push(3000);
 		stack.print();*/
 
-		int[] arr = new int[]{10,6,7,5,9,8};
+		int[] arr = new int[]{2, 4, 8, 7, 7, 9, 3};
 
-		int[][] knowsArray = {{1, 0, 0, 1},
-						     {1, 0, 0, 1},
-						     {1, 0, 0, 1},
-						     {0, 0, 0, 1}};
+		//int[][] knowsArray = {{1, 0, 0, 1},
+		//				     {1, 0, 0, 1},
+		//				     {1, 0, 0, 1},
+		//				     {0, 0, 0, 1}};
 
 		//Reverse.reverse("GeeksQuiz");
 		//NextGreater.nextGreater(arr);
@@ -139,6 +139,9 @@ public class Application {
 		list.add('D');
 		//list.add('E');
 		CelebrityProblem.findCelebrity2(knowsArray, list);*/
+
+		//NextSmallerOfNextGreater.nextSmallerOfNextGreater(arr);
+		NextSmallerLeftSmaller.nextSmallerRightSmaller(arr);
 	}
 
 }

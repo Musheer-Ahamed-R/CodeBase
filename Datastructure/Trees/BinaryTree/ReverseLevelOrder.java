@@ -2,6 +2,8 @@ import java.util.*;
 
 public class ReverseLevelOrder {
 
+  // Reverse Level Order Traversal
+
   /*
     4567
     32
@@ -14,7 +16,7 @@ public class ReverseLevelOrder {
     q.add(root);
     while(!q.isEmpty()) {
       Node target = q.remove();
-      s.push(target);              // This is enough, because the order we pull, is the order in which we push elements into the queue.
+      s.push(target);              // This is enough, because the order we push, is the order in which we push elements into the queue.
       if(target.getRChild() != null) {
         q.add(target.getRChild());
       }

@@ -2,6 +2,11 @@ import java.util.*;
 
 public class VerticalTree {
 
+
+  // Print a Binary Tree in Vertical Order | Set 1
+  // Print a Binary Tree in Vertical Order | Set 2 (Hashmap based Method)
+  // Print a Binary Tree in Vertical Order | Set 3 (Using Level Order Traversal)
+
   public static void printVerticalOrderIter(Node root) {
     if(root == null) {
       return;
@@ -34,6 +39,22 @@ public class VerticalTree {
     }
   }
 
+  public static void printVerticalOrderRecur(Node root, int verticalLevel, Map<Integer, List<Node>> verticalLevelMap) {
+    if(root == null) {
+      return;
+    }
+    if(verticalLevelMap.get(verticalLevel) == null) {
+      List<Node> nodeList = new ArrayList<>();
+      nodeList.add(root);
+      verticalLevelMap.put(verticalLevel, nodeList);
+    } else {
+      verticalLevelMap.get(verticalLevel).add(root);
+    }
+    printVerticalOrderRecur(root.getLChild(), verticalLevel - 1, verticalLevelMap);
+    printVerticalOrderRecur(root.getRChild(), verticalLevel + 1, verticalLevelMap);
+  }
+
+  // Vertical Sum in a given Binary Tree | Set 1  
   public static void sumVerticalOrderIter(Node root) {
     if(root == null) {
       return;
@@ -61,21 +82,6 @@ public class VerticalTree {
     for(Map.Entry<Integer, Integer> element : verticalLevelMap.entrySet()) {
       System.out.println(element.getKey()+" --> "+element.getValue());
     }
-  }
-
-  public static void printVerticalOrderRecur(Node root, int verticalLevel, Map<Integer, List<Node>> verticalLevelMap) {
-    if(root == null) {
-      return;
-    }
-    if(verticalLevelMap.get(verticalLevel) == null) {
-      List<Node> nodeList = new ArrayList<>();
-      nodeList.add(root);
-      verticalLevelMap.put(verticalLevel, nodeList);
-    } else {
-      verticalLevelMap.get(verticalLevel).add(root);
-    }
-    printVerticalOrderRecur(root.getLChild(), verticalLevel - 1, verticalLevelMap);
-    printVerticalOrderRecur(root.getRChild(), verticalLevel + 1, verticalLevelMap);
   }
 
   public static void sumVerticalOrderRecur(Node root, int verticalLevel, Map<Integer, Integer> verticalLevelSumMap) {

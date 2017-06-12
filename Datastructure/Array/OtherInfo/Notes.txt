@@ -17,6 +17,7 @@
      Notes :
          -> Use HashSet, if we only want to Check the Occurrence.
          -> Use HashMap, if we want to Store Additional Details Such as occurrence Count, Occurrence Index.
+         -> DO NOT use either of these if the KEY is not ENSURED to be UNIQUE.    // --------- 
 
 7 -> Binary Search SHOULD be ALWAYS in MIND when working with Arrays When the Array Elements are in SOME ORDER (e.g Sorted Order, Increasing then Decreasing,
      Order Maintained between Arrays etc..) and we need to FIND/SEARCH for an Element or a Change in the Order in such an Array.
@@ -32,6 +33,10 @@
 19 -> Zero CANNOT BE NEGATED. This has to be Considered when Storing the Index Value as Negative Value(To Indicate Index of First Occurrence).
 
 9 -> Use STACK if the Current Elements Presence depends on other Elements in the Array (e.g Previous or Next Elements).
+     Note : 
+        -> Next/Prev Greater/Smaller requires using a Stack(can be solved from either direction for the same problem), whereas
+           greater to its right or left (overall) should be solved by traversing in the opposite direction.(greatest on its right means 
+           traverse from right)
 
 10 -> Try XOR if Array has DUPLICATE/REPEATING Values. This approach can be used to Find SINGLE UNIQUE Element or DOUBLE UNIQUE and also DUBLE DUPLICATE Elements.
       Other than these Elements, this approach DOES NOT WORK.

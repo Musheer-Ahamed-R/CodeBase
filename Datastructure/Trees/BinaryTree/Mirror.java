@@ -1,5 +1,9 @@
 public class Mirror {
 
+  // Write an Efficient Function to Convert a Binary Tree into its Mirror Tree
+
+
+
   public static void convertToMirror(Node root) {
     if(root == null) {
       return;
@@ -9,10 +13,11 @@ public class Mirror {
     convertToMirror(root.getRChild());
 
     Node left = root.getLChild();
-    Node right = root.getRChild();
-    root.setLChild(right);
+    root.setLChild(root.getRChild());
     root.setRChild(left);
   }
+
+  
 
   public static boolean isMirror(Node root1, Node root2) {
     if(root1 == null && root2 == null) {

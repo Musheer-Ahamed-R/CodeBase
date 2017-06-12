@@ -1,7 +1,7 @@
 Threaded Binary Tree -
 
     - A Binary tree is Threaded by making all Right child pointers that would NORMALLY be NULL, point to the InOrder-Successor of the node (if it exists),
-and all LEFT child pointers that would NORMALLY be NULL point to the InOrder-Predecessor of the node.
+	  and all LEFT child pointers that would NORMALLY be NULL point to the InOrder-Predecessor of the node.
 
 Types :
     Single Threaded: each node is threaded towards either the in-order predecessor(Left) or successor(Right).

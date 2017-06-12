@@ -1,0 +1,52 @@
+1 -> Caching a node (especially indirect hierachy of a node(node->next-> next)) while doing some operations can become TRAGIC SOMETIMES.
+	 (Caching while Swapping Adjacent nodes).
+
+2 -> It is EXTREMELY ADVISABLE to keep both the Current Node and the Previous Node while finding/deleting/swapping etc..
+
+3 -> Keep a HOLD on to the Current Node even if it is not necessary.(like we could manage with its previous nodes, but that could 
+	 involve caching which is against Rule 1)
+
+4 -> We can solve problems using two ways, using the 
+		-> previous pointer and current pointer
+		-> current pointer alone (checking for current.next)
+
+5 -> Make NULL CHECK for all list inside a LOOP.(This is THE VERY BASIC CHECK)
+
+6 -> We can solve problems in two ways,(Almost ALWAYS consider these two cases) 
+		->**** By Changing links(We can shift links DIRECTLY(sometimes) rather than changing one by one. e.g in case of ShiftNodes/
+			   Rotate)
+		-> By Changing data (This does not work if the target node is the last node)
+
+7 -> Using the condition "curr != null and curr.next != null" can be useful in cases where we have split the list.(curr.next.next is 
+	 also used sometimes).
+
+8 -> Use a DUMMY node where we do not want to have null as starting value.(i.e while building a new list). This can be used in many 
+	 cases.
+
+9 -> While shifting nodes, if the prev value is null, then make that node as head of the linked list.
+
+10 -> In some cases where an action needs to happen after a specific point and continue to happen after that(e.g Delete from end). In 
+	 this case, we may have to check the condition from where it has to start as seperately.
+
+11 -> When we are populating a new list( or lists) from an actual list based on some criteria(new list of even numbers), it is MANDATORY 
+	 to set the NEXT of the new list to NULL.(Otherwise, it could cause some trouble in the end).
+
+12 -> When adding a number use Modulo and Division.(can make the code general)
+
+13 -> When dealing with two lists which are not of the same size, then we can consider 0 as the default value.(i.e head == null ? 0 : 
+	  head.getNext().(Add Two List - reversed)
+
+14 -> Prefer using a loop inside of a loop, rather than just a single loop with multiple CONFUSING conditions inside it.(Delete N nodes
+	  after M nodes of a linked list).
+	  	-> Along with this, SOMETIMES instead of maintaining a flag do both operations in the same loop one after the other.(e.g 
+	  	   DeleteSomeAfterSome) 		
+
+**15 -> We can split the list based on some condition in two ways
+		 -> Moving elements to the front	// EXTREMELY PREFFERED
+		 -> Using a head and the tail pointer and putting the other nodes at the tail pointer.	// Preffered way of doing
+		 -> Creating small small lists and finally joining them.
+
+16 -> We should Highly Consider pushing elements to front(Automatic reverse while splitting the list) or using Recursion(Normal and
+	  splitting cases) if we are not allowed to reverse the list.
+
+17 -> 

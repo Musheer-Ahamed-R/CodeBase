@@ -1,0 +1,17 @@
+1 -> Working algorithm for detecting loop in a Linked List.
+
+2 -> Swapping. Use currentNode also and don't cache node -> next -> next.
+
+3 -> palindrome
+
+4 -> Intersection point
+
+5 -> Rotate
+
+6 -> Add two linked list numbers without reversing.
+
+7 -> sortOnActualValue(push nodes to the first)
+
+8 -> Make NULL Check.(Insertion Sort for Singly Linked List)
+
+9 -> Find a triplet from three linked lists with sum equal to a given number

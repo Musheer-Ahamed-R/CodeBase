@@ -32,13 +32,15 @@ public class PostOrderTraversal {
             System.out.println(target.getData());
             visitedMap.put(target, "Visited");
             stack.pop();
-          } else if(target.getRChild() != null){
+          } else {
             stack.push(target.getRChild());
           }
       }
     }
   }
-
+  
+  // Iterative Postorder Traversal | Set 1 (Using Two Stacks)
+  
   // Warning : Here, there is no need to specifically use a Second Stack. We Could use a List and Print it in Reverse Order.
   public static void iterPostOrder2(Node root) {
     if(root == null) {
@@ -66,6 +68,8 @@ public class PostOrderTraversal {
 
   // Here the currentNode is always one step ahead of the stack Top and it guides the flow(Almost the same as in InOrder Traversal)
   // Here, in the first part of the second case, the Current Node Stays Null.
+  
+  // Iterative Postorder Traversal | Set 2 (Using One Stack)
   public static void iterPostOrder3(Node root) {
     Node currentNode = root;
     Stack<Node> stack = new Stack<>();

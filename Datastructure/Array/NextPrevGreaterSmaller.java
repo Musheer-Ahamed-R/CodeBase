@@ -8,7 +8,8 @@ public class NextPrevGreaterSmaller {
    // Print the Prev Smaller Elements(NGT) for all the Elements in the Array or null if not present.
 
    // 1 -> Using Two Loops    -  O(n)
-   // 2 -> Using Stack and Maintaining the Elements in Sorted Order
+   // 2 -> Using Stack and Maintaining the Elements in Sorted Order 
+   // 3 -> Using Stack and iterating from the opposite direction of the previous method
 
    // The Idea in this method is to keep the Elements in the Stack in Sorted Order.
 
