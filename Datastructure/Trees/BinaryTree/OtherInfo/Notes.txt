@@ -12,7 +12,7 @@ Important Points
 5 -> When dealing with recursion, ALWAYS KNOW THAT THE METHODS ARE GOING TO BE EXECUTED and that methid call same ""FIRST"" method again and again 
      untill the base case is reached, thus the second method call will have to wait till that. THIS causes problems because of LESS understanding of the method call execution.(e.g see not working method - Perfect Binary Tree Specific Level Order Traversal).
 
-3 -> Traversal Findings
+6 -> Traversal Findings
            PreOrder Traversal :
                 1 -> A Node will always have its left child after it.
 
@@ -31,14 +31,14 @@ Important Points
                 1 -> A Node will always have its right child before it.(used in case of Iterative Traversal)
 
 
-4 -> The return value(Base Case) in a recursive call has a MAJOR MAJOR impact in the problem solution.(i.e They should be used wisely)
+7 -> The return value(Base Case) in a recursive call has a MAJOR MAJOR impact in the problem solution.(i.e They should be used wisely)
         -> Also note that, if the left child value and right value are not related (i.e) we have an option to send only one data. We should be very  
            careful in this case as we will be losing the other value at this level which could be WRONG.(Print all nodes that are at distance k from a leaf 
            node)
 
-5 -> Using root instead of the Current Node can lead to UNNECESSARY TROUBLE. Always take care of this BIG careless mistake.
+8 -> Using root instead of the Current Node can lead to UNNECESSARY TROUBLE. Always take care of this BIG careless mistake.
 
-6 -> Traversals Quick Note (Iterative):
+9 -> Traversals Quick Note (Iterative):
           -> PreOrderTraversal  - 2
           -> InOrderTraversal   - 3
           -> PostOrderTraversal - 3
@@ -49,39 +49,42 @@ Important Points
               -> InOrder and PostOrder    -> "Current Pointer is always before".(In postorder Traversel, the Current Node Stays null in First part of Second case)).
                                              Visited Map.     (We Keep on going LEFT till we reach the End. From there we start Processing).(NOT IDEAL)
 
-7 -> While dealing with any of the traversals(Known or Unknown), WRITE DOWN the Traversal before making ANY MOVE.
+10 -> While dealing with any of the traversals(Known or Unknown), WRITE DOWN the Traversal before making ANY MOVE.
 
-8 -> Incase of Level Order Traversel - Level Printing, Consider doing operations(e.g adding to stack) while REMOVING Node rather than while adding.
+11 -> Incase of Level Order Traversel - Level Printing, Consider doing operations(e.g adding to stack) while REMOVING Node rather than while adding.
 
-9 -> Incase of Level Order Traversel, we can also keep track of the current level of the node by having another queue adjacent of it that holds the level.
+12 -> Incase of Level Order Traversel, we can also keep track of the current level of the node by having another queue adjacent of it that holds the level.
      e.g Find next right node of a given key. Here, we get the level of target node and put the level for children as level + 1.
 
-9 -> If we are dealing with a tree which has some Property, try to take ADVANTAGE OF THAT PROPERTY.(Sum Tree)
+13 -> If we are dealing with a tree which has some Property, try to take ADVANTAGE OF THAT PROPERTY.(Sum Tree)
 
 *****
-10 -> Level Order Traversal and other such things that uses level order Traversal(Print Vertical View) can also be done using Preoder order traversal
+14 -> Level Order Traversal and other such things that uses level order Traversal(Print Vertical View) can also be done using Preoder order traversal
       (Traversing for each level). But, this happens at O(n^2).
 
 *****
-11 - > The above method involves calculating height and traversing for each level(O(n^2)). REMEMBER THIS CAN SAVE A DAY, especially when space complexity
+15 - > The above method involves calculating height and traversing for each level(O(n^2)). REMEMBER THIS CAN SAVE A DAY, especially when space complexity
        is to be optimized.
 
 *******
-12 -> Making MULTIPLE SEPERATE TRAVERSALS (O(n) Complexity) SHOULD also be considered especially when there is a restriction on space 
+16 -> Making MULTIPLE SEPERATE TRAVERSALS (O(n) Complexity) SHOULD also be considered especially when there is a restriction on space 
       complexity.(Find the maximum sum leaf to root path in a Binary Tree)
 
-13 -> REVERSE ORDER TRAVERSAL can come in handy sometimes. So, ALWAYS CONSIDER THIS AS AN ALTERNATE OPTION.
+17 -> REVERSE ORDER TRAVERSAL can come in handy sometimes. So, ALWAYS CONSIDER THIS AS AN ALTERNATE OPTION.
 
-11 -> When we want to know if there exists a value(or sum) equal to the given no or while wanting to reach a specific level, CONSIDER DECREMENTING the 
+18 -> When we want to know if there exists a value(or sum) equal to the given no or while wanting to reach a specific level, CONSIDER DECREMENTING the 
       value untill it reaches 0. (e.g RootToLeafSum, Level Order Printing using rec
             usrsion).
 
-12 -> Instead of appending the number, we can multiply the by no by 10 each time before adding the value(e.g Sum of all the numbers that are formed from root to leaf paths)
+19 -> Instead of appending the number, we can multiply the by no by 10 each time before adding the value(e.g Sum of all the numbers that are formed from root to leaf paths)
 
-13 -> Using an ancestor array to store the ancestors as we go down is an IMPORTANT technique in cases where doing operations on ancestors is 
+20 -> Using an ancestor array to store the ancestors as we go down is an IMPORTANT technique in cases where doing operations on ancestors is 
       required. A SINGLE ANCESTOR ARRAY is ENOUGH since we are just going to store the value based on index(level) which is overwritten. (Find the closest leaf in a 
       Binary Tree)
 
-14 -> Using a Global variable is useful when dealing with indexes of an array. The main idea here is that we  
+21 -> Using a Global variable is useful when dealing with indexes of an array. The main idea here is that we  
       keep on incrementing index value of one traversal while splitting the other traversal for left and right
       subtree (e.g Construct a special tree from given preorder traversal)
+
+22 -> If we are asked to check whether a tree is a complete binary tree or a perfect tree, FIRST CONSIDER THE ARRAY
+      STRUCTURE OF FINDING THE INDEX OF THE CHILDREN.(Check whether a binary tree is a complete tree or not | Set 2 (Recursive Solution))
