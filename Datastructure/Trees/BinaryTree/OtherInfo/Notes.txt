@@ -32,6 +32,9 @@ Important Points
 
 
 4 -> The return value(Base Case) in a recursive call has a MAJOR MAJOR impact in the problem solution.(i.e They should be used wisely)
+        -> Also note that, if the left child value and right value are not related (i.e) we have an option to send only one data. We should be very  
+           careful in this case as we will be losing the other value at this level which could be WRONG.(Print all nodes that are at distance k from a leaf 
+           node)
 
 5 -> Using root instead of the Current Node can lead to UNNECESSARY TROUBLE. Always take care of this BIG careless mistake.
 
@@ -63,8 +66,22 @@ Important Points
 11 - > The above method involves calculating height and traversing for each level(O(n^2)). REMEMBER THIS CAN SAVE A DAY, especially when space complexity
        is to be optimized.
 
-11 -> When we want to know if there exists a value(or sum) equal to the given no or while wanting to reach a specific level, CONSIDER DECREMENTING the 
-      value untill it reaches 0. (e.g RootToLeafSum, Level Order Printing using recusrsion).
+*******
+12 -> Making MULTIPLE SEPERATE TRAVERSALS (O(n) Complexity) SHOULD also be considered especially when there is a restriction on space 
+      complexity.(Find the maximum sum leaf to root path in a Binary Tree)
 
-12 -> Instead of appending the number, we can multiply the by no by 10 each time before adding the value(e.g Sum of all the numbers that are formed from
-      root to leaf paths)
+13 -> REVERSE ORDER TRAVERSAL can come in handy sometimes. So, ALWAYS CONSIDER THIS AS AN ALTERNATE OPTION.
+
+11 -> When we want to know if there exists a value(or sum) equal to the given no or while wanting to reach a specific level, CONSIDER DECREMENTING the 
+      value untill it reaches 0. (e.g RootToLeafSum, Level Order Printing using rec
+            usrsion).
+
+12 -> Instead of appending the number, we can multiply the by no by 10 each time before adding the value(e.g Sum of all the numbers that are formed from root to leaf paths)
+
+13 -> Using an ancestor array to store the ancestors as we go down is an IMPORTANT technique in cases where doing operations on ancestors is 
+      required. A SINGLE ANCESTOR ARRAY is ENOUGH since we are just going to store the value based on index(level) which is overwritten. (Find the closest leaf in a 
+      Binary Tree)
+
+14 -> Using a Global variable is useful when dealing with indexes of an array. The main idea here is that we  
+      keep on incrementing index value of one traversal while splitting the other traversal for left and right
+      subtree (e.g Construct a special tree from given preorder traversal)
