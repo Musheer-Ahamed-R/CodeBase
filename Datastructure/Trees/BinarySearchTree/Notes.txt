@@ -1,8 +1,16 @@
-1 -> All the Nodes in the Left Subtree of the Node(Root) should be less than the Node data and
-     All the Nodes in the Right Subtree of the Node(Root) should be greater than the Node data.
+1 -> If ANY problem is given on the binary search tree, ALWAYS consider using the BST Property as a FIRST 
+	 OPTION.
 
-2 -> We can find a Node in a Binary Search Tree without traversing the entire tree.
-     We just need to traverse the path from the Root to the Node using the Binary Search Tree Property.
+2 -> The In-Order Traversal of a BST always gives the nodes in the Ascending Order and this should be SECOND
+	 THING that comes to mind after property of BST.(i.e many problems can be solved using this technique).
 
-3 -> The Rightmost Node is the Maximum Node in a BST.
-     The Leftmost Node is the Minimum Node in a BST.
+// have doubt if O(log n) or O(h)
+3 -> Most of the operations on a BST have a Time Complexity of O(h)(h - height of the tree), thus keeping the height of the
+	 tree minimal(balanced) can be very useful.
+
+4 - > The advantage of BST over Hash Table is very minimal.
+		-> Inorder traversal gives nodes in sorted order
+		-> Doing order statistics, finding closest lower and greater elements, doing range queries are easy to do with BSTs
+		-> Easy to Implement
+		-> O(log n) always guaranteed, but with Hash table Time complexity will increase when table resizing happens.O(1) 
+		   average time in Hash Table.
