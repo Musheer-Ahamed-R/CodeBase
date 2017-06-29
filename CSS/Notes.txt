@@ -1,0 +1,24 @@
+Notes : 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	-> If a property is unknown or if a value is not valid for a given property, the declaration is deemed invalid and is wholly ignored by the 
+	   browser's CSS engine.
+
+	-> In CSS (and other web standards), US spelling has been agreed on as the standard to stick to where uncertainty arises. For example, color (as seen 
+	   in the above code) should always be spelt color. colour won't work.
+
+	-> If a single basic selector in a chain or group is invalid, like when using an unknown pseudo-element or pseudo-class, the whole group of 
+	   selectors is invalid and therefore the entire rule is invalid and ignored.   
