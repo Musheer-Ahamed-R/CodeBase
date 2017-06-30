@@ -22,3 +22,5 @@ Notes :
 
 	-> If a single basic selector in a chain or group is invalid, like when using an unknown pseudo-element or pseudo-class, the whole group of 
 	   selectors is invalid and therefore the entire rule is invalid and ignored.   
+
+	-> The whitespace we need to be careful of in CSS is the whitespace around the properties and their values. i.e padding- left is Invalid.
