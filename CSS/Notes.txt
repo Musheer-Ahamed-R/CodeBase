@@ -24,3 +24,7 @@ Notes :
 	   selectors is invalid and therefore the entire rule is invalid and ignored.   
 
 	-> The whitespace we need to be careful of in CSS is the whitespace around the properties and their values. i.e padding- left is Invalid.
+
+**
+	-> Properties override other properties, but you don't get entire rules overriding other rules. When several CSS rules match the same element, they
+	   are ALL applied to that element. Only after that are any conflicting properties evaluated to see which individual styles will win over others.

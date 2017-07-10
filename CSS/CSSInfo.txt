@@ -178,4 +178,67 @@ Definition
 
 	-> Cascade and inheritance
 
-			-> 
+			-> Incases where there are multiple CSS rules for an Element, which CSS rule "wins", and ends up being the one that is finally applied to 
+			   the element?. This is controlled by a mechanism called the Cascade; This is also related to inheritance (elements will take some property values from their parents, but not others.) 
+
+			-> What selectors win out in the cascade depends on three factors (these are listed in order of weight — earlier ones will overrule later 
+			   ones):
+
+					-> Importance
+					-> Specificity
+					-> Source order   
+
+				-> Importance
+				
+						-> This makes sure that a certain rule will always win over all others
+						e.g  border: none !important;
+
+						Notes : 
+							-> The only way to override this !important declaration would be to include another !important declaration of the same 
+							   specificity, later in the source order.
+
+				-> Specificity
+
+						-> Specificity is basically a measure of how specific a selector is — how many elements it could match.
+
+						-> This is NOT related to Inheritence.
+
+						-> The amount of specificity a selector has is measured using four different values (or components), which can be thought of as 
+						   thousands, hundreds, tens and ones — four single digits in four columns:
+
+							-> Thousands: Score one in this column if the matching selector is inside a <style> element or the declaration is inside a 
+							   style attribute (such declarations don't have selectors, so their specificity is always simply 1000.) Otherwise 0.
+							-> Hundreds: Score one in this column for each ID selector contained inside the overall selector.
+							-> Tens: Score one in this column for each class selector, attribute selector, or pseudo-class contained inside the overall 
+							   selector.
+							-> Ones: Score one in this column for each element selector or pseudo-element contained inside the overall selector.
+
+							e.g h1 						-> 0001
+								#important				-> 0100
+								h1 + p::first-letter	-> 0003
+
+							Notes : 
+								-> Note: Universal selector (*), combinators (+, >, ~, ' ') and negation pseudo-class (:not) have no effect on 
+								   specificity.	
+
+				-> Source order
+						->  If multiple competing selectors have the same importance and specificity, the third factor that comes into play to help 
+						    decide which rule wins is source order — later rules will win over earlier rules				   
+
+			-> Inheritance
+					-> The idea is that some property values applied to an element will be inherited by that element's children, and some won't.
+
+					-> The Properties are inherited only if the element does not that property on its own(or from browser's default styles).
+
+						e.g it makes sense for font-family and color to be inherited and it makes sense for margin, padding, border, and 
+						background-image to NOT be inherited			    
+
+					Controlling inheritance : 
+						-> inherit 	: This value sets the property value applied to a selected element to be the same as that of its parent element.
+
+						-> initial 	: This value sets the property value applied to a selected element to be the same as the value set for that element 
+									  in the BROWSER'S DEFAULT STYLE SHEET. If no value is set by the browser's default style sheet and the property is 
+									  naturally inherited, then the property value is set to inherit instead.	
+
+						-> unset 	: This value resets the property to its natural value, which means that if the property is naturally inherited it 	
+									  acts like inherit, otherwise it acts like initial.			 
