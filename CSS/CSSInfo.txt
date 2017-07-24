@@ -17,3 +17,228 @@ Definition
 	   Block						
 
 	-> CSS Rules	:	CSS declaration blocks are paired with selectors to produce CSS Rulesets (or CSS Rules).
+
+
+	-> CSS Statements
+			->  CSS rules are one type of so-called CSS statements. The other types are as follows:
+
+					-> At-rules	:
+							-> They are used in CSS to convey metadata, conditional information, or other descriptive information. They start with an at 
+							   sign (@), followed by an identifier to say what kind of rule it is, then a syntax block of some kind, ending with a 
+							   semi-colon (;). 
+							-> Each type of at-rule, defined by the identifier, will have its own internal syntax and semantics. Examples include:
+
+								-> @charset and @import (metadata) [e.g @import 'custom.css'; ]
+								-> @media or @document (conditional information, also called nested statements, see below.)
+								-> @font-face (descriptive information)
+
+					-> Nested statements :
+							-> They are a specific subset of at-rule, the syntax of which is a nested block of CSS rules that will only be applied to the 
+							   document if a specific condition is matched
+
+							   	-> The @media at-rule content is applied only if the device which runs the browser matches the expressed condition;
+								-> The @supports at-rule content is applied only if the browser actually supports the tested feature;
+								-> The @document at-rule content is applied only if the current page matches some conditions.
+
+								e.g
+									@media (min-width: 801px) {
+									  body {
+									    margin: 0 auto;
+									    width: 800px;
+									  }
+									}
+
+	-> CSS Shorthands 
+	
+			-> Some properties like font, background, padding, border, and margin are called shorthand properties. This is because they allow you to set 
+			   several property values in a single line, saving time and making your code neater in the process.
+
+			   		e.g 
+			   			padding: 10px 15px 15px 5px;
+
+			   			Does this same thing as all these:
+
+			   			padding-top: 10px;
+						padding-right: 15px;
+						padding-bottom: 15px;
+						padding-left: 5px;	
+
+
+	-> CSS Selectors 
+	
+			-> In CSS, selectors are used to target the HTML elements on our web pages that we want to style. There are a wide variety of CSS selectors 
+			   available, allowing for fine grained precision when selecting elements to style.
+
+			   Types : 
+
+			   		-> Simple selectors: Match one or more elements based on element type, class, or id.
+					-> Attribute selectors: Match one or more elements based on their attributes/attribute values.
+					-> Pseudo-classes: Match one or more elements that exist in a certain state, such as an element that is being hovered over by the 
+					   mouse pointer, or a checkbox that is currently disabled or checked, or an element that is the first child of its parent in the DOM 
+					   tree.
+					-> Pseudo-elements: Match one or more parts of content that are in a certain position in relation to an element, for example the 
+					   first word of each paragraph, or generated content appearing just before an element.
+					-> Combinators: These are not exactly selectors themselves, but ways of combining two or more selectors in useful ways for very 
+					   specific selections. So for example, you could select only paragraphs that are direct descendants of divs, or paragraphs that come 
+					   directly after headings.
+					-> Multiple selectors: Again, these are not separate selectors; the idea is that you can put multiple selectors on the same CSS rule, 
+					   separated by commas, to apply a single set of declarations to all the elements selected by those selectors.
+
+
+
+				Simple selectors : 
+
+					-> Type selectors aka element selectors
+						-> This selector is just a case-insensitive match between the selector name and a given HTML element name. 
+						-> This is the simplest way to target all elements of a given type.	   
+
+					-> Class selectors
+						-> The class selector consists of a dot, '.', followed by a class name. 
+						-> It is also worth knowing that multiple elements in a document can have the same class value and a single element can have 
+						   multiple class names separated by white space. 		
+
+					-> ID selectors
+						-> The ID selector consists of a hash/pound symbol (#), followed by the ID name of a given element
+						-> It's the most efficient way to select a single element.
+
+					-> Universal selector
+						-> It allows selecting all elements in a page
+						-> It is often used in combination with other selectors 		   
+
+						Notes : 
+							-> Careful when using the universal selector. As it applies to all elements, using it in large web pages can have a 
+							   perceptible impact on performance: web pages can be displayed slower than expected. There are not many instances where 
+							   you'd want to use this selector.
+
+				Attribute selectors :
+					
+					-> Attribute selectors are a special kind of selector that will match elements based on their attributes and attribute values.
+
+					-> Presence and value attribute selectors
+						-> These attribute selectors try to match an exact attribute value:
+
+						Types :
+							-> [attr] : This selector will select all elements with the attribute attr, whatever its value.
+							
+							-> [attr=val](Exact Match) : This selector will select all elements with the attribute attr, but only if its value is val.
+							
+							-> [attr~=val](Contains) : This selector will select all elements with the attribute attr, but only if the value val is one 
+							   of a space-separated list of values contained in attr's value. for example a single class in a space-separated list of 
+							   classes.(This is not like *= in below)
+
+					-> Substring value attribute selectors   
+						-> Attribute selectors in this class are also known as "RegExp-like selectors" (but to be clear, these selectors are not true 
+						   regular expression):
+
+						Types : 
+						
+							-> [attr|=val] : This selector will select all elements with the attribute attr for which the value is exactly val or starts 
+							   with val- (careful, the dash here isn't a mistake, this is to handle language codes.). 
+							   (This is similar to [attr=values] + begining with val- (e.g lang="fr-FR")). 
+							
+							-> [attr^=val] : This selector will select all elements with the attribute attr for which the value starts with val.
+							
+							-> [attr$=val] : This selector will select all elements with the attribute attr for which the value ends with val.
+							
+							-> [attr*=val] : This selector will select all elements with the attribute attr for which the value contains the string val (
+							   unlike [attr~=val], this selector doesn't treat spaces as value separators but as part of the attribute value.)   
+
+				Pseudo-Selectors : 
+					
+					->  These don't select actual elements, but rather certain parts of elements, or elements only in certain contexts. They come in two 
+					    main types — pseudo-classes and pseudo-elements.
+
+					-> They only work with a selector (i.e selector:pseudo-selector).
+
+					-> The rule applied by the Pseudo-Selectors, is toggled back to its OLD STATE, once the element leaves the state or condition.
+
+					    	-> Pseudo-classes : 
+					    		-> A CSS pseudo-class is a keyword preceded by a colon (:) that is added on to the end of selectors to specify that you 
+					    		   want to style the selected elements only when they are in certain state. For example you might want to style an 
+					    		   element only when it is being hovered over by the mouse pointer(USER ACTION), or a checkbox when it is disabled or 
+					    		   checked(ELEMENT STATE), or an element that is the first child of its parent(ELEMENT POSITION) in the DOM tree.
+
+					    		   e.g a:hover
+
+					    	-> Pseudo-elements : 
+					    		-> Pseudo-elements are very much like pseudo-classes. They are keywords preceded by two colons (::) — that can be added 
+					    		   to the end of selectors to select a CERTAIN PART of an element(selector element).
+
+				Combinators : 
+				
+					-> Combinators		Select
+
+						A, B		Any element matching A and/or B (see also Multiple selectors on one rule, below).
+						A B			Any element matching B that is a descendant of an element matching A (that is: a child, or a child of a child, etc.)
+						A > B		Any element matching B that is a direct child of an element matching A.
+						A + B		Any element matching B that is the next sibling of an element matching A (that is: the next child of the same 
+									parent.)
+						A ~ B		Any element matching B that is one of the next siblings of an element matching A (that is: one of the next children 
+									of the same parent.)
+
+	-> Cascade and inheritance
+
+			-> Incases where there are multiple CSS rules for an Element, which CSS rule "wins", and ends up being the one that is finally applied to 
+			   the element?. This is controlled by a mechanism called the Cascade; This is also related to inheritance (elements will take some property values from their parents, but not others.) 
+
+			-> What selectors win out in the cascade depends on three factors (these are listed in order of weight — earlier ones will overrule later 
+			   ones):
+
+					-> Importance
+					-> Specificity
+					-> Source order   
+
+				-> Importance
+				
+						-> This makes sure that a certain rule will always win over all others
+						e.g  border: none !important;
+
+						Notes : 
+							-> The only way to override this !important declaration would be to include another !important declaration of the same 
+							   specificity, later in the source order.
+
+				-> Specificity
+
+						-> Specificity is basically a measure of how specific a selector is — how many elements it could match.
+
+						-> This is NOT related to Inheritence.
+
+						-> The amount of specificity a selector has is measured using four different values (or components), which can be thought of as 
+						   thousands, hundreds, tens and ones — four single digits in four columns:
+
+							-> Thousands: Score one in this column if the matching selector is inside a <style> element or the declaration is inside a 
+							   style attribute (such declarations don't have selectors, so their specificity is always simply 1000.) Otherwise 0.
+							-> Hundreds: Score one in this column for each ID selector contained inside the overall selector.
+							-> Tens: Score one in this column for each class selector, attribute selector, or pseudo-class contained inside the overall 
+							   selector.
+							-> Ones: Score one in this column for each element selector or pseudo-element contained inside the overall selector.
+
+							e.g h1 						-> 0001
+								#important				-> 0100
+								h1 + p::first-letter	-> 0003
+
+							Notes : 
+								-> Note: Universal selector (*), combinators (+, >, ~, ' ') and negation pseudo-class (:not) have no effect on 
+								   specificity.	
+
+				-> Source order
+						->  If multiple competing selectors have the same importance and specificity, the third factor that comes into play to help 
+						    decide which rule wins is source order — later rules will win over earlier rules				   
+
+			-> Inheritance
+					-> The idea is that some property values applied to an element will be inherited by that element's children, and some won't.
+
+					-> The Properties are inherited only if the element does not that property on its own(or from browser's default styles).
+
+						e.g it makes sense for font-family and color to be inherited and it makes sense for margin, padding, border, and 
+						background-image to NOT be inherited			    
+
+					Controlling inheritance : 
+						-> inherit 	: This value sets the property value applied to a selected element to be the same as that of its parent element.
+
+						-> initial 	: This value sets the property value applied to a selected element to be the same as the value set for that element 
+									  in the BROWSER'S DEFAULT STYLE SHEET. If no value is set by the browser's default style sheet and the property is 
+									  naturally inherited, then the property value is set to inherit instead.	
+
+						-> unset 	: This value resets the property to its natural value, which means that if the property is naturally inherited it 	
+									  acts like inherit, otherwise it acts like initial.			 
