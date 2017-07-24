@@ -49,8 +49,17 @@
            Thus, if a Number got Cancelled(While XOR'ing all Elements) it MAY NOT be a Duplicate in the List.
 
 11 -> Try SUM of Numbers and then Manipulating (like finding DIFF between two SUM etc..)
+      -> Sum and XOR go hand-in-hand in many cases.
+      
+12 -> If a Pair or a Triplet equal to a Given Sum is asked, then 
+      if sum is asked, then i(first) and j(last) elem, if diff is asked, i(first) and j(second) element is considered.
+      This can be solved in two ways.
+        -> Sort the Array, and keep two pointer, one in the front and another in the end and keep eliminating from either
+           of the sides based on the given SUM. // O(n logn)
+        -> Using a HashMap(But fails when there are duplicate elemnets in the array)// not preffered
 
 12 -> Bit Manipulation should also be considered as a Final Alternative.(e.g All Elements N Times except 1 Element)
+        -> Bit Manipulation and Character Shifting go "HAND IN HAND".   
 
 13 -> SLIDING WINDOW should be Used/Considered when we are Dealing with a Group of Array Elements(SUB-ARRAY) Within a "PREDEFINED" Limit or Boundary(like Sub-Array matching a Sum, Problems with Given k Value, FlipZeros(Predefined No to be Flipped) to get Max 1's etc..)
 
@@ -74,3 +83,8 @@
          -> Using Quick Select
          -> Using Randomized Quick Select
 
+21 -> Using a Charcter Array(array of size 26 to store count), is much better, especially when we have to traverse the entire
+      given input.
+
+22 -> Each Charcter (Char Index) can be represented in a Bit(as 1) by shifting the appropriate Index. 
+      e.g 'd' represened by 1 << 4.

@@ -22,7 +22,7 @@ public class BreadthFirstSearch {
       this.vertices[0].isVisited = true;
       System.out.println("Vertex -> "+vertices[vertexIndex].vertexName);
       // The Vertices that are not reacheable from first Vertex cannot be Traversed in a Single Traversal(logical). Instead, we can use a
-      // Seperate for loop for Iterating Over those Vertices. But That is not necessary, Since we are Talking about Traversal here and not Visiting Every Node.
+      // Seperate for loop for Iterating Over those Vertices.
       while(!q.isEmpty()) {
          int vertexIndex = q.remove();
          for(int i=0;i<vertexCount;i++) {
