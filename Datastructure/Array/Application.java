@@ -17,11 +17,13 @@ public class Application {
       //FindString.finalAttempt(matrix, "GEEKS");
 
       //int[] a = {40, 10, 20, 5, 45, 50, 65, 90, 35, 25};
-      int[] a = {1, 9, 8, 4, 0, 0, 2, 7, 0, 6, 0, 9};
+      int[] a = {2, 3, 22, 8, 21, 2, 43, 44, 45, 16, 8, 9};
 
-      //int sum = 10;
+      int sum = 24;
       //PairNumberSum.pairNoSum1(a, sum);
       //PairNumberSum.pairNoSum2(a, sum);
+
+      TripletWithSum.tripletWithSum(a, 24);
 
       //MajorityElement.majorityElem1(a);
       //MajorityElement.boyerMooreAlgorithn(a);
@@ -106,6 +108,8 @@ public class Application {
       //FirstRepeating.firstRepeating2(a);
 
       //UnionAndIntersection.unionAndIntersection(a, b);
+
+      DiffWithSum.diffWithSum(a, 42);
    }
 
 

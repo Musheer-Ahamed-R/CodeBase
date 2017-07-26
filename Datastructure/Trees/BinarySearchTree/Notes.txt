@@ -1,8 +1,10 @@
-1 -> If ANY problem is given on the binary search tree, ALWAYS consider using the BST Property as a FIRST 
-	 OPTION.
-
-2 -> The In-Order Traversal of a BST always gives the nodes in the Ascending Order and this should be SECOND
-	 THING that comes to mind after property of BST.(i.e many problems can be solved using this technique).
+1 -> If ANY problem is given on the binary search tree, ALWAYS consider the following options
+		-> Using the BST Property as a FIRST OPTION.
+		-> The In-Order Traversal of a BST always gives the nodes in the Ascending Order .(i.e many problems can be solved 
+		   using this technique).
+		-> Iterative In Order Traversal should be used when we going to have comparisions between nodes
+		   either in Same Tree or in a Different Tree.(Find pair with given sum, Common Nodes in a Two BST's).
+		-> Converting a Tree to DLL in the Inorder way. Then doing operations as in an Array.
 
 // have doubt if O(log n) or O(h)
 3 -> Most of the operations on a BST have a Time Complexity of O(h)(h - height of the tree), thus keeping the height of the
@@ -14,3 +16,8 @@
 		-> Easy to Implement
 		-> O(log n) always guaranteed, but with Hash table Time complexity will increase when table resizing happens.O(1) 
 		   average time in Hash Table.
+
+5 -> We can Handle duplicates in Binary Search Tree in two ways
+		-> Keeping the duplicate Node as the Left(or Right) Child
+		-> Every node will keep a count, which indicates the number of duplicates. 
+		   

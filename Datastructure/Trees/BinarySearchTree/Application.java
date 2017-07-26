@@ -4,25 +4,25 @@ public class Application {
 
    public static void main(String[] args) {
 
-      /*Node tree = new Node(80);
+      Node tree = new Node(80);
 
       tree.setLChild(new Node(40));
       tree.setRChild(new Node(120));
 
-      tree.getLChild().setLChild(new Node(20));
+      //tree.getLChild().setLChild(new Node(20));
       tree.getLChild().setRChild(new Node(60));
-      tree.getRChild().setLChild(new Node(100));
+      //tree.getRChild().setLChild(new Node(100));
       tree.getRChild().setRChild(new Node(140));
 
-      tree.getLChild().getLChild().setLChild(new Node(10));
-      tree.getLChild().getLChild().setRChild(new Node(30));
+      //tree.getLChild().getLChild().setLChild(new Node(10));
+      //tree.getLChild().getLChild().setRChild(new Node(30));
       tree.getLChild().getRChild().setLChild(new Node(50));
       tree.getLChild().getRChild().setRChild(new Node(70));
 
-      tree.getRChild().getLChild().setLChild(new Node(90));
-      tree.getRChild().getLChild().setRChild(new Node(110));
+      //tree.getRChild().getLChild().setLChild(new Node(90));
+      //tree.getRChild().getLChild().setRChild(new Node(110));
       tree.getRChild().getRChild().setLChild(new Node(130));
-      tree.getRChild().getRChild().setRChild(new Node(150));*/
+      tree.getRChild().getRChild().setRChild(new Node(150));
 
 
       // tree.getLChild().getLChild().getLChild().setLChild();
@@ -87,9 +87,18 @@ public class Application {
       
       //SortedOrderPrinting.sortedOrderPrinting(bstArr, 0);
 
-      traverse(tree2);
-      tree2 = RemoveKeysOutsideRange.removeKeysOutsideRange(tree2, -10, 13);
-      traverse(tree2);
+      //traverse(tree2);
+      //tree2 = RemoveKeysOutsideRange.removeKeysOutsideRange(tree2, -10, 13);
+      //traverse(tree2);
+
+      //NOrderStatistics.nOrderStatisticsRecur(tree, 0, 8);
+      //NOrderStatistics.nOrderStatisticsIter(tree, 8);
+      //NOrderStatistics.nOrderStatisticsMorris(tree, 8);
+      
+      //boolean isBST = CheckIfBST.checkIfBST(tree, Integer.MIN_VALUE, Integer.MAX_VALUE);
+      //System.out.println(isBST);
+      
+      InOrderSuccPred.inOrderSuccPred(tree, 10);
    }
 
    public static void traverse(Node root) {

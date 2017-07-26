@@ -1,6 +1,6 @@
 public class OddOccurence {
 
-   // All Numbers in an Array Occurer "Even Times", except for One Element. Find that Element.
+   // Find the Number Occurring Odd Number of Times
 
    // 1 -> Using XOR    -  O(n)
 
