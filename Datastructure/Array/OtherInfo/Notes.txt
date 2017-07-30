@@ -4,6 +4,8 @@
 
 3 -> In case of TWO LOOPS, USE THE PROPER INDEX IN THE PROPER PLACE(i.e use i and j in PROPER PLACES).
 
+4 -> In cases where the number we are dealing with starts from 1, IT IS BETTER TO START LOOP INDEX FROM 1.
+
 4 -> IT IS BETTER TO MAKE THE CODE DIRTY THAN MAKE THE LOGIC CONFUSING. Could Tremendously Reduce Occurrence of Bugs. You could make the code BETTER After Completing the Problem.
 
 5 -> Always Always Check for the Corner Cases. Most of the Time, the Logic takes a "Major Major Hit" in Corner Cases.
@@ -88,3 +90,5 @@
 
 22 -> Each Charcter (Char Index) can be represented in a Bit(as 1) by shifting the appropriate Index. 
       e.g 'd' represened by 1 << 4.
+
+

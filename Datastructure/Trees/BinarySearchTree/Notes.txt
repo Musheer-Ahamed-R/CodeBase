@@ -21,3 +21,4 @@
 		-> Keeping the duplicate Node as the Left(or Right) Child
 		-> Every node will keep a count, which indicates the number of duplicates. 
 		   
+6 -> If the Algorithm for manipulating Tree/Arr/List elements is slow, then try solving the problem form the leaves.		   

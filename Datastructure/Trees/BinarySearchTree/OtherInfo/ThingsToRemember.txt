@@ -1,0 +1,6 @@
+1 -> Finding if a Tree is a BST or not can also be solved by inorder Traversal by just keeping a reference to
+     previous variable.
+
+2 -> In Converting a Binary tree to BST, the sorted array should replace the B Tree in INORDER TRAVERSAL.
+
+3 -> The Lowest Common Ancestor in BST is the Point at which the the two nodes split.
