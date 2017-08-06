@@ -7,6 +7,11 @@ Important Points
 ******
 3 -> For EACH AND EVERY TREE Problem, find if it can be solved using BFS or DFS(or Both)(RECURSIVE AND ITERATIVE). From that use the best approach.
 
+4 -> Also, ALWAYS CONSIDER the REVERSE Traversal(InOrder/PreOrder/PostOrder), if the
+     normal Treaversal is not Working.
+
+4 -> Many problems can be solved by considering the TRAVERSALS(any Traversal along with Inorder). They help in uniquely identifying a tree
+
 4 -> If the word MINIMUM is used, then consider using BFS first.
 
 5 -> When dealing with recursion, ALWAYS KNOW THAT THE METHODS ARE GOING TO BE EXECUTED and that methid call same ""FIRST"" method again and again 
@@ -88,3 +93,6 @@ Important Points
 
 22 -> If we are asked to check whether a tree is a complete binary tree or a perfect tree, FIRST CONSIDER THE ARRAY
       STRUCTURE OF FINDING THE INDEX OF THE CHILDREN.(Check whether a binary tree is a complete tree or not | Set 2 (Recursive Solution))
+
+23 -> From the Root and Left and Right Extreme Nodes(Without any turn), we can reach the
+      entire Tree.(e.g Boundary Traversal)

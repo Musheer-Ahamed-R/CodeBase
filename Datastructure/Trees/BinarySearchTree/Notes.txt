@@ -5,6 +5,7 @@
 		-> Iterative In Order Traversal should be used when we going to have comparisions between nodes
 		   either in Same Tree or in a Different Tree.(Find pair with given sum, Common Nodes in a Two BST's).
 		-> Converting a Tree to DLL in the Inorder way. Then doing operations as in an Array.
+		-> Using LCA for finding/comparing/manipulating nodes BETWEEN two Nodes in a BST(The Splitting Node)
 
 // have doubt if O(log n) or O(h)
 3 -> Most of the operations on a BST have a Time Complexity of O(h)(h - height of the tree), thus keeping the height of the

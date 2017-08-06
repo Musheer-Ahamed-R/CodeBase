@@ -67,6 +67,8 @@ public class Application {
       //PostOrderTraversal.iterPostOrder3(tree);
 
       //LevelOrderTraversal.levelOrder(tree);
+
+      DiameterTraversal.diameterTraversal(tree);
   }
 
 

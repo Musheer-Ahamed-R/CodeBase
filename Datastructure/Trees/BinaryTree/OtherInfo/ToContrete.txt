@@ -17,3 +17,8 @@
 	 FOR EACH NODE(Naive Approach) Use the Property of Inorder Successor and Predessor.(Incereased Time Complexity).
 
 9 -> Print Postorder traversal from given Inorder and Preorder traversals.(Just the old post ordering way of printing).
+
+10 -> Connect Neighbour Nodes at the same level.(Reverse Traversal)
+
+11 -> Boundary Traversal.(Traversing Leaf nodes while traversing left and right nodes
+      (StackOverflow)).
