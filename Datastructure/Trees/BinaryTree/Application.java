@@ -15,24 +15,24 @@ public class Application {
       skewedTree.getRChild().getRChild().getRChild().getRChild().setRChild(new Node(63, null, null));
 
 
-      Node tree2 = new Node(10, null, null);
+      Node tree2 = new Node(1, null, null);
 
-      tree2.setLChild(new Node(12, null, null));
-      tree2.setRChild(new Node(15, null, null));
+      tree2.setLChild(new Node(2, null, null));
+      tree2.setRChild(new Node(2, null, null));
       
-      tree2.getLChild().setLChild(new Node(25, null, null));
-      tree2.getLChild().setRChild(new Node(30, null, null));
-      tree2.getRChild().setLChild(new Node(36, null, null));
-      //tree2.getRChild().setRChild(new Node(9, null, null));
+      //tree2.getLChild().setLChild(new Node(3, null, null));
+      tree2.getLChild().setRChild(new Node(4, null, null));
+      //tree2.getRChild().setLChild(new Node(4, null, null));
+      tree2.getRChild().setRChild(new Node(3, null, null));
 //
-      //tree2.getLChild().getLChild().setLChild(new Node(1, null, null));
-      //tree2.getLChild().getLChild().setRChild(new Node(2, null, null));
-      //tree2.getLChild().getRChild().setLChild(new Node(1, null, null));
-      //tree2.getLChild().getRChild().setRChild(new Node(11, null, null));
-      //tree2.getRChild().getLChild().setLChild(new Node(5, null, null));
-      //tree2.getRChild().getLChild().setRChild(new Node(6, null, null));
-      //tree2.getRChild().getRChild().setLChild(new Node(4, null, null));
-      //tree2.getRChild().getRChild().setRChild(new Node(8, null, null));
+      /*tree2.getLChild().getLChild().setLChild(new Node(1, null, null));
+      tree2.getLChild().getLChild().setRChild(new Node(2, null, null));
+      tree2.getLChild().getRChild().setLChild(new Node(1, null, null));
+      tree2.getLChild().getRChild().setRChild(new Node(11, null, null));
+      tree2.getRChild().getLChild().setLChild(new Node(5, null, null));
+      tree2.getRChild().getLChild().setRChild(new Node(6, null, null));
+      tree2.getRChild().getRChild().setLChild(new Node(3, null, null));
+      tree2.getRChild().getRChild().setRChild(new Node(4, null, null));*/
 
 
       Node tree = new Node(1, null, null);
@@ -42,8 +42,12 @@ public class Application {
 
       tree.getLChild().setLChild(new Node(4, null, null));
       tree.getLChild().setRChild(new Node(5, null, null));
-      tree.getRChild().setLChild(new Node(16, null, null));
-      tree.getRChild().setRChild(new Node(17, null, null));
+      tree.getRChild().setLChild(new Node(6, null, null));
+      tree.getRChild().setRChild(new Node(7, null, null));
+
+      tree.setNextRight(tree.getRChild().getRChild());
+      tree.getLChild().setNextRight(tree.getLChild().getRChild());
+      tree.getRChild().setNextRight(tree.getLChild().getLChild());
 //
       //tree.getLChild().getLChild().setLChild(new Node(8, null, null));
       //tree.getLChild().getLChild().setRChild(new Node(9, null, null));
@@ -276,8 +280,12 @@ public class Application {
       //ConnectNodesAtSameLevel.connectNodesAtSameLevel(tree);
       //levelOrder(tree);
   
-      MaxPathSum.maxPathSum(tree);
-      System.out.println(MaxPathSum.currMax);
+      //MaxPathSum.maxPathSum(tree2);
+      //System.out.println(MaxPathSum.currMax);
+  
+      //SymmetricTree.symmetricTree(tree2);
+ 
+      CloneTree.cloneTree(tree);
   }
 
   public static void levelOrder(Node root) {
@@ -291,6 +299,7 @@ public class Application {
       while(count-- > 0) {
         Node target = q.remove();
         System.out.println(target.getData() +"  "+target.getNextRight());
+        //System.out.println(target.getData() +"  ");
         if(target.getLChild() != null) {
           q.add(target.getLChild());
         }

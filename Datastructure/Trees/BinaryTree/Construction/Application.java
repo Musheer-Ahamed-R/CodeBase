@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Application {
 	
 	public static void main(String[] args) {
@@ -46,11 +48,36 @@ public class Application {
      int[] preOrder = new int[]{1, 2, 4, 8, 9, 5, 10, 11, 3, 6, 12, 13, 7, 14, 15};
      int[] postOrder = new int[]{8, 9, 4, 10, 11, 5, 2, 12, 13, 6, 14, 15, 7, 3, 1};
 
-     Node constructTree = ConstructFromInOrderPreOrder.constructFromInOrderPreOrder(inOrder, preOrder, 0, inOrder.length-1);
+     int[] parentArr = {1, 5, 5, 2, 2, -1, 3};
 
+     //Node constructTree = ConstructFromInOrderPreOrder.constructFromInOrderPreOrder(inOrder, preOrder, 0, inOrder.length-1);
+
+     ConstructFromParentArr.constructFromParentArr(parentArr);
 	}
 
-
+  public static void levelOrder(Node root) {
+    if(root == null) {
+      return;
+    }
+    Queue<Node> q = new ArrayDeque<>();
+    q.add(root);
+    while(!q.isEmpty()) {
+      int count = q.size();
+      while(count-- > 0) {
+        Node target = q.remove();
+        System.out.println(target.getData() +"  "+target.getNextRight());
+        //System.out.println(target.getData() +"  ");
+        if(target.getLChild() != null) {
+          q.add(target.getLChild());
+        }
+        if(target.getRChild() != null) {
+          q.add(target.getRChild());
+        }
+      }
+      System.out.println();
+    }
+    
+  }
 
 
 }

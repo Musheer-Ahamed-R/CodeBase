@@ -6,13 +6,15 @@ public class PreOrderTraversal {
     public static final List<Integer> list2 = new ArrayList<>();
     public static final List<Integer> list3 = new ArrayList<>();
 
-    public static void recurPreOrder(Node root) {
+    public static void recurPreOrder(Node root, int level) {
       if(root == null) {
         return;
       }
-      System.out.println("Node "+root.getData());
-      recurPreOrder(root.getLChild());
-      recurPreOrder(root.getRChild());
+      if(level == 4) {
+        System.out.println("Node "+root.getData());
+      }
+      recurPreOrder(root.getLChild(), level + 1);
+      recurPreOrder(root.getRChild(), level + 1);
     }
 
     // Iterative approach can be solved using

@@ -91,4 +91,6 @@
 22 -> Each Charcter (Char Index) can be represented in a Bit(as 1) by shifting the appropriate Index. 
       e.g 'd' represened by 1 << 4.
 
+23 -> If Array is to be used in a rotational/circular manner, use module by the array length
+
 

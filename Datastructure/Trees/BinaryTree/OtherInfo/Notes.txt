@@ -87,6 +87,9 @@ Important Points
       required. A SINGLE ANCESTOR ARRAY is ENOUGH since we are just going to store the value based on index(level) which is overwritten. (Find the closest leaf in a 
       Binary Tree)
 
+21 -> If the Word Path is used(e.g root to leaf path), then consider using
+      a ARRAY/ARRAYLIST.
+
 21 -> Using a Global variable is useful when dealing with indexes of an array. The main idea here is that we  
       keep on incrementing index value of one traversal while splitting the other traversal for left and right
       subtree (e.g Construct a special tree from given preorder traversal)
@@ -96,3 +99,9 @@ Important Points
 
 23 -> From the Root and Left and Right Extreme Nodes(Without any turn), we can reach the
       entire Tree.(e.g Boundary Traversal)
+
+24 -> When inside of a function whose implementation is dependent on another value 
+      which is not yet created, then we can recursively call the function with that value
+
+25 -> If doing something from the top takes more time, then consider doing it from 
+      the bottom.
