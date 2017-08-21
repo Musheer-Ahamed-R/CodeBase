@@ -1,0 +1,13 @@
+Iterator Pattern : 
+
+	-> The iterator pattern provides a way to access the elements of an aggregate
+	   object without exposing its underlying representation(i.e Array, List or Set).
+	-> There are a lot of data structures/collections available in every language. 
+	   Each collection must provide an iterator that lets it iterate through its
+	   objects. However while doing so it should make sure that it does not expose
+	   its implementation.
+	-> Thus, if we would have used some other DataStructure instead of current one in
+	   future, there will not be any change in the client code due to the decoupling 
+	   achieved by the use of iterator interface.
+
+

@@ -1,0 +1,31 @@
+Decorator Pattern : 
+	-> The decorator pattern attaches additional responsibilities to an object 
+	   dynamically. 
+	-> Decorators provide a flexible alternative to subclassing for extending 
+	   functionality.
+
+	Note : 
+		-> This pattern is used when the want of capabilities of inheritence with sub-classes, but you need to add functionality at Run time.
+		-> This pattern is to be used when customization of an Object is required.
+
+	Implementation : 
+	
+		-> Each component can be used on its own or may be wrapped by a decorator.
+	 ***-> Each decorator has an instance variable that holds the reference to
+		   component it decorates(HAS-A relationship).
+		-> The ConcreteComponent is the object we are going to dynamically
+		   decorate.   
+
+	Advantages:
+		-> The decorator pattern can be used to make it possible to extend (decorate)
+		   the functionality of a certain object at runtime.
+		-> The decorator pattern is an alternative to subclassing. Subclassing adds 
+		   behavior at compile time, and the change affects all instances of the original class; decorating can provide new behavior at runtime for individual objects.
+		-> Decorator offers a pay-as-you-go approach to adding responsibilities. 
+		   Instead of trying to support all foreseeable features in a complex, customizable class, you can define a simple class and add functionality incrementally with Decorator objects.
+
+	Dis-Advantages : 
+		-> Decorators can complicate the process of instantiating the component
+		   because you not only have to instantiate the component, but wrap it in a number of decorators.
+		-> It can be complicated to have decorators keep track of other decorators, 
+		   because to look back into multiple layers of the decorator chain starts to push the decorator pattern beyond its true intent.	   

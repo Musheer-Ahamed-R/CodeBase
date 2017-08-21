@@ -1,0 +1,15 @@
+Facade Pattern : 
+
+	-> This hides the complexities of the system and provides an interface to the
+	   client from where the client can access the system.
+	-> The facade pattern is appropriate when you have a complex system that you want
+	   to expose to clients in a simplified way, or you want to make an external
+	   communication layer over an existing system which is incompatible with the
+	   system. 
+	-> Facade deals with interfaces, not implementation. Its purpose is to hide
+	   internal complexity behind a single interface that appears simple on the 
+	   outside.
+
+	   e.g, Banking activities like withdrawl, Hotel Keeper who helps the customer with his needs(Customer need not know where exactly to go/ask he can ask the keeper).
+
+    

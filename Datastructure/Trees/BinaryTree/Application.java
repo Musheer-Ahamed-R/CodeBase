@@ -37,13 +37,13 @@ public class Application {
 
       Node tree = new Node(1, null, null);
 
-      tree.setLChild(new Node(2, null, null));
-      tree.setRChild(new Node(3, null, null));
+      tree.setLChild(new Node(4, null, null));
+      tree.setRChild(new Node(8, null, null));
 
-      tree.getLChild().setLChild(new Node(4, null, null));
+      tree.getLChild().setLChild(new Node(2, null, null));
       tree.getLChild().setRChild(new Node(5, null, null));
-      tree.getRChild().setLChild(new Node(6, null, null));
-      tree.getRChild().setRChild(new Node(7, null, null));
+      tree.getRChild().setLChild(new Node(9, null, null));
+      tree.getRChild().setRChild(new Node(10, null, null));
 
       tree.setNextRight(tree.getRChild().getRChild());
       tree.getLChild().setNextRight(tree.getLChild().getRChild());
@@ -285,7 +285,10 @@ public class Application {
   
       //SymmetricTree.symmetricTree(tree2);
  
-      CloneTree.cloneTree(tree);
+      //CloneTree.cloneTree(tree);
+  
+      RemoveOddParent.removeOddParent(tree);
+      Application.levelOrder(tree);
   }
 
   public static void levelOrder(Node root) {

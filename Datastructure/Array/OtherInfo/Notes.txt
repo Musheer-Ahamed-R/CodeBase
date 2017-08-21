@@ -62,6 +62,7 @@
 
 12 -> Bit Manipulation should also be considered as a Final Alternative.(e.g All Elements N Times except 1 Element)
         -> Bit Manipulation and Character Shifting go "HAND IN HAND".   
+        -> When dealing with bit manipulation, sometimes we have think of the given no itself in terms of individual bits.
 
 13 -> SLIDING WINDOW should be Used/Considered when we are Dealing with a Group of Array Elements(SUB-ARRAY) Within a "PREDEFINED" Limit or Boundary(like Sub-Array matching a Sum, Problems with Given k Value, FlipZeros(Predefined No to be Flipped) to get Max 1's etc..)
 
