@@ -1,0 +1,39 @@
+Asymptotic Runtime Notations - 
+
+Big O Notation - 
+
+	For a function f(x), there exists a function g(x)(simplified version of f(x)), f(x) == O(g(x)), 
+	if there exists f(x) <= c * g(x), where c > 0 and x1 > 0, for all x > x1. 
+
+	This is called the Upper bound
+
+
+Omega Notation - 
+
+	For a function f(x), there exists a function g(x)(simplified version of f(x)), f(x) == Omega(g(x)),
+	if there exists f(x) >= c * g(x), where c > 0 and x1 > 0, for all x > x1.
+	
+	This is called the Lower bound
+
+Theta Notation - 
+
+	This exists if both O and Omega notation exists
+
+	This offers a tight bound on the run time.
+
+	Relationship between best/worst/expected case and Big O. Omega and Theta Notations
+
+		-> There is no particular relationship between these concepts, 
+
+		   Best/worst/Expected cases describe the Big O(or Big Theta) for a particular input or secnarios
+
+		   Big O, Big Omega, and Big Theta describes the upper, lower and tight bound for the runtime.(Realted to mathematical equation) 
+
+Calculating Big O notation : 
+	
+	-> Drop the Constant	O(2N) ~ O(N)
+	-> Drop the Non Dominant Term	 O(N + N) ~ N(N)
+	   Note : 
+		-> We might still have some Sum in a runtim. e.g O(N + M), here we cannot reduce the Noattion to either
+		   O(N) or O(M), with any knowledge of N and M.	
+	
