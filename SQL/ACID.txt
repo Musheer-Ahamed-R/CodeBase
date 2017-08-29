@@ -1,0 +1,24 @@
+ACID Properties
+
+The ACID model is one of the oldest and most important concepts of database theory. A transaction may contain several low level tasks and further a transaction is a very small unit of any program. There is a set of properties that guarantee that database transactions are processed reliably. These properties are called ACID properties and are the subject to the sections below:
+
+Atomicity
+
+Atomicity states that database modifications must follow an all or nothing rule. Though a transaction involves several low level operations but this property states that a transaction must be treated as an atomic unit, that is, either all of its operations are executed or none. There must be no state in database where the transaction is left partially completed. States should be defined either before the execution of the transaction or after the execution/abortion/failure of the transaction. A transaction must be fully complete, saved (committed) or completely undone (rolled back).
+
+Consistency
+
+The consistency property ensures that the database remains in a consistent state before the start of the transaction and after the transaction is over (whether successful or not). This property states that after the transaction is finished, its database must remain in a consistent state. There must not be any possibility that some data is incorrectly affected by the execution of transaction.
+
+If each transaction is consistent, and the database starts consistent, then the database ends up consistent. If a transaction violates the database’s consistency rules, the entire transaction will be rolled back and the database will be restored to a state consistent with those rules.
+ 
+Durability
+
+Durability refers to the guarantee that once the user has been notified of success, the transaction will persist, and not be undone. This property states that in any case all updates made on the database will persist even if the system fails and restarts. If a transaction writes or updates some data in database and commits that data will always be there in the database. If the transaction commits but data is not written on the disk and the system fails, that data will be updated once the system comes up.
+Once a transaction commits, the system must guarantee that the results of its operations will never be lost, in spite of subsequent failures.
+
+Isolation
+
+Isolation refers to the requirement that other operations cannot access or see the data in an intermediate state during a transaction. This constraint is required to maintain the performance as well as the consistency between transactions in a database. Thus, each transaction is unaware of another transactions executing concurrently in the system.
+
+In other words, in a database system where more than one transaction are being executed simultaneously and in parallel, the property of isolation states that all the transactions will be carried out and executed as if it is the only transaction in the system. No transaction will affect the existence of any other transaction.

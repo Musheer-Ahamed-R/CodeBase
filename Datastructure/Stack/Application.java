@@ -68,7 +68,7 @@ public class Application {
 		stack.push(3000);
 		stack.print();*/
 
-		int[] arr = new int[]{2, 4, 8, 7, 7, 9, 3};
+		int[] arr = {2, 1, 8};
 
 		//int[][] knowsArray = {{1, 0, 0, 1},
 		//				     {1, 0, 0, 1},
@@ -141,7 +141,11 @@ public class Application {
 		CelebrityProblem.findCelebrity2(knowsArray, list);*/
 
 		//NextSmallerOfNextGreater.nextSmallerOfNextGreater(arr);
-		NextSmallerLeftSmaller.nextSmallerRightSmaller(arr);
+		//NextSmallerLeftSmaller.nextSmallerRightSmaller(arr);
+	
+		//DuplicateExpression.duplicateExpression("((a+(b))+(c+d))");
+	
+		MaxDiff.maxDiff(arr);
 	}
 
 }

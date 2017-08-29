@@ -12,5 +12,4 @@ Applications	-
 				-> Redo-undo features at many places like editors, photoshop.
 				-> Forward and backward feature in web browsers
 				-> Used in many algorithms like Tower of Hanoi, tree traversals, stock span problem, histogram problem.
-				-> Other applications can be Backtracking, Knight tour problem, rat in a maze, N queen problem and sudoku solver							  
-
+				-> Other applications can be Backtracking, Knight tour problem, rat in a maze, N queen problem and sudoku solver.

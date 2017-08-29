@@ -13,7 +13,38 @@ public class TrappingRainWater {
    //    -> The Previous Greatest Element
 
    // This can be Optimized by not using the rightGreatest Array and Computing its value on the go while calculating the No of Units.
-   public static void trappingRainWater(int[] a) {
+   
+   public static void trappingRainWater(int[] arr) {
+      if(arr == null) {
+         return;
+      }
+      int maxIndex = 0;
+      for(int i=1;i<arr.length;i++) {
+         if(arr[i] > arr[maxIndex]) {
+            maxIndex = i;
+         }
+      }
+      int maxLeft = 0;
+      int result = 0;
+      for(int i=1;i<maxIndex;i++) {
+         if(arr[i] >= arr[maxLeft]){
+            maxLeft = i;
+         } else {
+            result += arr[maxLeft] - arr[i];
+         }
+      }
+      int maxRight = arr.length-1;
+      for(int i=arr.length-2;i>maxIndex;i--) {
+         if(arr[i] >= arr[maxRight]){
+            maxRight = i;
+         } else {
+            result += arr[maxRight] - arr[i];
+         }
+      }
+      System.out.println(result);
+   }
+
+   /*public static void trappingRainWater(int[] a) {
 
       int[] leftGreatest = new int[a.length];
       int[] rightGreatest = new int[a.length];
@@ -41,6 +72,6 @@ public class TrappingRainWater {
          noOfUnits += Integer.max(Integer.min(rightGreatest[i], leftGreatest[i]) - a[i], 0);
       }
       System.out.println(noOfUnits);
-   }
+   }*/
 
 }

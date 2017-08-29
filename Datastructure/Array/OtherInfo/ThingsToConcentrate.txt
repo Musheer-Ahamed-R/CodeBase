@@ -8,3 +8,4 @@
 
 5 -> Count Inversions in an array | Set 1 (Using Merge Sort)
  
+6 -> For Trapping rain water, first find the max bar. then traverse left til max bar and from right till maxbar, keeping track of the max elem.

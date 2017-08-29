@@ -14,7 +14,7 @@ Important Points
 
 4 -> If the word MINIMUM is used, then consider using BFS first.
 
-5 -> When dealing with recursion, ALWAYS KNOW THAT THE METHODS ARE GOING TO BE EXECUTED and that methid call same ""FIRST"" method again and again 
+5 -> When dealing with recursion, ALWAYS KNOW THAT THE METHODS ARE GOING TO BE EXECUTED and that method call same ""FIRST"" method again and again 
      untill the base case is reached, thus the second method call will have to wait till that. THIS causes problems because of LESS understanding of the method call execution.(e.g see not working method - Perfect Binary Tree Specific Level Order Traversal).
 
 6 -> Traversal Findings

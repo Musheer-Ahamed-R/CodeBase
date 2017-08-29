@@ -5,8 +5,29 @@ Notes :
 
 **2 -> Consider Using Stack if the Problem Involves BACKTRACKING(Including Tree Traversals).
 
+3 -> This can be used for REVERSING elements(e.g String)
+
+****
+4 -> BE EXTREMELY CAREFUL WHILE USING INDEX AS STACK ELEMENTS.
+
 3 -> Use STACK if the Current Element depends on other Elements in the Array (e.g Previous or Next Elements).
 
 4 -> In case of Stack, the Problem should always be Considered "STEP BY STEP". (Just like Recursion). Otherwise, we "COULD NOT POSSIBLY SOLVE" the Problem.
 
 5 -> Popping from one stack and pushing that into another stack actually Reverses the Stack Elements.(Speciality of Stack)
+
+6 -> Implementing a stack using a single Queue is possible just as it is possible to implement a Queue using a Single Stack(uses recursion as another stack).
+
+7 -> The TOH problem is so complicated that we can just use the example of ONE 
+	 AND TWO discs for solving successfully. Also, we just print the movement only when are moving from source to destination.(Not other movements)
+	 BEWARE, for inputs greater than TWO, it involves a lot of recursive steps(No Need to go that far as we get the answer for solving with just 1 and 2 as input)
+
+	 Logic is, 
+	 	-> Move n-1 disks from source to aux peg using the dest peg as intermediate peg
+	 	-> Move nth disk from source to dest peg using aus peg as intermediate peg
+	 	-> Move n-1 disks from aux peg to dest using source peg as intermediate peg
+
+*****************************
+*****************************
+8 -> When we are finding the next Smaller/Greater element, we also have access to PREV Smaller/Greater for that element.
+

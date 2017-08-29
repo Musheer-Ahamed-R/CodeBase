@@ -1,765 +1,767 @@
-Database Server -
+   Database Server -
 
-      Database Server is a Software Application that Contains Databases, Schemas, Tables, Triggers, Views, Indexes, Stored Procedures, Functions etc..
+   Database Server is a Software Application that Contains Databases, Schemas, Tables, Triggers, Views, Indexes, Stored Procedures, Functions etc..
 
-Types of Database Management System(Server) :
+   Types of Database Management System(Server) :
 
-      1 -> Flat File Database
-            -> A Single large Table.
+   1 -> Flat File Database
+   -> A Single large Table.
 
-      2 -> Relational Database
-            -> Hierarchical Database
-                     -> Folder Structure, One to One Relationship(i.e Employee reporting to a Single Manager(Parent).
-                     -> A Folder/File is related to a Single Folder.
-            -> RDBMS (Relational DBMS)
-                     -> One to Many Relationship(i.e Employee reporting to a Multiple Managers).
-                     -> A Table can be related to any other Table in a Database.
-                     -> e.g SQL Server, MySQL, Oracle
-            -> ORDBMS (Object-Relational DBMS)
-                     -> e.g Postgres
-            -> NEWSQL
-                     -> Provides the Same Scalable Performance of NoSQL System for OLTP(Online Transaction Processing), while maintaining the ACID
-                        guarantees of a Traditional Database System.
-                     -> e.g Clustrix, NuoDB, MemSQL, Elastic Database, VoltDB, Google Spanner.
+   2 -> Relational Database
+   -> Hierarchical Database
+   -> Folder Structure, One to One Relationship(i.e Employee reporting to a Single Manager(Parent).
+   -> A Folder/File is related to a Single Folder.
+   -> RDBMS (Relational DBMS)
+   -> One to Many Relationship(i.e Employee reporting to a Multiple Managers).
+   -> A Table can be related to any other Table in a Database.
+   -> e.g SQL Server, MySQL, Oracle
+   -> ORDBMS (Object-Relational DBMS)
+   -> e.g Postgres
+   -> NEWSQL
+   -> Provides the Same Scalable Performance of NoSQL System for OLTP(Online Transaction Processing), while maintaining the ACID
+   guarantees of a Traditional Database System.
+   -> e.g Clustrix, NuoDB, MemSQL, Elastic Database, VoltDB, Google Spanner.
 
-      3 -> NoSQL Database (Lacks in ACID test)
-            -> Key-Value Database
-                     -> e.g Amazon DynamoDB, Oracle Berkeley Db, Redis
-            -> Graph Database
-                     -> e.g Neo4j, infiniteGraph, Sones
-            -> Column Database
-                     -> e.g HBASE, Riak, Cassandra
-            -> Document Database
-                     -> Nested form of Key-Value database(JSON Structured)
-                     -> e.g CouchDB, MongoDB, Terrastore
+   3 -> NoSQL Database (Lacks in ACID test)
+   -> Key-Value Database
+   -> e.g Amazon DynamoDB, Oracle Berkeley Db, Redis
+   -> Graph Database
+   -> e.g Neo4j, infiniteGraph, Sones
+   -> Column Database
+   -> e.g HBASE, Riak, Cassandra
+   -> Document Database
+   -> Nested form of Key-Value database(JSON Structured)
+   -> e.g CouchDB, MongoDB, Terrastore
 
-Terms and Meanings :
+   Terms and Meanings :
 
-Database          - A Database is the Main Container, it Contains the Data, Log files and all the Schemas within it.
-                     -> Whenever a Database is created, two files are Generated,
-                           -> MASTER Data File (MDF)(Contains Actual Data)
-                           -> LOG Data File (LDF)(Transaction Log File - Used to recover the Database).
+   Database          - A Database is the Main Container, it Contains the Data, Log files and all the Schemas within it.
+   -> Whenever a Database is created, two files are Generated,
+   -> MASTER Data File (MDF)(Contains Actual Data)
+   -> LOG Data File (LDF)(Transaction Log File - Used to recover the Database).
 
 
 
-Schemas           - A Schema is like a Folder within a Database(namespace/package), and are mainly used to group logical Objects together, which leads to ease of
-                  Setting Permission by Schema. (e.g HR Schema, Research Schema, Vendors Schema etc.., Now HR User can be made to access only HR Schema).
+   Schemas           - A Schema is like a Folder within a Database(namespace/package), and are mainly used to group logical Objects together, which leads to ease of
+   Setting Permission by Schema. (e.g HR Schema, Research Schema, Vendors Schema etc.., Now HR User can be made to access only HR Schema).
 
-                  Syntax :
-                           CREATE SCHEMA schemaname AUTHORIZATION username;                                                   // Postgres - Authorization username could be skipped
+   Syntax :
+   CREATE SCHEMA schemaname AUTHORIZATION username;                                                   // Postgres - Authorization username could be skipped
 
-                           -> Its a Distinct namespace, that exists independently of the Database User who Created it (i.e It Could be Made accessible to Other Users). Its Ownership is Transferable.
+   -> Its a Distinct namespace, that exists independently of the Database User who Created it (i.e It Could be Made accessible to Other Users). Its Ownership is Transferable.
 
-                           -> Every Database has a Default Schema. If we Create a Table without a Schema, it will go inside the Default Schema of the Database.
+   -> Every Database has a Default Schema. If we Create a Table without a Schema, it will go inside the Default Schema of the Database.
 
-                           -> We can only DROP a Schema if it is Empty(No Objects inside it). Otherwise, we should use the CASCADE Command.
+   -> We can only DROP a Schema if it is Empty(No Objects inside it). Otherwise, we should use the CASCADE Command.
 
-Tables/Entity     - A Table is a  Collection of Data Elements organized in terms of Rows and Columns. It is a Convenient representation of a Relation.
+   Tables/Entity     - A Table is a  Collection of Data Elements organized in terms of Rows and Columns. It is a Convenient representation of a Relation.
 
-Field/Attribute   - Fields are the Properties(Column names) of a Table/Entity.
-                    Types of Attributes :
+   Field/Attribute   - Fields are the Properties(Column names) of a Table/Entity.
+   Types of Attributes :
 
-                        -> Simple Single Values Attribute (e.g Gender)
-                        -> Simple Multi-Values Attribute (e.g Phone No)
-                        -> Composite Single Values Attribute (e.g firstname_lastname)
-                        -> Composite Multi-Values Attribute (e.g sibilingfirstname_sibilinglastname)
-                        -> Derived Attribute  =>  Values that do not exist in the base tables, but are calculated from the values stored in the base tables(e.g Average Salary of Employees, age derived from DOB, etc..)
+   -> Simple Single Values Attribute (e.g Gender)
+   -> Simple Multi-Values Attribute (e.g Phone No)
+   -> Composite Single Values Attribute (e.g firstname_lastname)
+   -> Composite Multi-Values Attribute (e.g sibilingfirstname_sibilinglastname)
+   -> Derived Attribute  =>  Values that do not exist in the base tables, but are calculated from the values stored in the base tables(e.g Average Salary of Employees, age derived from DOB, etc..)
 
-Record/Row/TUPLE  - A Single instance of a table that represents set of related data.
+   Record/Row/TUPLE  - A Single instance of a table that represents set of related data.
 
-Column            - Set of Value(Instance) of a Particular Type(Filed).
+   Column            - Set of Value(Instance) of a Particular Type(Filed).
 
-Different Types of Keys in a Table -
+   Different Types of Keys in a Table -
 
-         -> Super Key
-                     -> A Single Attribute or a Combination of Attributes that is used to uniquely identify a record.
-                     -> A table can have many super keys.
-                     -> The Combination of Attributes need not be minimal. (i.e There can be a Combination of three attributes for a Super key, even if one or two is sufficient to uniquely identify a Record).
+   -> Super Key
+   -> A Single Attribute or a Combination of Attributes that is used to uniquely identify a record.
+   -> A table can have many super keys.
+   -> The Combination of Attributes need not be minimal. (i.e There can be a Combination of three attributes for a Super key, even if one or two is sufficient to uniquely identify a Record).
 
-         -> Candidate Key
-                     -> The Minimal Super Key or the Irreducible Super Key (i.e An SINGLE Attribute or a Combination of Attributes that identifies the record uniquely, but none of its subsets can identify the records uniquely).
+   -> Candidate Key
+   -> The Minimal Super Key or the Irreducible Super Key (i.e An SINGLE Attribute or a Combination of Attributes that identifies the record uniquely, but none of its subsets can identify the records uniquely).
 
-         -> Unique Key
-                     -> They have UNIUUE values in a Table, except for NULL Values.
-                     -> It can take NULL values (Those NULL values could occur MULTIPLE TIMES. Thus, need not always be a Candidate Key)
-                     -> There can one or more Unique Keys in a Table.
-                     -> It is a Single Attribute
+   -> Unique Key
+   -> They have UNIUUE values in a Table, except for NULL Values.
+   -> It can take NULL values (Those NULL values could occur MULTIPLE TIMES. Thus, need not always be a Candidate Key)
+   -> There can one or more Unique Keys in a Table.
+   -> It is a Single Attribute
 
-         -> Primary Key
-                     -> A Candidate Key that is used by the Database Designer for unique identification of each Row in a Table.
-                     -> A Primary Key can Consist of One or More Attributes of a Table
-                     -> It Cannot take NULL values
-                     -> There can only be one Primary Key
-                     -> It can be a Combination of Attributes(e.g Composite Primary Key)
+   -> Primary Key
+   -> A Candidate Key that is used by the Database Designer for unique identification of each Row in a Table.
+   -> It can be a Combination of Attributes(e.g Composite Primary Key)
+   -> It Cannot take NULL values
+   -> There can only be one Primary Key
 
-         -> Composite Key(Compound Key/Concatenated Key)
-                     -> If we use Multiple Attributes to create a Primary Key, then that Primary Key is called ad Composite Key
+   -> Composite Key(Compound Key/Concatenated Key)
+   -> If we use Multiple Attributes to create a Primary Key, then that Primary Key is called ad Composite Key
 
-         -> Alternate Key
-                     -> Any Candidate Key that is not a Primary Key.
+   -> Alternate Key
+   -> Any Candidate Key that is not a Primary Key.
 
-         -> Secondary Key
-                     -> The Attribute that are not even the Super Key, but can still be used for Identification of Records(though NOT UNIQUE).
+   -> Secondary Key
+   -> The Attribute that are not even the Super Key, but can still be used for Identification of Records(though NOT UNIQUE).
 
-         -> Foreign Key
-                     -> An Attribute or Combination of Attribute in one Base table that points to the Primary Key of Another table.
-                     -> This is used to ensure Referential Integrity of the Data.(i.e Only values that are already Present in the Parent Table or NULL is allowed)
+   -> Foreign Key
+   -> An Attribute or Combination of Attribute in one Base table that points to the Primary Key of Another table.
+   -> This is used to ensure Referential Integrity of the Data.(i.e Only values that are already Present in the Parent Table or NULL is allowed)
 
-         -> Artificial Key
-                     -> If no Obvious Stand alone Primary Key or Composite Key is available, then we simply create a new Attribute and assign a Unique Number to each Record.
-                     -> This eventually becomes the Primary Key.
-
-         -> Surrogate Key
+   -> Artificial Key
+   -> If no Obvious Stand alone Primary Key or Composite Key is available, then we simply create a new Attribute and assign a Unique Number to each Record.
+   -> This eventually becomes the Primary Key.
+
+   -> Surrogate Key
 
-
-         -> Partial Key
-
-
-Constraints in SQL :
-
-         -> Primary Key           - PRIMARY KEY(Col1, Col2, Col3);
-
-         -> Unique                - Checks if the Value for the Column, is UNIQUE in the Table.
-                                    UNIQUE (Col)
-
-         -> Foreign Key           - FOREIGN KEY(Col111, Col222, Col333) REFERENCES PARENT_TABLE(Col1, Col2, Col3);
-
-                                    CASCADING Referential Integrity - This allows the Database Server to define the Actions which should be taken when a user attempts to
-                                                                    Delete/Update a key to which an existing Foreign key points.
-                                                                    -> The CASCADING Referential Integrity is for the FOREIGN KEY of a Table(i.e) Not for the Entire Parent Table. Thus, it can
-                                                                    only be applied when a Foreign key is Declared.
-                                                                    Options -
-                                                                        -> NO ACTION (Default, DELETE/UPDATE is ROLLED BACK)
-                                                                        -> CASCADE (DELETE/UPDATE reflected everywhere the key is referenced as a Foreign Key)
-                                                                        -> SET NULL
-                                                                        -> SET DEFAULT
-
-         -> Check                 - This is used to limit the Range of values, that can be entered for a Column.(NULL is Considered as a Valid Value if Passed).
-                                    CHECK (Boolean_Expression)
-
-         -> NOT NULL              - Checks if the Value to be Inserted for a Column is Not NULL
-                                    NOT NULL
-
-         -> DEFAULT               - The Value to be Set for the Column, if no Value is specified(NULL is Considered as a Value if Passed).
-                                    DEFAULT Default_Value
-
-         Note :
-            -> We should be using the Keyword CONSTRAINT, if we want to name our Constraint. (e.g CONSTRAINT prim_key_attr PRIMARY KEY(id).
-            -> CONSTRAINT name should be UNIQUE WITHIN a SCHEMA. It should not Collide with Table name either.
-
-Additional Properties :
-
-         Identity Column          -       -> If a Column is Marked as an Identity Column, we need not provide Value for that Column, for each Record we Insert into that Table.
-                                          -> We can also explicitly give the value for the Identity Column. But, in case of SQL Server, We have to SET
-                                             IDENTITY_INSERT to "ON"(Used in case of filling the Deleted Values).
-                                          -> Thus, It could allow duplicate values.
-                                          -> Same as AUTO_INCREMENT in MYSQL or SEQUENCE in PostgreSQL(SERIAL is implicitly Converted to a SEQUENCE in PostgreSQL).
-                                          -> DBCC Command(Database Consistency Check) can be used to RESET the Identity Value(Start value).
-                                          -> Last generated Identity value can be retrieved using Three Commands
-                                                   SCOPE_IDENTITY()              ->    Same Session and Same Scope
-                                                   @@Identity                    ->    Same Session, but Any Scope
-                                                   IDENT_CURRENT(TableName)      ->    Any Session and Any Scope
-
-                                                   Session  - A Connection with the Database Server.(A Tab in Terminal)
-                                                   Scope    - A Single Action(Like Inset, Update, Delete etc..)
-
-
-Important Keywords in SQL
-
-         -> CREATE      -     -> We use CREATE Command to Create ALL Types of the Database Objects.
-                              Syntax :
-                                 CREATE Object_Type Name ...
-
-         -> ALTER       -     -> If we Want to Alter Any Object which is already created using the CREATE Command.
-                              -> If ONLY is specified before the Table Name, only that Table is altered, else the Table and all its descendant Tables (if any) are altered
-                              Syntax :
-                                 ALTER Object_Type [IF EXISTS, ONLY] Name Option
-                                 Option - ADD/MODIFY/DROP/ALTER/RENAME/VALIDATE/DISABLE/ENABLE/CLUSTER/SET/RESET/INHERIT/NO INHERIT/OF/NOT OF/OWNER TO
-
-         -> DROP        -     -> TO Drop any Object
-                              -> We Cannot DROP an Object if it is Currently in use.
-                              Syntax :
-                                 DROP Object_Type Name
-
-         -> SELECT      -    -> To Retrieve Column Values from a Table or a Combination of Two tables(JOIN).
-                             -> Better to Specify all Column names, instead of just * for Performance reasons.
-                             -> The Select_List is a series of Expressions separated by commas. Each expression defines a column in the result set.
-                             -> The Select_List could also contain EXPRESSION, involving literals, Arithmetic Operators(COUNT(id) + SUM(Salary)), SubQuery etc..
-                             -> It Always gives a Result Set, even that that can be a Single value.
-                             -> The optional AS keyword can be used to change the name, or to assign a name if the expression has no name.
-
-                             Syntax :
-                                 SELECT select_list
-                                 [ INTO new_table_name ]
-                                 FROM table_list
-                                 [ WHERE search_conditions ]
-                                 [ GROUP BY group_by_list ]
-                                 [ HAVING search_conditions ]
-                                 [ ORDER BY order_list [ ASC | DESC ] ]
-
-                             The Select_List can also contain the following keywords that control the final format of the result set :
-                                 ALL         -     -> The ALL keyword can explicitly ask for all rows. However, there is no need to specify ALL because it is the default.
-
-                                 DISTINCT    -     -> The DISTINCT keyword eliminates duplicate rows from the results of a SELECT statement or Duplicates in an Aggregate Function if passed as an argument to it.
-                                                   -> It is same like GROUP BY Clause, except that we cannot use Aggregate Functions(Without any Tweak) with it.(i.e Just Removes duplicates).
-                                                   -> DISTINCT = GROUP BY - AGGREGATE FUNCTIONS
-                                                   -> Distinct on Multiple Columns means, the Values should be Distinct on all the Columns.(e.g, record -> ('mush', 'chn') is DISTNICT only with record -> ('mush', 'chn')).
-                                                   -> For the DISTINCT keyword, null values are considered to be duplicates of each other, and only one NULL is returned in the results, regardless of how many NULL values are encountered.
-                                                   -> DISTINCT Cannot be applied only on Specific Columns of a Select Query.
-                                                   Syntax :
-                                                      DISTINCT Col1[, Col2, Col3 ...]
-
-                                 TOP/LIMIT   -     -> We can use the TOP Clause to limit the number of rows that are returned in the Result Set.
-                                                   -> If a SELECT statement that includes TOP also has an ORDER BY clause, the rows to be returned are selected from the ordered result set.
-                                                   Syntax :
-                                                      TOP ( expression ) [ PERCENT ] [ WITH TIES ]          // expression within Brackets
-                                                                     OR
-                                                               LIMIT expression
-                                                      Note :
-                                                         expression - is a numeric expression that specifies the number of rows to be returned;
-                                                         PERCENT    - The percentage (specified by expression) of the result set rows is returned.
-                                                         WITH TIES  - All rows that contain the last value returned by the ORDER BY clause are returned, even if doing this exceeds the number specified by expression.
-
-
-                                                   -> The items in the select list can include the following:
-                                                            -> A simple Expression, such as: a reference to a function(Scalar), a variable, a constant, or a Column in a table or view.
-                                                            -> A scalar subquery. This is a SELECT statement that evaluates to a single value for each result set row.
-                                                            -> A complex expression that is built by using Operators on one or more Simple Expressions. For more information about expressions, see Expressions (Transact-SQL).
-                                                            -> The * symbol. This specifies that all columns in all Table are returned. It can be Qualified with a Table or View Name.
-                                                            -> Variable Assignment in the form: @local_variable = expression. The SET @local_variable statement can also be used for variable assignment.
-
-                             SUBQUERY    -   -> A subquery is a (Select) query that is nested inside the WHERE or HAVING or FROM Clause of an Outer SELECT, INSERT, UPDATE, or DELETE statement, or inside another subquery.
-                                             -> In SQL, a subquery can be substituted anywhere an Expression can be used in SELECT, UPDATE, INSERT, and DELETE statements,
-                                                except in an ORDER BY list, if it returns a SINGLE VALUE.
-                                             -> The SELECT query of a subquery is always enclosed in parentheses.
-                                             -> A subquery nested in the outer SELECT statement has the following components:
-                                                      -> A regular SELECT query including the regular select list components.
-                                                      -> A regular FROM clause including one or more table or view names.
-                                                      -> An optional WHERE clause.
-                                                      -> An optional GROUP BY clause.
-                                                      -> An optional HAVING clause.
-                                             -> It cannot include a COMPUTE or FOR BROWSE or INTO clause, and may only include an ORDER BY clause when a TOP clause is also specified.
-                                             -> Statements that include a subquery usually take one of these formats:
-                                                      -> FROM (subquery)
-                                                      -> WHERE expression [NOT] IN (subquery)
-                                                      -> WHERE expression comparison_operator [ANY | ALL] (subquery)
-                                                         Where Comparison Operator can be one of the (=, < >, >, > =, <, ! >, ! <, or < =) operators.
-                                                      -> WHERE [NOT] EXISTS (subquery)
-                                             -> There are three basic types of subqueries. Those that:
-                                                      -> Used in the FROM Clause, that gives a Normal Result Set.(Only case where Multiple Columns are Supported)
-                                                      -> Operate on lists introduced with IN, or those that a comparison operator modified by ANY or ALL, must have a Single Column.
-                                                      -> Are introduced with an unmodified comparison operator or in place of an Expression and must return a Single Value.
-                                                      -> Are existence tests introduced with EXISTS, almost always consists of an asterisk (*).
-                                             -> SUBQUERY Rules
-                                                      -> If the WHERE clause of an outer query includes a column name, it must be JOIN-COMPATIBLE with the Column in the subquery select list.
-                                                      -> Subqueries introduced with Unmodified comparison operators often include AGGREGATE Functions, because these return a single value.
-                                                      -> Because they must return a single value, subqueries introduced by an unmodified comparison operator
-                                                         (one not followed by the keyword ANY or ALL) cannot include GROUP BY and HAVING clauses, unless we know the GROUP BY or HAVING clause itself returns a single value.
-                                                      -> The DISTINCT keyword cannot be used with subqueries that include GROUP BY.
-                                             -> Subqueries with Aliases
-                                                      -> Many statements in which the subquery and the outer query refer to the same table can be stated
-                                                         as self-joins (joining a table to itself). An Alias Will/Must be used in this case.
-
-                                             Correlated Subqueries   -  -> Many queries can be evaluated by executing the subquery once and substituting the resulting value or values into the WHERE clause of the outer query.
-                                                                           In queries that include a correlated subquery (also known as a repeating subquery), the subquery depends on the outer query for its values.
-                                                                           This means that the subquery is executed repeatedly, once for each row that might be selected by the outer query.
-                                                                        -> Sometimes a correlated subquery mimics a GROUP BY clause.
-
-                             Note :
-                                   -> SubQuery in a FROM Clause, means SubQuery is allowed where a Table is Expected.(e.g.. JOIN Clause etc..)
-
-
-
-
-         -> INTO        -    -> This is used to CREATE a new table(on the Fly) from the Result set of a Select Query. The Name of the New Table is Specified along with it.
-                             Syntax :
-                                 INTO new_table_name
-
-
-         -> FROM        -    -> Contains a (comma Separated list of the Tables and Views) and JOINS from which the Result set data is retrieved.
-                             -> We can use the FROM clause to:
-                                    -> List the tables and views containing the columns referenced in the select list and in the WHERE clause. The table or view names can be aliased using the AS clause.
-                                    -> Join types. These are qualified by join conditions specified in the ON clause.
-                             -> These sources can be :
-                                    -> Base tables in the local server running SQL Server.
-                                    -> Result of a SubQuery.
-                                    -> Views in the local instance of SQL Server. SQL Server internally resolves a View reference to references against the base tables that make up the view.
-                                    -> Linked tables. These are tables in OLE DB data sources that can be accessed by SQL Server. This is referred to as a distributed query. OLE DB data sources can be accessed from SQL Server by linking them as a linked server,
-                                       or by referencing the data source in an OPENROWSET or OPENQUERY function.
-                             -> The FROM clause is also used on the DELETE and UPDATE statements to define the Tables that are modified.
-                             -> It can also have APPLY, PIVOT and the UNPIVOT operators.
-                                    APPLY  -   -> The APPLY operator allows you to invoke a TABLE-VALUED FUNCTION or a Correlated SubQuery for each row returned by an Outer Table expression of a query.
-                                               -> We can join a Result(Table) from a FUNCTION with other Tables, but not by simple joins. It can only be done using an APPLY operator.
-                                               -> Its Most Important use can be, when The sets(Two tables) are not self-sufficient.(i.e the query uses values from table1 to define the second set, NOT TO JOIN WITH IT)(e.g. A Column value in table1 determines the No of Column to be retrieved from the table2).
-                                               -> CROSS APPLY works better on things that have no simple JOIN condition.
-                                               -> The table-valued function acts as the Right input and the Outer table expression acts as the Left input. The right input is evaluated for each row from the left input and the rows produced are combined for the final output.
-                                               -> The list of columns produced by the APPLY operator is the set of columns in the left input followed by the list of columns returned by the right input.
-                                               -> You pass one of the columns from the outer table to the function and the TVF returns the MATCHING ROWS. You can also use APPLY to supply a value to "join" on a derived table.
-                                               -> You can also use the same Cross Apply and Outer Apply with Derived tables joined to your main query, this means you can select from a View instead of a TV function (code reuse).
-
-                                               There are two forms of APPLY :
-                                                   -> CROSS APPLY    -     -> This returns only rows from the outer table that produce a result set from the TABLE-VALUED FUNCTION.
-                                                                           -> CROSS APPLY is SIMILAR to, but in most cased not the same as an INNER JOIN.(i.e When calling a TVF the TVF is called/executed for each row in the outer table/left input)
-                                                   -> OUTER APPLY    -     -> This returns both rows that produce a result set, and rows that do not, with NULL values in the columns produced by the TABLE-VALUED FUNCTION.
-
-                                               Note :
-                                                   -> Calling TVF in an Inner Join Might be possible as long as we pass a Variable or a Constant.(i.e don't pass a Column value from first table to it.)
-                                                   -> Subqueries or Table functions appearing in FROM can be preceded by the key word LATERAL. This allows them to reference columns provided by preceding FROM items.(Co-related SubQuery)
-                                                   -> PostgreSQL Equivalent of CROSS APPLY and OUTER APPLY are INNER JOIN LATERAL and LEFT JOIN LATERAL respectively.
-                                                      Syntax :
-                                                         left | right | inner JOIN LATERAL
-                                    Using PIVOT and UNPIVOT    -  -> You can use the PIVOT and UNPIVOT relational operators to change a TABLE-VALUED EXPRESSION(Expression that returns a Table) into Another table.
-                                                                  -> This is Just ANOTHER VIEW of a GROUP BY Clause.
-
-                                                                  PIVOT    -  -> PIVOT rotates a TABLE-VALUED EXPRESSION by turning the unique values from ONE Column in the expression into Multiple Columns/Attributes in the output, and performs aggregations
-                                                                                 where they are required on any remaining column values that are wanted in the final output.
-                                                                              -> Here, the Group by happens on the non-pivoted Column(and also the Pivoted Column, based on which the aggregate Functions Operate.(Its Right).
-                                                                              -> In Case, this Functionality is Not Supported by the Database Server, this Can be achieved using a Single Group By Clause and Multiple Aggregate Functions(Which uses a Case Statement) having Alias as Each Pivoted Column.
-                                                                              -> When aggregate functions are used with PIVOT, the presence of any NULL values in the value column are not considered when computing an aggregation.
-                                                                                 Syntax :
-                                                                                    SELECT <non-pivoted column>,
-                                                                                    [first pivoted column] AS <column name>,
-                                                                                    [second pivoted column] AS <column name>,
-                                                                                    ...
-                                                                                    [last pivoted column] AS <column name>
-                                                                                    FROM
-                                                                                    (<SELECT query that produces the data>)
-                                                                                    AS <alias for the source query>
-                                                                                    PIVOT
-                                                                                    (
-                                                                                    <aggregation function>(<column being aggregated>)
-                                                                                    FOR
-                                                                                    [<column that contains the values that will become column headers>]
-                                                                                    IN ( [first pivoted column], [second pivoted column],
-                                                                                    ... [last pivoted column])
-                                                                                    ) AS <alias for the pivot table>
-                                                                                    <optional ORDER BY clause>;
-                                                                  UNPIVOT  -  -> UNPIVOT performs the opposite operation to PIVOT by rotating columns of a TABLE-VALUED EXPRESSION into column values(Rows).
-                                                                              -> There Should be two additional columns, correspond to the pivot_column and value_column.
-                                                                              -> PIVOT performs an aggregation and, therefore, merges possible multiple rows into a single row in the output. UNPIVOT does not reproduce the original TABLE-VALUED EXPRESSION result
-                                                                                 because rows have been merged. Besides, NULL values in the input of UNPIVOT disappear in the output, whereas there may have been original NULL values in the input before the PIVOT operation.
-
-                             -> SELECT Statements Without FROM Clauses
-                                    -> The SELECT statements that do not require a FROM clause are those that are not selecting data from any tables in the database. These SELECT statements
-                                       only select data from local variables or Transact-SQL functions that do not operate on a column, for example:
-                                       e.g.. SELECT @MyIntVariable
-                             -> Using Table Aliases
-                                    -> A table alias can be assigned either with or without the AS keyword:
-                                    -> If an Alias is assigned to a Table, all explicit references to the Table in the Transact-SQL statement must use the Alias, not the Table Name.
-                                       Syntax :
-                                          table_name AS table alias
-                                          table_name table_alias
-
-
-
-         -> WHERE       -    -> The WHERE clause is a filter that defines the conditions EACH ROW in the source Tables must meet to qualify for the SELECT.
-                             -> The WHERE search condition is applied before the grouping operation occurs.
-                             -> The WHERE clause is used on the SELECT, DELETE and UPDATE statements to define the rows in the target tables that are modified/retrieved.
-                             -> Aggregate Functions CANNOT be used in a WHERE Clause, unless it is in a SubQuery Contained in a Having Clause.
-                             Syntax :
-                                    WHERE Condition
-
-                                    Wildcards -
-                                          -> %                     -    Matches one or more characters(any Character)
-                                          -> _                     -    Matches one Character(any Character)
-                                          -> []                    -    Matches one Character from the CHARACTER CLASS
-                                    Note :
-                                          -> WildCards are only used with LIKE Operator and SIMILAR TO Operator.
-                                          -> AN Important consideration in using wildcards is their effect on performance. If a wildcard begins the expression (e.g %mith'), an index cannot be used. (Just as you would not know where to start in a phone book.
-                                             A wildcard in or at the end of an expression does not preclude use of an index.
-                                          -> Use the ESCAPE keyword to define an escape character.
-                                          -> Use square brackets ([ ]) to enclose the wildcard by itself.
-
-                                    SQL Logical Operators Possibilities -
-                                          -> LIKE                  -    'Regular_Expression_STRING_PATTERN'
-                                          -> SIMILAR TO            -    'Regular_Expression'(PostgreSQL)
-                                          -> IN                    -    (val1, val2, val3, ...) OR SUBQUERY
-                                          -> BETWEEN               -    (val1 AND val2), Inclusive Range
-                                          -> IS NULL               -    IS NULL
-                                          -> IS NOT NULL           -    IS NOT NULL
-                                          -> NOT                   -    Uses with LIKE, IN, BETWEEN, EXISTS and ALL Comparator Operators(e.g NOT Col1 = Col2)
-                                          -> AND                   -    AND
-                                          -> OR                    -    OR
-                                          -> EXISTS                -    SUBQUERY
-                                          -> ALL                   -    SUBQUERY
-                                          -> ANY                   -    SUBQUERY
-
-                                    SQL Comparison Operators -
-                                          -> =, !=, <>(Same as !=), >, <. >=, <=, !>, !<
-
-                                    SQL Arithmetic Operators -
-                                          -> +, -, *, /, %
-
-                                Additional Notes on Operators -
-
-                                    Exists          -  -> When a subquery is introduced with the keyword EXISTS, the subquery functions as an existence test.(i.e The subquery
-                                                          does not actually produce any data, it returns a value of TRUE or FALSE.
-                                                       -> The WHERE clause of the outer query tests whether the rows that are returned by the subquery exist.
-                                                       -> The Subquery is a CORRELATED SubQuery.(i.e It references a Table Outside the SubQuery)
-                                                       -> JOIN along with DISTINCT does the same thing, but EXISTS has a Performance Advantage Over Join(i.e It returns True if there exists at least a Single Record, need not go through all the records, Unlike JOIN).
-                                                       -> Logically very Similar to the IN Clause, but we don't use JOIN Like Condition in the SubQuery.
-                                                       -> The keyword EXISTS is not preceded by a column name, constant, or other expression.
-                                                       -> The select list of a subquery introduced by EXISTS almost always consists of an asterisk (*).
-                                                          There is no reason to list column names because you are just testing whether rows that meet the conditions specified in the subquery exist.
-                                                       -> This can be used ANYWHERE(i.e Outside the Where/Having Clause too).   
-
-                                    IN              -  -> The Possible Values for IN WITH A SUBQUERY is, all the Values for the related Column in the other table. It is as Efficient as Exists(Discussed above).
-                                                       -> The SubQuery can have only one Column
-                                                       -> Can also be expressed using a JOIN WITH DISTINCT
-
-                                    ANY and ALL     -  -> The SubQuery can have only one Column
-                                                       -> They can return a list of zero or more values and can include a GROUP BY or HAVING clause.
-                                                       -> These subqueries can be restated with EXISTS.
-                                                       -> >ALL, means greater than the Maximum value and >ANY means greater than the Minimum value in the List returned by the SubQuery.
-                                                       -> =ANY is Equivalent to IN and <>ALL is same as NOT IN.
-
-                                 Using NULL VALUES  -  -> A value of NULL indicates that the value is UNKNOWN. A value of NULL is different from an empty or zero value.
-                                                       -> No two null values are equal. Comparisons between two null values, or between a NULL and any other value, return UNKNOWN because the value of each NULL is UNKNOWN.
-                                                       -> Null values generally indicate data that is UNKNOWN, not applicable, or that the data will be added later.
-                                                         Following is information about nulls:
-                                                            -> To test for null values in a query, use IS NULL or IS NOT NULL in the WHERE clause.
-                                                            -> When query results are viewed in SQL Server Management Studio Code editor, null values are shown as NULL in the result set.
-                                                            -> Null values can be inserted into a column by explicitly stating NULL in an INSERT or UPDATE statement, by leaving a column out of an INSERT statement, or
-                                                               when adding a new column to an existing table by using the ALTER TABLE statement.
-                                                            -> Null values cannot be used for information that is required to distinguish one row in a table from another row in a table, such as primary keys.
-
-                                 Order Of Execution -  -> Understanding the correct sequence in which the WHERE, GROUP BY, and HAVING clauses are applied helps in CODING EFFICIENT QUERIES :
-                                                            -> The WHERE clause is used to filter the rows that result from the operations specified in the FROM clause.
-                                                            -> The GROUP BY clause is used to group the output of the WHERE clause.
-                                                            -> The HAVING clause is used to filter rows from the grouped result.
-                                 Operator Preced    -  -> When more than one logical operator is used in a statement, NOT is evaluated first, then AND, and finally OR. Arithmetic, and bitwise, operators are handled before logical operators.
-
-                                Note :
-
-                                    -> IN, ANY, ALL, EXISTS can be used with a SubQuery.
-                                    -> EXISTS is better than JOIN + DISTINCT
-                                    -> When you search for a Unicode string in a WHERE clause, put the N character before the search string.
-
-         -> INSERT      -    -> To Insert values into a Table
-                             -> DEFAULT Keyword can be used if we want to use Default value for the Attribute.
-                             Syntax :
-                                 INSERT INTO TABLE_NAME(Col1, Col2, ...) VALUES(Val1, Val2, ...);
-                                                         OR
-                                 INSERT INTO TABLE_NAME VALUES(Val1, Val2, ...);           //If we are going to insert Values for all Attributes.
-
-         -> UPDATE      -   ->
-                            -> FROM Clause can also be Used if Required.
-
-         -> DELETE
-
-         -> JOIN        -    -> By using joins, we can retrieve data from two or more tables(or VIEWS or a SubQuery) based on logical relationships between the tables.
-                             -> JOIN takes all the record, when a Col in One table has Multiple matches in Other table(Col is Duplicated as many times it found a Match on the Other table).
-                             -> A join can always be expressed as a subquery. A subquery can often, but not always, be expressed as a join.
-                                This is because joins are symmetric, you can join table A to B in either order and get the same answer. The same is not true if a subquery is involved.
-                                Syntax :
-                                    FROM first_table join_type second_table [ON (join_condition)]
-                             -> A join condition defines the way two tables are related in a query by:
-                                      -> Specifying the column from each table to be used for the join. A typical join condition specifies a foreign key from one table and its associated key in the other table.
-                                      -> Specifying a logical operator (for example, = or <>,) to be used in comparing values from the columns.
-                             -> Inner joins can be specified in either the FROM (Includes ON Clause)or WHERE clauses. Outer joins can be specified in the FROM clause only.
-                             -> Specifying the Join conditions in the FROM clause helps separate them from any other search conditions that may be specified in a WHERE clause, and is the recommended method for specifying joins.
-                             -> Columns used in a join condition are not required to have the same name or be the same data type. However, if the data types are not identical,
-                                they must be compatible, or be types that SQL Server can implicitly convert. If the data types cannot be implicitly converted, the join condition must explicitly convert the data type using the CAST function.
-                             -> When there are NULL values in the columns of the tables being joined, the NULL values do not match each other. The presence of NULL values in a column(JOIN Column) from one of the tables
-                                being joined can be returned only by using an outer join (unless the WHERE clause excludes null values).
-                             -> The JOIN Columns need not be having a Primary Key and a Foreign Key Relationship, even though it should be having for performance reasons.
-                             -> The Join Types can be Visualized using VENN Diagrams.
-                             -> JOIN Types
-                                      -> Inner joins
-                                      -> Outer joins
-                                      -> Cross joins
-                                INNER JOIN   -  -> Inner joins use a comparison operator to match rows from two tables based on the values in common columns from each table.
-                                                -> Inner joins can be specified in either the FROM (Includes ON Clause)or WHERE clauses.In case of WHERE Clause, it becomes an IMPLICIT Inner Join.
-                                                -> Inner joins eliminate the rows that do not match with a row from the other table based on the Join Criteria.
-                                                -> The Not-Equal join (<>) is rarely used. As a general rule, Not-Equal joins make sense only when used with a self-join.
-                                                -> This is the Default Join.(i.e its an Inner Join if only Join is specified).
-                                                Types of Inner Join  -
-                                                      -> A THETA join allows for arbitrary comparison relationships (such as ≥).
-                                                      -> An EQUI-JOIN is a theta join using the equality operator.
-                                                      -> A NATURAL join is an EQUI-JOIN on attributes that have the same NAME in each relationship. Additionally, a natural join removes the duplicate columns involved in
-                                                         the equality comparison. This type of JOIN is HIGHLY DISCOURAGED.
-
-
-                                OUTER JOIN   -  -> Outer joins, return all rows from at least one of the tables (Left or Right)or views mentioned in the FROM clause, as long as those rows meet any WHERE or HAVING search conditions.
-                                                -> To get Only the Non-Matching Rows Over an Outer Join, in addition to the Normal Join Condition in the ON Clause, we have to use an Additional NULL Check on the JOIN COLUMN of the Other table in the Where Clause.
-                                                -> Types of Outer Join  -
-                                                      -> LEFT OUTER JOIN or LEFT JOIN
-                                                      -> RIGHT OUTER JOIN or RIGHT JOIN
-                                                      -> FULL OUTER JOIN or FULL JOIN
-
-                                                   LEFT JOIN   -  -> All rows, Other than the Matches Rows, are retrieved from the Left table. For those Rows, the Value for Columns in the Right Table will be NULL.
-
-                                                   RIGHT JOIN  -  -> All rows, Other than the Matches Rows, are retrieved from the Right table. For those Rows, the Value for Columns in the Left Table will be NULL.
-
-                                                   FULL JOIN   -  -> All rows, Other than the Matches Rows, are retrieved from the Left and the Right table. For those Rows, the Value for Columns in the Other Table will be NULL.
-
-                                CROSS JOIN   -  -> This return all rows from the left table. Each row from the left table is combined with all rows from the right table.(i.e If the
-                                                   First Table has 17 Rows and Second table has 10 Rows, then the Resultant ResultSet will have 170 Rows).
-                                                -> Cross joins are also called Cartesian products.
-                                                -> They don't have an ON Clause or a WHERE Clause. If where Clause is used, they behave like INNER JOIN.
-
-                                SELF JOIN    -  -> A table can be joined to itself in a self-join. Use a self-join when you want to create a result set that joins records in a table with other records in the same table.
-                                                -> This is Done using an INNER JOIN.
-                                                -> The Not-Equal join (<>) is rarely used. Not-Equal joins make sense only when used with a self-join that too as a Second Condition.
-                                                -> e.g Looking for Employee's Manager using Manager Id in the Employee table.(i.e Manager is also an Employee with an Employee Id)
-
-                             -> Join Over Three or More Tables
-                                                -> The FROM Clauses can contain multiple join specifications. This allows many tables to be joined for a single query.
-                                                -> The Middle table of the join, can be called the Translation table or Intermediate table, because Table is an intermediate point of Connection between the other Tables involved in the Join.
-                                                -> The Second or Joins after it use the ResultSet returned from their Previous Join.
-                                                -> When there is more than one join operator in the same statement, either to join more than two tables or to join more than two pairs of columns,
-                                                   the Join expressions can be connected with AND or with OR.
-                           -> Note :
-
-
-         -> GROUP BY    -    -> Groups a selected set of rows into a set of summary rows by the values of one or more columns or expressions.
-                             -> One row is returned for each group. Aggregate functions in the SELECT clause select_list provide information about each group instead of individual rows.
-                             -> It is always used in Conjunction with one or more Aggregate Functions. Otherwise. it doesn't make any sense to use GROUP BY Clause.
-                             -> GROUP BY on Multiple Columns means, the Values should be Distinct on all the Columns.(e.g, record -> ('mush', 'chn') is DISTNICT only with record -> ('mush', 'chn')).
-                             -> All COLUMNS described in the Select List, should be used in the GROUP BY Clause. However, Columns NOT IN SELECT LIST can also be used in the Group By Clause.
-                             -> NULL values are considered to be duplicates of each other, and only one NULL is returned in the results, regardless of how many NULL values are encountered. They are put into a Single Group.
-                             -> Arithmetic Operations on Two or More Columns is Not Allowed in the GROUP BY Clause, unless they are used/Specified in the EXACT Same way in the Select List.
-                             -> We cannot use GROUP BY with an alias to replace a Column name in the AS Clause unless the alias replaces a Column name in a Derived table in the FROM clause.
-                             -> If aggregate functions are included in the SELECT clause <Select List>, GROUP BY calculates a summary value for each group. These are known as vector aggregates.
-                             -> A GROUP BY clause can be described as general or simple:
-                                    -> A general GROUP BY clause includes GROUPING SETS, CUBE, ROLLUP, WITH CUBE, or WITH ROLLUP.
-                                    -> A simple GROUP BY clause does not include GROUPING SETS, CUBE, ROLLUP, WITH CUBE, or WITH ROLLUP.
-
-                             -> Simple GROUP BY Clause -
-                                    -> This includes a GROUP BY Clause containing Zero or More Columns, based on which the Grouping Occurs.
-                                    -> The Order of the Columns in this GROUP BY Clause does not matter as Grouping happens as a Whole.
-
-                             -> Advanced Grouping Options -    -> This type of Grouping allows us to get Multiple Grouping Options on a Single Query.
-                                                               -> ALL the Grouping done by this method can be achieved using UNION ALL(S) Where each Select Queries does a Separate Grouping.
-                                                               -> All the Advanced Grouping Options should have at least ONE AGGREGATE FUNCTION EXPRESSION. Otherwise, It would be Pointless to do have multiple grouping options.
-                                                               -> Distinct aggregates, for example, AVG (DISTINCT column_name), COUNT (DISTINCT column_name), and SUM (DISTINCT column_name), are SUPPORTED when you use CUBE or ROLLUP and GROUPING SETS.
-                                                               -> ROLLUP, CUBE, and GROUPING SETS cannot be specified in an indexed view.
-                                                               -> All these are Allowed withe Normal Grouping Columns. e.g (Col1, CUBE(Col1, Col2)) or (Col1, ROLLUP(Col1, Col2)) or (Col1, GROUPING SETS(...)).
-                                                               -> In This case, the Grouping is a Cartesian Product between the Normal Grouping Columns and result of the each of the Grouping Columns from the Advanced Grouping Options.
-                                                               -> When Grouping is Not done on a Particular Column, then the value of that Column is returned as NULL.
-
-                                    -> ROLLUP             -    -> Generates the simple GROUP BY aggregate rows, plus subtotal or super-aggregate rows, and also a grand total row.
-                                                               -> This form of Group By forms a Hierarchy. i.e First grouping is done based on all the Columns in the GROUP BY Clause, Then Grouping is Done on all the Columns
-                                                                  except the Last Column. This happens un till the Grouping happens on NO COLUMN.
-                                                               -> Here groupings done on NO COLUMN is Called as the Grand Total. and Grouping done on Intermediate Columns(i.e Except the First(All Columns) and Last Grouping(No Column))
-                                                                  are called as the SUB TOTAL or SUPER-AGGREGATE Rows.
-                                                               -> The Column order affects the output groupings and can affect the number of rows in the result set.
-                                                               Syntax -
-                                                                  GROUP BY ROLLUP (Col1. Col2, ...Coln) OR GROUP BY (Col1. Col2, ...Coln) WITH ROLLUP
-
-                                    -> CUBE               -    -> This Outputs a grouping for all permutations of Columns provided in the GROUP BY Clause, including Grouping By with NO COLUMN.
-                                                               -> This is a Super-Set of ROLLUP Clause.
-                                                               -> The number of groupings that is generated equals (2 POWER n), where n = the number of Columns provided in the GROUP BY Clause.
-                                                               -> Column order does not affect the output of CUBE.
-                                                               Syntax -
-                                                                  GROUP BY CUBE (Col1. Col2, ...Coln) OR GROUP BY (Col1. Col2, ...Coln) WITH CUBE
-
-                                    -> GROUPING SETS      -    -> Specifies multiple groupings of data in one query.
-                                                               -> Only the specified groups are aggregated instead of the full set of aggregations that are generated by CUBE or ROLLUP.
-                                                               -> GROUPING SETS can contain a single element or a list of elements or NO ELEMENT(i.e () -> No Element).
-                                                               -> This provides a CUSTOM GROUPING OPTION. The GROUPING SETS can specify groupings equivalent to those returned by ROLLUP or CUBE
-                                                               -> The <grouping set item list> can contain ROLLUP or CUBE. (e.g (CUBE(Col1, Col2), ROLLUP(Col1, COl4), (Col2, Col3), ()))
-                                                               -> Grouping sets are not allowed in the GROUP BY clause unless they are part of an explicit GROUPING SETS list. For example,
-                                                                  GROUP BY Column1, (Column2, ...ColumnN) is allowed in the standard but not in SQL Server. GROUP BY C1, GROUPING SETS ((Column2, ...ColumnN))
-                                                                  is Allowed.
-
-                                                               Syntax -
-                                                                  GROUP BY GROUPING SETS
-                                                                  (
-                                                                     <grouping set item list>
-                                                                  )
-                                                                  <grouping set item list> - (FIRST Combination),
-                                                                                             (SECOND Combination),
-                                                                                             ...
-                                                                                             ...
-                                                                                             ()                               // Grouping By No Column or Grand Total Row
-
-                                 -> GROUPING Function     -    -> The Grouping Function indicates whether a Column in a Group By List is involved in Aggregation or Not. (i.e if it is part of the Grouping, then it is Not Aggregated, Otherwise it is Aggregated).
-                                                               -> This Returns 1 for Aggregated Columns and 0 for Non-Aggregated Columns.
-                                                               -> This is used especially with Advanced Grouping Options. Since in other cases Grouping is based on all the Columns in the GROUP BY Clause.
-                                                               -> We can specify only one Column with the Grouping Function. Thus, if required for Multiple Columns, then we have to declare them Separately.
-                                                               -> Can be used to pass Meaningful values(Like 'ALL') instead of NULL for Aggregated Columns(Aggregated Column Values are returned as NULL). The (Column IS NULL) or ISNULL() or COALESCE() does the Same Thing, (i.e) Detect NULL Values,
-                                                                  But it fails if the Column Value itself is NULL.
-                                                               Syntax
-                                                                     GROUPING(Col)
-
-                                 -> GROUPING_ID Function  -    -> The GROUPING_ID Function Computes the Level of Grouping(No of Aggregated Columns) and Not the Actual Grouped/Aggregated Columns.
-                                                               -> This takes a List of Columns that match the GROUP BY Clause Column List. Otherwise, we may get INCONSISTENT Results.
-                                                               -> This concatenates all the results of GROUPING Function(on Individual Columns), performs the Binary to decimal Conversion, and returns the Equivalent Integer.
-                                                                  (i.e GROUPING_ID(a, b, c)  = GROUPING(a) + GROUPING(b) + GROUPING(c).
-                                                               -> This can be used to Sort or Filter Rows based on the Level Of Grouping.
-
-                             ISO-Compliant Syntax
-                                    GROUP BY <group by spec>
-
-                                    <group by spec> ::=
-                                      <group by item> [ ,...n ]
-
-                                    <group by item> ::=
-                                      <simple group by item>
-                                      | <rollup spec>
-                                      | <cube spec>
-                                      | <grouping sets spec>
-                                      | <grand total>
-
-                                    <simple group by item> ::=
-                                      <column_expression>
-
-                                    <rollup spec> ::=
-                                      ROLLUP ( <composite element list> )
-
-                                    <cube spec> ::=
-                                      CUBE ( <composite element list> )
-
-                                    <composite element list> ::=
-                                      <composite element> [ ,...n ]
-
-                                    <composite element> ::=
-                                      <simple group by item>
-                                      | ( <simple group by item list> )
-
-                                    <simple group by item list> ::=
-                                      <simple group by item> [ ,...n ]
-
-                                    <grouping sets spec> ::=
-                                      GROUPING SETS ( <grouping set list> )
-
-                                    <grouping set list> ::=
-                                      <grouping set> [ ,...n ]
-
-                                    <grouping set> ::=
-                                      <grand total>
-                                      | <grouping set item>
-                                      | ( <grouping set item list> )
-
-                                    <empty group> ::=
-                                          ( )
-
-                                    <grouping set item> ::=
-                                         <simple group by item>
-                                         | <rollup spec>
-                                         | <cube spec>
-
-                                    <grouping set item list> ::=
-                                        <grouping set item> [ ,...n ]
-                             Non-ISO-Compliant Syntax
-                                    [ GROUP BY [ ALL ] group_by_expression [ ,...n ]
-                                      [ WITH { CUBE | ROLLUP } ]
-                                    ]
-
-
-         -> HAVING      -    -> The HAVING clause is an additional filter that is applied to the result set. Logically, the HAVING clause filters rows from the intermediate result set
-                                built from applying any FROM, WHERE, or GROUP BY clauses in the SELECT statement.
-                             -> The HAVING search condition is applied after the grouping operation occurs.
-                             -> HAVING clauses are typically used with a GROUP BY clause to filter the results of AGGREGATE Values, although a GROUP BY clause is not required before a HAVING clause.
-                             -> They are typically used to Filter the Rows after Grouped by a Group By Clause.
-                             -> The HAVING Filter can be applied to an AGGREGATE FUNCTION used in the SELECT LIST(or Outside of it), While the WHERE Clause Cannot be used in this Case.
-                             -> For any search conditions that could be applied either before or after the grouping operation, it is more efficient to specify them in the WHERE clause.
-                                The only search conditions that should be specified in the HAVING clause are those search conditions that must be applied after the grouping operation has been performed.
-                             -> They can only be used in a Select Clause.
-                             Syntax :
-                                 HAVING search_conditions
-
-         -> ORDER BY    -    -> The ORDER BY clause defines the order in which the rows in the result set are sorted.
-                             -> We specify the RESULT SET Columns that make up the sort list.
-                             -> The ASC and DESC keywords are used to specify if the rows are sorted in an ascending or descending sequence.
-                             -> The Ordering happens for Each Column Specified and not as a Whole like in GROUP BY Clause. Thus, The Sequence of Ordering should be Specified for EACH Column
-                                in the ORDER BY List.
-                             -> The Order in which the Columns are Specified in the ORDER BY Clause is also Important unlike the GROUP BY Clause.
-                             -> The default Ordering is ASC.
-                             -> ORDER BY is important because relational theory specifies that the rows in a result set cannot be assumed to have any sequence unless ORDER BY is specified.
-                             -> Used Only in the SELECT Clause.
-                             -> Columns not in the Select Clause can also be specified for Ordering.
-                             -> ORDER BY guarantees a sorted result only for the outermost SELECT statement of a query.(i.e The SELECT QUERY With Which the Order BY Clause is Associated). and NOT For any Query that Uses the Query Containing the ORDER BY Clause.
-                             Syntax :
-                                 ORDER BY order_list[ ASC | DESC ]
-
-         -> AS          -    -> The AS clause can be used either to change the name of a result set column or assign a name to a derived column.
-                             -> If the name does not follow the rules for identifiers it must be delimited using either brackets ([]) or double quotation marks ("").
-                             -> The SQL reserved keywords can also be used in Quoted Column headings(e.g "sum").
-                             Syntax :
-                                 Col[ OR Derived Col ] AS New_Col_Name
-
-         -> Set Operators    -> Set operators combine results from two or more queries into a single result set.
-                             -> The Set Operation Clauses are just like NORMAL Clause Like FROM, WHERE for the (First) Select Query.(i.e They Don't stand Alone in a Query).
-                             -> The Column names of the Result Set that are returned by the FULL SET OPERATOR Query are the same names as those returned by the query on the left side of the operand.
-                             -> All Other Clauses (like GROUP BY, ORDER BY) should appear after the FULL SET OPERATOR Query(i.e. After the Last Select Statement), Otherwise, unexpected results may Occur.
-                             -> The Final ResultSet becomes the ResultSet of the first Select Query. Thus, INTO is only allowed on first SELECT of UNION/INTERSECT/EXCEPT
-                             -> When we compare rows for determining DISTINCT values, two NULL VALUES on Separate ROWS are considered EQUAL.
-                             -> The following are basic rules for combining the result sets of two queries by using Set Operators:
-                                   -> The number and the order of the columns must be the same in all queries.
-                                   -> The data types must be compatible.
-                             -> Types of Set Operators
-                                -> UNION
-                                -> INTERSECT
-                                -> EXCEPT
-                                Syntax :
-                                   { <query_specification> | ( <query_expression> ) }
-                                   { UNION [ ALL ] | EXCEPT | INTERSECT }
-                                   <query_specification | ( <query_expression> )
-                                   { UNION [ ALL ] | EXCEPT | INTERSECT }
-                                   <query_specification> | ( <query_expression> )
-                                   { ... }
-
-                                -> UNION      -    -> Combines the results(ResultsSets) of two or more Queries into a Single Result Set that includes ALL THE ROWS(UNIQUE ROWS ACROSS ALL THE RESULT SETS) that belong to ALL QUERIES in the Union.
-                                                   -> The UNION operation is different from using joins that combine columns from two tables, as there is no Condition for Joining in case of UNION.
-                                                   -> The ALL (UNION ALL) incorporates all rows into the results. This includes Duplicates. If NOT SPECIFIED, DUPLICATE rows are REMOVED.
-
-                                                   Note :
-                                                      -> UNION takes longer time, since the duplicates must be removed after the combination of the two selects has ended. So if we know that each set is unique or
-                                                         if we want duplicates to remain, we can save BIG Time by use UNION ALL.
-                                                      -> The UNION has to perform a Distinct SORT to remove the Duplicates.
-                                                      -> UNION Combines ROWS from 2 or more Tables, whereas JOIN Combines COLUMNS from 2 or more Tables.
-
-                                -> INTERSECT  -    -> This returns any DISTINCT Rows that are FOUND IN BOTH the left and right Query.
-                                                   -> Similar to INNER JOIN + DISTINCT. Also, NULL Values are Considered Equal.
-
-                                -> EXCEPT     -    -> This returns any DISTINCT Rows from the left query that are NOT ALSO FOUND on the right query.
-                                                   -> Similar to NOT IN + DISTINCT. Also, NULL Values are Considered Equal.
-
-                                Note :
-                                    -> Set Operator Precedence are executed in the order
-                                             -> Expressions in parentheses
-                                             -> The INTERSECT operand
-                                             -> EXCEPT and UNION evaluated from left to right based on their position in the expression
-         -> WITH
-
-
-
-
-
-
-
-
-         -> RETURNING   -    -> This is used to get the value of the Column(s) which are inserted/Deleted currently. Used in cases where the value for a Column is Inserted by a Sequence.
-                             Syntax :
-                                 insert into dummy3(id, name) values(DEFAULT, 'sfcsdd'), (DEFAULT, 'fsfsd') RETURNING id, name;
-
-         -> CROSS
-
-         -> OUTER
-
-         -> OVER
-
-         -> PARTITION
-
-
-         -> WHILE       -    ->
-
-
-
-         -> CASE        -    -> It is very similar to switch case.
-                             Syntax :
-                                 CASE Expression                                         // This behaves more like a Normal Switch-Case Statement
-                                    WHEN Some_Actual_Value THEN Value_To_Return
-                                    ...
-                                    ...
-                                    ELSE Value_To_Return
-                                 END
-                                    OR
-                                 CASE
-                                    WHEN Expression_Evaluating_BOOLEAN THEN Value_To_Return
-                                    ...
-                                    ...
-                                    ELSE Value_To_Return
-                                 END
+
+   -> Partial Key
+
+
+   Constraints in SQL :
+
+   -> Primary Key           - PRIMARY KEY(Col1, Col2, Col3);
+
+   -> Unique                - Checks if the Value for the Column, is UNIQUE in the Table.
+   UNIQUE (Col)
+
+   -> Foreign Key           - FOREIGN KEY(Col111, Col222, Col333) REFERENCES PARENT_TABLE(Col1, Col2, Col3);
+
+   CASCADING Referential Integrity - This allows the Database Server to define the Actions which should be taken when a user attempts to
+   Delete/Update a key to which an existing Foreign key points.
+   -> The CASCADING Referential Integrity is for the FOREIGN KEY of a Table(i.e) Not for the Entire Parent Table. Thus, it can
+   only be applied when a Foreign key is Declared.
+   Options -
+   -> NO ACTION (Default, DELETE/UPDATE is ROLLED BACK)
+   -> CASCADE (DELETE/UPDATE reflected everywhere the key is referenced as a Foreign Key)
+   -> SET NULL
+   -> SET DEFAULT
+
+   -> Check                 - This is used to limit the Range of values, that can be entered for a Column.(NULL is Considered as a Valid Value if Passed).
+   CHECK (Boolean_Expression)
+
+   -> NOT NULL              - Checks if the Value to be Inserted for a Column is Not NULL
+   NOT NULL
+
+   -> DEFAULT               - The Value to be Set for the Column, if no Value is specified(NULL is Considered as a Value if Passed).
+   DEFAULT Default_Value
+
+   Note :
+   -> We should be using the Keyword CONSTRAINT, if we want to name our Constraint. (e.g CONSTRAINT prim_key_attr PRIMARY KEY(id).
+   -> CONSTRAINT name should be UNIQUE WITHIN a SCHEMA. It should not Collide with Table name either.
+
+   Additional Properties :
+
+   Identity Column          -       -> If a Column is Marked as an Identity Column, we need not provide Value for that Column, for each Record we Insert into that Table.
+   -> We can also explicitly give the value for the Identity Column. But, in case of SQL Server, We have to SET
+   IDENTITY_INSERT to "ON"(Used in case of filling the Deleted Values).
+   -> Thus, It could allow duplicate values.
+   -> Same as AUTO_INCREMENT in MYSQL or SEQUENCE in PostgreSQL(SERIAL is implicitly Converted to a SEQUENCE in PostgreSQL).
+   -> DBCC Command(Database Consistency Check) can be used to RESET the Identity Value(Start value).
+   -> Last generated Identity value can be retrieved using Three Commands
+   SCOPE_IDENTITY()              ->    Same Session and Same Scope
+   @@Identity                    ->    Same Session, but Any Scope
+   IDENT_CURRENT(TableName)      ->    Any Session and Any Scope
+
+   Session  - A Connection with the Database Server.(A Tab in Terminal)
+   Scope    - A Single Action(Like Inset, Update, Delete etc..)
+
+
+   Important Keywords in SQL
+
+   -> CREATE      -     -> We use CREATE Command to Create ALL Types of the Database Objects.
+   Syntax :
+   CREATE Object_Type Name ...
+
+   -> ALTER       -     -> If we Want to Alter Any Object which is already created using the CREATE Command.
+   -> If ONLY is specified before the Table Name, only that Table is altered, else the Table and all its descendant Tables (if any) are altered
+   Syntax :
+   ALTER Object_Type [IF EXISTS, ONLY] Name Option
+   Option - ADD/MODIFY/DROP/ALTER/RENAME/VALIDATE/DISABLE/ENABLE/CLUSTER/SET/RESET/INHERIT/NO INHERIT/OF/NOT OF/OWNER TO
+
+   -> DROP        -     -> TO Drop any Object
+   -> We Cannot DROP an Object if it is Currently in use.
+   Syntax :
+   DROP Object_Type Name
+
+   -> SELECT      -    -> To Retrieve Column Values from a Table or a Combination of Two tables(JOIN).
+   -> Better to Specify all Column names, instead of just * for Performance reasons.
+   -> The Select_List is a series of Expressions separated by commas. Each expression defines a column in the result set.
+   -> The Select_List could also contain EXPRESSION, involving literals, Arithmetic Operators(COUNT(id) + SUM(Salary)), SubQuery etc..
+   -> It Always gives a Result Set, even that that can be a Single value.
+   -> The optional AS keyword can be used to change the name, or to assign a name if the expression has no name.
+
+   Syntax :
+   SELECT select_list
+   [ INTO new_table_name ]
+   FROM table_list
+   [ WHERE search_conditions ]
+   [ GROUP BY group_by_list ]
+   [ HAVING search_conditions ]
+   [ ORDER BY order_list [ ASC | DESC ] ]
+
+   The Select_List can also contain the following keywords that control the final format of the result set :
+   ALL         -     -> The ALL keyword can explicitly ask for all rows. However, there is no need to specify ALL because it is the default.
+
+   DISTINCT    -     -> The DISTINCT keyword eliminates duplicate rows from the results of a SELECT statement or Duplicates in an Aggregate Function if passed as an argument to it.
+   -> It is same like GROUP BY Clause, except that we cannot use Aggregate Functions(Without any Tweak) with it.(i.e Just Removes duplicates).
+   -> DISTINCT = GROUP BY - AGGREGATE FUNCTIONS
+   -> Distinct on Multiple Columns means, the Values should be Distinct on all the Columns.(e.g, record -> ('mush', 'chn') is DISTNICT only with record -> ('mush', 'chn')).
+   -> For the DISTINCT keyword, null values are considered to be duplicates of each other, and only one NULL is returned in the results, regardless of how many NULL values are encountered.
+   -> DISTINCT Cannot be applied only on Specific Columns of a Select Query.
+   Syntax :
+   DISTINCT Col1[, Col2, Col3 ...]
+
+   TOP/LIMIT   -     -> We can use the TOP Clause to limit the number of rows that are returned in the Result Set.
+   -> If a SELECT statement that includes TOP also has an ORDER BY clause, the rows to be returned are selected from the ordered result set.
+   Syntax :
+   TOP ( expression ) [ PERCENT ] [ WITH TIES ]          // expression within Brackets
+   OR
+   LIMIT expression
+   Note :
+   expression - is a numeric expression that specifies the number of rows to be returned;
+   PERCENT    - The percentage (specified by expression) of the result set rows is returned.
+   WITH TIES  - All rows that contain the last value returned by the ORDER BY clause are returned, even if doing this exceeds the number specified by expression.
+
+
+   -> The items in the select list can include the following:
+   -> A simple Expression, such as: a reference to a function(Scalar), a variable, a constant, or a Column in a table or view.
+   -> A scalar subquery. This is a SELECT statement that evaluates to a single value for each result set row.
+   -> A complex expression that is built by using Operators on one or more Simple Expressions. For more information about expressions, see Expressions (Transact-SQL).
+   -> The * symbol. This specifies that all columns in all Table are returned. It can be Qualified with a Table or View Name.
+   -> Variable Assignment in the form: @local_variable = expression. The SET @local_variable statement can also be used for variable assignment.
+
+   SUBQUERY    -   -> A subquery is a (Select) query that is nested inside the WHERE or HAVING or FROM Clause of an Outer SELECT, INSERT, UPDATE, or DELETE statement, or inside another subquery.
+   -> In SQL, a subquery can be substituted anywhere an Expression can be used in SELECT, UPDATE, INSERT, and DELETE statements,
+   except in an ORDER BY list, if it returns a SINGLE VALUE.
+   -> The SELECT query of a subquery is always enclosed in parentheses.
+   -> A subquery nested in the outer SELECT statement has the following components:
+   -> A regular SELECT query including the regular select list components.
+   -> A regular FROM clause including one or more table or view names.
+   -> An optional WHERE clause.
+   -> An optional GROUP BY clause.
+   -> An optional HAVING clause.
+   -> It cannot include a COMPUTE or FOR BROWSE or INTO clause, and may only include an ORDER BY clause when a TOP clause is also specified.
+   -> Statements that include a subquery usually take one of these formats:
+   -> FROM (subquery)
+   -> WHERE expression [NOT] IN (subquery)
+   -> WHERE expression comparison_operator [ANY | ALL] (subquery)
+   Where Comparison Operator can be one of the (=, < >, >, > =, <, ! >, ! <, or < =) operators.
+   -> WHERE [NOT] EXISTS (subquery)
+   -> There are three basic types of subqueries. Those that:
+   -> Used in the FROM Clause, that gives a Normal Result Set.(Only case where Multiple Columns are Supported)
+   -> Operate on lists introduced with IN, or those that a comparison operator modified by ANY or ALL, must have a Single Column.
+   -> Are introduced with an unmodified comparison operator or in place of an Expression and must return a Single Value.
+   -> Are existence tests introduced with EXISTS, almost always consists of an asterisk (*).
+   -> SUBQUERY Rules
+   -> If the WHERE clause of an outer query includes a column name, it must be JOIN-COMPATIBLE with the Column in the subquery select list.
+   -> Subqueries introduced with Unmodified comparison operators often include AGGREGATE Functions, because these return a single value.
+   -> Because they must return a single value, subqueries introduced by an unmodified comparison operator
+   (one not followed by the keyword ANY or ALL) cannot include GROUP BY and HAVING clauses, unless we know the GROUP BY or HAVING clause itself returns a single value.
+   -> The DISTINCT keyword cannot be used with subqueries that include GROUP BY.
+   -> Subqueries with Aliases
+   -> Many statements in which the subquery and the outer query refer to the same table can be stated
+   as self-joins (joining a table to itself). An Alias Will/Must be used in this case.
+
+   Correlated Subqueries   -  -> Many queries can be evaluated by executing the subquery once and substituting the resulting value or values into the WHERE clause of the outer query.
+   In queries that include a correlated subquery (also known as a repeating subquery), the subquery depends on the outer query for its values.
+   This means that the subquery is executed repeatedly, once for each row that might be selected by the outer query.
+   -> Sometimes a correlated subquery mimics a GROUP BY clause.
+
+   Note :
+   -> SubQuery in a FROM Clause, means SubQuery is allowed where a Table is Expected.(e.g.. JOIN Clause etc..)
+
+
+
+
+   -> INTO        -    -> This is used to CREATE a new table(on the Fly) from the Result set of a Select Query. The Name of the New Table is Specified along with it.
+   Syntax :
+   INTO new_table_name
+
+
+   -> FROM        -    -> Contains a (comma Separated list of the Tables and Views) and JOINS from which the Result set data is retrieved.
+   -> We can use the FROM clause to:
+   -> List the tables and views containing the columns referenced in the select list and in the WHERE clause. The table or view names can be aliased using the AS clause.
+   -> Join types. These are qualified by join conditions specified in the ON clause.
+   -> These sources can be :
+   -> Base tables in the local server running SQL Server.
+   -> Result of a SubQuery.
+   -> Views in the local instance of SQL Server. SQL Server internally resolves a View reference to references against the base tables that make up the view.
+   -> Linked tables. These are tables in OLE DB data sources that can be accessed by SQL Server. This is referred to as a distributed query. OLE DB data sources can be accessed from SQL Server by linking them as a linked server,
+   or by referencing the data source in an OPENROWSET or OPENQUERY function.
+   -> The FROM clause is also used on the DELETE and UPDATE statements to define the Tables that are modified.
+   -> It can also have APPLY, PIVOT and the UNPIVOT operators.
+   
+   APPLY  -   -> The APPLY operator allows you to invoke a TABLE-VALUED FUNCTION or a Correlated SubQuery for each row returned by an Outer Table expression of a query.
+   -> We can join a Result(Table) from a FUNCTION with other Tables, but not by simple joins. It can only be done using an APPLY operator.
+   -> Its Most Important use can be, when The sets(Two tables) are not self-sufficient.(i.e the query uses values from table1 to define the second set, NOT TO JOIN WITH IT)(e.g. A Column value in table1 determines the No of Column to be retrieved from the table2).
+   -> CROSS APPLY works better on things that have no simple JOIN condition.
+   -> The table-valued function acts as the Right input and the Outer table expression acts as the Left input. The right input is evaluated for each row from the left input and the rows produced are combined for the final output.
+   -> The list of columns produced by the APPLY operator is the set of columns in the left input followed by the list of columns returned by the right input.
+   -> You pass one of the columns from the outer table to the function and the TVF returns the MATCHING ROWS. You can also use APPLY to supply a value to "join" on a derived table.
+   -> You can also use the same Cross Apply and Outer Apply with Derived tables joined to your main query, this means you can select from a View instead of a TV function (code reuse).
+
+   There are two forms of APPLY :
+   -> CROSS APPLY    -     -> This returns only rows from the outer table that produce a result set from the TABLE-VALUED FUNCTION.
+   -> CROSS APPLY is SIMILAR to, but in most cased not the same as an INNER JOIN.(i.e When calling a TVF the TVF is called/executed for each row in the outer table/left input)
+   -> OUTER APPLY    -     -> This returns both rows that produce a result set, and rows that do not, with NULL values in the columns produced by the TABLE-VALUED FUNCTION.
+
+   Note :
+   -> Calling TVF in an Inner Join Might be possible as long as we pass a Variable or a Constant.(i.e don't pass a Column value from first table to it.)
+   -> Subqueries or Table functions appearing in FROM can be preceded by the key word LATERAL. This allows them to reference columns provided by preceding FROM items.(Co-related SubQuery)
+   -> PostgreSQL Equivalent of CROSS APPLY and OUTER APPLY are INNER JOIN LATERAL and LEFT JOIN LATERAL respectively.
+   Syntax :
+   left | right | inner JOIN LATERAL
+   Using PIVOT and UNPIVOT    -  -> You can use the PIVOT and UNPIVOT relational operators to change a TABLE-VALUED EXPRESSION(Expression that returns a Table) into Another table.
+   -> This is Just ANOTHER VIEW of a GROUP BY Clause.
+
+   PIVOT    -  -> PIVOT rotates a TABLE-VALUED EXPRESSION by turning the unique values from ONE Column in the expression into Multiple Columns/Attributes in the output, and performs aggregations
+   where they are required on any remaining column values that are wanted in the final output.
+   -> Here, the Group by happens on the non-pivoted Column(and also the Pivoted Column, based on which the aggregate Functions Operate.(Its Right).
+   -> In Case, this Functionality is Not Supported by the Database Server, this Can be achieved using a Single Group By Clause and Multiple Aggregate Functions(Which uses a Case Statement) having Alias as Each Pivoted Column.
+   -> When aggregate functions are used with PIVOT, the presence of any NULL values in the value column are not considered when computing an aggregation.
+   Syntax :
+   SELECT <non-pivoted column>,
+   [first pivoted column] AS <column name>,
+   [second pivoted column] AS <column name>,
+   ...
+   [last pivoted column] AS <column name>
+   FROM
+   (<SELECT query that produces the data>)
+   AS <alias for the source query>
+   PIVOT
+   (
+   <aggregation function>(<column being aggregated>)
+   FOR
+   [<column that contains the values that will become column headers>]
+   IN ( [first pivoted column], [second pivoted column],
+   ... [last pivoted column])
+   ) AS <alias for the pivot table>
+   <optional ORDER BY clause>;
+   
+   UNPIVOT  -  -> UNPIVOT performs the opposite operation to PIVOT by rotating columns of a TABLE-VALUED EXPRESSION into column values(Rows).
+   -> There Should be two additional columns, correspond to the pivot_column and value_column.
+   -> PIVOT performs an aggregation and, therefore, merges possible multiple rows into a single row in the output. UNPIVOT does not reproduce the original TABLE-VALUED EXPRESSION result
+   because rows have been merged. Besides, NULL values in the input of UNPIVOT disappear in the output, whereas there may have been original NULL values in the input before the PIVOT operation.
+
+   -> SELECT Statements Without FROM Clauses
+   -> The SELECT statements that do not require a FROM clause are those that are not selecting data from any tables in the database. These SELECT statements
+   only select data from local variables or Transact-SQL functions that do not operate on a column, for example:
+   e.g.. SELECT @MyIntVariable
+   -> Using Table Aliases
+   -> A table alias can be assigned either with or without the AS keyword:
+   -> If an Alias is assigned to a Table, all explicit references to the Table in the Transact-SQL statement must use the Alias, not the Table Name.
+   Syntax :
+   table_name AS table alias
+   table_name table_alias
+
+
+
+   -> WHERE       -    -> The WHERE clause is a filter that defines the conditions EACH ROW in the source Tables must meet to qualify for the SELECT.
+   -> The WHERE search condition is applied before the grouping operation occurs.
+   -> The WHERE clause is used on the SELECT, DELETE and UPDATE statements to define the rows in the target tables that are modified/retrieved.
+   -> Aggregate Functions CANNOT be used in a WHERE Clause, unless it is in a SubQuery Contained in a Having Clause.
+   Syntax :
+   WHERE Condition
+
+   Wildcards -
+   -> %                     -    Matches one or more characters(any Character)
+   -> _                     -    Matches one Character(any Character)
+   -> []                    -    Matches one Character from the CHARACTER CLASS
+   Note :
+   -> WildCards are only used with LIKE Operator and SIMILAR TO Operator.
+   -> AN Important consideration in using wildcards is their effect on performance. If a wildcard begins the expression (e.g %mith'), an index cannot be used. (Just as you would not know where to start in a phone book.
+   A wildcard in or at the end of an expression does not preclude use of an index.
+   -> Use the ESCAPE keyword to define an escape character.
+   -> Use square brackets ([ ]) to enclose the wildcard by itself.
+
+   SQL Logical Operators Possibilities -
+   -> LIKE                  -    'Regular_Expression_STRING_PATTERN'
+   -> SIMILAR TO            -    'Regular_Expression'(PostgreSQL)
+   -> IN                    -    (val1, val2, val3, ...) OR SUBQUERY
+   -> BETWEEN               -    (val1 AND val2), Inclusive Range
+   -> IS NULL               -    IS NULL
+   -> IS NOT NULL           -    IS NOT NULL
+   -> NOT                   -    Uses with LIKE, IN, BETWEEN, EXISTS and ALL Comparator Operators(e.g NOT Col1 = Col2)
+   -> AND                   -    AND
+   -> OR                    -    OR
+   -> EXISTS                -    SUBQUERY
+   -> ALL                   -    SUBQUERY
+   -> ANY                   -    SUBQUERY
+
+   SQL Comparison Operators -
+   -> =, !=, <>(Same as !=), >, <. >=, <=, !>, !<
+
+   SQL Arithmetic Operators -
+   -> +, -, *, /, %
+
+   Additional Notes on Operators -
+
+   Exists          -  -> When a subquery is introduced with the keyword EXISTS, the subquery functions as an existence test.(i.e The subquery
+   does not actually produce any data, it returns a value of TRUE or FALSE.
+   -> The WHERE clause of the outer query tests whether the rows that are returned by the subquery exist.
+   -> The Subquery is a CORRELATED SubQuery.(i.e It references a Table Outside the SubQuery)
+   -> JOIN along with DISTINCT does the same thing, but EXISTS has a Performance Advantage Over Join(i.e It returns True if there exists at least a Single Record, need not go through all the records, Unlike JOIN).
+   -> Logically very Similar to the IN Clause, but we don't use JOIN Like Condition in the SubQuery.
+   -> The keyword EXISTS is not preceded by a column name, constant, or other expression.
+   -> The select list of a subquery introduced by EXISTS almost always consists of an asterisk (*).
+   There is no reason to list column names because you are just testing whether rows that meet the conditions specified in the subquery exist.
+   -> This can be used ANYWHERE(i.e Outside the Where/Having Clause too).   
+
+   IN              -  -> The Possible Values for IN WITH A SUBQUERY is, all the Values for the related Column in the other table. It is as Efficient as Exists(Discussed above).
+   -> The SubQuery can have only one Column
+   -> Can also be expressed using a JOIN WITH DISTINCT
+
+   ANY and ALL     -  -> The SubQuery can have only one Column
+   -> They can return a list of zero or more values and can include a GROUP BY or HAVING clause.
+   -> These subqueries can be restated with EXISTS.
+   -> >ALL, means greater than the Maximum value and >ANY means greater than the Minimum value in the List returned by the SubQuery.
+   -> =ANY is Equivalent to IN and <>ALL is same as NOT IN.
+
+   Using NULL VALUES  -  -> A value of NULL indicates that the value is UNKNOWN. A value of NULL is different from an empty or zero value.
+   -> No two null values are equal. Comparisons between two null values, or between a NULL and any other value, return UNKNOWN because the value of each NULL is UNKNOWN.
+   -> Null values generally indicate data that is UNKNOWN, not applicable, or that the data will be added later.
+   Following is information about nulls:
+   -> To test for null values in a query, use IS NULL or IS NOT NULL in the WHERE clause.
+   -> When query results are viewed in SQL Server Management Studio Code editor, null values are shown as NULL in the result set.
+   -> Null values can be inserted into a column by explicitly stating NULL in an INSERT or UPDATE statement, by leaving a column out of an INSERT statement, or
+   when adding a new column to an existing table by using the ALTER TABLE statement.
+   -> Null values cannot be used for information that is required to distinguish one row in a table from another row in a table, such as primary keys.
+
+   Order Of Execution -  -> Understanding the correct sequence in which the WHERE, GROUP BY, and HAVING clauses are applied helps in CODING EFFICIENT QUERIES :
+   -> The WHERE clause is used to filter the rows that result from the operations specified in the FROM clause.
+   -> The GROUP BY clause is used to group the output of the WHERE clause.
+   -> The HAVING clause is used to filter rows from the grouped result.
+   Operator Preced    -  -> When more than one logical operator is used in a statement, NOT is evaluated first, then AND, and finally OR. Arithmetic, and bitwise, operators are handled before logical operators.
+
+   Note :
+
+   -> IN, ANY, ALL, EXISTS can be used with a SubQuery.
+   -> EXISTS is better than JOIN + DISTINCT
+   -> When you search for a Unicode string in a WHERE clause, put the N character before the search string.
+
+   -> INSERT      -    -> To Insert values into a Table
+   -> DEFAULT Keyword can be used if we want to use Default value for the Attribute.
+   Syntax :
+   INSERT INTO TABLE_NAME(Col1, Col2, ...) VALUES(Val1, Val2, ...);
+   OR
+   INSERT INTO TABLE_NAME VALUES(Val1, Val2, ...);           //If we are going to insert Values for all Attributes.
+
+   -> UPDATE      -   ->
+   -> FROM Clause can also be Used if Required.
+
+   -> DELETE
+
+   -> JOIN        -    -> By using joins, we can retrieve data from two or more tables(or VIEWS or a SubQuery) based on logical relationships between the tables.
+   -> JOIN takes all the record, when a Col in One table has Multiple matches in Other table(Col is Duplicated as many times it found a Match on the Other table).
+   -> A join can always be expressed as a subquery. A subquery can often, but not always, be expressed as a join.
+   This is because joins are symmetric, you can join table A to B in either order and get the same answer. The same is not true if a subquery is involved.
+   Syntax :
+   FROM first_table join_type second_table [ON (join_condition)]
+   -> A join condition defines the way two tables are related in a query by:
+   -> Specifying the column from each table to be used for the join. A typical join condition specifies a foreign key from one table and its associated key in the other table.
+   -> Specifying a logical operator (for example, = or <>,) to be used in comparing values from the columns.
+   -> Inner joins can be specified in either the FROM (Includes ON Clause)or WHERE clauses. Outer joins can be specified in the FROM clause only.
+   -> Specifying the Join conditions in the FROM clause helps separate them from any other search conditions that may be specified in a WHERE clause, and is the recommended method for specifying joins.
+   -> Columns used in a join condition are not required to have the same name or be the same data type. However, if the data types are not identical,
+   they must be compatible, or be types that SQL Server can implicitly convert. If the data types cannot be implicitly converted, the join condition must explicitly convert the data type using the CAST function.
+   -> When there are NULL values in the columns of the tables being joined, the NULL values do not match each other. The presence of NULL values in a column(JOIN Column) from one of the tables
+   being joined can be returned only by using an outer join (unless the WHERE clause excludes null values).
+   -> The JOIN Columns need not be having a Primary Key and a Foreign Key Relationship, even though it should be having for performance reasons.
+   -> The Join Types can be Visualized using VENN Diagrams.
+   -> JOIN Types
+   -> Inner joins
+   -> Outer joins
+   -> Cross joins
+   INNER JOIN   -  -> Inner joins use a comparison operator to match rows from two tables based on the values in common columns from each table.
+   -> Inner joins can be specified in either the FROM (Includes ON Clause)or WHERE clauses.In case of WHERE Clause, it becomes an IMPLICIT Inner Join.
+   -> Inner joins eliminate the rows that do not match with a row from the other table based on the Join Criteria.
+   -> The Not-Equal join (<>) is rarely used. As a general rule, Not-Equal joins make sense only when used with a self-join.
+   -> This is the Default Join.(i.e its an Inner Join if only Join is specified).
+   Types of Inner Join  -
+   -> A THETA join allows for arbitrary comparison relationships (such as ≥).
+   -> An EQUI-JOIN is a theta join using the equality operator.
+   -> A NATURAL join is an EQUI-JOIN on attributes that have the same NAME in each relationship. Additionally, a natural join removes the duplicate columns involved in
+   the equality comparison. This type of JOIN is HIGHLY DISCOURAGED.
+
+
+   OUTER JOIN   -  -> Outer joins, return all rows from at least one of the tables (Left or Right)or views mentioned in the FROM clause, as long as those rows meet any WHERE or HAVING search conditions.
+   -> To get Only the Non-Matching Rows Over an Outer Join, in addition to the Normal Join Condition in the ON Clause, we have to use an Additional NULL Check on the JOIN COLUMN of the Other table in the Where Clause.
+   -> Types of Outer Join  -
+   -> LEFT OUTER JOIN or LEFT JOIN
+   -> RIGHT OUTER JOIN or RIGHT JOIN
+   -> FULL OUTER JOIN or FULL JOIN
+
+   LEFT JOIN   -  -> All rows, Other than the Matches Rows, are retrieved from the Left table. For those Rows, the Value for Columns in the Right Table will be NULL.
+
+   RIGHT JOIN  -  -> All rows, Other than the Matches Rows, are retrieved from the Right table. For those Rows, the Value for Columns in the Left Table will be NULL.
+
+   FULL JOIN   -  -> All rows, Other than the Matches Rows, are retrieved from the Left and the Right table. For those Rows, the Value for Columns in the Other Table will be NULL.
+
+   CROSS JOIN   -  -> This return all rows from the left table. Each row from the left table is combined with all rows from the right table.(i.e If the
+   First Table has 17 Rows and Second table has 10 Rows, then the Resultant ResultSet will have 170 Rows).
+   -> Cross joins are also called Cartesian products.
+   -> They don't have an ON Clause or a WHERE Clause. If where Clause is used, they behave like INNER JOIN.
+
+   SELF JOIN    -  -> A table can be joined to itself in a self-join. Use a self-join when you want to create a result set that joins records in a table with other records in the same table.
+   -> This is Done using an INNER JOIN.
+   -> The Not-Equal join (<>) is rarely used. Not-Equal joins make sense only when used with a self-join that too as a Second Condition.
+   -> e.g Looking for Employee's Manager using Manager Id in the Employee table.(i.e Manager is also an Employee with an Employee Id)
+
+   -> Join Over Three or More Tables
+   -> The FROM Clauses can contain multiple join specifications. This allows many tables to be joined for a single query.
+   -> The Middle table of the join, can be called the Translation table or Intermediate table, because Table is an intermediate point of Connection between the other Tables involved in the Join.
+   -> The Second or Joins after it use the ResultSet returned from their Previous Join.
+   -> When there is more than one join operator in the same statement, either to join more than two tables or to join more than two pairs of columns,
+   the Join expressions can be connected with AND or with OR.
+   -> Note :
+
+
+   -> GROUP BY    -    -> Groups a selected set of rows into a set of summary rows by the values of one or more columns or expressions.
+   -> One row is returned for each group. Aggregate functions in the SELECT clause select_list provide information about each group instead of individual rows.
+   -> It is always used in Conjunction with one or more Aggregate Functions. Otherwise. it doesn't make any sense to use GROUP BY Clause.
+   -> GROUP BY on Multiple Columns means, the Values should be Distinct on all the Columns.(e.g, record -> ('mush', 'chn') is DISTNICT only with record -> ('mush', 'chn')).
+   -> All COLUMNS described in the Select List, should be used in the GROUP BY Clause. However, Columns NOT IN SELECT LIST can also be used in the Group By Clause.
+   -> NULL values are considered to be duplicates of each other, and only one NULL is returned in the results, regardless of how many NULL values are encountered. They are put into a Single Group.
+   -> Arithmetic Operations on Two or More Columns is Not Allowed in the GROUP BY Clause, unless they are used/Specified in the EXACT Same way in the Select List.
+   -> We cannot use GROUP BY with an alias to replace a Column name in the AS Clause unless the alias replaces a Column name in a Derived table in the FROM clause.
+   -> If aggregate functions are included in the SELECT clause <Select List>, GROUP BY calculates a summary value for each group. These are known as vector aggregates.
+   -> A GROUP BY clause can be described as general or simple:
+   -> A general GROUP BY clause includes GROUPING SETS, CUBE, ROLLUP, WITH CUBE, or WITH ROLLUP.
+   -> A simple GROUP BY clause does not include GROUPING SETS, CUBE, ROLLUP, WITH CUBE, or WITH ROLLUP.
+
+   -> Simple GROUP BY Clause -
+   -> This includes a GROUP BY Clause containing Zero or More Columns, based on which the Grouping Occurs.
+   -> The Order of the Columns in this GROUP BY Clause does not matter as Grouping happens as a Whole.
+
+   -> Advanced Grouping Options -    -> This type of Grouping allows us to get Multiple Grouping Options on a Single Query.
+   -> ALL the Grouping done by this method can be achieved using UNION ALL(S) Where each Select Queries does a Separate Grouping.
+   -> All the Advanced Grouping Options should have at least ONE AGGREGATE FUNCTION EXPRESSION. Otherwise, It would be Pointless to do have multiple grouping options.
+   -> Distinct aggregates, for example, AVG (DISTINCT column_name), COUNT (DISTINCT column_name), and SUM (DISTINCT column_name), are SUPPORTED when you use CUBE or ROLLUP and GROUPING SETS.
+   -> ROLLUP, CUBE, and GROUPING SETS cannot be specified in an indexed view.
+   -> All these are Allowed withe Normal Grouping Columns. e.g (Col1, CUBE(Col1, Col2)) or (Col1, ROLLUP(Col1, Col2)) or (Col1, GROUPING SETS(...)).
+   -> In This case, the Grouping is a Cartesian Product between the Normal Grouping Columns and result of the each of the Grouping Columns from the Advanced Grouping Options.
+   -> When Grouping is Not done on a Particular Column, then the value of that Column is returned as NULL.
+
+   -> ROLLUP             -    -> Generates the simple GROUP BY aggregate rows, plus subtotal or super-aggregate rows, and also a grand total row.
+   -> This form of Group By forms a Hierarchy. i.e First grouping is done based on all the Columns in the GROUP BY Clause, Then Grouping is Done on all the Columns
+   except the Last Column. This happens un till the Grouping happens on NO COLUMN.
+   -> Here groupings done on NO COLUMN is Called as the Grand Total. and Grouping done on Intermediate Columns(i.e Except the First(All Columns) and Last Grouping(No Column))
+   are called as the SUB TOTAL or SUPER-AGGREGATE Rows.
+   -> The Column order affects the output groupings and can affect the number of rows in the result set.
+   Syntax -
+   GROUP BY ROLLUP (Col1. Col2, ...Coln) OR GROUP BY (Col1. Col2, ...Coln) WITH ROLLUP
+
+   -> CUBE               -    -> This Outputs a grouping for all permutations of Columns provided in the GROUP BY Clause, including Grouping By with NO COLUMN.
+   -> This is a Super-Set of ROLLUP Clause.
+   -> The number of groupings that is generated equals (2 POWER n), where n = the number of Columns provided in the GROUP BY Clause.
+   -> Column order does not affect the output of CUBE.
+   Syntax -
+   GROUP BY CUBE (Col1. Col2, ...Coln) OR GROUP BY (Col1. Col2, ...Coln) WITH CUBE
+
+   -> GROUPING SETS      -    -> Specifies multiple groupings of data in one query.
+   -> Only the specified groups are aggregated instead of the full set of aggregations that are generated by CUBE or ROLLUP.
+   -> GROUPING SETS can contain a single element or a list of elements or NO ELEMENT(i.e () -> No Element).
+   -> This provides a CUSTOM GROUPING OPTION. The GROUPING SETS can specify groupings equivalent to those returned by ROLLUP or CUBE
+   -> The <grouping set item list> can contain ROLLUP or CUBE. (e.g (CUBE(Col1, Col2), ROLLUP(Col1, COl4), (Col2, Col3), ()))
+   -> Grouping sets are not allowed in the GROUP BY clause unless they are part of an explicit GROUPING SETS list. For example,
+   GROUP BY Column1, (Column2, ...ColumnN) is allowed in the standard but not in SQL Server. GROUP BY C1, GROUPING SETS ((Column2, ...ColumnN))
+   is Allowed.
+
+   Syntax -
+   GROUP BY GROUPING SETS
+   (
+   <grouping set item list>
+   )
+   <grouping set item list> - (FIRST Combination),
+            (SECOND Combination),
+            ...
+            ...
+            ()                               // Grouping By No Column or Grand Total Row
+
+   -> GROUPING Function     -    -> The Grouping Function indicates whether a Column in a Group By List is involved in Aggregation or Not. (i.e if it is part of the Grouping, then it is Not Aggregated, Otherwise it is Aggregated).
+   -> This Returns 1 for Aggregated Columns and 0 for Non-Aggregated Columns.
+   -> This is used especially with Advanced Grouping Options. Since in other cases Grouping is based on all the Columns in the GROUP BY Clause.
+   -> We can specify only one Column with the Grouping Function. Thus, if required for Multiple Columns, then we have to declare them Separately.
+   -> Can be used to pass Meaningful values(Like 'ALL') instead of NULL for Aggregated Columns(Aggregated Column Values are returned as NULL). The (Column IS NULL) or ISNULL() or COALESCE() does the Same Thing, (i.e) Detect NULL Values,
+   But it fails if the Column Value itself is NULL.
+   Syntax
+   GROUPING(Col)
+
+   -> GROUPING_ID Function  -    -> The GROUPING_ID Function Computes the Level of Grouping(No of Aggregated Columns) and Not the Actual Grouped/Aggregated Columns.
+   -> This takes a List of Columns that match the GROUP BY Clause Column List. Otherwise, we may get INCONSISTENT Results.
+   -> This concatenates all the results of GROUPING Function(on Individual Columns), performs the Binary to decimal Conversion, and returns the Equivalent Integer.
+   (i.e GROUPING_ID(a, b, c)  = GROUPING(a) + GROUPING(b) + GROUPING(c).
+   -> This can be used to Sort or Filter Rows based on the Level Of Grouping.
+
+   ISO-Compliant Syntax
+   GROUP BY <group by spec>
+
+   <group by spec> ::=
+   <group by item> [ ,...n ]
+
+   <group by item> ::=
+   <simple group by item>
+   | <rollup spec>
+   | <cube spec>
+   | <grouping sets spec>
+   | <grand total>
+
+   <simple group by item> ::=
+   <column_expression>
+
+   <rollup spec> ::=
+   ROLLUP ( <composite element list> )
+
+   <cube spec> ::=
+   CUBE ( <composite element list> )
+
+   <composite element list> ::=
+   <composite element> [ ,...n ]
+
+   <composite element> ::=
+   <simple group by item>
+   | ( <simple group by item list> )
+
+   <simple group by item list> ::=
+   <simple group by item> [ ,...n ]
+
+   <grouping sets spec> ::=
+   GROUPING SETS ( <grouping set list> )
+
+   <grouping set list> ::=
+   <grouping set> [ ,...n ]
+
+   <grouping set> ::=
+   <grand total>
+   | <grouping set item>
+   | ( <grouping set item list> )
+
+   <empty group> ::=
+   ( )
+
+   <grouping set item> ::=
+   <simple group by item>
+   | <rollup spec>
+   | <cube spec>
+
+   <grouping set item list> ::=
+   <grouping set item> [ ,...n ]
+   Non-ISO-Compliant Syntax
+   [ GROUP BY [ ALL ] group_by_expression [ ,...n ]
+   [ WITH { CUBE | ROLLUP } ]
+   ]
+
+
+   -> HAVING      -    -> The HAVING clause is an additional filter that is applied to the result set. Logically, the HAVING clause filters rows from the intermediate result set
+   built from applying any FROM, WHERE, or GROUP BY clauses in the SELECT statement.
+   -> The HAVING search condition is applied after the grouping operation occurs.
+   -> HAVING clauses are typically used with a GROUP BY clause to filter the results of AGGREGATE Values, although a GROUP BY clause is not required before a HAVING clause.
+   -> They are typically used to Filter the Rows after Grouped by a Group By Clause.
+   -> The HAVING Filter can be applied to an AGGREGATE FUNCTION used in the SELECT LIST(or Outside of it), While the WHERE Clause Cannot be used in this Case.
+   -> For any search conditions that could be applied either before or after the grouping operation, it is more efficient to specify them in the WHERE clause.
+   The only search conditions that should be specified in the HAVING clause are those search conditions that must be applied after the grouping operation has been performed.
+   -> They can only be used in a Select Clause.
+   Syntax :
+   HAVING search_conditions
+
+   -> ORDER BY    -    -> The ORDER BY clause defines the order in which the rows in the result set are sorted.
+   -> We specify the RESULT SET Columns that make up the sort list.
+   -> The ASC and DESC keywords are used to specify if the rows are sorted in an ascending or descending sequence.
+   -> The Ordering happens for Each Column Specified and not as a Whole like in GROUP BY Clause. Thus, The Sequence of Ordering should be Specified for EACH Column
+   in the ORDER BY List.
+   -> The Order in which the Columns are Specified in the ORDER BY Clause is also Important unlike the GROUP BY Clause.
+   -> The default Ordering is ASC.
+   -> ORDER BY is important because relational theory specifies that the rows in a result set cannot be assumed to have any sequence unless ORDER BY is specified.
+   -> Used Only in the SELECT Clause.
+   -> Columns not in the Select Clause can also be specified for Ordering.
+   -> ORDER BY guarantees a sorted result only for the outermost SELECT statement of a query.(i.e The SELECT QUERY With Which the Order BY Clause is Associated). and NOT For any Query that Uses the Query Containing the ORDER BY Clause.
+   Syntax :
+   ORDER BY order_list[ ASC | DESC ]
+
+   -> AS          -    -> The AS clause can be used either to change the name of a result set column or assign a name to a derived column.
+   -> If the name does not follow the rules for identifiers it must be delimited using either brackets ([]) or double quotation marks ("").
+   -> The SQL reserved keywords can also be used in Quoted Column headings(e.g "sum").
+   Syntax :
+   Col[ OR Derived Col ] AS New_Col_Name
+
+   -> Set Operators    
+   -> Set operators combine results from two or more queries into a single result set.
+   -> The Set Operation Clauses are just like NORMAL Clause Like FROM, WHERE for the (First) Select Query.(i.e They Don't stand Alone in a Query).
+   -> The Column names of the Result Set that are returned by the FULL SET OPERATOR Query are the same names as those returned by the query on the left side of the operand.
+   -> All Other Clauses (like GROUP BY, ORDER BY) should appear after the FULL SET OPERATOR Query(i.e. After the Last Select Statement), Otherwise, unexpected results may Occur.
+   -> The Final ResultSet becomes the ResultSet of the first Select Query. Thus, INTO is only allowed on first SELECT of UNION/INTERSECT/EXCEPT
+   -> When we compare rows for determining DISTINCT values, two NULL VALUES on Separate ROWS are considered EQUAL.
+   -> The following are basic rules for combining the result sets of two queries by using Set Operators:
+   -> The number and the order of the columns must be the same in all queries.
+   -> The data types must be compatible.
+   -> Types of Set Operators
+   -> UNION
+   -> INTERSECT
+   -> EXCEPT
+   Syntax :
+   { <query_specification> | ( <query_expression> ) }
+   { UNION [ ALL ] | EXCEPT | INTERSECT }
+   <query_specification | ( <query_expression> )
+   { UNION [ ALL ] | EXCEPT | INTERSECT }
+   <query_specification> | ( <query_expression> )
+   { ... }
+
+   -> UNION      -    -> Combines the results(ResultsSets) of two or more Queries into a Single Result Set that includes ALL THE ROWS(UNIQUE ROWS ACROSS ALL THE RESULT SETS) that belong to ALL QUERIES in the Union.
+   -> The UNION operation is different from using joins that combine columns from two tables, as there is no Condition for Joining in case of UNION.
+   -> The ALL (UNION ALL) incorporates all rows into the results. This includes Duplicates. If NOT SPECIFIED, DUPLICATE rows are REMOVED.
+
+   Note :
+   -> UNION takes longer time, since the duplicates must be removed after the combination of the two selects has ended. So if we know that each set is unique or
+   if we want duplicates to remain, we can save BIG Time by use UNION ALL.
+   -> The UNION has to perform a Distinct SORT to remove the Duplicates.
+   -> UNION Combines ROWS from 2 or more Tables, whereas JOIN Combines COLUMNS from 2 or more Tables.
+
+   -> INTERSECT  -    -> This returns any DISTINCT Rows that are FOUND IN BOTH the left and right Query.
+   -> Similar to INNER JOIN + DISTINCT. Also, NULL Values are Considered Equal.
+
+   -> EXCEPT     -    -> This returns any DISTINCT Rows from the left query that are NOT ALSO FOUND on the right query.
+   -> Similar to NOT IN + DISTINCT. Also, NULL Values are Considered Equal.
+
+   Note :
+   -> Set Operator Precedence are executed in the order
+   -> Expressions in parentheses
+   -> The INTERSECT operand
+   -> EXCEPT and UNION evaluated from left to right based on their position in the expression
+   -> WITH
+
+
+
+
+
+
+
+
+   -> RETURNING   -    -> This is used to get the value of the Column(s) which are inserted/Deleted currently. Used in cases where the value for a Column is Inserted by a Sequence.
+   Syntax :
+   insert into dummy3(id, name) values(DEFAULT, 'sfcsdd'), (DEFAULT, 'fsfsd') RETURNING id, name;
+
+   -> CROSS
+
+   -> OUTER
+
+   -> OVER
+
+   -> PARTITION
+
+
+   -> WHILE       -    ->
+
+
+
+   -> CASE        -    -> It is very similar to switch case.
+   Syntax :
+   CASE Expression                                         // This behaves more like a Normal Switch-Case Statement
+   WHEN Some_Actual_Value THEN Value_To_Return
+   ...
+   ...
+   ELSE Value_To_Return
+   END
+   OR
+   CASE
+   WHEN Expression_Evaluating_BOOLEAN THEN Value_To_Return
+   ...
+   ...
+   ELSE Value_To_Return
+   END
