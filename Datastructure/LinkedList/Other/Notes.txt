@@ -24,6 +24,8 @@
 7 -> We should Highly Consider pushing elements to front(Automatic reverse while splitting the list) or using Recursion(Normal and
 	  splitting cases) if we are not allowed to reverse the list.
 
+8 -> Reversing/Recursion should be Considered when we want to traverse the list from the end
+
 8 -> Use a DUMMY node where we do not want to have null as starting value.(i.e while building a new list). This can be used in many 
 	 cases.
 

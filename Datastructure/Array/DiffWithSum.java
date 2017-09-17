@@ -11,6 +11,7 @@ public class DiffWithSum {
 			if(currDiff == diff) {
 				System.out.println(a[i]+"  "+a[j]);
 				i++;
+				// check if j++ also needs to be done
 			} else if(currDiff > diff) {
 				i++;
 			} else {

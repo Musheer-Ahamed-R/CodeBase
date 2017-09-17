@@ -2,15 +2,25 @@ Important Points
 
 1 -> Don't use root.getLChild() or root.getRChild() for NULL check(unless entirely necessary). It causes a lot of trouble with null pointer exception
 
-2 -> The Order in which Left and the Right Child are added is extremely important(e.g, Iterative PreOrderTraversal, tree to doubly linked list)
 
 ******
-3 -> For EACH AND EVERY TREE Problem, find if it can be solved using BFS or DFS(or Both)(RECURSIVE AND ITERATIVE). From that use the best approach.
+4 -> For EACH AND EVERY TREE Problem, find if it can be solved using BFS or DFS(or Both)(RECURSIVE AND ITERATIVE). From that use the best approach.
 
-4 -> Also, ALWAYS CONSIDER the REVERSE Traversal(InOrder/PreOrder/PostOrder), if the
+
+3 -> Also, ALWAYS CONSIDER the REVERSE Traversal(InOrder/PreOrder/PostOrder), if the
      normal Treaversal is not Working.
 
+2 -> The Order in which Left and the Right Child are added is extremely important(e.g, Iterative PreOrderTraversal, tree to doubly linked list)
+
+5 -> If doing something from the top takes more time, then consider doing it from 
+      the bottom.
+
+6 -> Solving Problem from the Bottom Up(PostOrder Traversal) is an EXTREMELY IMPORTANT TECHNIQUE. 
+      (e.g. Minimum no. of iterations to pass information to all nodes in the tree)
+
 4 -> Many problems can be solved by considering the TRAVERSALS(any Traversal along with Inorder). They help in uniquely identifying a tree
+
+10 -> While dealing with any of the traversals(Known or Unknown), WRITE DOWN the Traversal before making ANY MOVE.
 
 4 -> If the word MINIMUM is used, then consider using BFS first.
 
@@ -35,7 +45,6 @@ Important Points
           PostOrder Traversal
                 1 -> A Node will always have its right child before it.(used in case of Iterative Traversal)
 
-
 7 -> The return value(Base Case) in a recursive call has a MAJOR MAJOR impact in the problem solution.(i.e They should be used wisely)
         -> Also note that, if the left child value and right value are not related (i.e) we have an option to send only one data. We should be very  
            careful in this case as we will be losing the other value at this level which could be WRONG.(Print all nodes that are at distance k from a leaf 
@@ -54,7 +63,6 @@ Important Points
               -> InOrder and PostOrder    -> "Current Pointer is always before".(In postorder Traversel, the Current Node Stays null in First part of Second case)).
                                              Visited Map.     (We Keep on going LEFT till we reach the End. From there we start Processing).(NOT IDEAL)
 
-10 -> While dealing with any of the traversals(Known or Unknown), WRITE DOWN the Traversal before making ANY MOVE.
 
 11 -> Incase of Level Order Traversel - Level Printing, Consider doing operations(e.g adding to stack) while REMOVING Node rather than while adding.
 
@@ -75,7 +83,7 @@ Important Points
 16 -> Making MULTIPLE SEPERATE TRAVERSALS (O(n) Complexity) SHOULD also be considered especially when there is a restriction on space 
       complexity.(Find the maximum sum leaf to root path in a Binary Tree)
 
-17 -> REVERSE ORDER TRAVERSAL can come in handy sometimes. So, ALWAYS CONSIDER THIS AS AN ALTERNATE OPTION.
+
 
 18 -> When we want to know if there exists a value(or sum) equal to the given no or while wanting to reach a specific level, CONSIDER DECREMENTING the 
       value untill it reaches 0. (e.g RootToLeafSum, Level Order Printing using rec
@@ -103,5 +111,3 @@ Important Points
 24 -> When inside of a function whose implementation is dependent on another value 
       which is not yet created, then we can recursively call the function with that value
 
-25 -> If doing something from the top takes more time, then consider doing it from 
-      the bottom.
