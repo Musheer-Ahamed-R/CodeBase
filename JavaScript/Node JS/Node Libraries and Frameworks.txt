@@ -1,0 +1,18 @@
+Frameworks
+
+	-> Express JS
+	-> Hapi.js
+
+Library 
+
+	-> live-server
+	-> lodash
+	-> Yargs
+
+Database Framework 
+
+	-> RethinkDB
+
+Utility 
+
+	-> Nodemon

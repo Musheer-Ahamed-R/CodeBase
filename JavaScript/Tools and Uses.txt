@@ -1,0 +1,213 @@
+1. Package Manager
+
+Package managers simplify installing and updating project dependencies, which are libraries such as: jQuery, Bootstrap, etc - everything that is used on your site and isn't written by you.
+
+Browsing all the library websites, downloading and unpacking the archives, copying files into the projects — all of this is replaced with a few commands in the terminal.
+
+NPM stands for: Node JS package manager helps you to manage all the libraries your software relies on. You would define your needs in a file called package.json and run npm install in the command line... then BANG, your packages are downloaded and ready to use. Could be used both for front-end and back-end libraries.
+Bower: for front-end package management, the concept is same with NPM. All your libraries are stored in a file named bower.json and then run bower install in the command line.
+The biggest difference between Bower and NPM is that NPM does nested dependency tree while Bower requires a flat dependency tree as below.
+
+Quoting from What is the difference between Bower and npm?
+NPM
+
+project root
+[node_modules] // default directory for dependencies
+ -> dependency A
+ -> dependency B
+    [node_modules]
+    -> dependency A
+
+ -> dependency C
+    [node_modules]
+    -> dependency B
+      [node_modules]
+       -> dependency A 
+    -> dependency D
+Bower
+
+project root
+[bower_components] // default directory for dependencies
+ -> dependency A
+ -> dependency B // needs A
+ -> dependency C // needs B and D
+ -> dependency D
+There are some updates on npm 3 Duplication and Deduplication, please open the doc for more detail.
+Yarn: A new package manager for JavaScript published by Facebook recently with some more advantages compared to NPM. And with Yarn, you still can use both NPMand Bower registry to fetch the package. If you've installed a package before, yarn creates a cached copy which facilitates offline package installs.
+jspm: is a package manager for the SystemJS universal module loader, built on top of the dynamic ES6 module loader. It is not an entirely new package manager with its own set of rules, rather it works on top of existing package sources. Out of the box, it works with GitHub and npm. As most of the Bower based packages are based on GitHub, we can install the those packages using jspm as well. It has a registry that lists most of the commonly used front-end packages for easier installation.
+See the different between Bower and jspm: Package Manager: Bower vs jspm
+2. Module Loader/Bundling
+
+Most projects of any scale will have their code split between a number of files. You can just include each file with an individual <script> tag, however, <script> establishes a new http connection, and for small files – which is a goal of modularity – the time to set up the connection can take significantly longer than transferring the data. While the scripts are downloading, no content can be changed on the page.
+
+The problem of download time can largely be solved by concatenating a group of simple modules into a single file, and minifying it.
+E.g
+
+<head>
+    <title>Wagon</title>
+    <script src=“build/wagon-bundle.js”></script>
+</head>
+The performance comes at the expense of the flexibility though. If your modules have inter-dependency, this lack of flexibility may be a showstopper.
+E.g
+
+<head>
+    <title>Skateboard</title>
+    <script src=“connectors/axle.js”></script>
+    <script src=“frames/board.js”></script>
+    <!-- skateboard-wheel and ball-bearing both depend on abstract-rolling-thing -->
+    <script src=“rolling-things/abstract-rolling-thing.js”></script>
+    <script src=“rolling-things/wheels/skateboard-wheel.js”></script>
+    <!-- but if skateboard-wheel also depends on ball-bearing -->
+    <!-- then having this script tag here could cause a problem -->
+    <script src=“rolling-things/ball-bearing.js”></script>
+    <!-- connect wheels to axle and axle to frame -->
+    <script src=“vehicles/skateboard/our-sk8bd-init.js”></script>
+</head>
+Computers can do that better than you can, and that is why you should use a tool to automatically bundle everything into a single file.
+
+Then we heard about RequireJS, Browserify, Webpack and SystemJS
+
+RequireJS: is a JavaScript file and module loader. It is optimized for in-browser use, but it can be used in other JavaScript environments, like Node.
+E.g: myModule.js
+
+// package/lib is a dependency we require
+define(["package/lib"], function (lib) {
+
+    // behavior for our module
+    function foo() {
+        lib.log( "hello world!" );
+    }
+
+    // export (expose) foo to other modules as foobar
+    return {
+        foobar: foo
+    }
+});
+In main.js, we can import myModule.js as dependency and use it.
+
+require(["package/myModule"], function(myModule) {
+    myModule.foobar();
+});
+And then in our HTML, we can refer to use with RequireJS.
+
+<script src=“app/require.js” data-main=“main.js” ></script>
+Read more about CommonJS and AMD to get understanding easily. Relation between CommonJS, AMD and RequireJS?
+Browserify: set out to allow use of CommonJS formatted modules in the browser. Consequently, Browserify isn’t as much a module loader as a module bundler: Browserify is entirely a build-time tool, producing a bundle of code which can then be loaded client-side.
+Start with a build machine that has node & npm installed, and get the package:
+
+npm install -g –save-dev browserify
+Write your modules in CommonJS format
+
+//entry-point.js
+var foo = require('../foo.js');
+console.log(foo(4));
+And when happy, issue the command to bundle:
+
+browserify entry-point.js -o bundle-name.js
+Browserify recursively finds all dependencies of entry-point and assembles them into a single file:
+
+<script src=”bundle-name.js”></script>
+Webpack: It bundles all of your static assets, including JavaScript, images, CSS and more, into a single file. It also enables you to process the files through different types of loaders. You could write your JavaScript with CommonJS or AMD modules syntax. It attacks the build problem in a fundamentally more integrated and opinionated manner. In Browserify you use Gulp/Grunt and a long list of transforms and plugins to get the job done. Webpack offers enough power out of the box that you typically don’t need Grunt or Gulp at all.
+Basic usage is beyond simple. Install Webpack like Browserify:
+
+npm install -g –save-dev webpack
+And pass the command an entry point and an output file:
+
+webpack ./entry-point.js bundle-name.js
+SystemJS: is a module loader that can import modules at run time in any of the popular formats used today (CommonJS, UMD, AMD, ES6). It is built on top of the ES6 module loader polyfill and is smart enough to detect the format being used and handle it appropriately. SystemJS can also transpile ES6 code (with Babel or Traceur) or other languages such as TypeScript and CoffeeScript using plugins.
+Want to know what is the node module and why it is not well adapted to in-browser.
+
+More useful article:
+
+https://medium.com/@housecor/browserify-vs-webpack-b3d7ca08a0a9#.c1q7ao3h4
+http://jamesknelson.com/which-build-system-should-i-use-for-my-javascript-app/
+https://appendto.com/2016/06/the-short-history-of-javascript-module-loaders/
+Why jspm and SystemJS?
+
+One of the main goals of ES6 modularity is to make it really simple to install and use any Javascript library from anywhere on the Internet (Github, npm, etc.). Only two things are needed:
+
+A single command to install the library
+One single line of code to import the library and use it
+So with jspm, you can do it.
+
+Install the library with a command: jspm install jquery
+Import the library with a single line of code, no need to external reference inside you HTML file.
+display.js
+
+var $ = require('jquery'); 
+
+$('body').append("I've imported jQuery!");
+Then you configure these things within System.config({ ... }) before importing your module. Normally when run jspm init, there will be a file named config.js for this purpose.
+To make these scripts run, we need to load system.js and config.js on the HTML page. After that we will load the display.js file using the SystemJS module loader.
+index.html
+
+<script src="jspm_packages/system.js"></script>
+<script src="config.js"></script>
+<script>
+  System.import("scripts/display.js");
+</script>
+Noted: You can also use npm with Webpack as Angular 2 has applied it. Since jspm was developed to integrate with SystemJS and it works on top of existing npm source, so your answer is up to you.
+3. Task runner
+
+Task runners and build tools are primarily command-line tools. Why we need to use them: In one word: automation. The less work you have to do when performing repetitive tasks like minification, compilation, unit testing, linting which previously cost us a lot of times to do with command line or even manually.
+
+Grunt: You can create automation for your development environment to pre-process codes or create build scripts with a config file and it seems very difficult to handle a complex task. Popular in last few years.
+Every task in Grunt is an array of different plugin configurations, that simply get executed one after another, in a strictly independent, and sequential fashion.
+
+grunt.initConfig({
+  clean: {
+    src: ['build/app.js', 'build/vendor.js']
+  },
+
+  copy: {
+    files: [{
+      src: 'build/app.js',
+      dest: 'build/dist/app.js'
+    }]
+  }
+
+  concat: {
+    'build/app.js': ['build/vendors.js', 'build/app.js']
+  }
+
+  // ... other task configurations ...
+
+});
+
+grunt.registerTask('build', ['clean', 'bower', 'browserify', 'concat', 'copy']);
+Gulp: Automation just like Grunt but instead of configurations, you can write JavaScript with streams like it's a node application. Prefer these days.
+This is a Gulp sample task declaration.
+
+//import the necessary gulp plugins
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+var minifyCss = require('gulp-minify-css');
+var rename = require('gulp-rename');
+
+//declare the task
+gulp.task('sass', function(done) {
+  gulp.src('./scss/ionic.app.scss')
+    .pipe(sass())
+    .pipe(gulp.dest('./www/css/'))
+    .pipe(minifyCss({
+      keepSpecialComments: 0
+    }))
+    .pipe(rename({ extname: '.min.css' }))
+    .pipe(gulp.dest('./www/css/'))
+    .on('end', done);
+});
+See more: https://medium.com/@preslavrachev/gulp-vs-grunt-why-one-why-the-other-f5d3b398edc4#.fte0nahri
+4. Scaffolding tools
+
+Slush and Yeoman: You can create starter projects with them. For example, you are planning to build a prototype with HTML and SCSS, then instead of manually create some folder like scss, css, img, fonts. You can just install yeoman and run a simple script. Then everything here for you.
+Find more here.
+
+npm install -g yo
+npm install --global generator-h5bp
+yo h5bp
+See more: https://www.quora.com/What-are-the-differences-between-NPM-Bower-Grunt-Gulp-Webpack-Browserify-Slush-Yeoman-and-Express
+My answer is not really matched with the content of the question but when I'm searching for these knowledge on Google, I always see the question on topso I decided to answer it in summary as well as why we need to use those tool.
+
+Recently I found a really comprehensive guide from Grab team about how to approach front-end development in 2017. You can check it out as below.
+
+https://github.com/grab/front-end-guide

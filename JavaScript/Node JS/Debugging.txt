@@ -1,0 +1,15 @@
+Debugging Applications : 
+
+	Syntax
+		node inspect filename	
+		node --inspect-brk filename		// go to chrome://inspect
+	-> Inside the debugger we can use the following commands
+		-> list(no)	// no of lines above and below from the place we paused
+		-> n 		// next line
+		-> c 		// continue till program ends or encounters a debugger
+		-> repl		// (Read Evaluate Print Loop). Inside repl, we can actually manipulate/change the values of variables 
+	-> We can use debugger in the code to skip upto a particular area in code.	
+
+	Note : 
+		-> We can also use "nodemon" for debugging.	
+		-> We can manipulate/Change the values of variables while debugging.

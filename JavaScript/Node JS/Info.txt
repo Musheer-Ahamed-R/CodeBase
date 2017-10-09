@@ -1,0 +1,50 @@
+Node.js : 
+
+	-> 
+
+
+
+Note : 
+	-> The Javascript executed in the Browser and the Node is actually running on the same exact Runtime Engine called the V8 Javascript Runtime Engine(Chrome).(Node has this enging packed within itself).	
+	-> The V8 Runtime engine takes plain javascript code and compiles it into much faster machine code and executes it.
+	-> The V8 engine is written in C++ Code. 
+
+
+Module : 
+
+	-> Module in Node.js is a simple or complex functionality organized in single or 
+	   multiple JavaScript files which can be reused throughout the Node.js application.
+	-> Each module in Node.js has its own context, so it cannot interfere with other 
+	   modules or pollute global scope. Also, each module can be placed in a separate .js file under a separate folder.   
+
+	-> Module Types, Node.js includes three types of modules:
+
+		-> Core Modules
+		-> Local Modules
+		-> Third Party Modules   
+
+		-> Node.js Core Modules:
+
+			->  These core modules are compiled into its binary distribution and load automatically when Node.js process starts. However, you need to import the core module first in order to use it in your application.
+
+What is require() : 
+
+	-> The "require" function is the easiest way to include modules that exist in separate files.
+	-> The basic functionality of "require" is that it reads a javascript file, EXECUTES the file, and then proceeds to return the exports object	
+	-> Each time you subsequently require an already-required file, the exports object is cached and reused.
+	-> The rules of where require finds the files can be a little complex, but a simple rule of thumb is that if the file doesn't start with "./" or "/", then it is either considered a core module (and the local Node path is checked), or a dependency in the local node_modules folder. If the file starts with "./" it is considered a relative file to the file that called require. If the file starts with "/", it is considered an absolute path. 
+	-> We can "require" either a Single file or a module as a whole(both user created).
+	-> While requiring a module(User Created) instead of a file, we can actually specfiy only the module name/folder. The "require" wil read the package.json file of the module for "main" key or index.js by default.
+
+	NOTE: 
+		-> "require" is automatically available in all node js files.
+		-> you can omit ".js" and "require" will automatically append it if needed.
+		-> When we only specify the module name, the "require" is going to look in to the core modules, if not then in the node_modules folder(third party modules).(i.e if we were to use a third party module with same name as core, it will not work as expected)
+
+
+Command Line Arguments : 
+	-> This is the same as in java.
+	-> We can acces this from the process object(process.argv)
+	-> The process.argv is an array. It also contains some unnecessary items in the array.
+	-> We can also get the values using a third party module called Yargs. This can save us some time with parsing.
+

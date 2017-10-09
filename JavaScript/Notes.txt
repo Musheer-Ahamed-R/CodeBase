@@ -6,3 +6,7 @@
      is stopped, which in turn affects User Experience.
 
 3 -> Parallel Downloading of Script Files is Possible, but there is a Limit to it for a Given Domain, and not on Parallel Downloading itself.(e.g 8 on a Given Domain)
+
+4 -> Just as we can access the closure variable, we can also modify its value and we will be getting the modified value, the next time we acces it.
+
+5 -> If in an object, the key and the variable name is both same, then we can skip the colon and variable name. e.g { addNote : addNote } => { addNote }

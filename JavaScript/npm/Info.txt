@@ -1,0 +1,51 @@
+Info : 
+
+	-> Node Package Manager (NPM) is a command line tool that installs, updates or uninstalls Node.js packages in your application.
+	-> It is also an online repository for open-source Node.js packages. The node community around the world 
+	   creates useful modules and publishes them as packages in this repository.
+	-> Node package manager(PreIntstalled with node)
+	-> Easily install Modules/Packages(both same) in our system(Modules are basically javascript libraries)
+
+
+Getting Started : 
+
+		npm init : 
+			-> This command is used for creating the package.json file(This could also be created manually, but requires additional manual work). 
+			-> The package.json is the MOST important file that contains all the info about our project.(e.g name/dependencies/version etc..)
+			-> This is only used when we are creating a new package/module.
+
+		npm install : 
+			-> This is used to install a package to our current project(used for adding new projects) or install an existing package(Maye be our own or some other)
+			-> The "--save" in the command saves the package we are installing as a dependency to our main package(i.e adds an entry in package.json)
+			If this was not specified, then we package is only installed in our main package folder and not added as a dependency which may cause problems later on when we move/install our main package to some other place.
+			-> Adding the package to the package.json - dependenices folder is important, because we usally skip the node_modules folder that contains all the downloaded dependcies packages.
+			-> plain "npm install" is used to install ALL the dependency packages from the package.json file.
+			-> "npm install --production" only installs the dependency(not dev dependencies).
+			-> "--save-dev" installs the package as a development dependency
+				npm install package ---save-dev
+			-> We can install a certain version of a package by using the command 
+				npm install package@versionno --save
+
+		npm update : 
+			-> 
+
+		npm uninstall : 
+			-> 
+
+
+Package Versioning : 
+	
+	-> Format is 
+	   major version . minor version . patch(e.g 6.2.1)
+
+	-> ^ in the version no indicates that, when we install package dependency, its LATEST MINOR version gets updated/downloaded(Not the case with major version)
+	-> ~ indicates to keep the minor version as it is in the package.json and only update the patch version to the latest.
+	-> If no prefix is used, the EXACT SAME VERSION is downloaded even if there is a latest patch version available 
+	-> If * is used, then it indicates to downloaded the current latest version. 
+
+Global modules : 
+	-> If we want a package to be used gloablly(accessed from anywhere) we can use the command
+		npm install -g package
+
+	Note : 
+		-> The Global module is usually independent of the current project.
