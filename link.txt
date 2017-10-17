@@ -1,4 +1,3 @@
 1 -> https://en.wikipedia.org/wiki/Threaded_binary_tree
 2 -> http://www.dcs.bbk.ac.uk/~trevor/FoC/NOTES/notes2%20trees%20p17_22.pdf
 3 -> http://quiz.geeksforgeeks.org/threaded-binary-tree/
-4 -> https://www.youtube.com/watch?v=5cPbNCrdotA&index=37&list=PL2_aWCzGMAwI3W_JlcBbtYTwiQSsOTa6P
