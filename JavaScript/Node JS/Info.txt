@@ -41,10 +41,3 @@ What is require() :
 		-> you can omit ".js" and "require" will automatically append it if needed.
 		-> When we only specify the module name, the "require" is going to look in to the core modules, if not then in the node_modules folder(third party modules).(i.e if we were to use a third party module with same name as core, it will not work as expected)
 
-
-Command Line Arguments : 
-	-> This is the same as in java.
-	-> We can acces this from the process object(process.argv)
-	-> The process.argv is an array. It also contains some unnecessary items in the array.
-	-> We can also get the values using a third party module called Yargs. This can save us some time with parsing.
-
