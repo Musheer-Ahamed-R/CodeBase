@@ -1,4 +1,3 @@
 Callback - 
 
-	-> A callback function is defined as function that is passed as an arguement to another function,
-	   that is executed after an event has happened
+	-> A callback function is defined as a function that is passed as an arguement to another function, that gets executed after some event has happened.
