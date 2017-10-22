@@ -70,7 +70,8 @@ Notes :
 	-> catch(failureCallback) is short for then(null, failureCallback).  This is USEFULL when we want only a single error handling function for a series of promises.   
 	-> it is often desirable to catch rejected promises rather than use then's two case syntax.
 	**
-	-> The handler function (onFulfilled or onRejected) gets called asynchronously (as soon as the stack is empty)
+	-> The handler function (onFulfilled or onRejected) gets called asynchronously (as soon as the stack is empty). 
+	   Also, it is only pushed to the Callback Queue after the Promise is resolved/rejected.
 	-> Basically, a promise chain stops if there's an exception, looking down the chain for catch handlers instead.  
 	-> Only the first call to resolve or reject  inside of a promise is considered. Any other sub-sequent calls either same or different will be ignored.   
 	   This includes errors thrown after resolve is called.
@@ -81,3 +82,8 @@ Advantages :
 	-> Callbacks will never be called before the completion of the current run of the JavaScript event loop.
 	-> Callbacks added with .then even after the success or failure of the asynchronous operation, will be called.
 	-> Multiple callbacks may be added by calling .then several times, to be executed independently in insertion order.
+
+
+////////////////////////////////////////////////////
+Note : 
+	Start looking from "Error propagation"
