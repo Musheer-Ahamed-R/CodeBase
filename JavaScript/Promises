@@ -30,6 +30,8 @@ Chaining :
 			* returns an already rejected promise, the promise returned by then gets rejected with that promise's value as its value.
 			* returns another pending promise object, the resolution/rejection of the promise returned by then will be subsequent to the resolution/rejection of the promise returned by the handler. 
 			  Also, the value of the promise returned by then will be the same as the value of the promise returned by the handler.
+		
+		-> If the handler of "then"/"catch", does not return any value, the value for the Promise returned by "then"/"catch" will be "undefined".
 		-> The Promise returned by "then" is not the same promise that caused its execution.(It does not modify the original promise value)
 		   (i.e) If a promise that called "then" is called again later, the promise value will be the same as it was Originally before, 
 		   irrespective of whatever happens in the first "then" call.
