@@ -41,3 +41,7 @@ What is require() :
 		-> you can omit ".js" and "require" will automatically append it if needed.
 		-> When we only specify the module name, the "require" is going to look in to the core modules, if not then in the node_modules folder(third party modules).(i.e if we were to use a third party module with same name as core, it will not work as expected)
 
+npm Scripts : 
+
+	-> We can configure scripts to run in the package.json file under scripts key.
+	-> we should run it by calling npm "script name".

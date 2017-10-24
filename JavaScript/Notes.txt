@@ -10,3 +10,7 @@
 4 -> Just as we can access the closure variable, we can also modify its value and we will be getting the modified value, the next time we acces it.
 
 5 -> If in an object, the key and the variable name is both same, then we can skip the colon and variable name. e.g { addNote : addNote } => { addNote }
+
+6 -> While defining methods, we can skip the colon and the function keyword.
+
+6 -> Wrapping any statements inside a paranthesis will convert it into an expression. (Used with functions, functions expressions, arrow functions and any statements).

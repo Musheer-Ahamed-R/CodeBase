@@ -1,0 +1,40 @@
+Covering "this" keyword -
+
+      -> The Rules for the "this" keyword are all based on how we INVOKE the function!!. It's not the object that the method comes from, or the file, or the nesting or anything else, though these can play a part in how you invoke a function.
+      -> Ultimately, though, the 6 rules center around JavaScript's function invocation pattern:
+            -> Raw function calls   -  -> When a function is invoked in this manner, we can classify the value of "this" as the default value, .
+                                       -> The default value is almost always the "global" object for the runtime - but not always.
+                                       -> This function call may or may not have a value for "this". Whether or not it has a value, depends on the runtime environment in which the function is being invoked (and whether or not the "new" keyword is used)
+                                       -> To figure out what the value of "this" is, we need to know what environment in which the function is being invoked. The basic environments are:
+                                             -> A browser            -  global or window Object
+                                             -> A browser w/ strict  -  "undefined". Strict mode, then, does not provide direct access to the "global" or "window" object via "this".
+                                                mode enabled
+                                             -> NodeJS               -  global object.(A "global" object that works similarly to the "window" object )
+                                             -> NodeJS w/ strict     -  "undefined". Similarly to how the browser works, NodeJS' "strict mode" turns the default value of "this" in to an undefined value.
+                                                mode enabled
+
+
+            -> Method calls on objects -> Method Calls Assign "this" To The Object From Which They Are Called.
+                                       -> It truly is the INVOCATION pattern that determines the value of "this", and not just the location of the function definition.
+                                       -> There are some exceptions to this rule, of course. The most notable of the exceptions is the use of the "new" keyword,
+
+            -> Function calls with     -> When a function call is combined with the "new" keyword, it is said that the function is a "constructor function"(A function that intends
+               "new" keyword              to construct (or create) a new object instance), the value of "this" within that function becomes something new and unique.
+                                          It becomes an object instance, of the "type" that the function represents.
+                                       -> "this" inside a function called with "new", points to a NEWLY Created Instance of the Function.
+
+            -> Using .call and .apply  -> When using .call on a function, the first parameter will be the context("this"). Any additional parameters passed in will be pass as arguments to the original function
+               to invoke a function    -> The use of .apply is essentially the same as that of .call, except you pass in an array as the second parameter and that array gets passed through to the original object
+                                          as the list of arguments.
+
+            -> Function binding with   -> The major difference between .bind and .call / .apply, is that .bind will not invoke the function in question. Instead, it returns a new function to you.
+               .bind                   -> Invoking this new function(No Matter how it is invoked) will in turn invoke the original function with the context that was specified in the .bind call.
+                                       -> Even if the Bounded Function reference is passed to another variable, The Context Object will NOT CHANGE when newly assigned variable is invoked.
+                                       -> This is true for all of the patterns, including the use of .call and .apply.
+                                       -> If we wish to permanently override the context of a function on an object, we can do this by assigning the result of the ".bind" call to the original method name on that object.
+
+            -> ES6 Arrow Functions     -> When we write an arrow function in JavaScript, the value of "this" is said to be determined through "lexical analysis". (i.e. that "this" comes from the surrounding code,
+                                          where the function is called.)
+                                       -> The arrow function syntax uses the knowledge of where the code lives to see that it should use the value of "this" from the PARENT Function.
+
+

@@ -1,0 +1,47 @@
+Info : 
+
+    -> This library eases the creation of a webserver and Routing(url config) our applications.
+    -> we should start by calling the "express()" method, which returns an object(function), which is to be used for all express commands.
+
+
+Creating a Server : 
+
+    -> app.listen(PORT_NO, handler)
+    -> This is going to bind our application to a port on our machine.
+
+Routing : 
+
+    Syntax : 
+        app.METHOD(PATH, HANDLER)
+
+    Notes : 
+        -> It automatically sets the content-type of the response object appropriately(e.g plain/html/json)
+    
+
+Middleware : 
+
+    -> This lets us configure how our express application works.    
+    -> This allows us to add on to the existing functionality that express has.
+    -> We can register a middleeare using app.use(middlewareFunction()), this takes in the middleware function we want to use.
+    -> This is executed in the ORDER we use app.use.    
+    Notes : 
+        -> Inside of the middleware funcition, we must call the next method, so the app/request moves to the next middleware/request route
+           down the line. If we don't call it, then the app stops/freezes right there.
+        -> The req and res object we get inside of the middleware is the same as in request route handler function.
+
+Serving Static-Directory : 
+
+    -> This allows us to render the static files(js, html, css) from a web server, without needing to provide route for each file.
+
+    app.use("", express.static(__dirname + "path"));
+
+Using Template Engine : 
+
+    -> We can use other third party libraries with for express for rendering dynamic web pages. 
+    -> Need to call response.render("filename", object);
+
+    app.set("view engine", "hbs"); 
+
+    Partials :
+        -> hbs.registerPartials("directory_having_partials")
+    

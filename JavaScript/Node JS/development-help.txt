@@ -1,0 +1,6 @@
+1 -> For killing node process using gitbash 
+        netstat -ano | findstr :3000
+        taskkill //PID typeyourPIDhere //F 
+
+2 -> we can make nodemon listen to js and handlebars changes on save, by adding the -e attribute
+     nodemon filename -e js, hbs        

@@ -1,0 +1,18 @@
+Async Explained : 
+
+	-> The JavaScript execution environment has four major components
+		-> Call Stack
+		-> Browser or Node Apis
+		-> Callback Queue
+		-> Event Loop
+
+		-> Call Stack :
+			-> The Call Stack is basically the normal Method Call Stack. 
+
+		-> Browser or Node Apis
+			-> This allows us to register an Event-Callback Pair
+			-> When an event is succesfully completed, this pushes the event callback to the callback queue.
+
+		-> Callback Queue : 
+			-> This contains all the callbacks functions thate are ready to get fired. 
+			-> The order

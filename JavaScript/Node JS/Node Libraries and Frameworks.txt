@@ -8,6 +8,9 @@ Library
 	-> live-server
 	-> lodash
 	-> Yargs
+	-> request
+	-> axios
+	-> handlebars
 
 Database Framework 
 
