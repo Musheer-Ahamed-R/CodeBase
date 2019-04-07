@@ -23,8 +23,9 @@ public class Application {
                      {9, 10, 11, 12}, 
                      {13, 14, 15, 16}};             
 
-        int[][] d = {{1, 2},
-                     {3, 4}};             
+        int[][] d = {{1, 2, 3}, 
+                     {4, 5, 6}, 
+                     {7, 8, 9} };             
 
 
         boolean[][] visitedArr = new boolean[9][10];          
@@ -43,7 +44,11 @@ public class Application {
         //FindWord.findWord(ch, word);
         //PrintDiagnally.printDiagnally(b);
     
-        Rotate.rotate(d);
+        //Rotate.rotate(d);
+        //RotateBy180.rotate(d);
+
+        PrintSpiral.print(d);
+
     }
 
 }

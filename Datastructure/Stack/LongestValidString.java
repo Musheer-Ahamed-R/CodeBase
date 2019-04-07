@@ -18,7 +18,7 @@ public class LongestValidString {
 		Stack<Integer> stack = new Stack<>();
 		int validFrom = 0;	
 		int maxCount = 0;	
-		for(int i=0;i<exp.;length();i++) {
+		for(int i=0;i<exp.length();i++) {
 			if(exp.charAt(i) == '(') {
 				stack.push(i);
 			} else if(exp.charAt(i) == ')') {

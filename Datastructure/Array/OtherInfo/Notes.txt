@@ -94,4 +94,5 @@
 
 23 -> If Array is to be used in a rotational/circular manner, use module by the array length
 
+24 -> If array rotation is to be achieved without using extra space, then reversing the elements might be the only way to go.
 

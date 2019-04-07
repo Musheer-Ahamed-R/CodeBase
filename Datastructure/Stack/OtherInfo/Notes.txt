@@ -27,7 +27,9 @@ Notes :
 	 	-> Move nth disk from source to dest peg using aus peg as intermediate peg
 	 	-> Move n-1 disks from aux peg to dest using source peg as intermediate peg
 
+8 -> Finding the next Smaller/Greater can be solved by traversing either from the LEFT or from the RIGHT
+
 *****************************
 *****************************
-8 -> When we are finding the next Smaller/Greater element, we also have access to PREV Smaller/Greater for that element.
+9 -> When we are finding the next Smaller/Greater element, we also have access to PREV Smaller/Greater also right before that element in the stack.
 

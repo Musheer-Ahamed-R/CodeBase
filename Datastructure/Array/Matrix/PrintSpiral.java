@@ -1,6 +1,8 @@
 public class PrintSpiral {
 
-	public static void printDiagnally(int[][] a) {
+	// Print a given matrix in spiral form
+
+	public static void print(int[][] a) {
 		if(a == null) {
 			return;
 		}
@@ -19,12 +21,12 @@ public class PrintSpiral {
 			}
 			right--;
 			System.out.println();
-			for(int i=right;i>=left;i--) {
+			for(int i=right;i>=left && top <= bottom;i--) {
 				System.out.print(a[bottom][i]+" ");
 			}
 			bottom--;
 			System.out.println();
-			for(int i=bottom;i>=top;i--) {
+			for(int i=bottom;i>=top && left <= right;i--) {
 				System.out.print(a[i][left]+" ");
 			}
 			left++;

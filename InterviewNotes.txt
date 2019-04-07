@@ -1,0 +1,8 @@
+1. Memorize both the formulas for Binary Search(Even though the second formula is always enough)
+
+
+
+
+Algorithms:
+
+

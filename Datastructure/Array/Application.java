@@ -3,8 +3,8 @@ import java.util.*;
 public class Application {
 
    public static void main(String[] args) {
-       int[] arr = {10, 5, 6, 3, 2, 20, 100, 80};
-       //System.out.println("Hello World");
+      int[] arr = {10, 5, 6, 3, 2, 20, 100, 80};
+      //System.out.println("Hello World");
       //ZigZag.zigZag(arr);
       //System.out.println();
       //ZigZagOrder.sortZigZag(arr);

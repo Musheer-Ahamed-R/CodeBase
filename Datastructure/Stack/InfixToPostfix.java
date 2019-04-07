@@ -4,7 +4,7 @@ public class InfixToPostfix {
 
 
 	// Note : 
-	//	-> Incase of Prefix we have to deal with Operator Precedence and Other Stuffs, but in case of prefix or postfix, a operator will only have two operands.i.e There will be no ambiguity
+	//	-> Incase of Infix we have to deal with Operator Precedence and Other Stuffs, but in case of prefix or postfix, a operator will only have two operands.i.e There will be no ambiguity
 	//	-> This Prefix or Postfix is used by the Computrer language.
 	//  -> The Order of Operands WILL NOT CHANGE, whereas, the order of the Operator may change.
 
