@@ -87,8 +87,8 @@ public class Heap {
 
    public void insert(int data) {
       this.arr[this.count] = data;
-      int child = this.count;
       this.count++;
+      int child = this.count - 1;
       int parent = (child-1)/2;
       while(parent >= 0 && arr[parent] > data) {
          Application.swap(this.arr, parent, child);

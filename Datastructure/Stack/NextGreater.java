@@ -18,7 +18,6 @@ public class NextGreater {
 		while(!stack.isEmpty()) {
 			System.out.println(stack.pop()+" --> "+-1);
 		}
-
 	}
 
 }

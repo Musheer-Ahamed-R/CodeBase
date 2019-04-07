@@ -3,8 +3,8 @@ import java.util.*;
 public class Application {
 
    public static void main(String[] args) {
-       int[] arr = {10, 5, 6, 3, 2, 20, 100, 80};
-       System.out.println("Hello World");
+      int[] arr = {10, 5, 6, 3, 2, 20, 100, 80};
+      //System.out.println("Hello World");
       //ZigZag.zigZag(arr);
       //System.out.println();
       //ZigZagOrder.sortZigZag(arr);
@@ -17,11 +17,13 @@ public class Application {
       //FindString.finalAttempt(matrix, "GEEKS");
 
       //int[] a = {40, 10, 20, 5, 45, 50, 65, 90, 35, 25};
-      int[] a = {1, 9, 8, 4, 0, 0, 2, 7, 0, 6, 0, 9};
+      int[] a =  {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
 
-      //int sum = 10;
+      int sum = 24;
       //PairNumberSum.pairNoSum1(a, sum);
       //PairNumberSum.pairNoSum2(a, sum);
+
+      //TripletWithSum.tripletWithSum(a, 24);
 
       //MajorityElement.majorityElem1(a);
       //MajorityElement.boyerMooreAlgorithn(a);
@@ -85,7 +87,7 @@ public class Application {
 
       //FlipZero.flipZeroint(a, 4);
 
-      //TrappingRainWater.trappingRainWater(a);
+      TrappingRainWater.trappingRainWater(a);
 
       //Reverse.reverse(a);
       //Reverse.reverseRecursion(a, 0);
@@ -106,6 +108,8 @@ public class Application {
       //FirstRepeating.firstRepeating2(a);
 
       //UnionAndIntersection.unionAndIntersection(a, b);
+
+      //DiffWithSum.diffWithSum(a, 42);
    }
 
 

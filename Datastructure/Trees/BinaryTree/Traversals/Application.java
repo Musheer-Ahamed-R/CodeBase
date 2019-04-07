@@ -32,28 +32,28 @@ public class Application {
       tree.getRChild().getRChild().setLChild(new Node(14, null, null));
       tree.getRChild().getRChild().setRChild(new Node(15, null, null));
       
-      //
-      // tree.getLChild().getLChild().getLChild().setLChild(new Node(16));
-      // tree.getLChild().getLChild().getLChild().setRChild(new Node(17));
-      // tree.getLChild().getLChild().getRChild().setLChild(new Node(18));
-      // tree.getLChild().getLChild().getRChild().setRChild(new Node(19));
-      //
-      // tree.getLChild().getRChild().getLChild().setLChild(new Node(20));
-      // tree.getLChild().getRChild().getLChild().setRChild(new Node(21));
-      // tree.getLChild().getRChild().getRChild().setLChild(new Node(22));
-      // tree.getLChild().getRChild().getRChild().setRChild(new Node(23));
-      //
-      // tree.getRChild().getLChild().getLChild().setLChild(new Node(24));
-      // tree.getRChild().getLChild().getLChild().setRChild(new Node(25));
-      // tree.getRChild().getLChild().getRChild().setLChild(new Node(26));
-      // tree.getRChild().getLChild().getRChild().setRChild(new Node(27));
-      //
-      // tree.getRChild().getRChild().getLChild().setLChild(new Node(28));
-      // tree.getRChild().getRChild().getLChild().setRChild(new Node(29));
-      // tree.getRChild().getRChild().getRChild().setLChild(new Node(30));
-      // tree.getRChild().getRChild().getRChild().setRChild(new Node(31));
+      
+      tree.getLChild().getLChild().getLChild().setLChild(new Node(16));
+      tree.getLChild().getLChild().getLChild().setRChild(new Node(17));
+      tree.getLChild().getLChild().getRChild().setLChild(new Node(18));
+      tree.getLChild().getLChild().getRChild().setRChild(new Node(19));
+      
+      tree.getLChild().getRChild().getLChild().setLChild(new Node(20));
+      tree.getLChild().getRChild().getLChild().setRChild(new Node(21));
+      tree.getLChild().getRChild().getRChild().setLChild(new Node(22));
+      tree.getLChild().getRChild().getRChild().setRChild(new Node(23));
+      
+      tree.getRChild().getLChild().getLChild().setLChild(new Node(24));
+      tree.getRChild().getLChild().getLChild().setRChild(new Node(25));
+      tree.getRChild().getLChild().getRChild().setLChild(new Node(26));
+      tree.getRChild().getLChild().getRChild().setRChild(new Node(27));
+      
+      tree.getRChild().getRChild().getLChild().setLChild(new Node(28));
+      tree.getRChild().getRChild().getLChild().setRChild(new Node(29));
+      tree.getRChild().getRChild().getRChild().setLChild(new Node(30));
+      tree.getRChild().getRChild().getRChild().setRChild(new Node(31));
 
-      //PreOrderTraversal.recurPreOrder(tree);
+      PreOrderTraversal.recurPreOrder(tree, 0);
       //PreOrderTraversal.iterPreOrder(tree);
       //PreOrderTraversal.iterPreOrder2(tree);
 
@@ -67,6 +67,8 @@ public class Application {
       //PostOrderTraversal.iterPostOrder3(tree);
 
       //LevelOrderTraversal.levelOrder(tree);
+
+      //DiameterTraversal.diameterTraversal(tree);
   }
 
 

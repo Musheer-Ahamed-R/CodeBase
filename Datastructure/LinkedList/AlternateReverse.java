@@ -7,11 +7,11 @@ public class AlternateReverse {
 		if(head == null) {
 			return;
 		}
-		int order = 0;
+		boolean order = true;
 		Node prev = null;
 		Node curr = head;
 		while(curr != null) {
-			if(order == 0) {
+			if(order) {
 				Node tail = curr;
 				Node reverseHead = curr;
 				curr = curr.getNext();
@@ -34,7 +34,7 @@ public class AlternateReverse {
 					curr = curr.getNext();
 				}
 			}
-			order ^= 1;
+			order = !order;
 		}
 		Application.print(head);
 	}

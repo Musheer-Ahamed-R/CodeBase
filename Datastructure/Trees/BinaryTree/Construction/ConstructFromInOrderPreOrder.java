@@ -26,7 +26,7 @@ public class ConstructFromInOrderPreOrder {
 		}
 		currNode.setLChild(constructFromInOrderPreOrder(inOrder, preOrder, inStart, i-1));
 		currNode.setRChild(constructFromInOrderPreOrder(inOrder, preOrder, i+1, inEnd));
-
+		System.out.print(currNode+" ");
 		return currNode;
 	}
 

@@ -13,9 +13,6 @@ public class PerfectBinaryLevelOrder {
 		if(root.getLChild() != null && root.getRChild() != null) {
 			q.add(root.getLChild());
 			q.add(root.getRChild());
-		} else {
-			System.out.println("The tree is not a perfect binary tree");
-			return;
 		}
 		while(!q.isEmpty()) {
 			int count = q.size();

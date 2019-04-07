@@ -27,8 +27,8 @@ public class FlipZero {
             while(wL < wR && A[wL] !=0) {       // wL < wR condition is not required since there must be N+1 zeros between wL and wR
                wL++;
             }
-            nZero--;
             wL++;
+            nZero--;
       	}
 
       	//update best window:

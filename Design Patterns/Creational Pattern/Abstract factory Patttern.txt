@@ -1,0 +1,58 @@
+Abstarct factory Pattern : 
+
+	-> Abstract Factory pattern is almost similar to Factory Pattern is 
+	   considered as another layer of abstraction over factory pattern.
+	-> It is like Factory pattern, but everything is encapsulated.     
+	-> Abstract Factory patterns work around a super-factory which creates other
+	   factories.
+
+	Implementation :
+
+		-> This may also involves Stratergy Pattern.
+
+		-> The Factory Knows how to build the product. This is most important thing.
+		-> We can either create the factory and create Product from there, or we can
+		   use the Factory inside the Product(Instance) which helps in building the product.(below method) 
+		-> All the four components involved, form some type of Inheritence Hierarchy. 
+		-> There are basically Four Components, 
+			-> Builder
+			-> Model/Product
+			-> Factory
+			-> Composite Objects(Fields that define the Product)(Stratergy Pattern)
+
+		Builder - 
+			-> The Builder is nothing but an Interface which the Client uses/calls to get the Instance
+			-> It should expose a method, just like factory pattern(contains, if else based on the input)
+			-> Follows the Inheritence Hierarchy
+
+		Model - 	
+			-> The Model has some composite fields and a factory that is used to build/populate the composite fields
+			-> Its constructor only receives a factory. 
+			-> It has other method that builds the Model(using the factory) after it is created.  	
+			-> The Main Class for Model has to be an Abstract Class 
+		Factory - 
+			-> May be considered as a Class with bunch of getters that RETURNS the appropriate instances for each of the composite fields in the Model.
+			-> It forms a Hierarchy based on the Main Model(e.g if Car has subclasses like BigCar, SmallCar, then the factory will be like BigCarfactory, SmallCarFactory Inherited from CarFactory). 
+		
+		Composite Objects - 
+			-> This can be any object just like the Stratergy Object in the Startergy 
+			   Pattern.
+
+	Difference : 
+	
+		-> The main difference between a “factory method” and an “abstract factory”
+		   is that the factory method is a single method, and an abstract factory is an object.
+		-> The factory method is just a method, it can be overridden in a subclass, 
+		   whereas the abstract factory is an object that has multiple factory methods on it.
+		-> The Factory Method pattern uses inheritance and relies on a subclass to 
+		   handle the desired object instantiation.   
+
+	Advantages : 
+		
+		-> Isolation of concrete classes
+		-> Exchanging Product Families easily
+		-> Promoting consistency among products
+
+	Disadvantages : 
+		
+		-> Difficult to support new kind of products

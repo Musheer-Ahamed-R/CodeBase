@@ -1,5 +1,7 @@
 public class AncestorTree {
 
+  // Lowest Common Ancestor in a Binary Tree | Set 1
+
   //This is valid if the second node is not a Child of the first node.Since, we dont iterate after we found either of the nodes
   public static boolean printLCA(Node root, int data1, int data2) {
     if(root == null) {

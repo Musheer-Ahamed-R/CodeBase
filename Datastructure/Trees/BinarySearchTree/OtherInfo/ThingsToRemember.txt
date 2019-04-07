@@ -1,0 +1,12 @@
+1 -> Finding if a Tree is a BST or not can also be solved by inorder Traversal by just keeping a reference to
+     previous variable.
+
+2 -> In Converting a Binary tree to BST, the sorted array should replace the B Tree in INORDER TRAVERSAL.
+
+3 -> In Converting a BST to Min-Heap, the sorted array should replace the BST in PREORDER TRAVERSAL.
+
+4 -> The Lowest Common Ancestor in BST is the Point at which the the two nodes split.
+
+5 -> Convert a sorted LL/DLL to a Balanced BST(method involving bottom up approach, using just mid/2 and so on)
+
+6 -> Check if given Array is Preorder Traversal of a Binary Serach Tree(Using Manipulated version of next greater element)

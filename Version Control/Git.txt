@@ -1,0 +1,32 @@
+
+Generating SSH Keys : 
+    
+    -> ssh-keygen -t rsa -b 4096 -C ‘<email>’
+    -> eval "$(ssh-agent -s)"
+    -> ssh-add <path to private key>
+    -> pbcopy < ~/.ssh/<PUBLIC Key file name>
+    -> ssh -T git@github.com            // This one is used to test our connection.(optional)
+
+    Notes : 
+        -> make sure the default file id_rsa is used
+
+remote : 
+
+    -> Using this we can tell our repository(machine) about the remote urls we want it to know/connect to.
+    -> We can have more than one remote in our repository.(This is where the remote name comes into play)
+       One of the remote(origin) will be the GitHub itself.
+    -> Thus, the local repository can NOT ONLY be pushed to GitHub, but also to other remote applications that we specify.
+
+
+    git remote add <alias> <url>        // This creates a new remote with that alias name, that points to given url
+    git remote                          // Tell us about all the remotes that our repository(in our machine) knows about
+    git remote rm <alias>
+
+    Notes : 
+        -> origin is the default remote(usually GitHub remote)
+
+
+Ignore files : 
+
+    -> We can ignore specific files/folder by specifying them in .gitignore file and pushing .gitignore file to git repository.    
+     e.g *.class will ignore all the files with .class extension in our local repository

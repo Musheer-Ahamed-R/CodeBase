@@ -1,0 +1,17 @@
+Factory Pattern(Creational) : 
+
+	-> In this, we create object without exposing the creation logic 
+	   to client and the client use the same common interface to create new type
+	   of object.
+	-> The idea is to use a static member-function (static factory method) which
+	   creates & returns instances, hiding the details of class modules from user.
+
+
+	Notes : 
+		-> This pattern is followed especially when the Object(we want to create) 
+		   is part of Polymorpism.(creation object based on the parameter).
+		-> A factory pattern is one of the core design principles to create an 
+		   object, allowing clients to create objects of a library in a way such 
+		   that it doesn’t have tight coupling with the
+		   class hierarchy of the library.(i.e Class creation(factory) is also
+		   DONE AT THE LIBRARY SIDE).

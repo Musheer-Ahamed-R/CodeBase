@@ -10,8 +10,8 @@ public class MaxSumSubArray {
    //          This Algo says that the Maximum Sub-Array ""ENDING"" at the Current Index, is the
    //          Maximum of Element Itself or Element + Maximum SubArray "Ending" at the Previous Index.
    //          This Algo ONLY Considers the Maximum Sub-Array ""ENDING"" at the Current Element. (i.e Each Element will have
-   //          its own Maximum Sub-Array Ending at the Element itself. Maximum of those will give the desired Result.
-   //          Highest amongst that will be Maximum SubArray.
+   //          its own Maximum Sub-Array Ending at the Element itself.
+   //          Max amongst that will be Maximum SubArray.
    //     Note :
    //       -> This Algorithm works like Dynamic Programming, thus it is Better to Understand from the Start.
    //          Refer - https://youtu.be/86CQq3pKSUw

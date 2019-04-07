@@ -18,3 +18,28 @@ Dynamic Programming  -
             If a node x lies in the shortest path from a source node u to destination node v then the shortest path from u to v is combination of shortest path from u to x and shortest path from x to v.
             The standard All Pair Shortest Path algorithms like Floyd–Warshall and Bellman–Ford are typical examples of Dynamic Programming.
             On the other hand, the Longest Path problem doesn’t have the Optimal Substructure property. Here by Longest Path we mean longest simple path (path without cycle) between two nodes.
+
+
+Tabulation vs Memoizatation
+
+Tabulation Method(Bottom Up Dynamic Programming) : 
+
+    -> As the name itself suggests starting from the bottom and cumulating answers to the top
+    -> Iterative approach
+
+Memoization Method(Top Down Dynamic Programming) : 
+
+    -> Here, we start our journey from the top most destination state and compute its answer by taking in count the values of states that can
+       reach the destination state, till we reach the bottom most base state.
+    -> Here, we store and use the most recent cache up to a limit so that if next time we got a call for the same state we simply return it
+       from the memory.
+    -> Here, the memory may not be filled in a sequential manner.
+    -> Recursive approach
+
+Steps to solve a DP
+
+    -> Identify if it is a DP problem
+    -> Decide a state expression with 
+       least parameters
+    -> Formulate state relationship    
+    -> Do tabulation (or add memoization)

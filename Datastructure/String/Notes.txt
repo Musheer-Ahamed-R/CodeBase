@@ -1,0 +1,1 @@
+1 -> In case of Strings, a simple concatenation can solve a problem.(isSubstring of rotated string, max no fromed from an array).

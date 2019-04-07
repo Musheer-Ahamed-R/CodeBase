@@ -1,0 +1,7 @@
+1 -> For a recursive function, the Complexity is mostly Branches^depth(e.g Fibonacci 2^n)
+
+2 -> Write down/ADD the number of iterations. We can get some pattern in that and solve from there.
+
+3 -> Addition of N number from 1 to n is (n * (n-1))/2
+
+4 -> Sum of the powers of 2(from 1 to n) is 2^(n+1) - 1

@@ -15,3 +15,23 @@
 ********
 8 -> JUST USE INORDER TRSVERSAL AND A GLOBAL VARIABLE FOR CONVERT TREE TO DLL or 
 	 FOR EACH NODE(Naive Approach) Use the Property of Inorder Successor and Predessor.(Incereased Time Complexity).
+
+9 -> Print Postorder traversal from given Inorder and Preorder traversals.(Just the old post ordering way of printing).
+
+10 -> Connect Neighbour Nodes at the same level.(Reverse Traversal)
+
+11 -> Boundary Traversal.(Traversing Leaf nodes while traversing left and right nodes
+      (StackOverflow)).
+
+12 -> The MaxPathSum at each node can be at,
+	  	-> Through the left and right child      
+	  	-> Left Max + Root
+	  	-> Right Max + Root
+	  	-> Root alone
+
+13 -> Complete Binary Tree using Recursive approach.
+
+14 -> Clone a Binary Tree with Random Pointers. 
+
+15 -> Recursive implementation of "Construct Binary Tree from given Parent Array
+	  representation"

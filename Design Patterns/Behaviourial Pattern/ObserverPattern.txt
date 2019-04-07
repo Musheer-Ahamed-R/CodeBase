@@ -1,0 +1,35 @@
+Observer Pattern(Behavioural) : 
+	
+		
+		-> It is a Design Pattern in which an Object called the subject, maintains a
+		   list of its dependenties, called the observers and notifies them
+		   automatically of any state changes, uaually by calling one of their
+		   methods.
+		-> There is dependency as Observers themselves don’t have access to data.
+		   They are dependent on Subject to provide them data.
+
+		Refer Image - Observer.png for a very clear insight
+
+		Implementation : 
+			-> Here Observer and Subject are interfaces(can be any abstract super 
+			   type not necessarily java interface).
+			-> All observers who need the data need to implement observer interface.
+			   notify() method in observer interface defines the action to be taken when the subject provides it data.
+			-> The subject maintains an observerCollection which is simply the list 
+			   of currently registered(subscribed) observers.
+			-> registerObserver(observer) and unregisterObserver(observer) are
+			   methods to add and remove observers respectively.
+			-> notifyObservers() is called when the data is changed and the observers 
+			   need to be supplied with new data.
+
+		Advantages : 
+			Observer pattern provides this loose coupling as:
+			-> Subject only knows that observer implement Observer interface.Nothing 
+			   more.
+			-> There is no need to modify Subject to add or remove observers.
+			-> We can reuse subject and observer classes independently of each other.	   
+		e.g Social Media, Mail Sucscription, Stock market and many more places
+
+		Disadvantages : 
+			-> Memory leaks caused by Lapsed listener problem because of explicit
+			   register and unregistering of observers.
