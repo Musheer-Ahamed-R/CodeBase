@@ -4,6 +4,7 @@ public class Cycle {
 
    // If the Graph is UnDirected, then isVisited boolean alone is Enough to find the Cycle
 
+
    public static void dfsSearch(int[][] relationMatrix, Vertex[] vertices, int currentVertex, String graphType) {
       vertices[currentVertex].isGrey = true;
       vertices[currentVertex].isVisited = true;
