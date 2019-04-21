@@ -6,3 +6,5 @@
 		 or have a wrapper over graph vertex.
 
 4 -> Detecting Cycle in an undirected graph can be done using both BFS and DFS. But in case of Directed graph, only DFS can be used.
+
+5 -> Always consider using Stack if we need to track path while we traverse.

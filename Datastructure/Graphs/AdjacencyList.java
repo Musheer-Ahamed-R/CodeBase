@@ -2,10 +2,13 @@ import java.util.LinkedList;
 
 public class AdjacencyList {
 
-      // It is very sinmple. i.e It is just having an array of linked list of Integers(nodes), 
+      // It is very simple. i.e It is just having an array of linked list of Integers(nodes), 
       // where the index is the node itself(may be have a seperate map for storing the node index) 
       // and the elements in the linked list are its edges.
 
+      // Method 2
+      // Instead of using an array of Linked list, we can use a array/set of Set
+      // In this way, checking if an edge exists becomes very easy.
 
       public String[] verticesArr;
       public LinkedList<Integer>[] adjList;
