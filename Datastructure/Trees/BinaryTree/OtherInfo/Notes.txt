@@ -111,3 +111,6 @@ Important Points
 24 -> When inside of a function whose implementation is dependent on another value 
       which is not yet created, then we can recursively call the function with that value
 
+Move this to the top
+
+25 -> first consider the O(n) approach if not possible go with the approach of traversing tree multiple times x * O(n) ~ O(n). If all of this is not possible then finally go with the O(n^2) approach. 
