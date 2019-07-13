@@ -1,0 +1,33 @@
+1 -> What we insert in the zeroth Column and zeroth Row is VERY IMPORTANT. Differs for each problem. It is usually 0.
+
+2 -> When there are two inputs and asked to find the min/max. Always consider Dynamic programming 
+   as an IMPORTANT OPTION.
+
+3 -> Sometimes there will be one input given(e.g palindrome, optimal BST with key and freq etc..).
+     In those cases, we should do something like adjacency matrix.
+
+4. Also, sometimes we might have to use single matric for solving especially when only one input is given. e.g Lng Incr Subseq
+
+5 -> In case of DP problem, a n^2 solution is easily acceptible (e.g Long Incr Subs)
+
+6 -> In some cases, we should store two details for a single index.(e.g Max square with all X, Optimal Game etc..)
+
+6 -> Deriving value for a cell is based on three inputs.
+        -> Non-Matching
+            -> Left value
+            -> Left value before row
+            -> Top value
+            -> Diagonal value(Only in some cases e.g Minimum edit distance)
+        -> Matching
+            -> Diagonal value (Most of the cases)
+            -> Left value same row after elimating current value (e.g Min coin exchange)
+            -> Left value, current row - 1 after elimating current value
+
+7 -> When we are blocked with something, GO AHEAD and prepare a sub optimal approach. Maybe that is the solution
+     for this problem (e.g Max square with sides as X).
+
+8 -> Incase of rectangle in a DP matrix. Always try compressing the values and find max at each compression.
+     i.e compress row1 and row2 and find max, then compress row1, row2, row3 then find max.
+
+9 -> In case of probability sums like Egg dropping, Max square with border X, Optimal Game etc, we have to consider all options
+     and pick the maximum from it.

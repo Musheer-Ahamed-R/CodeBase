@@ -1,0 +1,9 @@
+1. Matrix Chain multiplication
+2. Optimal BST
+3. Coin Changing Minimum Coins Dynamic Programming (Set 2)
+4. Regular Expression Dynamic Programming
+5. Buy/Sell Stock With K transactions To Maximize Profit Dynamic Programming
+6. Text Justification Dynamic Programming
+7. Wildcard Matching Dynamic Programming
+8. Burst Balloon Dynamic Programming[Leetcode]
+9. Sum Query in 2D Immutable Array Dynamic Programming
