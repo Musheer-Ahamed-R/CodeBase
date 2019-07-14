@@ -1,0 +1,97 @@
+1 -> Angular uses Typescript
+
+2 -> Typescript is a super set of vannila JS.(i.e offers more features than vanilla JS like Classes, Interfaces and Strong typing)
+		 This does not run in the browser. So, it is complied to JS in the end. This is handled by Angular CLI
+
+3 -> We can add our own styles(Global Styles) inside of the angular.json file in styles node. 
+		 If seperate module, start the path from node_modules 
+
+4 -> index.html is the HTML file served by the server. It includes html from all the components
+
+5 -> 
+
+6 -> Whenever the ng serve, rebuilds the project, it will create JS bundles and automatically add the right imports in the index.html file
+	 	 So the script we write in main.ts is the first things that get executed. 
+		 This bootstraps/starts our angular application by passing the App module(/app/app.module.ts).
+		 The app.module.ts has a bootstrap array, which lists all the components which should be known to angular
+		 at the point of time it analyzes our index.html(i.e starting our server)
+
+7 -> Angular uses Components to build web pages and uses modules to bundle different pieces(e.g Components)
+     into packages.
+
+
+Components:
+	1 -> There is a root component(App component) which will tie together our whole application.
+	 	 We add other components to it
+
+	2 -> Each component has its own template(HTML), styling and script
+
+	3 -> It allows our complex application into small reusable parts
+
+	4 -> A Component is just a TS class, so that angular is able to instantiate it.
+
+	5 -> We add to add Decorators(Typescript feature to enhance classes and other elements) so that angular understands its not a normal class, rather a component.
+		 Need to use @sign in the front (e.g @Component)
+	
+	6 -> We need to pass some metadata to the Decorator like selectors
+
+	7 ->  sample component
+		      @Component({
+            selector: 'app-server',
+            templateUrl: './app.component.html',
+            styleUrls: ['./app.component.css']
+          })
+		      export class ServerComponent {
+    		  }
+
+          selector: The tag to be used to use this template. It works just like CSS selectors
+                    (i.e selecting by element tag itself, class, attributes). Also, selecting by Id/pseudo selectors are not supported by angular. 
+          templateUrl: refer to an external template
+          template: Actual Html template(used if very less html code)
+          styleUrls: array referring to external styles
+          styles: array of CSS styling string
+
+
+  8 -> We need to register the component in the app.module declarations field
+       because Angular will not scan our project for all components.
+
+  9 -> We can then use our component using the selector tag in some other main component(html file).
+
+  9 -> We need to add the Main AppComponent in bootstrap array of app.module.
+  		 This bootstrap array, lists all the components which should be known to angular
+		   at the point of time it analyzes our index.html(i.e starting our server)
+       
+Modules:
+    -> The modules are used to bundle different pieces(e.g Components) into packages.
+     
+    -> We need to use the decorator @NgModule to specify that the class is a module(just like component).
+
+    -> sample module
+        @NgModule({
+          declarations: [
+            AppComponent
+          ],
+          imports: [
+            BrowserModule, FormsModule
+          ],
+          providers: [],
+          bootstrap: [AppComponent]
+        })
+        export class AppModule { }
+
+      declarations - is the list of all the Components available, 
+      bootstrap    - has the list of components that angular need to know on starting server
+      import       - used to import other modules
+
+Angular Packages:
+	-> @angular/core
+
+
+Dummy notes:
+1 ->	add the FormsModule  to the imports[]  array in your app.module.ts
+      import { FormsModule } from '@angular/forms'; 
+
+2 -> Updating the CLI
+		 npm uninstall -g angular-cli @angular/cli 
+		 npm cache clean 
+		 npm install -g @angular/cli
