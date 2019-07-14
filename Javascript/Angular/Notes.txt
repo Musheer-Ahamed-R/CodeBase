@@ -19,6 +19,9 @@
 7 -> Angular uses Components to build web pages and uses modules to bundle different pieces(e.g Components)
      into packages.
 
+8 -> We can create local reference(marker) on an element by using #someName within that element
+
+9 -> We can use ng-template(inbuilt component/directive) to mark places in the DOM.
 
 Components:
 	1 -> There is a root component(App component) which will tie together our whole application.
@@ -60,7 +63,69 @@ Components:
   9 -> We need to add the Main AppComponent in bootstrap array of app.module.
   		 This bootstrap array, lists all the components which should be known to angular
 		   at the point of time it analyzes our index.html(i.e starting our server)
-       
+
+  11 -> Everytime we use the component selector in any template, a new component object is created.
+
+Databinding:
+    -> Communication between TS code and the HTML template
+    -> Outpu data (from TS to HTML)
+        -> Types:
+          -> String Interpolation {{data}}
+          -> Property Binding [property]="data"
+    -> React to user events (HTML to TS)
+          -> (event)="expression"
+    -> Two way data binding  (HTML to TS and vice versa)
+          -> [(ngModel)] = 'data'
+
+      -> String Interpolation:
+            -> Within the {{ }}, we can write any Typescript expression(single line) which can resolve to a string.
+               e.g referring a property, calling a function which returns a string
+      -> Property Binding:
+            -> Square brackets indicate to angular that we are using property binding
+               e.g [disabled]="propertyName"
+            -> Inside of the double quotes, we can write any TS expression same as in string interpolation
+            -> we can not only bind to HTML elements but also to directives and to our own components.
+      -> Event Binding:
+            -> On any HTMl element, we use do (event)="TS expression". The event can all the events supported for that element.
+            -> Inside of the quotation marks, $event will be the date that was emitted with the event.
+               Typecasting may be needed to use the data values(HTMLInputElement)
+      -> Two way data binding:
+            -> With this we combine property and event binding. The syntax is also combined.
+            -> e.g [(ngModel)]="TS Variable", this will trigger in the input event and update the value of the variable in our component automatically.
+               Also, It will update the input value if we chnage the value of variable somewhere else.
+
+
+Directives:
+    -> They are instructions in the DOM. (e.g Components are directives with a template 
+       i.e they tell angular to use the template based on the selector)
+
+    -> We usually add directives with an (attribute) selector, but the selector of the directive can also be like 
+       the selector of a Component. 
+
+    -> example *ngIf
+          -> The * is needed is needed because ngIf is a "structural directive" because, it changes the structure of the DOM.
+             i.e it either adds the element or doesn't add it(i.e Element is not hidden)
+          -> The value assigned should be any expression which returns true or false. 
+          -> We can also else in ngIf using markers like *ngIf="someValuse; else myMarker"
+
+    -> ngStyle
+        -> This is an "attribute directive". They don't add or remove elements rather only change the element they were placed on
+        -> e.g [ngStyle]="". The square brackets here is not the directive name. The square brackets indicate 
+           that we want to bind some property on this directive and the property name is also ngStyle.
+        -> This expects a JS object with style name and value. The value can also be returned from a function.
+        -> It allows us to dynamically update the styles.
+        **** IMPORTANT ****
+        -> If a variable value is changed, event if it is not directly accessed(e.g calling a function that returns that value),
+           the changes will still be reflected in the DOM.
+    -> ngClass
+        -> This is also an "attributive directive".
+        -> [ngClass]=""
+        -> This expects a JS object with class name and value. The value can also be returned from a function.
+        -> It allows us to dynamically update the CSS class.
+    -> ngFor
+        -> This is a structural directive. This is used for looping over the element
+        -> *ngFor="let server of myArrayName"
+
 Modules:
     -> The modules are used to bundle different pieces(e.g Components) into packages.
      
