@@ -23,6 +23,30 @@
 
 9 -> We can use ng-template(inbuilt component/directive) to mark places in the DOM.
 
+10 -> We can use Augury chrome extension to debug Angular apps. We can have a look at the state of the Application/Component etc..
+
+11 -> Local reference are use to get access to an element in the template. They can be placed on any HTML element,
+      with syntax #referenceName. This will have reference to the whole HTML element. We can use it anywhere in our template,
+      but not in our typescript code(i.e need to pass in as a parameter inside of the template itself to access in TS).
+      The Local reference can also be accessed using @ViewChild('localreferenceName', {static: true}) myPropertyName. Here myPropertyName has an instance of
+      ElementRef (Angular obj)
+      We can also get the Content of the local reference using @Content('localreferenceName', {static: true}) myPropertyName.
+
+12 -> We can see localreference and also directives and some cases of property bindings are used with the [] in the HTML template.
+
+12 -> Document manipulation i.e changing the element directly is highly NOT Recommended, since angular has better ways of doing it.
+      i.e String Intrerpolation etc. e.g Chaging element that we have accessed through Local reference or any other means is not recommended.
+
+13 -> Everything placed between the opening and the closing tag of our own component is lost(only takes the template within the component).
+      We can change this using the Directive <ng-content>. This will serve as a hook that gets replaced by the elements
+      we placed between the opening and closing tags.
+
+14 -> It is not a good practice to directly modify elements in the Component Business logic. We can use the renderer object.
+      this.rendere.setStyle(this.elementRef.nativeElement, "css-property", "value");
+      Because, angular is not limited to running in the browser. This can be run in service workers, where we might not have access to the DOM.
+
+15 -> It is better to most initializations inside of the ngOnInit func, instead of the constructor.
+
 Components:
 	1 -> There is a root component(App component) which will tie together our whole application.
 	 	 We add other components to it
@@ -66,6 +90,35 @@ Components:
 
   11 -> Everytime we use the component selector in any template, a new component object is created.
 
+  12 -> All properties of a component are only accessible inside of that component.
+        If we want to allow parent component to be able to bind to a property, then we have to
+        add a decorator to that element property. @Input('alias')
+
+  IMPORTANT - Custom property binding
+  13 -> If we need to access an object inside of a component whose data is populated by a different component, 
+        then we have to define the object first and expose it to outside world using the above @input() decorator.
+
+  IMPORTANT - Custom event trigger
+  14 -> We can create a custom events and also add event listeners to them just as we add it for other inbuilt events.
+        e.g Creating event and make them accessible in parent - @Output myEventName: new EventEmitter<>() 
+        trigger - myEventName.emit(SOME_DATA)
+
+  15 -> If a style is defined in a CSS file inside of a component, then it is applied to only that component. 
+        The way angular achieves this behaviour is by adding unique attributes to each component 
+        and associating the styles to that attribute.
+        This behaviour can be changed using the field encapsulation passed to @Component() (e.g ViewEncapsulation.None)
+
+  16 -> Lifecycle hooks
+            - ngOnChanges           - Called after a bound input property changes (@Input()). Note -> This does not gets triggered if any field in the object changes!!. because it will still refer to the same object.. 
+                                      This hook also passes the data of type SimpeChanges. This has prev value and new value and other details.
+            - ngOnInit              - Called once the component is initialized(after constructor)
+            - ngDoCheck             - Called during every change detection run
+            - ngAfterContentInit    - Called after content(ng-content) has been projected into view.
+            - ngAfterContentChecked - Called every time the projected content has been checked.
+            - ngAfterViewInit       - Called after the component's view (and child view's) has been initialized
+            - ngAfterViewChecked    - Called every time the view (and child view's) have been checked.
+            - ngOnDestroy           - Called once the component is about to be destroyed. 
+
 Databinding:
     -> Communication between TS code and the HTML template
     -> Outpu data (from TS to HTML)
@@ -80,15 +133,21 @@ Databinding:
       -> String Interpolation:
             -> Within the {{ }}, we can write any Typescript expression(single line) which can resolve to a string.
                e.g referring a property, calling a function which returns a string
+
       -> Property Binding:
             -> Square brackets indicate to angular that we are using property binding
                e.g [disabled]="propertyName"
             -> Inside of the double quotes, we can write any TS expression same as in string interpolation
             -> we can not only bind to HTML elements but also to directives and to our own components.
+            -> We can do custom property binding using the @Input('alias') fieldName. and then using ['alias'] in the outerParent Component
+            -> If we pass down a string like [property]='"myString"', then we can omit both the [] of property and also the "" in the value.
+               But, we have to make sure that it does not conflict with the default element property.
+
       -> Event Binding:
             -> On any HTMl element, we use do (event)="TS expression". The event can all the events supported for that element.
             -> Inside of the quotation marks, $event will be the date that was emitted with the event.
                Typecasting may be needed to use the data values(HTMLInputElement)
+
       -> Two way data binding:
             -> With this we combine property and event binding. The syntax is also combined.
             -> e.g [(ngModel)]="TS Variable", this will trigger in the input event and update the value of the variable in our component automatically.
@@ -125,7 +184,116 @@ Directives:
     -> ngFor
         -> This is a structural directive. This is used for looping over the element
         -> *ngFor="let server of myArrayName"
+        -> The let variable can be accessed directly in any TS expression, 
+           but in the HTML space we have to use string interpolation to access it.
+        -> let i = index, can be used to access the index of the current iteration.
+        -> We cannot have more than 1 structural directive on a single element.
+    -> ngSwitch
+        -> Sample 
+            [ngSwitch]="value"
+                *ngSwitchCase="10"
+                *ngSwitchDefault
 
+            Note:
+              -> No * for the initial ngSwitch
+
+    Custom Attribute Directives:
+        -> We can have our own business logic inside of a Directive and put it into any HTML element.
+        -> We can inject the element the direcrtive sits on into this directive.(Angular does this).
+        -> We can use @HostListener('event') funcName () {}, to listen to events automatically and also react to them(logic inside of func).
+        -> We can use `@HostBinding(style.backgroundColor) myField: string` to bind a property to a TS property
+           and change it in our code as a reaction to something.
+        -> Sample directive:
+            @Directive({
+              selector: "[appHighlight]"
+            })
+          Note:
+            -> selector is written as camelCase
+            -> Need to mention the Directive in App.Module file
+            -> while using the directive, we have to use it just the directive name(i.e without the [])
+        -> We can bind to properties of our own directive, by simply placing them on the same element enclosed in squarebrackets.
+        -> We can also have any one Main property the same name as our directive. In this case, 
+            we should not mention the Directive(without square brackets), rather the property binding of the property mentioned above.
+
+    Custom Structural directives:
+        -> <*ngIf> is same as -> <ng-template [ngIf]="sampleField"> </ng-template>
+        -> Sample
+            @Input() set myDirName (cond: boolean) {     // This is still a property, but this gets executed when the value passed to it(input params) changes
+              if (!cond) {
+                this.vcRef.createEmbeddedView (this.templateRef);
+              } else {
+                this.vcRef.clear();
+              }
+            }
+
+            constructor(private templateRef: TemplateRef, private vcRef: ViewConatainerRef) {}
+
+            Note: 
+              -> templateRef gives access to the template(ng-template - see point 1) and vcRef gives access to the view conatiner(This marks
+                 the place where we place the directive in the document)
+              -> Propert name should be same as Directrive name.
+
+Services:
+    -> Service is just another class, which acts a central business unit
+    -> Duplication of code, data storage, providing data are typical use case of a Service
+       e.g Logging service, User service(storing user data)
+    -> A service can be created by just creating a class.(No decorators needed, no need to add to app.module)
+    -> A service can be used in a component by adding them in the providers field in the @Component decorator and 
+       using the service in the constructor.
+    -> Always try to call the service functions and data from the Component TS file, rather than
+       the component template itself(i.e don't attach event listeners to them directly)
+
+Injection:
+    -> Easy way to get access to some other classes, without having to instantiate them.
+    -> The Angular dependency injector is actually a hierarcial injector. i.e if we provide a service for one component,
+       then angular knows how to create an instance of a service to that component and also all its child component.
+       i.e The Component and all its child components will receive the same instance of the Service
+       i.e The Instances don't propogate Up. They only go down
+    -> We can provide services at the 
+          -> AppModule(whole app gets the same service instance including components and services)
+          -> AppComponent - All components gets the same service instance but not the not services
+          -> AnyOther Component - Same instance of the service is availabe for the Component and its child Component.
+
+          Note:
+            -> If we provide a Service instance to a child Component. It will override if we were to provide the same
+               service at a higher level.
+            -> To use the same service in the child component, don't add it to the providers field. 
+               But have to add it to the constructor.
+    -> We can inject one service into another service. For that we have to use the @Injectible decorator. 
+       By this we are telling that this service can be injected. This has to be added at the receiving service.
+    -> We can also make cross component communication by emitting event from the service(in one component) and
+       subscribing to it in another component.
+    -> In Angular6+, instead of adding a service class to the providers[]  array in AppModule. We can do
+        @Injectable({providedIn: 'root'})
+        export class MyService { ... }
+        By this, Services can be loaded lazily by Angular (behind the scenes). 
+        This can lead to a better performance and loading speed.
+
+Router:
+    -> Sample
+          1. 
+          Inside of app.module
+          const myRoutes: Routes = [
+            { path: "", component: HomeComponent },
+            { path: "users", component: MySampleComponent }
+          ]
+          2. 
+          add the RouterModule to imports in app.module
+          actually, RouterModule.forRoot(myRoutes)
+          3. 
+          Add special directive(yes directive with element selector(usaully directives are property selectors))
+          <router-outlet></router-outlet>
+
+          Navigating Links;
+            -> We have to use a special directive called routerLink=""
+          Notes:
+            -> The path in routes should NOT begin with a /
+            -> The behaviour of path to routerLink,
+                  /server - appends to root path
+                  server or ./server - appends to the currently loaded path
+                  ../server - goes ONE level up from the currently loaded path. (This may not necessarily remove only /server. It may also remove /server/something to go one level up) 
+            -> The router-outlet simply the marks the place in the DOM where we want the angular to load 
+               
 Modules:
     -> The modules are used to bundle different pieces(e.g Components) into packages.
      
@@ -148,9 +316,14 @@ Modules:
       bootstrap    - has the list of components that angular need to know on starting server
       import       - used to import other modules
 
+
+Building Angular App:
+  -> Decide the Components e.g Main, Header, Footer etc..
+  -> Decide the data model, so that data exchange between components is very clear.
+
 Angular Packages:
 	-> @angular/core
-
+  -> @angular/router
 
 Dummy notes:
 1 ->	add the FormsModule  to the imports[]  array in your app.module.ts

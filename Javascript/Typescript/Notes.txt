@@ -23,7 +23,11 @@
      A variable with type(custom type) as interface can be assigned to A PLAIN OBJECT, which has all the mandatory fields and methods.
 
 8 -> It helps us in specify what type an object may contain. The object can be anything like an Array etc..
-     e.g let myArray: Array<number>;
+     e.g let myArray: Array<number>; OR let myArray: Custom[] (array of custom objects)
 
 9 -> Modules can be used to specify what variables that can be accessible outside of the file. 
      We use the export keyword for this. e.g export class MyClass
+
+10 -> constructor(puclic name: string) {} is a shorthand for the Normal way of creating field and assigning it in constructor.
+
+11 ->  defining object is myObj: { field1: string, field2: string }

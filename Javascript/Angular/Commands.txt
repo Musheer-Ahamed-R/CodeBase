@@ -1,4 +1,4 @@
 npm install -g @angular/cli
 ng new my-first-project
 ng serve (ng serve --port ANOTHERPORT)
-ng generate component <<COMP NAME>>
+ng generate component <<PATH/COMP_NAME>> --spec false
