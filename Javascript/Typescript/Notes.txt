@@ -31,3 +31,5 @@
 10 -> constructor(puclic name: string) {} is a shorthand for the Normal way of creating field and assigning it in constructor.
 
 11 ->  defining object is myObj: { field1: string, field2: string }
+
+12 -> If we do +"123". It will convert the string to a number if possible

@@ -11,3 +11,5 @@
         -> The behaviour of path to routerLink,
         ../server - goes ONE level up from the currently loaded path. (This may not necessarily remove only /server. It may also remove /server/something to go one level up) 
      Video - 127
+
+5 -> Practice Angular Life Cycle Hooks.

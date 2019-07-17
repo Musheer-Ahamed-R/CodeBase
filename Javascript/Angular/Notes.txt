@@ -47,6 +47,14 @@
 
 15 -> It is better to most initializations inside of the ngOnInit func, instead of the constructor.
 
+16 -> A component is typically destroyed when its selecector is remove from the DOM either by 
+         - using the router and navigating around your app
+         - when using *ngIf
+         - when using *ngFor (one or more increased or decreased component).
+
+17 -> Always don't forget. when using property binding the value inside of the "" MUST BE A TS expression.
+      either the variable name or some other expression.
+
 Components:
 	1 -> There is a root component(App component) which will tie together our whole application.
 	 	 We add other components to it
@@ -270,7 +278,7 @@ Injection:
         This can lead to a better performance and loading speed.
 
 Router:
-    -> Sample
+   -> Sample
           1. 
           Inside of app.module
           const myRoutes: Routes = [
@@ -286,14 +294,74 @@ Router:
 
           Navigating Links;
             -> We have to use a special directive called routerLink=""
-          Notes:
+            -> The routerLink also supports array value - ["/users", "sample"]. Note, only first index needs to have / 
+          Styling Active Router links:
+            -> routerLinkActive Directive can be used to add class for an active tab.
+            -> We can add it to the wrapping element or the link itself
+            -> routerLinkActive="myClass".
+            -> It analyzes our currently loaded path and checks which link leads to a route which uses this path.
+               It then marks the element as active if it CONTAINS the path.
+            -> Above creates problem for the ROOT path since all routes contain the root path. In this case we have to add
+               [routerLinkActiveOptions]="{ exact: true }"
+         Navigating Progmatically:
+            -> We can do it using the Router from @angular/router
+            -> this.router.navigate(["/servers"]);    Note, only first index needs to have /
+            -> This always apppends to the root path. If relative path is needed we have to configure it as
+               Add the ActivatedRoute Interface and then this.router.navigate(["/servers"], { relativeTo: this.route }); route refers to ActivatedRoute.
+         Adding Dynaimc paths:
+            -> While defining route. we can do "users/:myName"
+            -> Inside of the loaded component, we can access the dynamic param by importing the ActivatedRoute.
+               this.actRoute.snapshot.params.myName
+         Passing Query Params:
+            -> [queryParams]="{myKey: 'myValue'}". This is another bindable property of the routerLinkDirective
+            -> Progmatically - this.router.navigate(["/servers"], { queryParams: {} });
+            -> Can be accessed by this.actRoute.snapshot.queryParams and also can be subscribed for changes using
+               this.actRoute.queryParams.subscribe()
+         Passing Fragments(#):
+            -> fragment="someValue". This is another bindable property of the routerLinkDirective
+            -> Progmatically - this.router.navigate(["/servers"], { fragment: "myFragment" });
+            -> Can be accessed by this.actRoute.snapshot.fragment and also can be subscribed for changes using
+               this.actRoute.fragment.subscribe()
+         Child/Nested Routes
+            -> const myRoutes: Routes = [
+            { path: "", component: HomeComponent },
+            { path: "users", component: MySampleComponent, children: [
+               {
+                  path: ":id/:name", component: MySampleChildComponent
+               }]
+            }]
+            -> In this case, the MySampleComponent should have a sperate <router-outlet>
+
+         Redirecting routes:
+            -> When specifying the path we can use the redirectTo to direct to an exising path
+               e.g 
+               { path: "servers", component: ServerComponent },
+               { path: "users", redirectTo: "/servers" }
+         Default route:
+            ->  We can also use ** to configure the default path.
+               e.g 
+               { path: "**", component: ServerComponent }
+            -> Routes are not selected based on generality, but it is based on the order we enter them. 
+               Therefore very general routes should be only written in the end. 
+         Notes:
             -> The path in routes should NOT begin with a /
             -> The behaviour of path to routerLink,
                   /server - appends to root path
                   server or ./server - appends to the currently loaded path
                   ../server - goes ONE level up from the currently loaded path. (This may not necessarily remove only /server. It may also remove /server/something to go one level up) 
             -> The router-outlet simply the marks the place in the DOM where we want the angular to load 
-               
+            -> Angular DOES NOT re-instantiate the Component when the route changes if it is already in that component. 
+               e.g moving from /user/1 TO /user/2
+               this.activatedRoute.params.subscribe((newParams: Params) => {});
+               Also, when the component is destroyed, Angular automatically unsbscribes the subscription in this case(Not all cases).
+            -> We can preserve the current query params by using queryparamsHandling to preserve in 
+               this.router.navigate(["/servers"], { queryparamsHandling: "preserve" });
+
+Observeables:
+   -> An Observable is an easy way to subscribe to an even whcih might happen in the future. When it does happen
+      we can execute some piece of code.
+
+
 Modules:
     -> The modules are used to bundle different pieces(e.g Components) into packages.
      
