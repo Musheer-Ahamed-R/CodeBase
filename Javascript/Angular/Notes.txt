@@ -63,11 +63,12 @@ Components:
 
 	3 -> It allows our complex application into small reusable parts
 
-	4 -> A Component is just a TS class, so that angular is able to instantiate it.
+	4 -> A Component is just a TS class, so that angular is able to instantiate it. Whatever args we expect 
+       in the constructor(obviously valid ones like services) is also provided by Angular while instantiating.
 
 	5 -> We add to add Decorators(Typescript feature to enhance classes and other elements) so that angular understands its not a normal class, rather a component.
 		 Need to use @sign in the front (e.g @Component)
-	
+
 	6 -> We need to pass some metadata to the Decorator like selectors
 
 	7 ->  sample component
@@ -343,6 +344,17 @@ Router:
                { path: "**", component: ServerComponent }
             -> Routes are not selected based on generality, but it is based on the order we enter them. 
                Therefore very general routes should be only written in the end. 
+         Route Guards:
+            -> Functionality, logic which is to be executed once the route is loaded or once we want to leave a route
+            -> With this we can provide security to the routes.
+            -> Create a service which implements CanActivate
+            -> Need to implement the interface function canActivate(ActivatedRouterSnapshot, RouterStateSnapshot) 
+            -> Go to the place where we define the routes(paths, children etc..) and add a new field canActivate: [AuthGuard]
+               This applies the auth-guard to all child routes too.
+            -> We can only activate guard for child routes by adding the canActivateChild: [AuthGuard]. In this case we need to implement
+               a new Interface CanActivateChild which asks us to implement a canActivateChild method which does the actual authtication.
+
+
          Notes:
             -> The path in routes should NOT begin with a /
             -> The behaviour of path to routerLink,
@@ -356,6 +368,9 @@ Router:
                Also, when the component is destroyed, Angular automatically unsbscribes the subscription in this case(Not all cases).
             -> We can preserve the current query params by using queryparamsHandling to preserve in 
                this.router.navigate(["/servers"], { queryparamsHandling: "preserve" });
+            -> The routes are usually added as a seperate module. e.g app-routes.module.ts
+               So need to add the @NgModule decorator.
+            -> If the routers are moved to a seperate module, then we need to export the RouterModule from (@angular/router)
 
 Observeables:
    -> An Observable is an easy way to subscribe to an even whcih might happen in the future. When it does happen
@@ -370,19 +385,22 @@ Modules:
     -> sample module
         @NgModule({
           declarations: [
-            AppComponent
+              AppComponent
           ],
           imports: [
-            BrowserModule, FormsModule
+              BrowserModule, FormsModule
           ],
           providers: [],
+          exports: [],
           bootstrap: [AppComponent]
         })
         export class AppModule { }
 
-      declarations - is the list of all the Components available, 
-      bootstrap    - has the list of components that angular need to know on starting server
-      import       - used to import other modules
+        declarations - is the list of all the Components available, 
+        bootstrap    - has the list of components that angular need to know on starting server
+        import       - used to import other modules
+        exports      - this simpley tells angular, if the current module is to be imported
+                       in any other module, what should be accessible to the other module 
 
 
 Building Angular App:
