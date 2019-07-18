@@ -353,7 +353,33 @@ Router:
                This applies the auth-guard to all child routes too.
             -> We can only activate guard for child routes by adding the canActivateChild: [AuthGuard]. In this case we need to implement
                a new Interface CanActivateChild which asks us to implement a canActivateChild method which does the actual authtication.
-
+            -> Controlling Navigation(CanDeactivate Guard):
+               -> Conventient method of keeping the user from accediently navigating away from a page.
+               -> Create a service which implements CanActivate
+               -> Go to the place where we define the routes(paths, children etc..) and add a new field canDeactivate: [CanDeactivateGuard]
+               -> The logic may have to reside in the current Component since it may some useful data
+                  like whethere should we ask the user in the first place(i.e no changes made) 
+                  But the CanDeactivateGuard needs to be a service. So, we need to connect a Component to a service.
+                  i.e We will call canDeactivate() from the service to the component. In order to make sure that the component
+                  always has the canDeactivate method we make the Component to implement an Interface(newly created just for this purpose) which has that method.
+                  Note: the canDeactivate method receives the current Component(All the extra interface type is just a safety thing)
+         Passing static data:
+            -> The data property(while defining routes), allows us to pass on static data specific to that route to the Component 
+            -> we can access that using this.activatedRoute.snapshot.data
+            -> We may have to subscribe to it so that we listen for changes for data.
+         Resolver Guard:
+            -> This is also a service whcich allows us to run some code before a route is rendered.
+            -> This will NOT decide/block whether this route should be rendered or not. 
+            -> The alternative is to render the page instantly and then do this in ngOnInit(i.e with a spinner)
+            -> A new service class implementing Resolve Interface which forces to implement the function resolve.
+            -> The place where we define route, need to add resolve: { myAnyProperty: MyResolver }
+            -> we can access that using this.activatedRoute.snapshot.data
+            -> We may have to subscribe to it so that we listen for changes for data. 
+         Location stratergies:
+            -> We need to pass in the configuration in RouterModule.forRoot(myRoutes, {useHash: true}).
+            -> This informs our web server to only care about the part before the #(i.e only local:4200). 
+               Rest will be parsed by angular.
+            -> This is done to give angular full control of the routing to the angular(Specific handling in case of Route not found etc..)
 
          Notes:
             -> The path in routes should NOT begin with a /
@@ -362,7 +388,7 @@ Router:
                   server or ./server - appends to the currently loaded path
                   ../server - goes ONE level up from the currently loaded path. (This may not necessarily remove only /server. It may also remove /server/something to go one level up) 
             -> The router-outlet simply the marks the place in the DOM where we want the angular to load 
-            -> Angular DOES NOT re-instantiate the Component when the route changes if it is already in that component. 
+            -> Angular DOES NOT re-instantiate the Component when the route changes if it is already in the same component.
                e.g moving from /user/1 TO /user/2
                this.activatedRoute.params.subscribe((newParams: Params) => {});
                Also, when the component is destroyed, Angular automatically unsbscribes the subscription in this case(Not all cases).
@@ -371,6 +397,8 @@ Router:
             -> The routes are usually added as a seperate module. e.g app-routes.module.ts
                So need to add the @NgModule decorator.
             -> If the routers are moved to a seperate module, then we need to export the RouterModule from (@angular/router)
+            -> Only the component is not rendered if already existing, but the route will be called(with all its guards and other things)
+               each time we move to the same/different route.
 
 Observeables:
    -> An Observable is an easy way to subscribe to an even whcih might happen in the future. When it does happen

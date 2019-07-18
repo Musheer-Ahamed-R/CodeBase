@@ -13,3 +13,8 @@
      Video - 127
 
 5 -> Practice Angular Life Cycle Hooks.
+
+6 -> class someService implements Resolve<{ id: number, name: string }>. 
+     What is the significance of the Generic Object schema defined. 
+     Should the data we will return be like this or what else ?????? 
+     Video - 150
