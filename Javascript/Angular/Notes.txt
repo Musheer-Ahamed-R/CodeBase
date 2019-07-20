@@ -31,6 +31,7 @@
       The Local reference can also be accessed using @ViewChild('localreferenceName', {static: true}) myPropertyName. Here myPropertyName has an instance of
       ElementRef (Angular obj)
       We can also get the Content of the local reference using @Content('localreferenceName', {static: true}) myPropertyName.
+      We can also set localreference to some value(instead of the element itself). e.g #myRef="ngForm" 
 
 12 -> We can see localreference and also directives and some cases of property bindings are used with the [] in the HTML template.
 
@@ -54,6 +55,8 @@
 
 17 -> Always don't forget. when using property binding the value inside of the "" MUST BE A TS expression.
       either the variable name or some other expression.
+
+18 -> The localreference and the Directive, they both deal with the element they are put into.
 
 Components:
 	1 -> There is a root component(App component) which will tie together our whole application.
@@ -151,7 +154,9 @@ Databinding:
             -> We can do custom property binding using the @Input('alias') fieldName. and then using ['alias'] in the outerParent Component
             -> If we pass down a string like [property]='"myString"', then we can omit both the [] of property and also the "" in the value.
                But, we have to make sure that it does not conflict with the default element property.
-
+            -> If after the value is set, the user changes the value. This does not update the property of the component. 
+               This is only possible through two way binding.
+            -> Property binding is NOT Possible with a directive per say.
       -> Event Binding:
             -> On any HTMl element, we use do (event)="TS expression". The event can all the events supported for that element.
             -> Inside of the quotation marks, $event will be the date that was emitted with the event.
@@ -168,7 +173,7 @@ Directives:
        i.e they tell angular to use the template based on the selector)
 
     -> We usually add directives with an (attribute) selector, but the selector of the directive can also be like 
-       the selector of a Component. 
+       the selector of a Component(i.e Element selecector). 
 
     -> example *ngIf
           -> The * is needed is needed because ngIf is a "structural directive" because, it changes the structure of the DOM.
@@ -335,6 +340,8 @@ Router:
 
          Redirecting routes:
             -> When specifying the path we can use the redirectTo to direct to an exising path
+            -> We cannot redirect from an empty path ""(root path), because all paths contains/begins with an empty path
+               This can be fixed with pathMatch : 'full'.
                e.g 
                { path: "servers", component: ServerComponent },
                { path: "users", redirectTo: "/servers" }
@@ -342,8 +349,7 @@ Router:
             ->  We can also use ** to configure the default path.
                e.g 
                { path: "**", component: ServerComponent }
-            -> Routes are not selected based on generality, but it is based on the order we enter them. 
-               Therefore very general routes should be only written in the end. 
+             
          Route Guards:
             -> Functionality, logic which is to be executed once the route is loaded or once we want to leave a route
             -> With this we can provide security to the routes.
@@ -396,19 +402,68 @@ Router:
                this.router.navigate(["/servers"], { queryparamsHandling: "preserve" });
             -> The routes are usually added as a seperate module. e.g app-routes.module.ts
                So need to add the @NgModule decorator.
-            -> If the routers are moved to a seperate module, then we need to export the RouterModule from (@angular/router)
+            -> If the routers are moved to a seperate module, then we need to export(field: exports) the RouterModule from (@angular/router)
             -> Only the component is not rendered if already existing, but the route will be called(with all its guards and other things)
                each time we move to the same/different route.
-
+            -> Routes are not selected based on generality, but it is based on the order we enter them. 
+               Therefore very general routes should be only written in the end.
+               Also, dynamic routes should go after specific named routes. Because angular cannot differentiate 
+               between /:id and /new (new will be considered as a dynamci value).
 Observeables:
    -> An Observable is an easy way to subscribe to an even whcih might happen in the future. When it does happen
       we can execute some piece of code.
+   -> It can be thought of as a data source. In angular it is just an object we import from a third party package(RxJS).
+   -> It is implemented as an obervable pattern. We have an Observable and an observer.
+   -> In between this, there is a stream/teamline. We can have multiple events emitted the observable during that time(e.g chnage in data).
+   -> Observer with the data received can Handle Data, Handle error or Handle Completion.
+      Some Observable may not have data completion(e.g observable hooked to a button)
 
+      Creating Observeables
+         -> We can import the interval function from rxJS. This inturn returns an observable
+            interval(1000).subscribe((count) => { console.log(1) })
+         -> It is extremely important that we manually destroy/unsubscribe an observable after we are done/move away from the associated component.
+            Observables provided by angular like params observable are automatically destroyed by angular itself when we move away from the component.
+         -> Sample custom observable from sratch
+
+            Observable.create((observer) => {}).        
+               // Observable imported from rxJS and the arrow function is called whenever the Observable get a new observer.
+               setTimeout(() => {
+                  observer.next("someData");
+               }, 1000);
+            })
+            observer can be called with next(), error(new Error("my error")), complete() for corresponding cases.
+
+      Operators;
+        -> The data points first reach the operator, then the observer(Sits between the Observable emitted event and the subscriber handling method).
+        -> We can use them by calling the pipe method. This does not change the data we receiev from the subscribe callback, 
+           unless we subscribe to the observable after applying the operations(i.e after calling the pipe method).
+           Also, the pipe method takes an unlimited number of operators which are executed one after the other.
+      
+      Subject:
+        -> Subject is a special kind of Observable. It is also something we can subscribe to, but is active, 
+           because we can actively call next on it from the outside.
+           We can call next() and other Observable related methods on it. But the difference is, we call then anywhere
+           we want(outside of the Observer like above), if we have access to the Subject instance.
+        -> We should use Subject instead of EventEmitters and Observables, as they are bit more effecient behind the scenes.
+        -> We should also destroy them when we no longer need them(just like Observers).
+            Creating Subject:
+              mySubject = new Subject<boolean>()        // The return value is specified as boolean.
+      
+            Notes:
+              -> Observable.create(() => {}) is similar to new Subject<>().
+              -> Subject should only be used to communicate across Components and not withhin the same Component(i.e like using in case of @Output).
+      Notes:
+        -> Whenever an observable throws an error. It dies and stops further occurences.
+           Also, an error does not trigger the observer.complete method. 
+        -> The subscribe method has a second arguement(function), which we can use for error handling. 
+           Also, third argument can be used to react to observer completion
 
 Modules:
     -> The modules are used to bundle different pieces(e.g Components) into packages.
      
     -> We need to use the decorator @NgModule to specify that the class is a module(just like component).
+
+
 
     -> sample module
         @NgModule({
@@ -429,6 +484,60 @@ Modules:
         import       - used to import other modules
         exports      - this simpley tells angular, if the current module is to be imported
                        in any other module, what should be accessible to the other module 
+
+Forms:
+    -> Angular gives us a javascript object representation of the form and also some validations.
+    -> In angular, a form is just a Grpup of controls(we can define each control). This is held by the FormGroup(which is wrapped by ngForm in case of template driven approach )
+    -> Approaches supported by angular.
+          -> Template Driven
+          -> Reactive approach. Manually setup the structure of the form, then template, then manually connect it to the structure.
+    -> Steps - Template Driven:
+          -> Import the FormsModule in app.module.
+          -> Need to inform angular which form elements need to be controlled. Can be achieved by adding ngModel directive(without [()] in it).
+          -> Also, need to add the name attribute.(field name in JS Object representation).
+          -> When we click on a button inside of a Form(with type="submit" or only one button in a form), its default behaviour is to trigger a submit event. 
+             Angular uses this event using the directive ngSubmit, placed in the form element itself. 
+          -> A localreference set to "ngForm"(#f="ngForm") and passing the localreference as part of the handler for the submit event above.
+             We can also access the form data(JS object) created by angular on an individual Element by doing #fE="ngModel"
+        Notes:
+          -> The form element is kind of like a selector for a directive built into angular, which creates the JS object of the form automatically.
+          -> The required(Html attribute) is also an Angular Directive
+          -> email is also a Html directive. We can access the list of dieectives from - https://angular.io/api/forms/Validators
+          -> Angular adds its own CSS classes(e.g ng-dity, ng-valid etc), giving us information about the state of the individual control.
+             We can use this classes to make our own styling.
+          -> We can also use [ngModel]="myField" to show default values.  
+          -> We can use ngModel as just like that(to mark it as form control) or one way binding(default value) or also as two way binding
+          -> We can use the ngForm instance(accessed through local variable) to also set the values of the WHOLE form.. e.g this.localRef.setValue({}).
+             The data passed should be of the same structure as defined in the form.
+             We can override only specific values using  this.localRef.form.patchValue({})
+          -> We can also reset the form using this.localRef.reset(). This will make the form as just loaded.(i.e untouched etc. will be true). 
+             We can also passs in the object just like in setValue to reset to a specific values.
+      -> We can also group data by using ngModelGroup="groupName". We can now also do validations based on this group(just like individual FormControl)
+         Can be assessed using local reference, #localref="ngModelGroup"
+
+    -> Steps - Reactive Approach
+        -> The form needs to be created programatically(in TS code). 
+        -> myForm: FormGroup     (as discussed earlier, form is just a group of control).
+        -> Import the ReactiveFormsModule.
+        -> Initialize the form(myForm), before rendering the template.
+        -> this.myField = new FormGroup({
+              username: new FormControl("initial value")        // initial value, single/array of validators, asynchronous validators.
+           })
+        -> In the template, add the [formGroup]="myForm" directive to the Form element. This tells angular our own form group created earlier.
+        -> For each individual form control element, we should add the directrive formControlName="propertyName as just string" directive.
+        -> For accessing the form on submit(or any other time), we don't have to go through the localref way as done previously for Template form.
+           We can just access the same formGroup instance we created in the above steps. This will have all the details just like ngForm. 
+        -> The validation can be selected from the Validation classs. e.g [Validation.required, Validation.email] 
+        -> We van get access to our controls, using the myForm.get('controlName')     // controlName(no nested) or path to control
+        -> We can group controls by using the FormGroup class again.
+           this.myField = new FormGroup({
+              userData: new FormGroup({
+                username: new FormControl("initial value") 
+              })
+           })
+           Then in the tempate, we need to use formGroupName="formGroupNameAsString". But formControlName still remains the same(No need to define the path)
+           
+
 
 
 Building Angular App:
