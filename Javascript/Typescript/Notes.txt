@@ -33,3 +33,8 @@
 11 ->  defining object is myObj: { field1: string, field2: string }
 
 12 -> If we do +"123". It will convert the string to a number if possible
+
+13 -> We can validate dynaic key values in an object using the notation.
+      { [s: string]: boolean }
+
+14 -> We can use spread operators like { ...myObj }, to put key value in new Object.

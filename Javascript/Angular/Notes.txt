@@ -58,6 +58,10 @@
 
 18 -> The localreference and the Directive, they both deal with the element they are put into.
 
+19 -> It is always recommended to do all the heavy lifting in the services and keep the component light.
+      i.e Component only has template related logic. 
+
+
 Components:
 	1 -> There is a root component(App component) which will tie together our whole application.
 	 	 We add other components to it
@@ -438,7 +442,8 @@ Observeables:
         -> We can use them by calling the pipe method. This does not change the data we receiev from the subscribe callback, 
            unless we subscribe to the observable after applying the operations(i.e after calling the pipe method).
            Also, the pipe method takes an unlimited number of operators which are executed one after the other.
-      
+        -> We can use the tap Operator which does not modify the data, but lets us to do something with the data(e.g console.log).
+
       Subject:
         -> Subject is a special kind of Observable. It is also something we can subscribe to, but is active, 
            because we can actively call next on it from the outside.
@@ -512,6 +517,7 @@ Forms:
              We can override only specific values using  this.localRef.form.patchValue({})
           -> We can also reset the form using this.localRef.reset(). This will make the form as just loaded.(i.e untouched etc. will be true). 
              We can also passs in the object just like in setValue to reset to a specific values.
+         -> There is validator named pattern, which allows us to do regular expression validation on the form control.
       -> We can also group data by using ngModelGroup="groupName". We can now also do validations based on this group(just like individual FormControl)
          Can be assessed using local reference, #localref="ngModelGroup"
 
@@ -536,10 +542,110 @@ Forms:
               })
            })
            Then in the tempate, we need to use formGroupName="formGroupNameAsString". But formControlName still remains the same(No need to define the path)
-           
+        -> FormArray is an array of form controls/FormGroup. We can add formcontrol/formGroup dynamically.
+           Inside of the template, we can sepecify FormArray using formArrayName="stringFormArrayField"
+           We can iterate using *ngFor=let myVar of myDummyFunc()       // myDummyFunc returns all the formcontrols which we can iterate.
+           The name of the FormControl will just be the array index itself. 
+           We can push new Controls using (<FormArray>this.myForm.get("stringFormArrayField")).push(new FormControl())
+           We can also remove FormGroup or FormControl elements in a FormArray at a certain index. (<FormArray>this.myForm.get("stringFormArrayField")).removeAt(1)
+           or all items at once using (<FormArray>this.recipeForm.get('ingredients')).clear();
+      -> Adding own  validators
+          -> It is just a function, which receives a formcontrol instance.
+              myValidator (formControl) { [s: string]: boolean }
+          -> we can pass a reference to the above function in place where we pass in built-in validators.
+              Note:
+                -> If validation is successful, we have to pass nothing  or null. else we can 
+                   return an object with some error code as fieldName and value as true. 
+                -> Angular adds the error we pass to the error field of the formControl. We can access that error and
+                   show appropriate error message. This is true for inbuilt validators too.(But need to check the error name incase of built in validators)
+      -> Add Syns validators:
+          -> It is a function, which receives a formcontrol instance and returns a Promise or Observable.
+              myValidator (formControl) Promise<any> | Observable<any>
+          -> The above also resolves to an obect like we retuned previously for non-async function for validation failed.
+          -> This needs to be passed in as the third param while definining FormControl
+      -> Reacting to changes:
+          -> We can subscribe to value changes and status changes(e.g pending in case of async validators)
+             on the formObject or the individual formControl Object.
+            e.g this.myForm.statusChanges.subscribe()
+                this.myForm.valueChanges.subscribe()
+      -> Setting/Pathc/Reset Values:
+          -> on the formObject we can call setValue({ })    // set whole form
+          -> on the formObject we can call patchValue({ })    // set some fields
+          -> on the formObject we can call reset({ })    // reset form values
 
+Pipes:
+   -> Pipes allow us to transform output in our template.
+   -> e.g
+         {{ name | uppercase }} OR {{ myDate | date }}
+   -> We can pass parameters using the : after the pipe .eg date:"param1":"param2":"param3"
+   -> We can chain pipes by adding | after a pipe(order is important)
 
+      Creating Custom Pipes:
+         -> Create a file like shorten.pipe.ts
+         -> implement PipeTransform and implement the transform method
+         -> Add the @pipe({ name: "shorten" }) decorator
+         -> transform(value) {
+               return "newValue"
+            }
+         -> Add the pipe class to app.module declaratons array.
+         -> By default, angular does not re-run our data on our pipe whenever there is a data change(change in array or object), 
+            we can change this behaviour by adding `pure: false`. But, this might cause performance issues.
+            Also, when the data is run by two or more pipes, all pipes need to have this done so that it is re-run for all pipes when data changes
+            Otherwise only those which had it done will be run through our data when it changes.
 
+      async pipes:
+         -> This pipe can be used to display data which initially will resolve to a Promise or an Observable.
+            This will automatically update the value with data resolved by Promise or data received by Observable.
+            {{ appStatus | async }}
+
+HTTP requests:
+   -> 
+
+   -> Creating HTTP requests:
+         -> Import the HTTPClient Module
+         -> Add/Inject it to the constructor of the component.
+         -> Use the above instance to make HTTP requests.
+         -> We can handle errors by using the second parameter of the subscribe method or using the Subject to emit error data.   
+         -> We can use catchError Operator to do some hadling in case of Error occuring. Also, in this case we could 
+            return a new Observable called throwError which wraps the actual error.   
+         -> We can pass headers as part of the options in the secnd param of the HTTP method functions.
+            e.g header: new HttpHeaders({
+
+            })
+         -> We can pass params as part of the options in the secnd param of the HTTP method functions.
+            e.g header: new HttpParams().set("field", "value")
+         -> We can tell what we want as a result from a HTTP request. By default it is the parsed response body.
+            But, we can also tell angular to give the entire response (including headers, statuscode etc).
+            This can be achieved by setting "observe": "response"(options parsm of HTTP method).
+            Possible values: body(default), response, event
+         -> Using the above, we can listen to the HTTP events to track the state of the request.
+            i.e is the request sent to server, is the response received etc..
+            We can differentiate between the states using the type key(has value of 0, 1, 2, 3 etc..)
+         -> We can also set the responseType using the options object.
+
+      Interceptor;
+         -> We need to create a Service class(e.g AuthInterceptorService) which implements HttpInterceptor
+            which forces to add the intercept method(request: HttpRequest<any>, next HttpHandler).
+            This will run before the request leaves our application. We need to return next.handle(request).
+         -> In app.module file in the providers field add 
+            {
+               provide: HTTP_INTERCEPTORS,
+               useClass: AuthInterceptorService,
+               multi: true                         // No not override the existing interceptors and have multiple interceptors
+            }
+         -> Inside the interceptor, we can modify the request by cloning the actual request(since the actual request cannot be modified),
+            e.g let modifiedReq = req.clone({url: "xyz", headers: request.headers.append("abc", "xyz")});
+         -> The Order in which we provide the Interceptors matter, since that is the order it will get executed.
+
+         Response Interceptors:
+            -> The next.handle() returns an Observable. We can use pipe to manipulate the response.
+
+            Note:
+               -> The tap Operator always gets an event in this case(inside of an Interceptor), irrespective what we chose to Observe.
+
+         Notes:
+            -> Requests are only sent to the server when we subscribe to the Observable returned by .post/.get method.
+            -> All methods are generic, we can use them to define the response schema. e.g .get<{ name: string }>() 
 Building Angular App:
   -> Decide the Components e.g Main, Header, Footer etc..
   -> Decide the data model, so that data exchange between components is very clear.

@@ -23,3 +23,10 @@
      Video - 185
 
 8 -> What about event triggering with a directive. 
+
+9 -> What is FormBuilder and where it is used in Code.
+
+10 -> We can use catchError Operator to do some hadling in case of Error occuring. Also, in this case we could 
+      return a new Observable called throwError which wraps the actual error.
+
+      If we pass new Observable inside of an Operator, what is the behaviour ???
