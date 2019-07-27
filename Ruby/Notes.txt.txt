@@ -1,0 +1,29 @@
+1 -> No type for variables(not even let)
+
+
+Printing:
+   -> puts "" OR puts [1, 2, 3]     // returns null i.e just printing but also iterates if iteratable
+   -> p "" OR p [1, 2, 3]           // Here p prints and returns the value
+
+Getting value:
+   -> gets 
+   -> gets.chomp()                  // truncates the \n character in the end
+
+
+Variables:
+   -> Local Variables
+
+   -> Global variables
+         -> put $ infront of the variable (e.g $x)
+         -> Highly not recommended to use it as it will pollute the code and cause unnecessary naming issues.
+
+   -> Instance variables
+         -> put @ infront of the variable (e.g @y)
+         -> Used to share data across components like from method to a view etc..
+
+   -> Constant
+         -> All caps. Also, its value can be changed.
+
+   -> Class variable
+         -> put @@y infront of the variable (e.g @@z)
+         -> Varibale only available to that class instance.

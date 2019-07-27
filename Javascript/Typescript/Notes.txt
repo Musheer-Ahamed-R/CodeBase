@@ -38,3 +38,7 @@
       { [s: string]: boolean }
 
 14 -> We can use spread operators like { ...myObj }, to put key value in new Object.
+
+15 -> It is better to always specify the Schema/Type of data we are dealing with.(i.e method return value, api response data etc..)
+
+16 -> !!user will handle for !user ? false : true;

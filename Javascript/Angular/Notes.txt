@@ -14,7 +14,8 @@
 	 	 So the script we write in main.ts is the first things that get executed. 
 		 This bootstraps/starts our angular application by passing the App module(/app/app.module.ts).
 		 The app.module.ts has a bootstrap array, which lists all the components which should be known to angular
-		 at the point of time it analyzes our index.html(i.e starting our server)
+		 at the point of time it analyzes our index.html(i.e starting our server)(i.e all Components we used in index.html should
+       included in the bootstrap array)
 
 7 -> Angular uses Components to build web pages and uses modules to bundle different pieces(e.g Components)
      into packages.
@@ -24,6 +25,7 @@
 9 -> We can use ng-template(inbuilt component/directive) to mark places in the DOM.
 
 10 -> We can use Augury chrome extension to debug Angular apps. We can have a look at the state of the Application/Component etc..
+      In the browser we can look into the src folder to find our exact source code.
 
 11 -> Local reference are use to get access to an element in the template. They can be placed on any HTML element,
       with syntax #referenceName. This will have reference to the whole HTML element. We can use it anywhere in our template,
@@ -32,6 +34,7 @@
       ElementRef (Angular obj)
       We can also get the Content of the local reference using @Content('localreferenceName', {static: true}) myPropertyName.
       We can also set localreference to some value(instead of the element itself). e.g #myRef="ngForm" 
+      The @ViewChild and @Content can be used not just for local reference but also for other cases.
 
 12 -> We can see localreference and also directives and some cases of property bindings are used with the [] in the HTML template.
 
@@ -60,6 +63,9 @@
 
 19 -> It is always recommended to do all the heavy lifting in the services and keep the component light.
       i.e Component only has template related logic. 
+
+20 -> entryComponents is an array of Component Types. But only of those Components which will not be 
+      created either through add its selector to template or in the route config(i.e Templates added manually through code).
 
 
 Components:
@@ -135,6 +141,27 @@ Components:
             - ngAfterViewChecked    - Called every time the view (and child view's) have been checked.
             - ngOnDestroy           - Called once the component is about to be destroyed. 
 
+Dynamic Components;
+   -> Dynamic components are components which we add dynamically at runtime.
+   -> We can use this for overlay/spinner.
+   -> import in constructor - ComponentFactoryResolver.
+   -> Creating a component instance should not be done by us, instead needs to be handled by Angular.
+      componentFactoryResolver.resolveComponentFactory(ComponentType). This returns a Component Factory of the 
+      passed Type(It knows how to create the Passed Component).
+   -> Add an <ng-template> element in the template and add a custom PlaceHolder directive to it.
+   -> Access the directive using the @ViewChild(DirectiveType) - This fetches the first instance of that type in the template.
+   -> The PlaceHolder Directive exposes the ViewConatainerRef as a public property.
+   -> Use the ViewConatainerRef object to first clear and then create the template using 
+      vcRef.createComponent(ComponentFactory)
+   -> Need to add it to entryComponents array in app.module.
+   -> We can access the core Component instance by doing vcRef.createComponent(ComponentFactory).instance.
+   -> We can use that core component instance to access properties and change its values.
+   -> Important to note here is that the Data binding, @Input and @Output will all not work here.
+      We have to manually do data manipulation using the above core component instance and also listen to events
+      by manually subscribing to those events. 
+   -> When we move away from the dynamic component we have to do vcRef.clear() and also clear the 
+      above event subscription.
+
 Databinding:
     -> Communication between TS code and the HTML template
     -> Outpu data (from TS to HTML)
@@ -160,7 +187,7 @@ Databinding:
                But, we have to make sure that it does not conflict with the default element property.
             -> If after the value is set, the user changes the value. This does not update the property of the component. 
                This is only possible through two way binding.
-            -> Property binding is NOT Possible with a directive per say.
+            -> Property binding is NOT Possible with a directive per say.(except for custom property binding using @Input)
       -> Event Binding:
             -> On any HTMl element, we use do (event)="TS expression". The event can all the events supported for that element.
             -> Inside of the quotation marks, $event will be the date that was emitted with the event.
@@ -249,7 +276,11 @@ Directives:
             Note: 
               -> templateRef gives access to the template(ng-template - see point 1) and vcRef gives access to the view conatiner(This marks
                  the place where we place the directive in the document)
-              -> Propert name should be same as Directrive name.
+              -> Property name should be same as Directrive name. 
+
+      Notes:
+         -> A directive if placed on an element, is just a new instance of a class(The Corresponding Directive class)
+            which has more details about that element and it can control that element.
 
 Services:
     -> Service is just another class, which acts a central business unit
@@ -363,6 +394,7 @@ Router:
                This applies the auth-guard to all child routes too.
             -> We can only activate guard for child routes by adding the canActivateChild: [AuthGuard]. In this case we need to implement
                a new Interface CanActivateChild which asks us to implement a canActivateChild method which does the actual authtication.
+            -> From CanActivate, we can return a urlTree to navigate user to a differnt route. this.router.createURLTree(["/auth"]).
             -> Controlling Navigation(CanDeactivate Guard):
                -> Conventient method of keeping the user from accediently navigating away from a page.
                -> Create a service which implements CanActivate
@@ -413,6 +445,13 @@ Router:
                Therefore very general routes should be only written in the end.
                Also, dynamic routes should go after specific named routes. Because angular cannot differentiate 
                between /:id and /new (new will be considered as a dynamci value).
+            -> RouterModule.forRoot(myRoutes) can be used only once in the application. In all other feature modules, 
+               we have to use forChild()
+            -> We can also create a shared module which groups all the shared Components, Directives etc..
+            -> We can only declare Components, Directives, Pipes only once in our application. But, we can import a Module multiple times.
+            -> We can also use core module to export all the services into one module to make app.module a bit clear.
+               This is only needed if we are going to use the providers array in app.module(i.e Not needed if we used @Injectable({providedIn: "root"}))
+
 Observeables:
    -> An Observable is an easy way to subscribe to an even whcih might happen in the future. When it does happen
       we can execute some piece of code.
@@ -438,11 +477,14 @@ Observeables:
             observer can be called with next(), error(new Error("my error")), complete() for corresponding cases.
 
       Operators;
-        -> The data points first reach the operator, then the observer(Sits between the Observable emitted event and the subscriber handling method).
-        -> We can use them by calling the pipe method. This does not change the data we receiev from the subscribe callback, 
-           unless we subscribe to the observable after applying the operations(i.e after calling the pipe method).
-           Also, the pipe method takes an unlimited number of operators which are executed one after the other.
-        -> We can use the tap Operator which does not modify the data, but lets us to do something with the data(e.g console.log).
+         -> The data points first reach the operator, then the observer(Sits between the Observable emitted event and the subscriber handling method).
+         -> We can use them by calling the pipe method. This does not change the data we receiev from the subscribe callback, 
+            unless we subscribe to the observable after applying the operations(i.e after calling the pipe method).
+            Also, the pipe method takes an unlimited number of operators which are executed one after the other.
+         -> We can use the tap Operator which does not modify the data, but lets us to do something with the data(e.g console.log).
+            Different types of Operators
+               take        - Says we only want n values from the Observable and after that we should automatically unsubscribe.
+               exhaustMap  - It waits for the first Observable to complete and returns a new Observable from within.
 
       Subject:
         -> Subject is a special kind of Observable. It is also something we can subscribe to, but is active, 
@@ -457,6 +499,10 @@ Observeables:
             Notes:
               -> Observable.create(() => {}) is similar to new Subject<>().
               -> Subject should only be used to communicate across Components and not withhin the same Component(i.e like using in case of @Output).
+      BehaviourSubject:
+         -> This is same as the Subject, but with the difference that it gives immediate access to the previously emitted data,
+            even if the one acessing haven't subscribed when the value was emitted.
+      
       Notes:
         -> Whenever an observable throws an error. It dies and stops further occurences.
            Also, an error does not trigger the observer.complete method. 
@@ -464,11 +510,19 @@ Observeables:
            Also, third argument can be used to react to observer completion
 
 Modules:
-    -> The modules are used to bundle different pieces(e.g Components) into packages.
-     
-    -> We need to use the decorator @NgModule to specify that the class is a module(just like component).
+   -> The modules are used to bundle different pieces(e.g Components, Services, Pipes, Directives) into packages.
+   -> We need to use the decorator @NgModule to specify that the class is a module(just like component).
+   -> Every module works on its own in Angular(i.e They don't communicate with each other)
+      i.e We can use a Component declared in a module inside of other components besides it(declared within the same )
+      But, we cannot use them in a Component of a different module.
+      With the exception of services, which are available application wide.
+   -> When we import another module, we import everything that module exports.
 
 
+   Notes:
+      -> Splitting the app into feature modules is the prerequisite to performance improvements.
+      -> We can add CommonModule to access ngIf and ngFor. In app module it is available through BrowserModule.
+         But since BrowserModule does many things in app start up we have to include it only once.
 
     -> sample module
         @NgModule({
@@ -489,6 +543,19 @@ Modules:
         import       - used to import other modules
         exports      - this simpley tells angular, if the current module is to be imported
                        in any other module, what should be accessible to the other module 
+
+   Lazy Loading;
+      -> 
+
+      -> Pre Loading:
+            -> While register routes, router.forRoot(myRoutes, { preloadingStratergies: PreLoadAllModules })
+
+   Notes:
+      -> Adding a service to an eagerly loaded module has the exact same effect as adding it to the providers of app.module or 
+         providedIn: "root". But if added to a laxy loaded module, then it is only available to that module alone and it gets its own instance.
+         If we provide in both eagerly loaded and lazy loaded, the service will be available application wide but the lazy loaded
+         module will have a seperate instance.
+         So, loading services into Eagerly loaded modules should be avoided as this is very unexpected.
 
 Forms:
     -> Angular gives us a javascript object representation of the form and also some validations.
@@ -599,15 +666,13 @@ Pipes:
             {{ appStatus | async }}
 
 HTTP requests:
-   -> 
-
    -> Creating HTTP requests:
          -> Import the HTTPClient Module
          -> Add/Inject it to the constructor of the component.
          -> Use the above instance to make HTTP requests.
          -> We can handle errors by using the second parameter of the subscribe method or using the Subject to emit error data.   
          -> We can use catchError Operator to do some hadling in case of Error occuring. Also, in this case we could 
-            return a new Observable called throwError which wraps the actual error.   
+            return a new Observable called throwError which wraps the actual error(This Observable does nothing but emits an error with the data supplied).
          -> We can pass headers as part of the options in the secnd param of the HTTP method functions.
             e.g header: new HttpHeaders({
 
@@ -646,13 +711,67 @@ HTTP requests:
          Notes:
             -> Requests are only sent to the server when we subscribe to the Observable returned by .post/.get method.
             -> All methods are generic, we can use them to define the response schema. e.g .get<{ name: string }>() 
-Building Angular App:
-  -> Decide the Components e.g Main, Header, Footer etc..
-  -> Decide the data model, so that data exchange between components is very clear.
+            -> The error received is of type HttpErrorResponse
 
-Angular Packages:
-	-> @angular/core
-  -> @angular/router
+Building Angular App:
+   -> Decide the Components e.g Main, Header, Footer etc..
+   -> Decide the data model, so that data exchange between components is very clear.
+
+Starting Angular Project from scratch;
+   -> create a new folder src
+   -> create a new folder src->app
+
+Deploying Angular Apps:
+   -> Deploy to a static host. Static host is a web server that is capable of serving HTML, JS, CSS
+      but not capable of running any server side language.
+   -> src -> environment. It has a const and we can add key value pair to that constants. e.g ApiKey
+      We can require the environment file and use the constants.
+   Building Angular Apps:
+      -> The ng build 
+            - compiles TS code to JS
+            - compiles all templates to JS Instructions (i.e in the end only JS code is generated)
+              JS code conatins all the logic for updating the DOM.
+            - Translated to Angular language(so that Angular renderer can work with it in the browser) 
+   Routing after deployment:
+      -> Angular stores and manages your routes, not the server that’s hosting your Angular app!
+      -> The server only serves the index.html file - that’s about its only job!
+      -> Therefore, our server can’t do anything with an incoming request pointing at a /products route.
+         it’s totally unknown to it!. Due to the way the web works, requests reach the server though
+         and your client (i.e. the Angular app) DOESN'T EVEN GET LOADED as the server throws a 404 error.
+         i.e The very first request from the client to our app.
+      -> Thus, our server should always serve the index.html file, especially in 404 error cases!
+
+Angular Universal:
+   -> It allows us to pre-render our angular app on the server(pre-rendered HTML pages to the user).
+   -> Improves web crawler score
+   -> ng add @nguniversal/express-engine --clientProject ng-my-project(project name as in angular.json)
+   -> npm install --save nguniversal/module-map-ngfactory-loader. This is done to enable lazy loading.
+   -> Inject using @Inject(PLATFORM_ID) to identify which platform our app is running. 
+      This tells angular to look for a globally provided value with this identifier(PLATFORM_ID)
+   -> Import the method isPlatformBrowser from @angular/common. This is done to not execute browser specific code
+      on the server(like fetching from localstorage)
+   -> The page will be prerendered on the server, but once it is served, it will run again on the browser.
+   -> npm run buid:ssr
+   -> A Node js server is needed.
+   -> npm run serve:ssr
+
+Service Workers(Offline):
+   -> Google dev tools -> Application -> Service workers -> Offline
+   -> JS offers us to run additional threads(Web Worker i.e Service Workers).
+   -> This can be used in mobile to receive push notifications etc..
+   -> It can listen to outgoing Networks request (e.g fetching the assets off that web page - 
+      javascript or CSS and also data from an API.
+   -> The service worker can catch these outgoing requests and do something with them(like caching). 
+   -> ng add @angular/pwa
+   -> To ensure new build updates the service workers, resources will contain a Hash which will be injected into the service 
+      workers. Thats why build process needs to be aware that there are service workers configured.
+   -> The service workers can be considered as a proxy between our angular app and our backend server.
+      It catches and might still allow request to leave the app or it may block the request.
+   -> manifest.json - for launcher icons(mobile apps).
+   -> ngsw-config.json file - We can configure the service worker that gets generated.
+   -> We need to have a web server(http-server)
+   -> assetGroups for static content and dataGroups for Dynamic data.
+
 
 Dummy notes:
 1 ->	add the FormsModule  to the imports[]  array in your app.module.ts
@@ -662,3 +781,4 @@ Dummy notes:
 		 npm uninstall -g angular-cli @angular/cli 
 		 npm cache clean 
 		 npm install -g @angular/cli
+

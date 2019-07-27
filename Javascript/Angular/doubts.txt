@@ -30,3 +30,16 @@
       return a new Observable called throwError which wraps the actual error.
 
       If we pass new Observable inside of an Operator, what is the behaviour ???
+
+11 -> What does the .pipe method return and also what shpould the passed methods(pipes/operators return).
+
+12 -> The @ViewChild and @Content can be used not just for local reference but also for other cases.
+      In what other cases is this used ??.
+      Also, video - 312, if we used Type in @viewChild. It will find the first Occurence of that type in that template.
+
+13 -> How does importing RouterModule.forRoot(myRoutes) and exporting RouterModule in our AppRoutes module work. ?
+      i.e How does app module know about all our routes.
+
+14 -> Video - 323 Component declarations.
+
+15 -> If the domain url for both Angular and backend is same, then how to know which server to reach if both are hosted in different locations.
