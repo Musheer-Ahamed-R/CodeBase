@@ -1,5 +1,6 @@
 1 -> No type for variables(not even let)
 
+2 -> ** is operator used for exponentiation
 
 Printing:
    -> puts "" OR puts [1, 2, 3]     // returns null i.e just printing but also iterates if iteratable
@@ -27,3 +28,38 @@ Variables:
    -> Class variable
          -> put @@y infront of the variable (e.g @@z)
          -> Varibale only available to that class instance.
+
+Strings:
+   -> Interpolation #{variable}
+   -> Diff between '' and "" is, if '' is used, all text inside is considered as plain string
+      i.e No dynamic values. So, need to use "" for String Interpolation
+
+Numbers:
+   -> Integers
+   -> Float (very small decimal places)
+   -> Decimals (very accurate decimal places and takes more space)
+
+Methods:
+   -> Name in snake case
+   -> Syntax: 
+      def method_name
+         // body
+      end
+   -> We can execute methods by just calling method name without ()
+   -> The return value is whatever is there in the last line and it is considered bad practice to 
+      explicitly use return keyword.
+   -> Inside of a class, we can use def self.method_1 to create a class method. If normal syntax is used,
+      then it is an instance method 
+
+   Procs:
+      -> Proc objects are blocks of code that have been bound to a set of local variables(NOT arguments i.e like closure). 
+      -> Proc can have one, none or many arguments
+
+
+Bang operator and ! in methods
+   -> The bang operator can also be called on a variable like any other method call, arr.! .
+      This would return the same value as !arr.
+   -> Bangs are used to say this is the more unusual version of the method(e.g Mutating and error throwing).
+      .! coerces data to return a boolean value that is opposite to the truthiness or falsness that Ruby assigns to that data type
+      Any methods that end in an ! may mutate the data that is the method is called on.
+      Also used for methods that raise an exception when the method without it does not(i.e returns boolean normally).
