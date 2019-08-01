@@ -2,6 +2,10 @@
 
 2 -> ** is operator used for exponentiation
 
+3 -> ruby does not have i++ or i-- operators. We have to use  i+= 1 etc..
+
+4 -> 0..42 creates a collection(array) from 0 to 42
+
 Printing:
    -> puts "" OR puts [1, 2, 3]     // returns null i.e just printing but also iterates if iteratable
    -> p "" OR p [1, 2, 3]           // Here p prints and returns the value
@@ -40,9 +44,9 @@ Numbers:
    -> Decimals (very accurate decimal places and takes more space)
 
 Methods:
-   -> Name in snake case
+   -> method name and also parameters should be in snake case
    -> Syntax: 
-      def method_name
+      def method_name(first, last)
          // body
       end
    -> We can execute methods by just calling method name without ()
@@ -50,11 +54,73 @@ Methods:
       explicitly use return keyword.
    -> Inside of a class, we can use def self.method_1 to create a class method. If normal syntax is used,
       then it is an instance method 
+   -> The () can be skipped for a method both while calling and also while definfing actual params for a method.
+      e.g my_method first_name last_name
+          my_method "Musheer", "Ahamed"
+   -> We can use named arguments to explicitly define which arguments we are passing to the function(avoid unnecessary delay).
+      e.g my_method first:, second:
+          my_method second: "Ahamed", first: "Musheer" 
+   -> Default value to a method param can be done using `def my_method first_name:, last_name: "Ahamed"`
+      As we have to use name: in this case. So, if we have to pass in some value, we have to consider it as named param and explicitly use the param name.
+   -> Splat lets us pass in multiple arguments but treats them as a regular array inside of the method
+      *my_name
+   -> Keyword value Splat can be used to pass in key value pairs(JSON data).
+      **my_name
+   -> Optional arguments can be used to pass in arguments as named fields but received as an object.
+      It is same as Keyword value splat, except that the data passed will be named fields instead of a JSON data.
+      e.g def my_func options={}
+            options[:company]
+         end
+
+   Closure:
+      -> A closure is a function that: 
+            -> Can be passed around as a variable.
+            -> Binds to the same scope in which it was created.
+            -> To different extents, code blocks, procs, and lambdas can be seen as closures.
+      -> Construction
+            -> { |arg| } 
+            -> do |arg| end
+      -> Both the above snippets are considered as code blocks. If in a single line we use {} else do end.
 
    Procs:
-      -> Proc objects are blocks of code that have been bound to a set of local variables(NOT arguments i.e like closure). 
+      -> A proc is an object that contains a code block. It provides a way to save up a code block and execute it later.
+      -> Proc objects are bound to a set of local variables(NOT arguments but like closure). 
       -> Proc can have one, none or many arguments
+      -> Construction
+            -> Proc.new { |arg| } OR Proc.new do |arg| end
+            -> proc { |arg| } OR proc  do |arg| end
+      -> Calling
+            -> my_proc["first", "second"]
+            -> my_proc.call("first", "second")
+      -> The arguments passed may not be same as declared.
+      -> If we use return keyword in a Proc, it not only returns from the Proc block, but also from the exclosed function
+         (i.e no code beneath after calling Proc will get executed).
 
+   Lambda:
+      -> The symbol for stabby lambda is ->
+      -> Construction
+            -> lambda {|arg| } OR proc  do |arg| end
+            -> -> (arg) { } OR proc  do end      // stabby lambda
+      -> The arguments passed MUST be same as when declared.
+            
+      Notes:
+         -> Only -> (stabby lambda) takes argument outside of code block
+            e.g -> (arg) { puts arg }
+
+Loops:
+   -> while
+      Syntax:
+         while i < 10
+            // code
+         end     
+   -> Iterating arrays
+      Syntax:
+         my_array.each CODE_BLOCK 
+   -> for in Loops
+      Syntax:
+         for i in my_array
+            // code 
+         end   
 
 Bang operator and ! in methods
    -> The bang operator can also be called on a variable like any other method call, arr.! .
@@ -63,3 +129,4 @@ Bang operator and ! in methods
       .! coerces data to return a boolean value that is opposite to the truthiness or falsness that Ruby assigns to that data type
       Any methods that end in an ! may mutate the data that is the method is called on.
       Also used for methods that raise an exception when the method without it does not(i.e returns boolean normally).
+
