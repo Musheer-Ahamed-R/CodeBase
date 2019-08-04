@@ -5,7 +5,26 @@
 3 -> ruby does not have i++ or i-- operators. We have to use  i+= 1 etc..
 
 4 -> 0..42 creates a collection(array) from 0 to 42
+     But to convert it to an array we have to call .to_a
 
+5 -> For a method that expects a block/method, we can pass in built in method. 
+     All elements will be implicitly passed to that method.
+     e.g .select(&:even?) OR .map(&:to_i)
+
+6 -> %w(The quick brown fox jumped over the lazy dog).
+     Ruby converts each word inside the () into a seperate element in an array(words are WITHOUT quotes)
+
+7 -> We can do v ~= /[abcde]/ to do pattern matching. 
+
+8 -> we can use .to_i to convert an element to an integer.
+
+9 -> [a..g] can be used to get an array of alphabets from a through g
+
+10 -> If we multiply a string, it will duplicate itself to the number of times.
+
+11 -> irb or "the ruby shell" for running ruby code. Simpley type irb 
+
+12 -> In ruby, everything is an Object.
 Printing:
    -> puts "" OR puts [1, 2, 3]     // returns null i.e just printing but also iterates if iteratable
    -> p "" OR p [1, 2, 3]           // Here p prints and returns the value
@@ -61,6 +80,7 @@ Methods:
       e.g my_method first:, second:
           my_method second: "Ahamed", first: "Musheer" 
    -> Default value to a method param can be done using `def my_method first_name:, last_name: "Ahamed"`
+      or if variable passed(named params) and used is different, then ( name: my_name = "Musheer" )      // here name is the named param passed to this method
       As we have to use name: in this case. So, if we have to pass in some value, we have to consider it as named param and explicitly use the param name.
    -> Splat lets us pass in multiple arguments but treats them as a regular array inside of the method
       *my_name
@@ -71,6 +91,19 @@ Methods:
       e.g def my_func options={}
             options[:company]
          end
+
+   Types of Encapsulation:
+      -> private:
+            Syntax:
+               private 
+                  def my_method
+                     // code
+                  end
+      -> public:
+         -> This is the default. No need to mention anything
+      
+      -> protected:
+         -> This is almost similar to private, but with few small differences
 
    Closure:
       -> A closure is a function that: 
@@ -107,6 +140,25 @@ Methods:
          -> Only -> (stabby lambda) takes argument outside of code block
             e.g -> (arg) { puts arg }
 
+Class:
+   -> We can create a class variables and also set getters and setters in a single line
+      e.g attr_accessor :title, :name, :url 
+   -> Creating instance 
+      MyClass.new
+   -> initializer method. 
+      def initialize
+   Syntax:
+      class MyClass
+         // code
+      end
+
+   Inheritence;
+      Syntax:
+         class ChildClass < BaseClass
+
+   Polymorphism:
+      -> We can just call super(NOT super.my_method) inside of a method. It will automatically call the super class method.
+      
 Loops:
    -> while
       Syntax:
@@ -120,7 +172,95 @@ Loops:
       Syntax:
          for i in my_array
             // code 
-         end   
+         end
+   
+Conditionals:
+   -> If else conditional
+      -> Syntax
+         1. 
+            if x == y 
+               // code
+            elsif x > y             // YES ELSIF
+               // code
+            else
+               // code
+            end
+         2. To put things in a single line
+               puts "something" if a > b?
+   -> unless conditional
+      -> same as the opposide of if. can be used for more readability
+      Syntax
+      1. 
+         unless a > b?
+            // code
+         end
+      2. To put things in a single line
+         puts "something" unless a > b?
+
+
+Symbol:
+   -> A symbol is a uniq instance of the Symbol class which is generally used for identifying a specific resource. 
+   -> A Symbol object is created by prefixing an operator, string, variable, constant, method, class, module name(anything)
+      with a colon.
+      We can also create a symbol without any of the above. e.g :dummy_symbol. This is used in hash objects
+   -> A symbol looks like a variable name but it's prefixed with a colon.
+   -> It's just a name and an internal ID(i.e since each symbol has to be unique it is assigned an internal id). 
+      e.g :Test.object_id.to_s 
+   -> Symbol Object don't contain values or objects, like variables do. Instead they refer to some unique id.
+      e.g class Test. Here, Test is a class Variable, but :Test is a symbol.
+      Even in case of symbols used as fields in hash obj, we can cnsider that as a variable and its own symbol.
+   IMPORTANT
+   -> They're used as a consistent name/value within code(when used as values). Also this is more effecient than Strnigs.
+      e.g know_ruby = :yes
+   -> Symbols are more efficient than strings. Two strings with the same contents are two different objects,
+      but for any given name there is only one Symbol object. 
+   -> Ruby uses symbols, and maintains a Symbol Table to hold them. We can get all Symbols using Symbol.all_symbols. 
+   -> A new symbol is created when we define
+         -> a new symbol(explicit)
+         -> a new variable
+         -> a new method
+         -> a new class/module
+   -> The symbol object will be unique for each different name but does not refer to a particular instance of the name.
+      i.e if the same symbol is used in code to assign to different objects, the symbol obj will be same, but its actual 
+      type will be different according to the context in which it is used.
+
+Collections:
+
+Arrays:
+   -> We can create using [1, 2] OR Array.new
+   -> It may contain values of different types in the same array
+   -> we can use arr[index] = "value" to insert value at a certain index. But, all unfilled indexes before it will be filled as nil. 
+   -> we can delete using .delete, .delete_at, .delete_if
+
+Hash:
+   -> If we need to use symbol, we can either do :my_symbol => "Hellow" OR my_symbol: "Hello"
+      We don't need : for string keys(i.e inside ""), 
+      We need to use Hash Rocket(=>) for all cases other than symbols(modern syntax e.g my_symbol: "value").
+      we cannot use number as symbols(i.e 1: "One" won't work, but can be used as 1 => "One")
+   -> We can set override default value(nil) using 
+         -> Hash.new( "month" ) OR Hash.new "month"
+         -> my_hash = Hash.new; my_hash.default = "Hello" 
+   -> We can also create fields dynamically(i.e after initial hash object creation). my_hash[:my_new_symbol] = "Value"
+   -> A user-defined class may be used as a hash key if the hash and eql? methods
+      are overridden to provide meaningful behavior
+   -> A has can be visualized as an array like a whole array with each key value being a nested array within it
+      e.g [[:a, "Hello"], [:b, "World"]] equivalent to { a: "Hello", b: "World" }
+   -> Fetching values. my_hash[:my_symbol]
+   -> Deleting value. my_hash.delete(:my_symbol)
+   -> Syntax:
+         Hash.new
+         Hash["a", 100, "b", 200]                  #=> {"a"=>100, "b"=>200}
+         Hash[ [ ["a", 100], ["b", 200] ] ]  (array of key value pairs(array of arrays))      #=> {"a"=>100, "b"=>200}
+         Hash["a" => 100, "b" => 200]              #=> {"a"=>100, "b"=>200}
+         { :one => "eins", :two => "zwei", :three => "drei" }
+         { one: "eins", two: "zwei", three: "drei" }
+      Default values:
+         Hash.new( "month" ) OR Hash.new "month"            // default value when key does not exist
+         OR 
+         Hash.new { |hash, key| hash[key] = "Go Fish: #{key}" }
+   Notes:
+      -> The [ next to Hash MUST be close to it(e.g Hash[] and not Hash []). Otherwise it will throw error.
+
 
 Bang operator and ! in methods
    -> The bang operator can also be called on a variable like any other method call, arr.! .

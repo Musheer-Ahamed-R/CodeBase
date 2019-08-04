@@ -1,1 +1,19 @@
 1. what is the diff between my_proc and my_proc.call    // both execute proc
+
+2. When we do teams ( object inside of object. i.e not object inside of arrays), what does the var have
+   in each iteration. e.g teams.each do | team |. What does team have in each iteration
+
+3. what does .to_a do ?. Where/On What, it can be used ?
+
+4. Incase of .select(&:even?), what does the & and ? mean.. ??? 
+
+5. If, Symbol Object don't contain values or objects, like variables do. 
+   Then why, They are used in case of hashes as keys.
+
+6 -> Revisit lambda notes
+
+7 -> What is the use of ? in the end of single if/unless statements like 
+     puts "something" if x > y?
+     puts "something" unless x > y?
+
+8 -> Understand curl in video 50
