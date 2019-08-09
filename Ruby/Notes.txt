@@ -14,8 +14,6 @@
 6 -> %w(The quick brown fox jumped over the lazy dog).
      Ruby converts each word inside the () into a seperate element in an array(words are WITHOUT quotes)
 
-7 -> We can do v ~= /[abcde]/ to do pattern matching. 
-
 8 -> we can use .to_i to convert an element to an integer.
 
 9 -> [a..g] can be used to get an array of alphabets from a through g
@@ -25,9 +23,26 @@
 11 -> irb or "the ruby shell" for running ruby code. Simpley type irb 
 
 12 -> In ruby, everything is an Object.
+
+13 -> 10.times, runs a loop for ten times
+
+14 -> sleep 10, is equivalent to setTimeout
+
+15 -> We can have multiple classess in a single file.
+
+16 -> We can check if a method exists on an object by doing obj.respont_to?(:method_name)
+
+17 -> We can put _ where we usually put , to easy readability.
+      e.g 2_000_000
+
+18 -> We can use prime module of ruby to deal with prime numbers
+
+19 -> We can use date module of ruby to deal with dates
+
 Printing:
    -> puts "" OR puts [1, 2, 3]     // returns null i.e just printing but also iterates if iteratable
    -> p "" OR p [1, 2, 3]           // Here p prints and returns the value
+
 
 Getting value:
    -> gets 
@@ -82,16 +97,35 @@ Methods:
    -> Default value to a method param can be done using `def my_method first_name:, last_name: "Ahamed"`
       or if variable passed(named params) and used is different, then ( name: my_name = "Musheer" )      // here name is the named param passed to this method
       As we have to use name: in this case. So, if we have to pass in some value, we have to consider it as named param and explicitly use the param name.
-   -> Splat lets us pass in multiple arguments but treats them as a regular array inside of the method
-      *my_name
-   -> Keyword value Splat can be used to pass in key value pairs(JSON data).
-      **my_name
+   -> Splat 
+         -> lets us pass in multiple arguments but treats them as a regular array inside of the method
+            *my_name
+         -> A method can’t have two parameters with splat operator
+         -> A local variable will reference an empty array if arguments are not passed
+         -> It can be placed anywhere in the parameter list. It will take arguments accordingly giving precedence to other params
+            i.e first, *splat, last and we pass in four arrgs. splat will take the middle two etc..
+         -> We can flatten arrays using splat. This is the opposite of its use case in method parameters
+            This can be used while passing arguments to a method that expects multiple params
+            e.g new_arr = [*array1, 4, 5, *array2] OR new_arr = *array1, 4, 5, *array2
+            e.g my_method *array1
+         -> We can also array coercion(i.e convert anything to an array)
+            e.g 
+               *1..10            -> [1, 2, .... 10]
+               *"Hello"          -> ["Hello"]
+                *[1,2,3]         -> [1,2,3]                 // no changes
+               *{ a: "Hello" }   -> an array [[:a, "Hello"]]
+         -> can also be used in multiple variable assignment.(see below)
+   -> Keyword value Splat(double Splat)
+         -> This can be used to pass in key value pairs(JSON data).
+            **my_name
+         -> We can also double splat while calling methods to pass JSON data. This will flattened to the appropriate fields
+            the method expects(Opposite of above use case). Here JSON data is flattened to named method params which method expects
    -> Optional arguments can be used to pass in arguments as named fields but received as an object.
       It is same as Keyword value splat, except that the data passed will be named fields instead of a JSON data.
       e.g def my_func options={}
             options[:company]
          end
-
+   -> When using terinary operator, we should use () if we calling any method that returns a boolean
    Types of Encapsulation:
       -> private:
             Syntax:
@@ -147,6 +181,8 @@ Class:
       MyClass.new
    -> initializer method. 
       def initialize
+   -> We can also execute some code inside of a class. Not just declaring variables and methods
+
    Syntax:
       class MyClass
          // code
@@ -158,7 +194,7 @@ Class:
 
    Polymorphism:
       -> We can just call super(NOT super.my_method) inside of a method. It will automatically call the super class method.
-      
+
 Loops:
    -> while
       Syntax:
@@ -173,6 +209,11 @@ Loops:
          for i in my_array
             // code 
          end
+   -> We can create an infinite loop using the syntax
+      loop do
+         // code
+         // break
+      end 
    
 Conditionals:
    -> If else conditional
@@ -230,7 +271,14 @@ Arrays:
    -> We can create using [1, 2] OR Array.new
    -> It may contain values of different types in the same array
    -> we can use arr[index] = "value" to insert value at a certain index. But, all unfilled indexes before it will be filled as nil. 
+   -> We can also push elements using array << 10  // other than array.push() 
    -> we can delete using .delete, .delete_at, .delete_if
+   -> We can remove certain elements from an array using 
+      [1, 2, 2, 3, 4] - [2, 4]     // removes all elements with 2 and 4
+      Same for adding / merging
+      [1, 2, 2, 3, 4] + [5, 6]
+   -> We can splice easily using array[1..array.length] i.e array[start..end]
+      Also, array[1..array.length-1]   // doing arithmetic in end value
 
 Hash:
    -> If we need to use symbol, we can either do :my_symbol => "Hellow" OR my_symbol: "Hello"
@@ -245,7 +293,7 @@ Hash:
       are overridden to provide meaningful behavior
    -> A has can be visualized as an array like a whole array with each key value being a nested array within it
       e.g [[:a, "Hello"], [:b, "World"]] equivalent to { a: "Hello", b: "World" }
-   -> Fetching values. my_hash[:my_symbol]
+   -> Fetching values. my_hash[:my_symbol]   i.e my_hash['my_symbol'] will not work here, it will work only for Strings.
    -> Deleting value. my_hash.delete(:my_symbol)
    -> Syntax:
          Hash.new
@@ -261,6 +309,84 @@ Hash:
    Notes:
       -> The [ next to Hash MUST be close to it(e.g Hash[] and not Hash []). Otherwise it will throw error.
 
+Dates:
+   -> We can iterate over dates just like collection
+
+Files:
+   -> File.open("path_from_root", "option") { | f | f.write("Something")}
+      OR
+      File.new("path_from_root", "option")
+   -> Reading
+      File.read("path_from_root")
+   -> File.delete("path_from_root")
+   -> Appending to a file
+      File.open("path_from_root", "a") { | f | f.puts("Something")}
+   -> Need to close after using it(except while using a block in case 1).
+      Options:
+         -> r  - reading
+         -> a  - appending to a File
+         -> w  - just writing
+         -> w+ - reading and writing
+         -> a+ - Open a file for reading and appending
+         -> r+ - Open a file for updating, both reading and writing
+
+Error Handling:
+   -> Syntax:
+         begin
+            // code
+         rescue
+            // code
+         end
+
+         Rescue specific errors:
+         begin
+            // code
+         rescue StandardError => e
+            // code
+         end
+   -> Inside of the rescue method, we can call our own method to build our own custom error logger.
+
+Regular expression:
+   -> Syntax:
+      /[a-d]/
+   -> /[a-d]/i for case incensetive matcher
+   -> We can do v ~= /[abcde]/ to do pattern matching. 
+   -> We can rubular.com to test regex
+
+Grep:
+   -> Grep used for searching arrays and collections.
+
+Meta programming:
+   -> We can open up classess(Both core and custom classes) to customize class.
+   -> Typical spot for definfing meta programming is the initializers.
+   -> Method missing:
+         -> We can use method_missing method provided by ruby to execute a method if not already available.
+         -> It is considered a best practice to also implement the respond_to_missing?, so that the respond_to on the
+            new function returns true. i.e the method exists on the object.
+         -> Method is not created in this case, but before throwing NoMethodFoundError, ruby gives us the option of executing some code.
+   
+   -> Defining method(runtime):
+         -> We can use the define_method to actually creates method at runtime.
+         -> In this case, the respond_to on that method will also be true.(i.e no need to implement seperately like method_missing)
+         -> This can be used to create multiple methods which share the same code
+            e.g 
+            my_array.each do |method_name|
+               define_method("#{method_name}_action") do | args |
+                  // code
+               end
+            end 
+
+Algorithms:
+   -> Ruby uses quicksort algo for sorting
+
+Multiple Variable Assignment:
+   -> x, y = y, x
+   -> x, y = [1, 2]        // Array destructuring
+   -> We can swap elements in an array by just doing
+      a[i], a[i+1] = a[i+1], a[i]
+   -> Using splat, first, *second = ["a", "b", "c", "d", "e"]
+      OR first, *, last = ["a", "b", "c", "d", "e"]      // if we only want the first and last elem.
+      OR first, * =  ["a", "b", "c", "d", "e"]      // if we only want the first elem.
 
 Bang operator and ! in methods
    -> The bang operator can also be called on a variable like any other method call, arr.! .
@@ -270,3 +396,17 @@ Bang operator and ! in methods
       Any methods that end in an ! may mutate the data that is the method is called on.
       Also used for methods that raise an exception when the method without it does not(i.e returns boolean normally).
 
+Ruby gems:
+   -> We can definfe - group: development to say that a gem needs to be run only in development. 
+   -> Rails itself is a ruby gem
+   -> For requiring a ruby gem, first require 'rubygems', then the gem we want to require
+   -> Sample gems
+         Device gem     - used for registration, sign-in, sign out. Related to authentication
+         Will_paginate  - pagination
+         Honey badger   - For issue management (like pager duty)
+         New relic  rpm - For perf tracking
+         Rails admin    - For admin management
+         Pundit         - For handling permissions 
+         Breakman       - finding security issues. 
+         Web framework  - Sinatra
+         HttpParty      - Making Http calls

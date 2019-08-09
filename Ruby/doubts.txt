@@ -6,6 +6,7 @@
 3. what does .to_a do ?. Where/On What, it can be used ?
 
 4. Incase of .select(&:even?), what does the & and ? mean.. ??? 
+   Also, what is .inject(:+) do. i.e why we did not have & here too           // + is a method here       
 
 5. If, Symbol Object don't contain values or objects, like variables do. 
    Then why, They are used in case of hashes as keys.
@@ -17,3 +18,35 @@
      puts "something" unless x > y?
 
 8 -> Understand curl in video 50
+
+9 -> string.to_enum(:scan, /\d+/).map { Regexp.last_match }
+     What does above do ?
+     Video: 59
+
+10 -> What is rake and rackup
+
+11 -> What is diff between ruby hash and ruby object
+
+12 -> What is the ? In the end for a Boolean variables or expressions. Is this optional.?
+
+13 -> What is run filename do?. Can we run scripts inside of ruby code??  Also what is config.ru i.e extension .ru
+      Video - 75
+
+14 -> Defining routes in case of sintara?. Video - 75
+      Also, same for define_method("#{method_name}_action") block
+      i.e why are we passing blocks seperately
+
+15 -> What is method missing ?? in Meta programming?. 
+      Also, what is author.send inside it.
+      Video 71
+
+16 -> What is $1 inside of a method. Video 71.
+
+17 -> What does include mean. e.g MyClass incluce HttpParty
+
+18 -> What does empty? mean. (Note: This is inside of Array class)
+      The answere is inside of an class we can just call the method name instead of doing obj.method. Please confirm
+      Video - 83
+
+19 -> What is &pivot.method(:>)
+      Video - 83     // Quick sort impl
