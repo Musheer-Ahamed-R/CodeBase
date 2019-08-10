@@ -295,6 +295,8 @@ Hash:
       e.g [[:a, "Hello"], [:b, "World"]] equivalent to { a: "Hello", b: "World" }
    -> Fetching values. my_hash[:my_symbol]   i.e my_hash['my_symbol'] will not work here, it will work only for Strings.
    -> Deleting value. my_hash.delete(:my_symbol)
+   -> We can use the hash_obj.dig(:field, :nested_field) to access field vales. 
+      We can also use this on JSON data(i.e data from config.yml file)
    -> Syntax:
          Hash.new
          Hash["a", 100, "b", 200]                  #=> {"a"=>100, "b"=>200}
@@ -311,6 +313,7 @@ Hash:
 
 Dates:
    -> We can iterate over dates just like collection
+   -> We can subtract one day using date - 86400
 
 Files:
    -> File.open("path_from_root", "option") { | f | f.write("Something")}
@@ -380,7 +383,7 @@ Algorithms:
    -> Ruby uses quicksort algo for sorting
 
 Multiple Variable Assignment:
-   -> x, y = y, x
+   -> x, y = y, x          // We can have n number of variables and n corresponding values
    -> x, y = [1, 2]        // Array destructuring
    -> We can swap elements in an array by just doing
       a[i], a[i+1] = a[i+1], a[i]
@@ -395,6 +398,14 @@ Bang operator and ! in methods
       .! coerces data to return a boolean value that is opposite to the truthiness or falsness that Ruby assigns to that data type
       Any methods that end in an ! may mutate the data that is the method is called on.
       Also used for methods that raise an exception when the method without it does not(i.e returns boolean normally).
+
+Spaceship Operator:
+   -> . It returns either a -1, 0, or +1 depending on whether its receiver is less than, equal to, or greater than its argument.
+   -> i.e a <=> b :=
+         if a < b then return -1
+         if a = b then return  0
+         if a > b then return  1
+         if a and b are not comparable then return nil
 
 Ruby gems:
    -> We can definfe - group: development to say that a gem needs to be run only in development. 

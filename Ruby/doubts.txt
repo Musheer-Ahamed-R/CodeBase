@@ -50,3 +50,13 @@
 
 19 -> What is &pivot.method(:>)
       Video - 83     // Quick sort impl
+
+20 -> What is enumerator. 
+      Video - 90
+
+21 -> What is DecisionTree::ID3  i.e what is :: ?
+      Video - 96
+
+22 -> Grep section completely
+
+23 -> Video - 91 Amicable numbers
