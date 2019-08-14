@@ -18,7 +18,7 @@ Modules:
   -> Feature should more likely be a Modules
 
 Routing;
-  -> Controls the navigation for the user and creats a Controller and Views
+  -> Controls the navigation for the user and creats a Controller and Views 
 
 
   -> Controllers are responsible for View logic and exposing properties for view binding
