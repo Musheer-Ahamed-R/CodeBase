@@ -46,6 +46,22 @@ Creating controller:
   -> Using Controller as Alias, we can create instance of that controller(Plain JS Object). Need to access as alias.name.
      Also, can get rid of the dependency injection($scope) and just use this. inside of the Controller function.
 
+Components:
+  -> Stateless, Statefull and routed Components
+  -> Stateless:
+      -> Controller
+      -> template   
+  -> Stateful:
+      -> Controller
+      -> template   
+      -> Service
+  -> Routed: (same as Statfull with routing)
+      -> Controller
+      -> template   
+      -> Service
+
+      This is treated as Views
+
 
 Creating Services:
   -> angular
@@ -78,8 +94,12 @@ Directives:
      otherwise if two way binding, we have to do field="parentField"      // without string interpolation
   -> link function has ($scope, element, attrs) for a directive. (Behaviourial directives)
   -> scope: false inherits the scope of the current context.
-  -> We can use .$watch to watch for changes to a certain field. e.g $scope.$watch('fieldName', callBack)
+  -> We can use .$watch to watch for watching changes to a certain field. e.g $scope.$watch('fieldName', callBack). If we removed $scope.count and used this.count,
+     then we should do it as $scope.$watch(function() { return me.count }, callBack)
      Also, any new event we execute like .focus etc should be done inside of a setTimeout. i.e It has to be pushed to the end of the call stack. (The way angular works)
+     For Objects, we need to pass in a third arguement, to tell angular for Deep watching(Objects). Otherwise, we can just use watchCollection.
+  -> We can use $attr (inside link function) and do $attr.observe('name', function() { }) to watch for changes, just like .$watch
+     We can also use $attr.updateClass to update classes.
   -> We can also pass in an entire object from the parent controller to the directive and that too with two way data bindings.
   -> To deligate functions to our directive from our component, we can do field="myFunction()" and inside of the directive.bindToController, field: "&"   // Yes. actually use ()
 
@@ -122,7 +142,7 @@ ng-disabled
 
 
 Validators:
-  -> create name attribue on top level form. and also create name obj for all input
+  -> create name attribue on top level form. and also create name obj for all input. ng-model is for data binding and name is for validation.
 
 Routing:
   -> Inside of the app.js (module), add the ui-router for adding routing dependency

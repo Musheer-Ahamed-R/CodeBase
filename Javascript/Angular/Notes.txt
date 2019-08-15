@@ -170,12 +170,15 @@ Databinding:
           -> Property Binding [property]="data"
     -> React to user events (HTML to TS)
           -> (event)="expression"
-    -> Two way data binding  (HTML to TS and vice versa)
+    -> Two way data binding  (HTML to TS and vice versa).
           -> [(ngModel)] = 'data'
 
       -> String Interpolation:
             -> Within the {{ }}, we can write any Typescript expression(single line) which can resolve to a string.
-               e.g referring a property, calling a function which returns a string
+               e.g referring a property, calling a function which returns a value
+            !!!!!!!
+            Note:
+               -> For Interpolation, even if we only call a function which internally uses the field which was changed. Angular will still call that method and get the updated value.
 
       -> Property Binding:
             -> Square brackets indicate to angular that we are using property binding
@@ -197,12 +200,14 @@ Databinding:
             -> With this we combine property and event binding. The syntax is also combined.
             -> e.g [(ngModel)]="TS Variable", this will trigger in the input event and update the value of the variable in our component automatically.
                Also, It will update the input value if we chnage the value of variable somewhere else.
+            -> This is only available for user input fields like <input>, <select> etc..
 
 
 Directives:
     -> They are instructions in the DOM. (e.g Components are directives with a template 
        i.e they tell angular to use the template based on the selector)
-
+    -> A directive if placed on an element, is just a new instance of a class(The Corresponding Directive class)
+            which has more details about that element and IT CAN CONTROL THAT ELEMENT.
     -> We usually add directives with an (attribute) selector, but the selector of the directive can also be like 
        the selector of a Component(i.e Element selecector). 
 
@@ -277,10 +282,6 @@ Directives:
               -> templateRef gives access to the template(ng-template - see point 1) and vcRef gives access to the view conatiner(This marks
                  the place where we place the directive in the document)
               -> Property name should be same as Directrive name. 
-
-      Notes:
-         -> A directive if placed on an element, is just a new instance of a class(The Corresponding Directive class)
-            which has more details about that element and it can control that element.
 
 Services:
     -> Service is just another class, which acts a central business unit

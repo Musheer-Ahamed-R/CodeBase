@@ -1,0 +1,118 @@
+1 ->  It is based on MV* architecure.
+      Model        - data or $scope
+      View         - Template with a controller
+      *(anything)  - Watchers and the digest cycle       // This connects the model and the view.
+2 ->  We will not pollute our global name space by only adding a variable named app(ourApp).
+      angular.module('myApp', []);     // array of dependencies
+3 ->  All angular JS services name starts with a $ sign. (e.g $scope etc..)
+4 ->  We have to use $scope.$apply(myFunction) if we are working outside of the Angular Context(e.g Async requests).
+      This tells angular that after the code within it is run, Angular JS runs the digest cycle to check for any changes.
+
+
+
+Modules:
+  -> Create a module
+      angular
+        .module('app', [])      // array of dependencies if any, need to pass even if no dependencies
+  -> loading module, add ng-app="app" as an HTMl attribute. Usually put at the very top of the HTML doc(i.e inside <html> tag itself).
+  -> The dependencies can be any built-in module or our own module.
+  -> If we inject any new module, then we can use all of its Directives and Services(dependency Injection) in our app WITHOUT US DOING ANYTHING.
+
+Controller:
+  -> myApp.controller('controllerName', function() { })
+  -> A controller is nothing but a single function having all the logic for handling/manipulating the view.
+  -> The Controller ties the data($scope) to the View template associated with the controller in HTML.
+  -> All params used in the function of the controller are dependency Injection params.
+  -> To solve variable name changing during minify, instead of the controllerNameFunc, we should be passing in an array, which has all the dependencies names and the controllerNameFunc as the last item in the array.
+     The order of the dependencies names in the array is very important.
+     OR
+     controllerNameFunc.$inject = ["$scope", "$rootScope"]          // Both are same
+
+View:
+  -> Inside of our ng-app="myApp", we can define our view. 
+  -> It is nothing but a simple template with a controller associated !!!..
+  -> A view needs to be associated to a controller. So, we have to do ng-controller="controllerName" inside of out HTML (The controller which controls the view i.e supplies the model(data) etc..).
+     All html code inside of it is a view and it is controlled by the controller.
+
+Dependency Injection:
+  -> Rather than creating an object inside a function, we pass it(object) to the function.
+  -> Angular does dependency injection by parsing the parameters of the methods. e.g angular.injector().annotate(myControllerFunction), gives all params to the myControllerFunction function 
+
+Service:
+  -> We can get any service by simply including them in the parameter list.
+  Scope service:
+    -> $scope is an Object from Scope service.
+    -> This object is passed to the controller function and also the link function in directives.
+    ***********
+    -> This data becomes available inside of the view.
+    -> This data($scope) is specific to the view attached to the controller. If we use the same controller again, then we will be having a different $scope.
+    -> The $scope becomes the middle piece between the controller and the view.
+  $log service:
+    ->  Enhances the console.log and acts as a wrapper.
+  $filter:
+    ->  convert values. $filter('uppercase')(myField)
+  $timeout:
+    ->  wrapper over setTimeout. Keeps things angular way.
+  $http:
+    ->  wrapper for Making HTTP requests.
+
+  
+Directives:
+  -> An instruction to Angular JS to manipulate a piece of the DOM(where it is attached).
+  -> All params used in the directive's link method are dependency Injection params.
+  ******
+  -> ng-app and ng-controller are also Directives.
+  -> All/most browser events have a corresponding directives in angular. e.g click(ng-click), keypress(ng-keypress) etc..
+  Common directives:
+    ng-model:
+      -> ng-model="myField".          // For two way data bindings.
+    ng-if:
+      -> ng-if="JS expression"        // JS expression returning boolean value
+      -> elem is completely removed from the DOM.
+
+    ng-switch:
+      -> ng-switch="field". Then inside it, ng-switch-when="string_value" or ng-switch-default.
+
+    ng-hide/ng-show:
+      -> ng-hide="JS expression"        // JS expression returning boolean value
+      -> elem remains in DOM. Only hidden
+
+    ng-class:
+      -> ng-class="JSON Object"         // class name and boolean value
+
+    ng-repeat:
+      -> ng-repeat="field in array".   // This not just repeats the elements/template within it, but also repeats the element on which it sits.
+      -> We can use $index to access index inside of the ng-repeat
+
+    ng-cloak:
+      -> It hides the element untill angular JS has worked on it. To prevent showing things to the user without interpolated values(In case of slow internet).
+    
+    ng-src/hg-href
+      -> If src="some_url/{{myVar}}". Used if src/href have interpolated values, we can use this to make request only after the values are populated.
+
+
+Data bindings:
+  ->  One  way:
+        Output data (from JS to HTML) i.e String Interpolation {{data}}
+        !!!!!!!
+        Note:
+          -> For Interpolation, even if we only call a function which internally uses the field which was changed. Angular will still call that method and get the updated value.
+  ->  Two way data bindings. 
+        -> ng-model directive
+        -> This is only available for user input fields like <input>, <select> etc..
+
+Watchers:
+  ->  Everytime we put a variable or a function that is on the $scope and put it on the HTML page. Angular JS automatically adds a watcher for that variable in the watch list.
+      i.e It keeps track of the old value and the new value, everytime something happens that might have changed the value. i.e when an event is trigger like click, keypress etc.. 
+      It goes through every single variable in the watchlist to see it is changed(comparing the old value and new value). If a variable is changed, then it updates everywhere it is connected to.
+      e.g DOM(Interpolation), in JS code. 
+      This part of watching and checking for changes is inside the Digest loop. It is like the Event loop but specific to Angular JS.
+      Then after that it runs one more cycle, to see if changing that variable, changed some other variable untill all of the old values and the new values match.
+  ->  We can also manually add something to the watch list. This can be done to attach a callback that executes when it changes.
+      $scope.$watch("myField", function() { })
+  ->  If we made changes outside of the Angular context like inside of setTimeout. Angular does not know that something has changed and also will not run the Digest loop
+      to check for any changes to the variables in the watch list.
+      We can fix this using the $scope.$apply(myFunction). i.e after the code is run, Angular JS runs the digest cycle to check for any changes.
+      OR 
+      use the $timeout service.
+  -> The thing that connects the Model and the view is watchers and digest cycle.
