@@ -19,8 +19,6 @@ Modules:
 
 Routing;
   -> Controls the navigation for the user and creats a Controller and Views 
-
-
   -> Controllers are responsible for View logic and exposing properties for view binding
   -> View to controller - date is binded through Scope object
   -> Views are bigger Components(Can have multiple Components)
@@ -76,10 +74,7 @@ Dependency Injection:
 
 
 Directives:
-  -> angular
-      .module('app')      // don't pass the second arg. That means creating a new module
-      .directive("myDirective", Directive);
-  -> Directive names should be in camel case. But should be used as kebab case inside of the template.
+  
   -> Behaviourial directives and template directives
   -> Can use Directive to chunk out some common functionalites. We can define which controller the directive belongs to and also its template.
   -> Need to pass scope otherwise changes will be reflected globally.
@@ -104,29 +99,6 @@ Directives:
   -> To deligate functions to our directive from our component, we can do field="myFunction()" and inside of the directive.bindToController, field: "&"   // Yes. actually use ()
 
 
-ng-repeat:
-  -> add ng-repeat="movie in movies.favourites" attribute
-  -> We can use $index to access index inside of the ng-repeat
-
-ng-hide/ng-show:
-  -> add ng-hide="truthy/falsy expression" attribute
-  -> elem remains in DOM. Only hidden
-
-ng-if:
-  -> add ng-if="truthy/falsy expression" attribute
-  -> elem is not in DOM
-
-ng-switch:
-  -> add ng-switch="" attribute. Then ng-switch-when="value" or ng-switch-default attribute.
-
-ng-class:
-  -> 
-
-ng-model:
-  -> Two way data binding         // This is on input fields
-
-ng-src/hg-href
-  -> If sec/href attributes have dynamci values, we can use these.
 
 ng-click:
 

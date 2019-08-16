@@ -1,1 +1,2 @@
-1 -> Should a view always have a controller associated with it??.
+1 ->  Should a view always have a controller associated with it??.
+2 ->  Controller for directives ??
