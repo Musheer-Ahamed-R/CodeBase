@@ -11,6 +11,7 @@
 6 ->  Good practice to add new directives in a new line of the HTML element.
 7 ->  We can have some logic during app startup inside of angular.module('app').config(function($stateProvider, $urlRouterProvider) { }).
       Usually used for adding routes
+8 ->  We pass data down from parent components to child components using property bindings and pass data up from child to parent using events.
 
 
 
@@ -35,6 +36,19 @@ Modules:
       Notes:
         -> Features should more likely be a Module.
 
+Components:
+  ->  A component is a combination of a Controller and a Template
+      Types:
+        -> Stateless Component:
+            ->  This only has a Controller and a template
+        -> Stateful Component:
+            ->  This has a Controller and a template and also a Service. (Stateful because the service data is persisited across application)
+            ->  They are typically higher up in the hierarchy.
+        -> Routed Component:
+            ->  It is same as a Stateful Component with addition of routing.
+            ->  The template here is usually treated as Views.
+            ->  They also act as the rooted Component(i.e Component at the top level).
+
 Controller:
   ->  myApp.controller('controllerName', function() { })
       Inside of our HTML template, do ng-controller="controllerName"
@@ -49,16 +63,17 @@ Controller:
   ->  We can also use alias for Controller inside of the template. e.g MyController as controller.
       This helps in clear confusion when we have similar field names in nested controller templates(i.e Parent, then Child etc..). Also, we can clearly access the parent field inside of the child template using the alias.
       By using this we can completely skip the $scope and just use `this` inside of the controller(This will bind the data attached to `this` to the scope of the controller).
+      If we changed to this syntax, then all places where the controller is used(inside of Templates and others) needs to be accessed like an alias(using Controller As)
   ->  All fields accessibile inside of the parent component are also accessible inside of the child component. 
       If Angular did not find a particular field inside of a child component, it goes one level up and looks it up in the parent component and it goes on untill it finds the field.
 
 View/Template:
   ->  Inside of our ng-app="myApp", we can define our view. 
-  ->  It is nothing but a simple template with a controller associated !!!..
-  ->  A view needs to be associated to a controller. So, we have to do ng-controller="controllerName" inside of out HTML (The controller which controls the view i.e supplies the model(data) etc..).
-      All html code inside of it is generally considered a view and it is controlled by the controller. 
+  ->  It is nothing but a simple HTML template with a controller associated !!!..
+  ->  A template needs to be associated to a controller. So, we have to do ng-controller="controllerName" inside of out HTML (The controller which controls the view i.e supplies the model(data) etc..).
+  ->  A template associated with a Route is generally considerd as a View and it is also controlled by the controller. 
   !!!!!
-  ->  We can also create fields and associate values inside of the template itself(Inside " " where we generally write expressions).
+  ->  We can also create fields and associate values inside of the template itself(Inside " " where we generally write expressions). e.g ng-focus="isFocussed=true".
       This variable will only be accessible within the scope of the controller in the template in which it resides(Also, it cannot be accessed in the controller - JS code).
 
 Dependency Injection:
@@ -135,8 +150,10 @@ Directives:
       -> Need to enclose field names in 'fieldName', if it has - or _ in field names etc..
 
     ng-repeat:
-      -> ng-repeat="field in array".   // This not just repeats the elements/template within it, but also repeats the element on which it sits.
-      -> We can use $index to access index inside of the ng-repeat
+      ->  ng-repeat="field in array".   // This not just repeats the elements/template within it, but also repeats the element on which it sits.
+      ->  We can use $index to access index inside of the ng-repeat.
+      ->  Inside of each ng-repeat, we can also do two way binding on each of the INDIVIDUAL input elements whose value correspond to an element in the collection.
+          If the input value changes, its corresponding value at the array index also changes.
 
     ng-cloak:
       -> It hides the element untill angular JS has worked on it. To prevent showing things to the user without interpolated values(In case of slow internet).
@@ -263,15 +280,21 @@ Data bindings:
         -> This is only available for user input fields like <input>(text, checkbox(boolean)), <select> etc..
         -> Also available through '=' sign inside of Directives(Defining the type of binding for the directive scope).
 
-Watchers:
+Digest Loop:
   ->  Everytime we put a variable or a function that is on the $scope and put it on the HTML page. Angular JS automatically adds a watcher for that variable in the watch list.
       i.e It keeps track of the old value and the new value, everytime something happens that might have changed the value. i.e when an event is trigger like click, keypress etc.. 
       It goes through every single variable in the watchlist to see it is changed(comparing the old value and new value). If a variable is changed, then it updates everywhere it is connected to.
       e.g DOM(Interpolation), in JS code. 
       This part of watching and checking for changes is inside the Digest loop. It is like the Event loop but specific to Angular JS.
       Then after that it runs one more cycle, to see if changing that variable, changed some other variable untill all of the old values and the new values match.
+
+Watchers:
+  ->  Everytime we put a variable or a function that is on the $scope and put it on the HTML page. Angular JS automatically adds a watcher for that variable in the watch list.
   ->  We can also manually add something(inside $scope) to the watch list. This can be done to attach a callback that executes when it changes.
-      $scope.$watch("myField", function() { })
+      $scope.$watch("myField", function(newValue, oldValue) { })
+      This is usually done inside of a Controller or a Link function inside of a Directive(i.e where we access to $scope).
+  ->  We can also watch for changes in HTML attributes(we get access to them inside of the Directives link function - $attr).
+      $scope.$watch($attr.todoAutofocus, function(newValue, oldValue) { })
   ->  Angular JS passes the old value and the new value to the callback function.
   ->  If we made changes outside of the Angular context like inside of setTimeout. Angular does not know that something has changed and also will not run the Digest loop
       to check for any changes to the variables in the watch list. 
@@ -279,9 +302,12 @@ Watchers:
       We can fix this using the $scope.$apply(myFunction). i.e after the code is run, Angular JS runs the digest cycle to check for any changes.
       OR 
       use the $timeout service.
-  -> The thing that connects the Model and the view is watchers and digest cycle.
-  ->  We can also watch for changes in attributes(we get access to them inside of the Directives link function - $attr).
-      $scope.$watch($attr.todoAutofocus, function(newValue, oldValue) { })
+  ->  The thing that connects the Model and the view is watchers and digest cycle.
+  ->  If we use syntax of Controller As, then the first argument to $watch should be a function that returns the VALUE of the variable.(This says if it is changed when executed)
+      e.g $scope.$watch(function() { return self.count }, function(newValue, oldValue) { })         // Binding `this`/using self is important here
+  ->  For watching Deep Objects, we need to pass in a third argument with value as true.
+  ->  We can use $scope.$watchCollection(function() { return self.count }, function(newValue, oldValue) { }) (without third param as in above). This triggers change event when an item is added or deleted to the collection.
+      Also, this does not do deep checking for changes only top level check.
 
 Routing:
   ->  This is handled in the module angular-route.js. Need to include this in the app module dependencies array.

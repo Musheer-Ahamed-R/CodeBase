@@ -1,34 +1,9 @@
-7 -> We can use angular.module('app').config(function () {})     // This config method allows us to run logic when angular loads.
-
-Modules:
-  -> Feature should more likely be a Modules
-
 Routing;
   -> Controls the navigation for the user and creats a Controller and Views 
   -> Controllers are responsible for View logic and exposing properties for view binding
   -> View to controller - date is binded through Scope object
   -> Views are bigger Components(Can have multiple Components)
-  -> Components can also have a controller. Declaring new template and binding data.     
-
-Creating controller:
-  -> Managing Views and Components
-
-Components:
-  -> Stateless, Statefull and routed Components
-  -> Stateless:
-      -> Controller
-      -> template   
-  -> Stateful:
-      -> Controller
-      -> template   
-      -> Service
-  -> Routed: (same as Statfull with routing)
-      -> Controller
-      -> template   
-      -> Service
-
-      This is treated as Views
-
+  -> Components can also have a controller. Declaring new template and binding data.
 
 Creating Services:
   -> angular
@@ -39,7 +14,6 @@ Creating Services:
      method will be accessible to all. It is just a matter of preference.
 
 Directives:
-  
   -> Behaviourial directives and template directives
   -> Can use Directive to chunk out some common functionalites. We can define which controller the directive belongs to and also its template.
   -> Need to pass scope otherwise changes will be reflected globally.
