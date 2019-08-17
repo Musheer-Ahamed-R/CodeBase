@@ -1,0 +1,2 @@
+1 ->  Always use the HTML coded characters for special characters 
+      e.g &#215; for x

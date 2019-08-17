@@ -1,0 +1,1 @@
+1 -> Always update the UI after we get a successful response from the API. As there is always a possibility of API failing.

@@ -7,21 +7,37 @@
 3 ->  All angular JS services name starts with a $ sign. (e.g $scope etc..)
 4 ->  We have to use $scope.$apply(myFunction) if we are working outside of the Angular Context(e.g Async requests).
       This tells angular that after the code within it is run, Angular JS runs the digest cycle to check for any changes.
-5 -> If we split Controllers, Routes, Services and Directives into seperate JS files, then we have to include all of them in the app.js(Main JS) file.
+5 ->  If we split Controllers, Routes, Services and Directives into seperate JS files, then we have to include all of them in the app.js(Main JS) file.
+6 ->  Good practice to add new directives in a new line of the HTML element.
+7 ->  We can have some logic during app startup inside of angular.module('app').config(function($stateProvider, $urlRouterProvider) { }).
+      Usually used for adding routes
 
+
+
+Composed of 
+  -> Modules          (Main module and features)
+  -> Components       
+  -> Directives       (Bind to HTML and extend behaviour)
+  -> Services         (Business logic or non view related logic)
+  -> Routing + Views  (Usual routes and View is considered as a template of a route)
+  -> Controllers      (View related logic and model for the view)
 
 
 Modules:
-  -> Create a module
+  ->  Create a module
       angular
         .module('app', [])      // array of dependencies if any, need to pass even if no dependencies
-  -> loading module, add ng-app="app" as an HTMl attribute. Usually put at the very top of the HTML doc(i.e inside <html> tag itself).
-  -> The dependencies can be any built-in module or our own module.
-  -> If we inject any new module, then we can use all of its Directives and Services(dependency Injection) in our app WITHOUT US DOING ANYTHING.
-  -> If we call angular.module('app') (i.e without the second [] argument), then it returns the appModule anywhere inside of the code.
+  ->  loading module, add ng-app="app" as an HTMl attribute. Usually put at the very top of the HTML doc(i.e inside <html> tag itself).
+  ->  The dependencies can be any built-in module or our own module.
+  !!!!!!!
+  ->  If we inject any new module, then we can use all of its Directives and Services(dependency Injection) in our app WITHOUT US DOING ANYTHING.
+  ->  If we call angular.module('app') (i.e without the second [] argument), then it returns the appModule anywhere inside of the code.
+      Notes:
+        -> Features should more likely be a Module.
 
 Controller:
-  -> myApp.controller('controllerName', function() { })
+  ->  myApp.controller('controllerName', function() { })
+      Inside of our HTML template, do ng-controller="controllerName"
   -> A controller is nothing but a single function having all the logic for handling/manipulating the view.
   -> The Controller ties the data($scope) to the View template associated with the controller in HTML.
   -> All params used in the function of the controller are dependency Injection params.
@@ -36,11 +52,14 @@ Controller:
   ->  All fields accessibile inside of the parent component are also accessible inside of the child component. 
       If Angular did not find a particular field inside of a child component, it goes one level up and looks it up in the parent component and it goes on untill it finds the field.
 
-View:
-  -> Inside of our ng-app="myApp", we can define our view. 
-  -> It is nothing but a simple template with a controller associated !!!..
-  -> A view needs to be associated to a controller. So, we have to do ng-controller="controllerName" inside of out HTML (The controller which controls the view i.e supplies the model(data) etc..).
-     All html code inside of it is a view and it is controlled by the controller.
+View/Template:
+  ->  Inside of our ng-app="myApp", we can define our view. 
+  ->  It is nothing but a simple template with a controller associated !!!..
+  ->  A view needs to be associated to a controller. So, we have to do ng-controller="controllerName" inside of out HTML (The controller which controls the view i.e supplies the model(data) etc..).
+      All html code inside of it is generally considered a view and it is controlled by the controller. 
+  !!!!!
+  ->  We can also create fields and associate values inside of the template itself(Inside " " where we generally write expressions).
+      This variable will only be accessible within the scope of the controller in the template in which it resides(Also, it cannot be accessed in the controller - JS code).
 
 Dependency Injection:
   -> Rather than creating an object inside a function, we pass it(object) to the function.
@@ -79,6 +98,14 @@ Service:
     -> We can inject other serivces into our custom service using the same way(Dependency injection) as we did for controllers.
     -> We can attach properties and method to our service using the `this` keyword.(i.e $scope is not available for services)
 
+Factory:
+  ->  Same as services except for the syntax.
+      Syntax:
+      myApp.factory("MyFactory", function() {
+        return { }
+      })
+      The callback function returns the fields that are associated with factory object(we used `this` in case of services).
+
 Directives:
   -> An instruction to Angular JS to manipulate a piece of the DOM(where it is attached).
   -> All params used in the directive's link method are dependency Injection params.
@@ -87,7 +114,11 @@ Directives:
   -> All/most browser events have a corresponding directives in angular. e.g click(ng-click), keypress(ng-keypress) etc..
   Common directives:
     ng-model:
-      -> ng-model="myField".          // For two way data bindings.
+      ->  ng-model="myField".          // For two way data bindings.
+      -> We can also do two way bindings of nested JS object fields.
+      !!!!!!!
+      ->  The field "myField" need not exist inside of the controller. In which case it will be a template only variable. 
+          But, it will always have the latest input value(due to ng-model data binding). This can be used to use user input and do some processing like filter results etc..
     ng-if:
       -> ng-if="JS expression"        // JS expression returning boolean value
       -> elem is completely removed from the DOM.
@@ -100,7 +131,8 @@ Directives:
       -> elem remains in DOM. Only hidden
 
     ng-class:
-      -> ng-class="JSON Object"         // class name and boolean value
+      -> ng-class="JSON Object" OR a string value(single class)         // For JSON class name and boolean value
+      -> Need to enclose field names in 'fieldName', if it has - or _ in field names etc..
 
     ng-repeat:
       -> ng-repeat="field in array".   // This not just repeats the elements/template within it, but also repeats the element on which it sits.
@@ -113,16 +145,35 @@ Directives:
       -> If src="some_url/{{myVar}}". Used if src/href have interpolated values, we can use this to make request only after the values are populated.
     
     ng-submit:
-      -> ng-submit="mySubmitFunction()"
+      ->  Add ng-submit="mySubmitFunction()" to the form element itself.
+      ->  It automatically does the event.preventDefault to prevent default form submission(default HTML behaviour).
+      ->  The submit callback function is called with the current scope in which the form is residing.
+    
+    ng-change:
+      ->  We can use this directive to listen to change events on a particular input(works on input element).
+      ->  Can be used for autocomplete or validation as the user types.
+    
+    ng-disabled:
+      ->  ng-disabled="boolean expression"
+
+    ng-options:
+      ->  ngRepeat can be used on <option> elements instead of ngOptions to achieve a similar result. However, ngOptions provides some benefits
+          i.e When an item in the <select> menu is selected, the array element or object property represented by the selected option will be bound to the model identified by the ngModel directive.
+      ->  Optionally, a single hard-coded <option> element, with the value set to an empty string(Empty string is important), can be nested into the <select> element. If this gets selected, the model value will be null.
+      ->  Syntax:
+          product.label for product in products
 
     Custom Directives:
-      ->  Gives way to bring-in HTML reusable components in our HTML files.
+      ->  Gives way to bring-in HTML reusable components in our HTML files(Template Directives).
+      ->  Directives can also be used to change the behaviour of an HTML element(Behaviourial Directives)(i.e without any template changes)
       ->  In order to normalize between HTML and JS variable names. Angular JS converts/normailizes between them. i.e kebab case in HTML and camelCase in JS.
           Directive names should be in camel case. But should be used as kebab case inside of the template.
       ->  myApp.directive('searchResult', function() { return { }})          // This function returns the actual directive.
           Directive properties
             restrict:           // how we want to use this directive as(e.g as Attribute selector or element selector)
             scope: {}           // The scope within the directive template.
+            bindToController:   // Bind the scope object dirtectly to the controller
+            controller:         // Template controller
             template:           // HTML template
             templateUrl:        // relative location to template
             replace:            // boolean, whether we should keep the search-result tag or not in DOM(If yes, the template will be under it)
@@ -135,22 +186,40 @@ Directives:
           C - Class
           M - Comment       <!-- directive: search-result -->
           We can use them as restrict: "AEC" OR "AE" OR "E" etc..
-      ->  The directive can access the scope of the parent template by default. This can be problematic, since the directive can be re-used in many place and it should not depend upon the scope of its parent.
-          Angular JS provides a method to Isolate the model($scope) part of the directive from the model of the parent page. This is called isolated scope.
-          We can still access the data from the scope of the parent template inside of the directive, through custom attributes and normalization(i.e poking holes). 
-          e.g person-name={{ person.name }} OR personObj="person" (for objects. No {{ }})
-          @ - Text. One way data binding
-          = - For Objects. Two way binding.
-          & - To access parent scope function
-          e.g scope = {
-            personName: "@"             //  personNameSpecial: "@personName". Here, @personName comes from the attribute person-name.
-          }
+          Scope:
+            ->  The directive can access the scope of the parent template by default. This can be problematic, since the directive can be re-used in many place and it should not depend upon the scope of its parent.
+                Angular JS provides a method to Isolate the model($scope) part of the directive from the model of the parent page. This is called isolated scope.
+                We can still access the data from the scope of the parent template inside of the directive, through custom attributes and normalization(i.e poking holes). 
+                e.g person-name={{ person.name }} OR personObj="person" (Object itself)
+                @ - Text. One way data binding. use {{ field }}                 // It is important that we use {{ }} in this case.
+                = - Two way binding. For Objects and fields
+                & - To access parent scope function
+                e.g scope = {
+                  personName: "@"             //  personNameSpecial: "@personName". Here, @personName comes from the attribute person-name.
+                }
+                Notes:
+                  ->  The scope object should only have fields that we want to get from the parent scope/attributes.
+                  ->  If the scope object is not mentioned, then all the directives (inside of a parent controller) will only use the scope of the parent
+                      (i.e no seperate scope for child) (i.e the child controller fields will be accessible in parent scope itself).
+                      Even though the directive controller is called for each invokation of the directive. It all updates the single scope(which is the parent scope in this case).
+                      If the Directive Controller is defined outside of the current parent controller(as a controller itself or inside another controller). Then that will not be affected due to this scope.
+                  ->  The scope object is NOT merged to the controller object by default(But it is available in $scope object inside of the controller and we can use it to merge the fields with controller object).
+                  ->  We can tell angular to automatically bind the scope Object(data from attributes) to controller object by renaming the scope object to bindToController.
+                      But, we we still need to have scope object as {} in this case too for scope isolation.
           passing and using function:
                 ->  my-function-attr="myParentFunction(param1, param2)"           // Here, the params name don't need to match up with the param names in the actual function in the parent scope. 
                     But, need to match when actualling calling them inside of the directives.
                 ->  scope: { myFunctionInDirective: "&" }                         // making it available in directive scope
                 ->  when using inside of the directive. myFunctionInDirective({ param1: "some_Value", param2: "some_value" }). This makes sure that we pass in the desired object we want to the function
                     Here, always the function args should be object having map of param names defined earlier and its values.
+                ->  Important thing to note is that no matter how the function is called, it is binded to the scope in which it was originally created(i.e parent scope).
+          Controller:
+            ->  We can pass in what controller we want to use for the template in the Directive properties itself, instead of having it in the HTML template
+                where we invoke the directive.
+            ->  The model data in this case comes from two sources. 
+                  ->  Scope Object. i.e From the attributes on the directive element(where it is invoked). i.e getting data from parent scope.
+                  ->  Inside of the controller           // Normal
+
           Compile:
             ->  Do some processing on the directive template before our directive gets used.
             ->  This is called by angular before our directive is going to be used for the first time in our application. In case of second or third usages, this function is NOT executed.
@@ -185,13 +254,13 @@ Directives:
 
 Data bindings:
   ->  One  way:
-        Output data (from JS to HTML) i.e String Interpolation {{data}}
+        Output data (from JS to HTML) i.e String Interpolation {{data}}. We can add any valid JS expression inside there.
         !!!!!!!
         Note:
           -> For Interpolation, even if we only call a function which internally uses the field which was changed. Angular will still call that method and get the updated value.
   ->  Two way data bindings. 
         -> ng-model directive
-        -> This is only available for user input fields like <input>, <select> etc..
+        -> This is only available for user input fields like <input>(text, checkbox(boolean)), <select> etc..
         -> Also available through '=' sign inside of Directives(Defining the type of binding for the directive scope).
 
 Watchers:
@@ -203,17 +272,21 @@ Watchers:
       Then after that it runs one more cycle, to see if changing that variable, changed some other variable untill all of the old values and the new values match.
   ->  We can also manually add something(inside $scope) to the watch list. This can be done to attach a callback that executes when it changes.
       $scope.$watch("myField", function() { })
+  ->  Angular JS passes the old value and the new value to the callback function.
   ->  If we made changes outside of the Angular context like inside of setTimeout. Angular does not know that something has changed and also will not run the Digest loop
-      to check for any changes to the variables in the watch list.
+      to check for any changes to the variables in the watch list. 
+      (i.e All code inside of the $watch should be wrapped inside of $scope.$apply to allow digest cycle to detect changes.)
       We can fix this using the $scope.$apply(myFunction). i.e after the code is run, Angular JS runs the digest cycle to check for any changes.
       OR 
       use the $timeout service.
   -> The thing that connects the Model and the view is watchers and digest cycle.
+  ->  We can also watch for changes in attributes(we get access to them inside of the Directives link function - $attr).
+      $scope.$watch($attr.todoAutofocus, function(newValue, oldValue) { })
 
 Routing:
   ->  This is handled in the module angular-route.js. Need to include this in the app module dependencies array.
-  ->  configuring routes:
-        myApp.config(function($routeProvider) { 
+  ->  Configuring routes:
+        myApp.config(function($routeProvider) {
           $routeProvider.when("/", {
             templateUrl: "path_",
             controller: "myController"
@@ -221,4 +294,39 @@ Routing:
         })
   ->  To add query params add /:id/page. Can be retrieved using $routeParams service.
   ->  Add the directive ng-view to a div element.
-  -> Through code, we can navigate to a different route using the location service, $location.path('/my-path')
+  ->  The template associated with the route is considered as a View.
+  ->  Through code, we can navigate to a different route using the location service, $location.path('/my-path')
+      Routing Using ui-router:
+        -> Add the ui-router module dependency to app module.
+        ->  Inside of .config callback
+            $stateProvider.state('myState', {
+              url: "/",
+              controller: "",
+              template: ""
+            })
+        ->  Add the <ui-view> for the route placeholder
+        ->  We can then navigate route using an <a> element, we can use ui-sref="myState"       // state name defined while declaring route.
+  ->  We can do urlRouterProvider.otherwise("/") inside .config callback for directing to home route in case we could not find any other matching route.
+Pipes:
+  ->  We can use this to manipulate data. Can be used in both JS and HTML expression.
+  ->  Inside HTML expression, we can pass in attributes to the filter using | my_filter:"value1":"value2" etc..
+      Syntax:
+      {{ myCurrency | currency:'$':1 }}
+      Inbuilt Pipes:
+        date
+        currency
+        orderBy:
+          -> orderBy: 'year'   OR  orderBy: '-year'(descending order) OR  orderBy: 'year': true (descending order)       // Here year is the field of an object inside the array we want to order
+          -> The field can be dynamic.
+        filter: 
+          ->  Can be used for filtering results from a list.
+          ->  filter: { year: value }                 // searches for year field
+          ->  filter: value                           // searches for all fields
+        json:                                         // pretiffy JSON data in DOM
+
+Forms:
+  Validation:
+    ->  To include angular JS form validation, we need to include the name attribute on the top level form and also the input fields that will have validation.
+    ->  By doing above gives access to angular's form object which has various details about the form.(e.g isValid, isTouched). This can be accessed using the name attribute on the form element.
+        e.g <form name="myForm"> </form>
+        // myForm.isValid etc..

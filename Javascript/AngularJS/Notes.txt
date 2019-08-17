@@ -1,20 +1,6 @@
-1 ->  Composed of 
-        -> Modules
-        -> Components
-        -> Directives
-        -> Services
-        -> Routing + Views
-        -> Controllers
-
-2 -> Good practice to add new directives in a new line of the HTML element.
-3 -> We can also add new fields inside of the template. We can access that within our template. We cannot access that in our Controller.
-4 -> Business logic should be present in services.
-5 -> Anything we plan on using, wither Controller or Directives, we need to includ ethe src="" at the end to be able to access them in our template.
-6 -> we can use json filter for debugging purposes.
 7 -> We can use angular.module('app').config(function () {})     // This config method allows us to run logic when angular loads.
 
 Modules:
-  -> Code consisting of Routes, Views, Components or Services
   -> Feature should more likely be a Modules
 
 Routing;
@@ -22,27 +8,10 @@ Routing;
   -> Controllers are responsible for View logic and exposing properties for view binding
   -> View to controller - date is binded through Scope object
   -> Views are bigger Components(Can have multiple Components)
-  -> Components can also have a controller. Declaring new template and binding data.
-
-
-Creating modules:
-  -> Create a module
-      angular
-        .module('app', [])      // array of dependencies if any, need to pass even if no dependencies
-  -> loading module, add ng-app="app" as an HTMl attribute
+  -> Components can also have a controller. Declaring new template and binding data.     
 
 Creating controller:
-  -> Managing Views and Controllers
-  -> angular
-      .module('app')      // don't pass the second arg. That means creating a new module
-      .controller('MyFunctionName', MyFunctionName)
-  -> loading controller, add ng-controller="MyFunctionName" as an HTMl attribute.
-  -> Inside it we can access the properties
-  -> $scope inside of that function
-  -> MyFunctionName.$inject = ["$scope", "$rootScope"]        // This is minification safe.
-     This can also be passed during the controller declaration
-  -> Using Controller as Alias, we can create instance of that controller(Plain JS Object). Need to access as alias.name.
-     Also, can get rid of the dependency injection($scope) and just use this. inside of the Controller function.
+  -> Managing Views and Components
 
 Components:
   -> Stateless, Statefull and routed Components
@@ -68,10 +37,6 @@ Creating Services:
   -> Any service we created in Angular's Dependency injection system.
   -> We can also .factory(). This will return the fields that can be accessed by outside code. Otherwise, all fields we assisned using this inside of the Service
      method will be accessible to all. It is just a matter of preference.
-
-Dependency Injection:
-  -> Dependency injection is very simple. Just use the field in method param and it will be injected automatically.
-
 
 Directives:
   
@@ -99,43 +64,5 @@ Directives:
   -> To deligate functions to our directive from our component, we can do field="myFunction()" and inside of the directive.bindToController, field: "&"   // Yes. actually use ()
 
 
-
-ng-click:
-
-ng-submit:
-
-ng-blur/ng-focus:
-
-ng-change:
-
-ng-options
-
-ng-disabled
-
-
 Validators:
   -> create name attribue on top level form. and also create name obj for all input. ng-model is for data binding and name is for validation.
-
-Routing:
-  -> Inside of the app.js (module), add the ui-router for adding routing dependency
-  -> angular.module('app').config(function($stateProvider, $urlRouterProvider) {
-     })
-  -> For creating routes, we simply bind to the route provider object.
-     $stateProvider.state('home', {
-       url: "/",
-       controller: "",
-       template: ""
-     })
-
-Views:
-  -> element <ui-view></ui-view>
-  -> inside of code, for an <a> element, we can use ui-sref="home"
-
-Filters:
-  -> date
-  -> currency
-  -> orderBy
-  -> filter - 
-      - filter: { year: value } (searches for year field)
-      - filter: value (searches for all fields)
-  -> json         // pretiffy values

@@ -1,2 +1,4 @@
 1 ->  Should a view always have a controller associated with it??.
-2 ->  Controller for directives ??
+2 -> What does Component exactly mean??. See Pro tutorial
+4 ->  Why settimeout ??
+      Ultimatecourse Video - Lab: 6
