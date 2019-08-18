@@ -12,6 +12,11 @@
 7 ->  We can have some logic during app startup inside of angular.module('app').config(function($stateProvider, $urlRouterProvider) { }).
       Usually used for adding routes
 8 ->  We pass data down from parent components to child components using property bindings and pass data up from child to parent using events.
+9 ->  All JS expressions needs to be enclosed inside of the {{ }}, except for the directives for which we can have them inside of string itself.
+      e.g ng-show="2+2" will work, but some-attr="2+2" will not work.
+10 -> We have to be careful in using $scope.$apply(), since this will throw error if a $apply is already in progress(due to some other trigger).
+      We can overcome this by wrapping our code inside of $timeout(function() {}, 100). This is same as setTimeout, but it runs in the angular context
+      (i.e Digest cycle will know about the changes)
 
 
 
@@ -37,7 +42,29 @@ Modules:
         -> Features should more likely be a Module.
 
 Components:
-  ->  A component is a combination of a Controller and a Template
+  ->  A component is a combination of a Controller and a Template. For anything that uses a controller and a template, we should be using a Component.
+  ->  angular.module('app').component('myComponent', {
+      })
+      Component properties:
+      bindings:                   // same as bindToController
+      controller:                 // same as in Direcive
+      template:                   // same as in Direcive
+      transclude:                 // same as in Direcive
+      require:                    // Object with namespace and the component name. e.g { parent: "^^parent" }
+      
+      Bindings:
+        ->  For one way binding, the data is passed from the parent to the child component. The passed data is mutable, so we have to do angular.copy() inside of
+            $onChanges to make a seperate copy for the child(i.e so that we don't modify parent data right away when child data gets modified)
+            The child component, when needed passes the updated data through an event(function exposed by the parent component)
+        < - One way data binding. data="parent.data"            // NO {{ }}
+        @ - Text. One way data binding. use {{ field }}                 // It is important that we use {{ }} in this case.
+        & - Function binding
+      Require:
+        ->  We cannot use the parent require Object before onInit life cycle.
+        ->  We can just access it inside the child component using `this`.namespace
+        
+  ->  They always have an isolated scope(i.e Have their own scope).
+  ->  The default alias for the component is $ctrl. i.e should use $ctrl inside of the template.
       Types:
         -> Stateless Component:
             ->  This only has a Controller and a template
@@ -48,6 +75,24 @@ Components:
             ->  It is same as a Stateful Component with addition of routing.
             ->  The template here is usually treated as Views.
             ->  They also act as the rooted Component(i.e Component at the top level).
+      Life Cycle Hook:
+        $onInit: 
+          ->  This lifecycle hook will be executed when all controllers on an element have been constructed and after their bindings are initialized.
+              This hook is meant to be used for any kind of initialization work of a controller. 
+          ->  this.$onInit()
+        $postInit: 
+          ->  This gets called when the child components are ready and have been linked.
+          ->  Good place to do some DOM manipulations as all child components are loaded and safe to access.
+          ->  this.$postLink()
+        $onDestroy: 
+          ->  This gets called when the component scope gets destroyed.
+          ->  We can use this hook to release external resources, watches and event handlers.
+          ->  this.$onDestroy()
+        $onChanges:
+          ->  This hook allows us to react to changes of one-way bindings of a component.
+          ->  The first time it gets called, is on component initialisation.(i.e parent to child)
+          ->  It gets called with an object that holds the changes of all one-way bindings with the currentValue and the previousValue.
+          ->  One way data bindings include < and also @ expression in the bindings.
 
 Controller:
   ->  myApp.controller('controllerName', function() { })
@@ -130,10 +175,16 @@ Directives:
   Common directives:
     ng-model:
       ->  ng-model="myField".          // For two way data bindings.
-      -> We can also do two way bindings of nested JS object fields.
+      -> We can also do two way bindings of nested JS object fields.e.g ng-model="data.cost.amount"
       !!!!!!!
       ->  The field "myField" need not exist inside of the controller. In which case it will be a template only variable. 
           But, it will always have the latest input value(due to ng-model data binding). This can be used to use user input and do some processing like filter results etc..
+      ->  If we were to use ng-model on a contenteditable element(New Feature) instead of the input element. We need to add a new Directive to that element that helps in mimicing the behaviour of ng-model.
+          Inside of our custom directive, we need to require ngModel directive on the element. It has two useful methods - $setViewValue and $render
+          The contenteditable fires an input event on the element, we we can list to(subscribe in Link method $element.on("input", function () {})).
+          Inside of the input event callback, we can call ngModelCtrl.$setViewValue() to set the view value.
+          We should do ngModel.$render = function() { $element.html(ngModel.$modelValue)} to update if the model value changes. 
+          This gets called when angular needs to update the view when the model value changes
     ng-if:
       -> ng-if="JS expression"        // JS expression returning boolean value
       -> elem is completely removed from the DOM.
@@ -180,94 +231,135 @@ Directives:
       ->  Syntax:
           product.label for product in products
 
-    Custom Directives:
-      ->  Gives way to bring-in HTML reusable components in our HTML files(Template Directives).
-      ->  Directives can also be used to change the behaviour of an HTML element(Behaviourial Directives)(i.e without any template changes)
-      ->  In order to normalize between HTML and JS variable names. Angular JS converts/normailizes between them. i.e kebab case in HTML and camelCase in JS.
-          Directive names should be in camel case. But should be used as kebab case inside of the template.
-      ->  myApp.directive('searchResult', function() { return { }})          // This function returns the actual directive.
-          Directive properties
-            restrict:           // how we want to use this directive as(e.g as Attribute selector or element selector)
-            scope: {}           // The scope within the directive template.
-            bindToController:   // Bind the scope object dirtectly to the controller
-            controller:         // Template controller
-            template:           // HTML template
-            templateUrl:        // relative location to template
-            replace:            // boolean, whether we should keep the search-result tag or not in DOM(If yes, the template will be under it)
-            compile:            // function
-            link:               // function. Post link(see Link below)
-            transclude:         // boolean. To allow Transclusion or not
-      ->  By default, element selector and attribute of directive name(both behave as same) work for getting directives. We can configure it manually using the restrict field.
-          A - Attribute
-          E - Element
-          C - Class
-          M - Comment       <!-- directive: search-result -->
-          We can use them as restrict: "AEC" OR "AE" OR "E" etc..
-          Scope:
-            ->  The directive can access the scope of the parent template by default. This can be problematic, since the directive can be re-used in many place and it should not depend upon the scope of its parent.
-                Angular JS provides a method to Isolate the model($scope) part of the directive from the model of the parent page. This is called isolated scope.
-                We can still access the data from the scope of the parent template inside of the directive, through custom attributes and normalization(i.e poking holes). 
-                e.g person-name={{ person.name }} OR personObj="person" (Object itself)
-                @ - Text. One way data binding. use {{ field }}                 // It is important that we use {{ }} in this case.
-                = - Two way binding. For Objects and fields
-                & - To access parent scope function
-                e.g scope = {
-                  personName: "@"             //  personNameSpecial: "@personName". Here, @personName comes from the attribute person-name.
-                }
-                Notes:
-                  ->  The scope object should only have fields that we want to get from the parent scope/attributes.
-                  ->  If the scope object is not mentioned, then all the directives (inside of a parent controller) will only use the scope of the parent
-                      (i.e no seperate scope for child) (i.e the child controller fields will be accessible in parent scope itself).
-                      Even though the directive controller is called for each invokation of the directive. It all updates the single scope(which is the parent scope in this case).
-                      If the Directive Controller is defined outside of the current parent controller(as a controller itself or inside another controller). Then that will not be affected due to this scope.
-                  ->  The scope object is NOT merged to the controller object by default(But it is available in $scope object inside of the controller and we can use it to merge the fields with controller object).
-                  ->  We can tell angular to automatically bind the scope Object(data from attributes) to controller object by renaming the scope object to bindToController.
-                      But, we we still need to have scope object as {} in this case too for scope isolation.
-          passing and using function:
-                ->  my-function-attr="myParentFunction(param1, param2)"           // Here, the params name don't need to match up with the param names in the actual function in the parent scope. 
-                    But, need to match when actualling calling them inside of the directives.
-                ->  scope: { myFunctionInDirective: "&" }                         // making it available in directive scope
-                ->  when using inside of the directive. myFunctionInDirective({ param1: "some_Value", param2: "some_value" }). This makes sure that we pass in the desired object we want to the function
-                    Here, always the function args should be object having map of param names defined earlier and its values.
-                ->  Important thing to note is that no matter how the function is called, it is binded to the scope in which it was originally created(i.e parent scope).
-          Controller:
-            ->  We can pass in what controller we want to use for the template in the Directive properties itself, instead of having it in the HTML template
-                where we invoke the directive.
-            ->  The model data in this case comes from two sources. 
-                  ->  Scope Object. i.e From the attributes on the directive element(where it is invoked). i.e getting data from parent scope.
-                  ->  Inside of the controller           // Normal
+  Custom Directives:
+    ->  Gives way to bring-in HTML reusable components in our HTML files(Template Directives).
+    ->  Directives can also be used to change the behaviour of an HTML element(Behaviourial Directives)(i.e without any template changes)
+    ->  In order to normalize between HTML and JS variable names. Angular JS converts/normailizes between them. i.e kebab case in HTML and camelCase in JS.
+        Directive names should be in camel case. But should be used as kebab case inside of the template.
+    ->  myApp.directive('searchResult', function() { return { }})          // This function returns the actual directive.
+        Directive properties
+          restrict:           // how we want to use this directive as(e.g as Attribute selector or element selector)
+          scope: {}           // The scope within the directive template.
+          bindToController:   // Bind the scope object dirtectly to the controller
+          controller:         // Either a function or a string referring to a controller.
+          template:           // HTML template
+          templateUrl:        // relative location to template
+          replace:            // boolean, whether we should keep the search-result tag or not in DOM(If yes, the template will be under it)
+          compile:            // function
+          link:               // function. Post link(see Link below)
+          transclude:         // boolean. To allow Transclusion or not
+    ->  By default, element selector and attribute of directive name(both behave as same) work for getting directives. We can configure it manually using the restrict field.
+        A - Attribute
+        E - Element
+        C - Class
+        M - Comment       <!-- directive: search-result -->
+        We can use them as restrict: "AEC" OR "AE" OR "E" etc..
+        Scope:
+          ->  The directive can access the scope of the parent template by default. This can be problematic, since the directive can be re-used in many place and it should not depend upon the scope of its parent.
+              Angular JS provides a method to Isolate the model($scope) part of the directive from the model of the parent page. This is called isolated scope.
+              We can still access the data from the scope of the parent template inside of the directive, through custom attributes and normalization(i.e poking holes). 
+              e.g person-name={{ person.name }} OR personObj="person" (Object itself)
+              @ - Text. One way data binding. use {{ field }}                 // It is important that we use {{ }} in this case.
+              = - Two way binding. For Objects and fields                     // should not use {{ }} even for field values
+              & - To access parent scope function
+              e.g scope = {
+                personName: "@"             //  personNameSpecial: "@personName". Here, @personName comes from the attribute person-name.
+              }
+          ->  We can keep its value as either true or pass an Object with details about the type of bindings.
+              If true specified, then a seperate scope is created for the child directive, and it also prottypically inherits from the parent scope.
+              This also creates same problem as scope false, since the child scope is binded to parent unsing the two way binding(Prototypical inheritence)
+              Notes:
+                ->  The scope object should only have fields that we want to get from the parent scope/attributes.
+                ->  If the scope object is not mentioned, then all the directives (inside of a parent controller) will only use the scope of the parent
+                    (i.e no seperate scope for child) (i.e the child controller fields will be accessible in parent scope itself).
+                    Even though the directive controller is called for each invokation of the directive. It all updates the single scope(which is the parent scope in this case).
+                    If the Directive Controller is defined outside of the current parent controller(as a controller itself or inside another controller). Then that will not be affected due to this scope.
+                ->  The scope object is NOT merged to the controller object by default(But it is available in $scope object inside of the controller and we can use it to merge the fields with controller object).
+                ->  We can tell angular to automatically bind the scope Object(data from attributes) to controller object by renaming the scope object to bindToController.
+                    But, we we still need to have scope object as {} in this case too for scope isolation.
+        passing and using function:
+              ->  my-function-attr="myParentFunction(param1, param2)"           // Here, the params name don't need to match up with the param names in the actual function in the parent scope. 
+                  But, need to match when actualling calling them inside of the directives.
+              ->  scope: { myFunctionInDirective: "&" }                         // making it available in directive scope
+              ->  when using inside of the directive. myFunctionInDirective({ param1: "some_Value", param2: "some_value" }). This makes sure that we pass in the desired object we want to the function
+                  Here, always the function args should be object having map of param names defined earlier and its values.
+              ->  Important thing to note is that no matter how the function is called, it is binded to the scope in which it was originally created(i.e parent scope).
+        bindToController:
+          ->  We can either specify true(bind all fields) or explicitly specify which fields from the scope that we want to bind to.
+              If fields are specified in JSON object, then we can remove the same in scope object(to remove duplicate code)
+        Controller:
+          ->  We can pass in what controller we want to use for the template in the Directive properties itself, instead of having it in the HTML template
+              where we invoke the directive.
+          ->  The model data in this case comes from two sources. 
+                ->  Scope Object. i.e From the attributes on the directive element(where it is invoked). i.e getting data from parent scope.
+                ->  Inside of the controller           // Normal
 
-          Compile:
-            ->  Do some processing on the directive template before our directive gets used.
-            ->  This is called by angular before our directive is going to be used for the first time in our application. In case of second or third usages, this function is NOT executed.
-            -> This can be used to manipulate the HTML template of the directive.
-            ->  Syntax:
-                function (elem, attr) {
-                  // code
-                  return {
-                    pre: function(scope, element, attr) { // code }
-                    post: function(scope, element, attr) { // code }
-                  }
+        Compile:
+          ->  Do some processing on the directive template before our directive gets used.
+          ->  This is called by angular before our directive is going to be used for the first time in our application. In case of second or third usages, this function is NOT executed.
+          ->  This can be used to manipulate the HTML template of the directive.
+          ->  If the compile function is used, then we cannot use the Link function along with with it.(i.e should return the PostLink function from compile function)
+          ->  Syntax:
+              function (elem, attr) {
+                // code
+                return {
+                  pre: function(scope, element, attr) { // code }
+                  post: function(scope, element, attr) { // code }
                 }
-                Cycle:
-                  ->  Compiles a directive                            // Only once ever
-                  ->  Runs pre-link on the directive
-                  ->  Compiles the child directives                   // Only once ever
-                  ->  Runs pre-link on the child directive
-                  ->  Runs post-link on the child directive
-                  ->  Runs post-link on the parent directive
-                  ->  Then outputs the child and parent directive template to the user.
-          Link:
-            -> This is run everytime a directive is used(unlike compile which is called once). 
-            -> We can do some pre and post processing on the directive template before our directive gets used.
-            -> It is better to use post-link(i.e avoid pre-link) as we have better control over all the elements.
-            -> This can be used when we want some logic to reside inside of the JS file like adding our own listeners(we have access to the scope object of this directive), or make decision based on some other values etc..
-          Transclusion:
-            ->  Take a copy of one document and place it at a particulat point inside the other document.
-            ->  By default any elements placed between the directive element is ignored(i.e Not inside the Directive template but the place where the directive is invoked).
-                We can ask Angular JS to include this by adding the <ng-transclude> element or ng-transclude as an attribute inside of the directive template.
-                This acts as a place holder for all the elements within the directive element(Place where directive is invoked).
-                Also, add the transclude property of the scope to be true.
+              }
+              Cycle:
+                ->  Compiles a directive                            // Only once ever
+                ->  Runs pre-link on the directive
+                ->  Compiles the child directives                   // Only once ever
+                ->  Runs pre-link on the child directive
+                ->  Runs post-link on the child directive
+                ->  Runs post-link on the parent directive
+                ->  Then outputs the child and parent directive template to the user.
+        Link:
+          ->  This is run everytime a directive is used(unlike compile which is called once). 
+          ->  We can do some pre and post processing on the directive template before our directive gets used.
+          ->  It is better to use post-link(i.e avoid pre-link) as we have better control over all the elements.
+          ->  This can be used when we want some logic to reside inside of the JS file like adding our own listeners(we have access to the scope object of this directive), or make decision based on some other values etc..
+          !!!!!!!
+          ->  This can also be used to add event native listeners on the HTML element.
+        Transclusion:
+          ->  Take a copy of one document and place it at a particulat point inside the other document.
+              Single slot Transclusion:
+                ->  By default any elements placed between the directive element is ignored(i.e Not inside the Directive template but the place where the directive is invoked).
+                    We can ask Angular JS to include this by adding the <ng-transclude> element or ng-transclude as an attribute inside of the directive template.
+                    This acts as a place holder for all the elements within the directive element(Place where directive is invoked).
+                    Also, add the transclude property of the scope to be true.
+              Transclusion by $transclude:
+                ->  Inside of the link function($scope, $element, $attrs, $ctrl, $transclude), we have access to the transclude method. 
+                ->  The transclude function when executed returns the HTML elements to be transcluded as an array(i.e HTML elements present where the directive is invoked).
+                    We can use them to append it to the HTML template of the directive.
+                ->  The transclude function also accepts an array which can be used to modify the HTML elements in the array before returning.
+                    $transclude((elements) => { })
+              Multi Slot Transclusion:
+                ->  We can pass in an object to the transclude field and also assign a name to it.
+                    {
+                      name: "h1"          // h1 element to be transcluded,
+                      desc: "?p"          // p element to be transcluded
+                    }
+                ->  Then inside of the directive template, we can do ng-transclude="name" OR ng-transclude="desc" as attributes.
+                ->  We can also mention a field as option by putting a ? sign. In this case, if the value was not supplied, then the contents inside the HTML element
+                    having attribute ng-transclude="optionalName" will be printed to the screen.
+                    <span ng-transclude="desc">No Description</span>          // No Description will be printed if desc was not supplied.
+        Require:
+          ->  Require another directive and inject its controller as the fourth argument to the linking function.
+              The require name will be that of the directive and injected thing will be the Controller instance of the directive($ctrl).
+          ->  The require takes a string name (or array of strings) of the directive(s)(NOT ITS Controller) to require. If an array is used, the injected controller argument will be an array in corresponding order.
+          ->  If no such directive can be found, or if the directive does not have a controller, then an error is raised.
+          ->  The name can be prefixed with:
+              (no prefix) - Locate the required controller on the current(same) element(multiple directives on one element).
+              ^           - Locate the required controller by searching the element and its parents
+              ^^          - Locate the required controller by searching the element's parents.
+              ?^ OR ?^^   - Same as ^ or ^^, except that it will not throw an error if controller is not found. i.e null will be passed.
+
+              Note:
+                ->  parents in the context of the HTML template hierarchy.
+                ->  This can be used to pass in data from the child to the parent directive. The Object will be the same in child and parent directive.
+                ->  If we accessed $ctrl inside of the Link function of the directive without specifying the require field, then it corresponds to the Controller of the Current Directive(Its its own)
 
 Data bindings:
   ->  One  way:
@@ -277,7 +369,7 @@ Data bindings:
           -> For Interpolation, even if we only call a function which internally uses the field which was changed. Angular will still call that method and get the updated value.
   ->  Two way data bindings. 
         -> ng-model directive
-        -> This is only available for user input fields like <input>(text, checkbox(boolean)), <select> etc..
+        -> This is only available for user input fields like <input>(text, checkbox(boolean)), <select> and also for element with contenteditable attribute(New feature in HTML 5) etc..
         -> Also available through '=' sign inside of Directives(Defining the type of binding for the directive scope).
 
 Digest Loop:
@@ -308,6 +400,22 @@ Watchers:
   ->  For watching Deep Objects, we need to pass in a third argument with value as true.
   ->  We can use $scope.$watchCollection(function() { return self.count }, function(newValue, oldValue) { }) (without third param as in above). This triggers change event when an item is added or deleted to the collection.
       Also, this does not do deep checking for changes only top level check.
+
+Atribute($attrs) methods:
+  $observe:
+    ->  This can be used for observing changes to a specific attribute. This doesn't set up a watcher for the attribute. This makes our application slightly faster.
+    ->  They only work on attributes with interpolated values.
+    ->  This can be done inside of the Link function of the directive.(We have access to $attrs variable there)
+        Syntax:
+        $attrs.$observe("myAttribute", function(value) { })
+  
+  $updateClass:
+    ->  This is used to update the class of the element on which the attribute sits.
+        Syntax:
+        $attrs.$updateClass("old-class", "class-to-replace")
+
+  Notes:
+    -> We can look into all the supported $attrs function and fields by looking into $attrs.__proto__ variable
 
 Routing:
   ->  This is handled in the module angular-route.js. Need to include this in the app module dependencies array.
@@ -356,3 +464,19 @@ Forms:
     ->  By doing above gives access to angular's form object which has various details about the form.(e.g isValid, isTouched). This can be accessed using the name attribute on the form element.
         e.g <form name="myForm"> </form>
         // myForm.isValid etc..
+
+Publish and subscribe events:
+  Using $scope:
+    ->  Inside of the controller, we can use the $scope to emit a custom event. e.g $scope.$emit("login", {})
+        $emit needs to be used when we want to fire an event upward and $broadcast if we want to fire an event down the scope. Both are just the same.
+    ->  We can also listen to custom events using $scope.$on("login", function(event, data) {}). Both upward and downward.
+    ->  The drawback with this approach is, the order/place of the scope is important. i.e when there are two parallel scopes without parent-child hierarchy then it is a problem
+  Using $rootScope:
+    ->  $rootscope is the first scope that is created when we angular bootstraps our application.
+    ->  All further scope instances either inherit from the $rootScope or have an isolated scope with a directive or a component. 
+    ->  $rootScope can be used to publish events application wide(unlike $scope which looks at the hierarchy of the components).
+    ->  We can listen to event on the $rootScope(same way as $scope). But in this case, we MUST manually un-subscribe the $rootScope from the event when the
+        Component is destroyed because the $rootScope is persistent across the application unlike $scope which is destroyed automatically by angular when the component dies
+        (i.e in $scope.on("$destroy", rootScopeName))
+    ->  Any event broadcasted from $rootScope, $scope can actually listen to it too.(i.e Both $rootScope and $scope can listen if event broadcasted by $rootScope)
+        This behaviour can be changed if we use $rootScope.emit() instead of $rootScope.broadcast()

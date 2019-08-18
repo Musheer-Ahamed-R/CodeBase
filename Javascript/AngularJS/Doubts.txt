@@ -2,3 +2,7 @@
 4 ->  Why settimeout ??
       Ultimatecourse Video - Lab: 6
 5 -> List out all the values tracked inside of the controller scope object(e.g like attribute values etc..)
+6 -> require in components
+7 -> ng-bind - Using require, $onInit, $postLink, $onDestroy Video - .45 - 1. min
+8 -> What is object structure of the object that gets passed to the $onChanges
+     Video - One-way databinding and $onChanges
