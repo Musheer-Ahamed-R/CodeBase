@@ -181,10 +181,9 @@ Directives:
           But, it will always have the latest input value(due to ng-model data binding). This can be used to use user input and do some processing like filter results etc..
       ->  If we were to use ng-model on a contenteditable element(New Feature) instead of the input element. We need to add a new Directive to that element that helps in mimicing the behaviour of ng-model.
           Inside of our custom directive, we need to require ngModel directive on the element. It has two useful methods - $setViewValue and $render
-          The contenteditable fires an input event on the element, we we can list to(subscribe in Link method $element.on("input", function () {})).
-          Inside of the input event callback, we can call ngModelCtrl.$setViewValue() to set the view value.
-          We should do ngModel.$render = function() { $element.html(ngModel.$modelValue)} to update if the model value changes. 
-          This gets called when angular needs to update the view when the model value changes
+          The contenteditable fires an input event on the element, we we can listen to(subscribe) in Link method $element.on("input", function () {}).
+          Inside of the input event callback, we can call ngModelCtrl.$setViewValue() to set the view value. Usually gets called when the input elem value changes
+          We should do ngModel.$render = function() { $element.html(ngModel.$modelValue)}. This gets called when angular needs to update the view when the model value changes.
     ng-if:
       -> ng-if="JS expression"        // JS expression returning boolean value
       -> elem is completely removed from the DOM.
@@ -371,6 +370,11 @@ Data bindings:
         -> ng-model directive
         -> This is only available for user input fields like <input>(text, checkbox(boolean)), <select> and also for element with contenteditable attribute(New feature in HTML 5) etc..
         -> Also available through '=' sign inside of Directives(Defining the type of binding for the directive scope).
+        Parser and Formatter:
+          ->  We can use this to control the model to view and view to model values.
+          ->  require the ngModel directive inside of our custom directive(See Two way data binding for more info).
+          ->  ngModelCtrl.$formatters has an array of methods. These gets run against our model values. They allow us to manipulate the value before it is returned to the view.
+          ->  ngModelCtrl.$parsers has an array of methods. These gets run against our view values. They allow us to manipulate the value before it is stored to the model.
 
 Digest Loop:
   ->  Everytime we put a variable or a function that is on the $scope and put it on the HTML page. Angular JS automatically adds a watcher for that variable in the watch list.
