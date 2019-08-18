@@ -37,6 +37,7 @@ Modules:
   ->  The dependencies can be any built-in module or our own module.
   !!!!!!!
   ->  If we inject any new module, then we can use all of its Directives and Services(dependency Injection) in our app WITHOUT US DOING ANYTHING.
+      In this case, we first need to download the dependency JS file(using src="/path" OR URL).
   ->  If we call angular.module('app') (i.e without the second [] argument), then it returns the appModule anywhere inside of the code.
       Notes:
         -> Features should more likely be a Module.
@@ -120,6 +121,7 @@ View/Template:
   !!!!!
   ->  We can also create fields and associate values inside of the template itself(Inside " " where we generally write expressions). e.g ng-focus="isFocussed=true".
       This variable will only be accessible within the scope of the controller in the template in which it resides(Also, it cannot be accessed in the controller - JS code).
+      These can be called as Template Only variables.
 
 Dependency Injection:
   -> Rather than creating an object inside a function, we pass it(object) to the function.
@@ -424,7 +426,7 @@ Atribute($attrs) methods:
 Routing:
   ->  This is handled in the module angular-route.js. Need to include this in the app module dependencies array.
   ->  Configuring routes:
-        myApp.config(function($routeProvider) {
+        myApp.config(function($routeProvider, $urlRouterProvider) {
           $routeProvider.when("/", {
             templateUrl: "path_",
             controller: "myController"
@@ -434,6 +436,7 @@ Routing:
   ->  Add the directive ng-view to a div element.
   ->  The template associated with the route is considered as a View.
   ->  Through code, we can navigate to a different route using the location service, $location.path('/my-path')
+  ->  We can do urlRouterProvider.otherwise("/") inside .config callback for directing to home route in case we could not find any other matching route.
       Routing Using ui-router:
         -> Add the ui-router module dependency to app module.
         ->  Inside of .config callback
@@ -444,13 +447,17 @@ Routing:
             })
         ->  Add the <ui-view> for the route placeholder
         ->  We can then navigate route using an <a> element, we can use ui-sref="myState"       // state name defined while declaring route.
-  ->  We can do urlRouterProvider.otherwise("/") inside .config callback for directing to home route in case we could not find any other matching route.
-Pipes:
+        Nested Routes:
+          ->  We have to use ui-view
+  
+Filters/Pipes:
   ->  We can use this to manipulate data. Can be used in both JS and HTML expression.
   ->  Inside HTML expression, we can pass in attributes to the filter using | my_filter:"value1":"value2" etc..
+  ->  The argument passed can be anything e.g a variable(Both template Only and Modal value(i.e data form controller)), strings, arrays, objects etc..
+  ->  We can also chain filters one after the other. e.g data | filter1:arg1 | filter2:arg1
       Syntax:
       {{ myCurrency | currency:'$':1 }}
-      Inbuilt Pipes:
+      Inbuilt Filters/Pipes:
         date
         currency
         orderBy:
@@ -461,13 +468,41 @@ Pipes:
           ->  filter: { year: value }                 // searches for year field
           ->  filter: value                           // searches for all fields
         json:                                         // pretiffy JSON data in DOM
+      
+      Custom Filters:
+        ->  This allows us to pass in some data and return a new value based on its functionality.
+        ->  myApp.filter("filterName", function() { 
+              return function (value, arg1) { }
+            })
 
 Forms:
+  ->  Most of the forma state and also validation states are persisted in the element class attribute by angular. e.g class="ng-valid ng-pristine ng-touched"
   Validation:
     ->  To include angular JS form validation, we need to include the name attribute on the top level form and also the input fields that will have validation.
     ->  By doing above gives access to angular's form object which has various details about the form.(e.g isValid, isTouched). This can be accessed using the name attribute on the form element.
         e.g <form name="myForm"> </form>
         // myForm.isValid etc..
+    ->  We can add our own custom validation using ngModelCtrl.$validation.myErrorField = function(modelValue, viewValue) { // reurn BOOLEAN_EXPRESSION }     // ngModelCtrl is required using require field in our directive($ctrl)
+        We can then access myErrorField using formName.fieldName.$error.myErrorField to see if has true value.
+        NgMessages:
+          ->  We can use ng-message module to display easy error messages for our form.
+              It allows us to group all errors of a particular element together.
+              e.g <div ng-messages="formName.fieldName.$error"> 
+                    <div ng-message="required"> Blaw </div> <div ng-message="minlength"> Blaw </div>
+                  </div>
+              Note:
+                ->  Both parent and child element have same directive name - ng-messages
+          ->  We can display multiple error messages for ng-message by adding the directive ng-messages-multiple.
+          ->  We can also include the template for error messges(Same HTML template with ng-messages directive added by referenced from a script tag or an external file).
+              Using Script tag:
+              <script type="text/ng-template" id="generic-message-template.html">
+                <div ng-message="required"> Blaw </div> <div ng-message="minlength"> Blaw </div>
+              </script>
+              And inside of the ng-messages template(parent template), we can just do ng-messages-include="generic-message-template.html"
+              If we also had an element with same error as in the template, then that element error message will take precedence over the template error message.
+              i.e child ng-messgaes and ng-messages-include(template) both have ng-messages="required" added to it.
+          ->  We can also add messages dynamically, using the ng-repeat and the ng-messages-exp="singleErrorInArrar.type" and its text, using {{ singleErrorInArrar.text }}
+          ->  We can also do ng-messages-exp="['minlength', 'maxlength']" to use same error message for multiple errors.
 
 Publish and subscribe events:
   Using $scope:
