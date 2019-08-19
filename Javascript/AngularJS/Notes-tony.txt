@@ -20,6 +20,15 @@
 
 
 
+IMPORTANT
+Naming Conventions:
+
+
+Constants             - UPPER_CASE_SNAKE_CASE
+Values(.values)       - PascalCase
+
+
+
 Composed of 
   -> Modules          (Main module and features)
   -> Components       
@@ -39,8 +48,15 @@ Modules:
   ->  If we inject any new module, then we can use all of its Directives and Services(dependency Injection) in our app WITHOUT US DOING ANYTHING.
       In this case, we first need to download the dependency JS file(using src="/path" OR URL).
   ->  If we call angular.module('app') (i.e without the second [] argument), then it returns the appModule anywhere inside of the code.
+      
+      Adding a dependency module:
+        ->  Copy and paste the soure code(or can use other build tools like npm etc..)
+        ->  Load the JS file in index.html after angular.js file
+        ->  Add the dependency to the needed module.
+
       Notes:
         -> Features should more likely be a Module.
+      
 
 Components:
   ->  A component is a combination of a Controller and a Template. For anything that uses a controller and a template, we should be using a Component.
@@ -152,6 +168,38 @@ Service:
     ->  It makes the URL available to our application.
   $routeParams:
     ->  Allows us to retrieve the current set of route parameters.
+  $resource:
+    ->  A factory which creates a resource object that lets you interact with RESTful server-side data sources.
+    ->  The returned resource object has action methods which provide high-level behaviors without the need to interact with the low level $http service.
+    ->  Fields will be just save, get etc. But, while using we have to do $get, $save
+    ->  All methods accepts a callback as an argument, which can be passed to run code after the request is successful.
+        Syntax:
+        $resource(url, [paramDefaults], [actions], options);
+          paramDefaults : params in the URL(Not query params). If this is part of the url, then need to add @ sign before it to tell $resource to extract it from the passed object.
+                          e.g $resource('/api/things/:id', {id: '@id'}, {})
+                          If the param value in url is not passed, then it will make request without it.
+          actions       : extend the $resource object with additional functionalities. e.g add update method(PUT)   // {method:?, params:?, isArray:?, headers:?, ...}
+        Available methods:
+          query   - retrieve a collection from the server. Ignores the dynamic part(specific id from the request url)
+          get     - GET request
+          save    - POST request
+          delete  - DELETE request
+
+    $q:
+      ->  This can be used to create custom promise object.(i.e wrapper for code that does not returns a promise)
+          Usage:
+          1.
+            return $q(function (resolve, reject) {
+              resolve(value) OR reject(value)
+            })  
+          2.
+            let defer = $q.defer()
+            defer.resolve(value) OR defer.reject(value)
+            defer.promise
+          3. $q.all([promises1, promises2])           // Array of promises
+          4. $q.race([promises1, promises2])          // Array of promises. Resolves first one as soon as it is available.
+          5. $q.resolve(value)                        // Resolve a promise
+          6. $q.reject(value)                         // Reject a promise
 
   Custom Services:
     -> The custom service created will be a Singleton object.
@@ -362,6 +410,23 @@ Directives:
                 ->  This can be used to pass in data from the child to the parent directive. The Object will be the same in child and parent directive.
                 ->  If we accessed $ctrl inside of the Link function of the directive without specifying the require field, then it corresponds to the Controller of the Current Directive(Its its own)
 
+
+
+Interceptors:
+  ->  We can intercept HTTP request and response and have some logic in it that may manipulate the request and response. e.g Add headers to request etc.
+      Usage:
+        ->  Create a factory MyInterceptor.i.e myApp.factory('MyInterceptor', MyInterceptor)
+        ->  It can have functions like
+            request(config)             // return config
+            requestError(config)        // return config
+            response(config)            // return response
+            responseError(config)       // return response
+        ->  Inject $q and do $q.reject(value) for requestError and responseError
+        ->  myApp.config(function($httpProvider) {
+              $httpProvider.interceptors.push('MyInterceptor')
+            })
+
+
 Data bindings:
   ->  One  way:
         Output data (from JS to HTML) i.e String Interpolation {{data}}. We can add any valid JS expression inside there.
@@ -445,11 +510,68 @@ Routing:
               controller: "",
               template: ""
             })
-        ->  Add the <ui-view> for the route placeholder
-        ->  We can then navigate route using an <a> element, we can use ui-sref="myState"       // state name defined while declaring route.
+        ->  Add the <ui-view> or <div ui-view> for the route placeholder
+        Navigation:
+          There are three main ways to activate a state:
+            ->  Call $state.go(). High-level convenience method.
+            ->  Click a link containing the ui-sref directive.e.g ui-sref="stateName"
+            ->  Navigate to the url associated with the state.
+        URL Parameters:
+          ->  '/hello/' - exactly match
+          ->  '/user/:id' - Matches '/user/bob' 
+          ->  '/user/{id}' - Same as the previous example, but using curly brace syntax.
+          ->  '/user/{id:int}' - The param is interpreted as Integer.
+        Router properties:
+          url:                      //  URL to load this resource
+          controller:               //  Controller of the View. Not preffered, use Components
+          template:                 //  Template of the View. Not preffered, use Components
+          component:                //  Component name
+          redirectTo:               //  Value is another state name. e.g for nested states parent.child
+          resolve:  {}              //  Object.
+          data: {}                  //  Custon data properties
+          params: {}                //  Query param object
+          views:  {}                //  Defining views
+          resolve:
+            ->  Each field in this object has a promise which resolves to some value. We can get access to that RESOLVED value in our template by using binding field inside of the component.
+                Here, binding is not from the template(like in normal cases. i.e binding fields from parent component). The binding is between the routing and the component.
         Nested Routes:
-          ->  We have to use ui-view
+          ->  These have parent-child relationship.i.e Parent state properties are available to use in all the child states.
+              Creation:
+                Using .(Dot) notation in child's state name. e,g $stateProvider.state('parent.child', {})
+                Using the parent: "parentStateName" while configuring. e.g $stateProvider.state('child', { parent: "parent" })
+          ->  This forms a hierarchy of states(Nested within each other). The loading can be viewed as a hierarchy of <ui-view>.
+              First the index.html is loaded(default). Then the first state in the hierarchy(Parent) gets loaded in the <ui-view> inside of the Main View(index.html)
+              Then the loaded parent template should be having a <ui-view> inside of which the child state gets loaded and so on.
+              The point to note here is that if ant any point there was no <ui-view> to load the scope(e.g no <ui-view> in index.html), then the hierarchy is cut-off and only the currently loaded ones remain.
+          ->  We can add ^ before the url to tell UI router to ignore the parent URL path completely and only consider the given path. .eg "^/phone"
+          ->  When a state is "active", all of its ancestor states are implicitly active as well. Below, when the "contacts.list" state is active, the "contacts" state is implicitly active as well,
+              because it's the parent state to "contacts.list".
+        Multiple Views:
+          ->  We can have multiple views inside of a single view(template). 
+          ->  Remove the component field inside of route config for the state(which will host multiple views)and replace it with views.
+              e.g views: {
+                "@": {                                // default view
+                  component: "myComponent"
+                },
+                "methods@contact": {                         // value before @ sign is the name of the view and value after @ is the state within which this inner view is present(i.e the same state name in which this config is made)
+                  component: "innerViewComponent"
+                }
+              }
+          ->  Add ui-view="viewName" (here ui-view is attribute instead of an element)
+          ->  Adding the views config for a component can be done anywhere. But, the thing to note is that, there is going to be only one url loaded at a time.
+              So, if a view is associated with an url, then we can define the view in its own component declaration file(i.e where the state is also declared). 
+              But, if the view only has a template and not any url associated. Then it makes sense to define the view config in the parent component itself.
+              Since this component will otherwise never gets loaded.
+          ->  Also, there can be multiple views with the same name and parent state name. The right view will be selected based on the url.
+        Data inheritence:
+          ->  Child states will inherit resolved dependencies from parent state(s), which they can overwrite. we can access it in $scope of the controller
+          ->  Custom data properties
+        Notes:
+          -> We can't have two different states named "edit" even if they have different parents.
+           
   
+
+
 Filters/Pipes:
   ->  We can use this to manipulate data. Can be used in both JS and HTML expression.
   ->  Inside HTML expression, we can pass in attributes to the filter using | my_filter:"value1":"value2" etc..
@@ -519,3 +641,102 @@ Publish and subscribe events:
         (i.e in $scope.on("$destroy", rootScopeName))
     ->  Any event broadcasted from $rootScope, $scope can actually listen to it too.(i.e Both $rootScope and $scope can listen if event broadcasted by $rootScope)
         This behaviour can be changed if we use $rootScope.emit() instead of $rootScope.broadcast()
+
+Constants:
+  ->  We can register constants in our angular app.
+  ->  It should be readonly. i.e value should not be changed in our application
+      Syntax
+      angular.module("myModule").constant("MY_CONSTANT", value)      // value can be a string or an Object.
+      We can then put it as a param in our controller method. It will be injected just like any other service by angular.
+  
+Values:
+  ->  We can have mutuable values in our angular app.
+      Syntax:
+      angular.module("myModule").value("My_Value", value)      // value can be a string or an Object or also a function.
+      We can then put it as a param in our controller method. It will be injected just like any other service by angular.
+
+Testing:
+  ->  Karma is a JavaScript command line tool that can be used to spawn a web server
+      which loads our application's source code and executes our tests.
+  ->  Jasmine is a behavior driven development framework for JavaScript.
+
+
+  Setting Up
+    ->  Need to add the following dependencies
+        ["jasmine-core", "karma", "karma-chrome-launcher", "karma-jasmine", "karma-spec-reporter"]
+    ->  run - karma init
+    ->  Add plugins to karma.config file
+        plugins: [
+          require('karma-chrome-launcher'),
+          require('karma-jasmine'),
+          require('karma-spec-reporter'),
+        ]
+    ->  add the file pattern to files array. e.g 'tests/*.spec.js'
+    ->  karma start
+    Testing Controller:
+      ->  add the following file pattern to files array in karma config. 
+          [ 'js/angular.js', 'tests/angular-mocks.js', 'js/**/*.js', 'tests/*.spec.js' ]
+      ->  beforeEach(module('app'))                   // instantiate/Loads the module
+      ->  beforeEach(inject(function($injector) {
+            // $injector - fetches dependencies from our application
+            var $controller = $injector.get('$controller')      // YES, $controller is a service. Needed to inject our service
+            var myController = $controller(MyController as myCont, {
+              $scope: {},
+              DependentService: MockedDependentService        // just a function object mocking the DependentService
+            });
+          }))
+    Testing Directive Controller:
+      ->  Step 1 and 2 same as above.
+      ->  beforeEach(inject(function($injector) {
+            // See Api reference for all function and its return value - https://docs.angularjs.org/api/ng/function/angular.element
+            var $compile = $injector.get('$compile')            // $compile - Compiles an HTML string or DOM into a template and produces a template function, which can then be used to link scope and the template together.
+            element = angular.element("<counter></counter>")    // Wraps a raw DOM element or HTML string as a jQuery element.
+            $compile(element)($rootScope.new())                 // see above comments
+            var $rootScope = $injector.get('$rootScope')        // $rootScope.new() creates a new $rootScope for us.
+            var $controller = $injector.get('$controller')      
+                                                                
+            $controller = element.controller('counter')         // the controller for this directive(passed as args) will be retrieved 
+            var $scope = element.isolateScope() || element.scope()    // Returns the isolated scope of the element
+            Then call controller methods using $controller.myFunction()
+          }))
+    Testing Component Controller:
+      ->  Step 1 and 2 same as first.
+      ->  beforeEach(inject(function($injector) {
+            // See Api reference for all function and its return value - https://docs.angularjs.org/api/ng/function/angular.element
+            var $componentContoller = $injector.get('$componentContoller')            
+            var controller = $componentContoller('compName', { $scope: {}, { initialCount: initialCount }})       // Here, the third args is the bindings object(i.e data from parent inside of template etc..)
+          }))
+      ->  For testing life cycle hooks, we need to actually call the hook(e.g controller.$onInit() etc..), since, we dont have the actual DOM, in which case this is automatically called by the angularjs itself.
+    Testing Filters:
+      ->  Step 1 and 2 same as first.
+      ->  beforeEach(inject(function($injector) {
+            // See Api reference for all function and its return value - https://docs.angularjs.org/api/ng/function/angular.element
+            var $filter = $injector.get('$filter')            
+            var filter = $filter('filterName');
+            execute the filter using filter(value, arg1, arg2)
+          }))
+    Testing Service:
+      ->  Step 1 and 2 same as first.
+      ->  beforeEach(inject(function($injector) {
+            // See Api reference for all function and its return value - https://docs.angularjs.org/api/ng/function/angular.element
+            var myCustomService = $injector.get('$myCustomService')            
+            var $httpBackend = $filter('$httpBackend');           // for mocing requests
+            $httpBackend.when('url').respond({})
+          }))
+      ->  We can also test the api getting fired using $httpBackend.expectGet('url')
+      ->  Need to call done when our tests are over(since async - just like mocha)
+      ->  $httpBackend.flush() in the end.
+    Testing Routing:
+      ->  Step 1 and 2 same as first.
+      ->  beforeEach(inject(function($injector) {
+            // See Api reference for all function and its return value - https://docs.angularjs.org/api/ng/function/angular.element
+            var $state = $injector.get('$state')
+            var $http = $injector.get('$http')                                    // Here, $http is only inject because the user function in resolve object expects it. Not needed otherwise
+            var $httpBackend = $injector.get('$httpBackend')
+            $httpBackend.when('url').respond({})                                  // Need to ALSO STUB the TEMPLATE URL, because it is also loaded by angular
+          }))
+      ->  Here, myState has all the properties of the state declaration.
+      ->  myState.resolve.user($http, {}).then(function() {})                                // Here, use is one property in resolve object
+      ->  We can also test the api getting fired using $httpBackend.expectGet('url')
+      ->  $httpBackend.flush() in the end.
+      
