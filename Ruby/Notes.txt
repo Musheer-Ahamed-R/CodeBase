@@ -306,6 +306,7 @@ Symbol:
       i.e if the same symbol is used in code to assign to different objects, the symbol obj will be same, but its actual 
       type will be different according to the context in which it is used.
 
+
 Collections:
 
 Ranges:

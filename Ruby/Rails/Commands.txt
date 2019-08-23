@@ -23,15 +23,17 @@ rails commands:
   ->  rails db:rollback                                             // undo single migration step
   ->  rails db:migrate VERSION=0                                    // to undo all mogration steps
   ->  rails test
+  ->  rails test:integration                                        // only running integration tests inside of the test/integration folder
+  ->  rails generate integration_test site_layout                   // generating a template test, site_layout
 
 Shortcuts:
   Full command	Shortcut
-  
-  rails server	$ rails s
-  rails console	$ rails c
-  rails generate	$ rails g
-  rails test	$ rails t
-  bundle install	$ bundle
+
+  rails server      -   rails s
+  rails console     -   rails c
+  rails generate    -   rails g
+  rails test        -   rails t
+  bundle install    -   bundle
 
 
 Notes:

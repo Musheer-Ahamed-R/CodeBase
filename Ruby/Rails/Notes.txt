@@ -1,5 +1,7 @@
 1 ->  rails console is built on top of interactive Ruby (irb). The console also has access to the Rails environment.
+      But, we have to require the file(s) that we are planning to use.
 2 ->  Rails defines three types of environment, namely development, test and production.
+3 ->  We can comment in .erb file using the <%#=  %> syntax. i.e just add # between % and =
 
 Namings Conventions:
   ->  model(database fields) as singular and controller and views as plaural
@@ -13,11 +15,72 @@ Namings Conventions:
 
 Layouts:
   ->  It is kind of like the top level of our controller view. i.e Inside of the layout, we add <%= yield %>, to include controller view.
-  ->  
+  ->  It can include many partials.
 
-Helper:
+Partials:
+  ->  It's just a piece of template that can be re-used.
+  ->  Create a partial name as _header.html.erb                           // _ before name is the convention for naming partials. But, should not include _ while referring inside of template.
+  ->  Syntax:
+      <%= render 'layouts/header' %>
+
+Helpers:
   ->  We can define helper methods and use them in our views.(without requiring)
+  link_to:
+    ->  to create links (i.e create anchor tag <a>).
+    ->  Can be used along with image_tag helper - as first attribute to add the imgage for the link.
+        Syntax:
+        <%= link_to "Sign up now!", '#', class: "btn btn-lg btn-primary" %>    
+  image_tag:
+    ->  This can be added to add the image element. The path to an image and an optional options hash.
+        Syntax:
+        <%= image_tag("kitten.jpg", alt: "Cat Image") %>
 
+Routes:
+  ->  Rails conventionally uses named routes. i.e for a url e.g (/about), we can name it as about_path and use it in our application(views).
+  ->  While adding route, we can do.
+      Syntax:
+        get  '/help', to: 'static_pages#help', as: 'helf'              //  url - /help and path - static_pages#help and as - name for the route
+        naive syntax  - get 'static_pages/help'
+  ->  Then we can access the route name in our entire application(including views)(e.g help_path WITHOUT quotes)
+      If we rename the route using `as: "helf"`, we still need to use it as helf_path.
+
+The asset pipeline:
+  ->  In particular, the asset pipeline combines all the application stylesheets into one CSS file (application.css), combines all the
+      application JavaScript into one JavaScript file (application.js), and then minifies them to remove the unnecessary spacing and indentation that bloats file size.
+  ->  There are three main features to understand about the asset pipeline: asset directories, manifest files, and preprocessor engines.
+      Asset directories:
+        - app/assets: assets specific to the present application
+        - lib/assets: assets for libraries written by your dev team
+        - vendor/assets: assets from third-party vendors
+      Manifest files:
+        ->  We can use manifest files to tell Rails (via the Sprockets gem) how to combine them to form single files(seperate for CSS and JS files).
+        ->  Inside that. 
+              require_tree  - ensures that all CSS files in the app/assets/stylesheets directory (including the tree subdirectories) are included into the application CSS
+              require_self  - specifies where in the loading sequence the CSS in application.css itself gets included.
+      Preprocessor engines:
+        ->  Rails prepares them for the site template by running them through several preprocessing engines and using the manifest files to combine them for delivery to the browser.
+        ->  We tell Rails which processor to use using filename extensions; the three most common cases are .scss for Sass, .coffee for CoffeeScript, and .erb for embedded Ruby (ERb).
+
+SCSS:
+  ->  Sass is a language for writing stylesheets that improves on CSS in many ways.
+  ->  most important improvements, nesting, variables and mixins.
+      Nesting:
+        .center {
+          text-align: center;             // only for .center
+          h1 {
+            margin-bottom: 10px;          // for both .center and h1. i.e `.center h1`
+          }
+        }
+        Note:
+          ->  For #logo:hover, need to use &:hover  inside of #logo to reference the parent element. i.e `#logo:hover`
+      Variables:
+        ->  Sass allows us to define variables to eliminate duplication and write more expressive code.
+        ->  The bootstrap-sass gem provides the Sass equivalents(from the bootstrap Less language) for commonly used variables.
+            Syntax:
+              $light-gray: #777;
+              We can use like i.e color: $light-gray;
+  ->  Import CSS gems
+      e.g @import "bootstrap-sprockets";
 
 Testing:
   ->  setup method is automatically run before every test.

@@ -4,8 +4,6 @@
 ->  belongs_to :user
 ->  layout
 
-->  Diff between get 'static_pages/about' and root 'application#hello' (i.e why is # and / used interchangeably ??)
-
 
 Dynamic contents:
   ->  <% provide(:title, "Home") %>   //  <% - to run ruby code inside.
@@ -21,3 +19,10 @@ Tests:
 ->  assert_select
 
 what is Active Record ??
+
+Update the layout links to use the helf route from Listing 5.29.
+
+What is fixtures :all in 
+class ActiveSupport::TestCase
+  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
+  fixtures :all
