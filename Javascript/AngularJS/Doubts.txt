@@ -1,8 +1,13 @@
 1 ->  Should a view always have a controller associated with it??.
 4 ->  Why settimeout ??
       Ultimatecourse Video - Lab: 6
-5 -> List out all the values tracked inside of the controller scope object(e.g like attribute values etc..)
-6 -> require in components
-7 -> ng-bind - Using require, $onInit, $postLink, $onDestroy Video - .45 - 1. min
-8 -> What is object structure of the object that gets passed to the $onChanges
-     Video - One-way databinding and $onChanges
+5 ->  List out all the values tracked inside of the controller scope object(e.g like attribute values etc..)
+6 ->  require in components
+7 ->  ng-bind - Using require, $onInit, $postLink, $onDestroy Video - .45 - 1. min
+8 ->  What is object structure of the object that gets passed to the $onChanges
+      Video - One-way databinding and $onChanges
+9 ->  Check if below is true or false. I think that field is automatically created by angular and can be accessed inside of the controller.
+      The field "myField" need not exist inside of the controller. In which case it will be a template only variable. 
+10->  Is there no difference between dynamic values in url and query params. i.e /user/id AND /user?id=1
+      I think they both are SAME (/contact/:id OR /contact?id). The only difference will be URL
+      Video -  Dynamic routes and query params, HTML5 mode (08:30)

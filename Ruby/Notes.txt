@@ -7,12 +7,8 @@
 4 -> 0..42 creates a collection(array) from 0 to 42
      But to convert it to an array we have to call .to_a
 
-5 -> For a method that expects a block/method, we can pass in built in method. 
-     All elements will be implicitly passed to that method.
-     e.g .select(&:even?) OR .map(&:to_i)
-
 6 -> %w(The quick brown fox jumped over the lazy dog).
-     Ruby converts each word inside the () into a seperate element in an array(words are WITHOUT quotes)
+     Ruby converts each word inside the () into a seperate element in an array(words should be WITHOUT quotes)
 
 8 -> we can use .to_i to convert an element to an integer.
 
@@ -39,9 +35,13 @@
 
 19 -> We can use date module of ruby to deal with dates
 
+!!!!!!!
+20 -> Except nil and false, all other values including "", 0 are all considered as truthy. e.g !!0 returns true.
+
 Printing:
    -> puts "" OR puts [1, 2, 3]     // returns null i.e just printing but also iterates if iteratable
    -> p "" OR p [1, 2, 3]           // Here p prints and returns the value
+   -> print "foo"                   // same as p "foo"(Non-iterative), but does not create a new line after printing
 
 
 Getting value:
@@ -61,7 +61,7 @@ Variables:
          -> Used to share data across components like from method to a view etc..
 
    -> Constant
-         -> All caps. Also, its value can be changed.
+         -> All caps. Also, its value CAN be changed.
 
    -> Class variable
          -> put @@y infront of the variable (e.g @@z)
@@ -71,11 +71,17 @@ Strings:
    -> Interpolation #{variable}
    -> Diff between '' and "" is, if '' is used, all text inside is considered as plain string
       i.e No dynamic values. So, need to use "" for String Interpolation
-
+   -> The `` is useful because they are truly literal, containing exactly the characters you type.
+      i.e Can add any special charatcers like \n as though its a string(i.e withoue escaping for \n expression)
+      i.e Will be problematic if we atually need to add excape expressions inside of it. Use "" in that case.
 Numbers:
    -> Integers
    -> Float (very small decimal places)
    -> Decimals (very accurate decimal places and takes more space)
+
+Objects:
+  ->  Everything in Ruby, including strings and even nil, is an object. i.e we can also call methods on nil(e.g nil.to_s)
+      i.e There is concept of null pointer exception in ruby.
 
 Methods:
    -> method name and also parameters should be in snake case
@@ -86,17 +92,21 @@ Methods:
    -> We can execute methods by just calling method name without ()
    -> The return value is whatever is there in the last line and it is considered bad practice to 
       explicitly use return keyword.
-   -> Inside of a class, we can use def self.method_1 to create a class method. If normal syntax is used,
-      then it is an instance method 
-   -> The () can be skipped for a method both while calling and also while definfing actual params for a method.
-      e.g my_method first_name last_name
+   -> Inside of a class, we can use def self.method_1 to create a class method. If normal syntax is used, then it is an instance method.
+   -> The () can be skipped for a method both while calling and also while definfing actual params for a method. But, the ,(comma) is important in both cases.
+      e.g my_method first_name, last_name
           my_method "Musheer", "Ahamed"
-   -> We can use named arguments to explicitly define which arguments we are passing to the function(avoid unnecessary delay).
+  ->  The count of the method params and the method args should ALWAYS MATCH. except cases where we use splat or default params or last param(i.e default behaviour of last param. see below).
+  ->  We can use named arguments to explicitly define which arguments we are passing to the function(avoid unnecessary delay).
+      In this case, the bracket (i.e ()) should be ignored for ruby to understand the syntax.
       e.g my_method first:, second:
           my_method second: "Ahamed", first: "Musheer" 
    -> Default value to a method param can be done using `def my_method first_name:, last_name: "Ahamed"`
       or if variable passed(named params) and used is different, then ( name: my_name = "Musheer" )      // here name is the named param passed to this method
       As we have to use name: in this case. So, if we have to pass in some value, we have to consider it as named param and explicitly use the param name.
+   -> For a method that expects a block/method to run on each single element inside of the collection, we can pass in built in method. 
+      This shorthand is called as called “symbol-to-proc”. i.e we use &:
+      e.g .select(&:even?) OR .map(&:to_i) 
    -> Splat 
          -> lets us pass in multiple arguments but treats them as a regular array inside of the method
             *my_name
@@ -108,23 +118,28 @@ Methods:
             This can be used while passing arguments to a method that expects multiple params
             e.g new_arr = [*array1, 4, 5, *array2] OR new_arr = *array1, 4, 5, *array2
             e.g my_method *array1
-         -> We can also array coercion(i.e convert anything to an array)
+         -> We can also do array coercion(i.e convert anything to an array)
             e.g 
                *1..10            -> [1, 2, .... 10]
                *"Hello"          -> ["Hello"]
                 *[1,2,3]         -> [1,2,3]                 // no changes
                *{ a: "Hello" }   -> an array [[:a, "Hello"]]
          -> can also be used in multiple variable assignment.(see below)
-   -> Keyword value Splat(double Splat)
-         -> This can be used to pass in key value pairs(JSON data).
+   -> Keyword value Splat(double Splat - **)
+         -> This can be used to pass in key value pairs(JSON data). We can also pass a hash without using a parameter with the double splat operator.
+            The only difference is that the param becomes completely optional.
             **my_name
+         -> This also works as the Last hash parameter(without **). i.e combines all final named args as a single hash.
          -> We can also double splat while calling methods to pass JSON data. This will flattened to the appropriate fields
             the method expects(Opposite of above use case). Here JSON data is flattened to named method params which method expects
-   -> Optional arguments can be used to pass in arguments as named fields but received as an object.
-      It is same as Keyword value splat, except that the data passed will be named fields instead of a JSON data.
-      e.g def my_func options={}
+         -> Must be the last parameter in a parameter list.
+   -> For the LAST param of a method(which expects a hash), we can wither pass a hash value or we can pass MULTIPLE named arguments which 
+      is converted as a hash for the LAST param.. i.e the last parameter works like a hash parameter in ruby
+      e.g def my_func param1, options={}
             options[:company]
-         end
+          end
+          my_func "Sample", name: "Musheer", email: "m@m.com", pass: "pass"     
+          // inside of my_func options param value will be { name: "Musheer", email: "m@mc.com" ...}
    -> When using terinary operator, we should use () if we calling any method that returns a boolean
    Types of Encapsulation:
       -> private:
@@ -152,7 +167,8 @@ Methods:
    Procs:
       -> A proc is an object that contains a code block. It provides a way to save up a code block and execute it later.
       -> Proc objects are bound to a set of local variables(NOT arguments but like closure). 
-      -> Proc can have one, none or many arguments
+      -> Proc can have one, none or many arguments.
+      -> Use {} syntax for one liners and do end syntax for loner blocks
       -> Construction
             -> Proc.new { |arg| } OR Proc.new do |arg| end
             -> proc { |arg| } OR proc  do |arg| end
@@ -162,6 +178,8 @@ Methods:
       -> The arguments passed may not be same as declared.
       -> If we use return keyword in a Proc, it not only returns from the Proc block, but also from the exclosed function
          (i.e no code beneath after calling Proc will get executed).
+      -> We can chain methods expecting block on the block itself. e.g arr.map { |elem| elem.upcase }.join
+         Here, .join is done on the block of .map itself
 
    Lambda:
       -> The symbol for stabby lambda is ->
@@ -182,19 +200,40 @@ Class:
    -> initializer method. 
       def initialize
    -> We can also execute some code inside of a class. Not just declaring variables and methods
+   -> We can use the self keyword inside of a method to access itself(more like `this` in java)
+   -> We can use attr_accessor to define instance fields.(It automatically creats the setter and getter for the fields).
+      e.g attr_accessor :name, :email
 
    Syntax:
       class MyClass
          // code
       end
 
-   Inheritence;
+   Inheritence:
+      -> Every custom class we create, inherits implicitly from the Object class, which in turn inherits from the BasicObject class.
       Syntax:
-         class ChildClass < BaseClass
+         class ChildClass < ParentClass
 
    Polymorphism:
       -> We can just call super(NOT super.my_method) inside of a method. It will automatically call the super class method.
 
+Modules:
+  ->  Modules are somewhat similar to classes: they are things that hold methods, just like classes do. However, modules can not be instantiated.
+      i.e., it is not possible to create objects from a module. And modules, unlike classes, therefore do not have a method new.
+      They facilitiate code re-usability.
+  ->  With modules you can share methods between classes. Modules can be included into classes, and this makes their methods available on the class.
+      e.g Comparable module
+      Syntax:
+      module MyModule
+        def method_1
+          // code
+        end
+      end
+      Inside of some class we do
+      class MyClass
+        include MyModule
+        // code inside class
+      end
 Loops:
    -> while
       Syntax:
@@ -228,6 +267,8 @@ Conditionals:
             end
          2. To put things in a single line
                puts "something" if a > b?
+      Notes:
+        ->  The else if should be written as elsif        // i.e no space and no final `e` in else
    -> unless conditional
       -> same as the opposide of if. can be used for more readability
       Syntax
@@ -267,18 +308,35 @@ Symbol:
 
 Collections:
 
+Ranges:
+  ->  The first and perhaps most natural use of ranges is to express a sequence. 
+      In Ruby, these sequences are created using the ".." and "..." range operators.
+      The two dot form creates an inclusive range, and the three-dot form creates a range that excludes the specified high value.
+  ->  In Ruby ranges are not represented internally as lists: the sequence 1..100000 is held as a Range object.
+      We can convert a range to a list using the to_a method.
+      Here, We need to add parentheses to the range to call a method on it.
+  ->  Another use of the range is as an interval test (i.e seeing if some value falls within the interval represented by the range)
+      We do this using === operator.
+  ->  Ranges also work with characters. e.g ('a'..'e')
+  ->  Ranges are useful for pulling out array elements. e.g a[2..(a.length-1)]
+  ->  Ranges in the descending order is not possible. i.e (3..1) will not work.
+
 Arrays:
-   -> We can create using [1, 2] OR Array.new
-   -> It may contain values of different types in the same array
-   -> we can use arr[index] = "value" to insert value at a certain index. But, all unfilled indexes before it will be filled as nil. 
-   -> We can also push elements using array << 10  // other than array.push() 
-   -> we can delete using .delete, .delete_at, .delete_if
-   -> We can remove certain elements from an array using 
+  ->  We can create using [1, 2] OR Array.new
+  ->  It may contain values of different types in the same array
+  ->  we can use arr[index] = "value" to insert value at a certain index. But, all unfilled indexes before it will be filled as nil. 
+  ->  We can also push elements using array << 10  // other than array.push() 
+  ->  we can delete using .delete, .delete_at, .delete_if
+  ->  We can remove certain elements from an array using 
       [1, 2, 2, 3, 4] - [2, 4]     // removes all elements with 2 and 4
       Same for adding / merging
       [1, 2, 2, 3, 4] + [5, 6]
-   -> We can splice easily using array[1..array.length] i.e array[start..end]
+  ->  We can splice easily using array[1..array.length] i.e array[start..end]
       Also, array[1..array.length-1]   // doing arithmetic in end value
+  ->  If we do arr[-1] it will return the last element in the array and a[-2] second last etc..
+  ->  If we do arr == 3(i.e comparing array with numeric value), then the comparision is based on array length.
+  ->  We can also add to arrays with the push method or its equivalent operator, <<. We can also chain << operators(arr << "foo" << "bar")
+  ->  Ruby arrays can contain a mixture of different types.
 
 Hash:
    -> If we need to use symbol, we can either do :my_symbol => "Hellow" OR my_symbol: "Hello"
@@ -293,7 +351,7 @@ Hash:
       are overridden to provide meaningful behavior
    -> A has can be visualized as an array like a whole array with each key value being a nested array within it
       e.g [[:a, "Hello"], [:b, "World"]] equivalent to { a: "Hello", b: "World" }
-   -> Fetching values. my_hash[:my_symbol]   i.e my_hash['my_symbol'] will not work here, it will work only for Strings.
+   -> Fetching values. my_hash[:my_symbol]   i.e my_hash['my_symbol'] will not work here, it will work only for Strings. Opposite is also same for strings.
    -> Deleting value. my_hash.delete(:my_symbol)
    -> We can use the hash_obj.dig(:field, :nested_field) to access field vales. 
       We can also use this on JSON data(i.e data from config.yml file)
@@ -361,7 +419,7 @@ Grep:
 
 Meta programming:
    -> We can open up classess(Both core and custom classes) to customize class.
-   -> Typical spot for definfing meta programming is the initializers.
+   -> Typical spot for definfing meta programming is the initializers(when application is initialized).
    -> Method missing:
          -> We can use method_missing method provided by ruby to execute a method if not already available.
          -> It is considered a best practice to also implement the respond_to_missing?, so that the respond_to on the
@@ -421,3 +479,37 @@ Ruby gems:
          Breakman       - finding security issues. 
          Web framework  - Sinatra
          HttpParty      - Making Http calls
+
+Rack:
+  ->  Interface between the Webserver and a Web framework(e.g Rails). So that a Webserver and Web framework need not be compatiable with each other.
+      Allows to switch easily between Web server and framework.
+  ->  Rack as a Middleware can be used to serve static files(CSS, JS etc.)
+  ->  Wraps HTTP request and responses.
+      Implementation:
+        ->  Should be a ruby Object that implements a call method.(e.g Proc, Lambda or custom class with call method)
+        ->  Accepts a single parameter, with info about request and server.
+        ->  Returns an Array
+              - Status Code (Integer)
+              - Hash Object(Response Header)
+              - Body(Enumerable) i.e Response, but should be Enumerable 
+        ->  Allows rack applications to be chained together, creating Middleware. i.e Multiple rack application between the Webserver and the Web framework,
+            which each request needs to pass through.
+        Rack Application Server:
+          ->  Create a class with Rack::Handler namespace
+          ->  Has a run method which accepts the application(rack application above) as a param.
+          ->  Calls the Applications call method(implemented before), passes the env hash as a param
+          ->  We can run this file as `rackup config.ru` OR just `rackup` (i.e config.ru). This has to be saved with .ru extension
+          ->  Inside of .ru file, we can just call run @app instead of Rack::Handler::WEBrick.run @app (inside of .rb - ruby file)
+
+Rake:
+  ->  Tool for organizing tasks(task runner). (i.e like gulp ??)
+  ->  Inside the task, we can write normal Ruby code, but there are some helpful Rake methods we can use.
+
+Running shell Commands inside of ruby code:
+  ->  6 different way to execute a shell script from ruby and their properties.
+        -> Exec
+        -> System
+        -> Backticks ()
+        -> IO#popen
+        -> open3#popen3
+        -> open4#popen4

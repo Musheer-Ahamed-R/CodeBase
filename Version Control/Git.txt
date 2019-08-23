@@ -25,6 +25,14 @@ remote :
     Notes : 
         -> origin is the default remote(usually GitHub remote)
 
+Push esiting codebase to github:
+  ->  Create repo in git hub with same name
+  ->  git init
+  ->  git add README.md
+  ->  git commit -m "first commit"
+  ->  git remote add origin https://github.com/Musheer-Ahamed-R/toy_app.git
+  ->  git push -u origin master OR git push -f origin master
+
 
 Ignore files : 
 

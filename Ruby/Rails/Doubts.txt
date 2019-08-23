@@ -1,0 +1,2 @@
+1 ->  in the case of a helper module Rails handles the inclusion for us ???. How ??
+      Chapter 4

@@ -1,0 +1,31 @@
+1 ->  rails console is built on top of interactive Ruby (irb). The console also has access to the Rails environment.
+2 ->  Rails defines three types of environment, namely development, test and production.
+
+Namings Conventions:
+  ->  model(database fields) as singular and controller and views as plaural
+  
+  Cases:
+    ->  Classes
+          class name  - Pascal Case
+          file name   - snake case
+    ->  
+
+
+Layouts:
+  ->  It is kind of like the top level of our controller view. i.e Inside of the layout, we add <%= yield %>, to include controller view.
+  ->  
+
+Helper:
+  ->  We can define helper methods and use them in our views.(without requiring)
+
+
+Testing:
+  ->  setup method is automatically run before every test.
+  ->  For adding colors for tesing result - 
+      inside of test/test_helper.rb - add below lines
+      require "minitest/reporters"
+      Minitest::Reporters.use!
+  ->  Automated tests with Guard - detects file changes and run the test automatically.
+      ->  bundle exec guard init            //  Generates Guardfile file
+      ->  guard :minitest, spring: "bin/rails test", all_on_start: false do
+      ->  bundle exec guard

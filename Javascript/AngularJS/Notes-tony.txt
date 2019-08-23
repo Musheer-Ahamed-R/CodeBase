@@ -17,8 +17,23 @@
 10 -> We have to be careful in using $scope.$apply(), since this will throw error if a $apply is already in progress(due to some other trigger).
       We can overcome this by wrapping our code inside of $timeout(function() {}, 100). This is same as setTimeout, but it runs in the angular context
       (i.e Digest cycle will know about the changes)
+11 -> Add ng-strict-di to run our project in strict mode.
+12 -> All config and run methods for all modules inside of all files WILL BE RUN ONCE WHEN THE APP START ITSELF. No need to load the module for the 
+      config and run method to execute.
+12 -> app.run(function() {})
+      Run blocks - get executed after the injector is created and are used to kickstart the application. Only instances and constants can be injected into run blocks.
+      Calling order of module loading
+        app.config()
+        app.run()
+        directive's compile functions (if they are found in the dom)
+        app.controller()
+        directive's link functions (again, if found)
+13 -> To remove the # in the url, need to make - $locationProvider.html5Mode(true).
 
 
+Best practices:
+  1 ->  Try as much possible to create new folder for each component and directive.
+  2 ->  Have HTML classes first and then the angular classes on an element
 
 IMPORTANT
 Naming Conventions:
@@ -55,7 +70,9 @@ Modules:
         ->  Add the dependency to the needed module.
 
       Notes:
-        -> Features should more likely be a Module.
+        ->  Features should more likely be a Module.
+        ->  We can also have modules, whose only job is to inject other child modules(This module itself will not have any component)
+            Infact module folder should only have the the module file, service and spec file. All the components and directives should reside inside their own folder
       
 
 Components:
@@ -234,6 +251,7 @@ Directives:
           The contenteditable fires an input event on the element, we we can listen to(subscribe) in Link method $element.on("input", function () {}).
           Inside of the input event callback, we can call ngModelCtrl.$setViewValue() to set the view value. Usually gets called when the input elem value changes
           We should do ngModel.$render = function() { $element.html(ngModel.$modelValue)}. This gets called when angular needs to update the view when the model value changes.
+      ->  If we access $ctrl.$viewValue, inside of a directive which does require: "ngModel"(see require in Directives), then we will get the element value.
     ng-if:
       -> ng-if="JS expression"        // JS expression returning boolean value
       -> elem is completely removed from the DOM.
@@ -270,6 +288,10 @@ Directives:
       ->  We can use this directive to listen to change events on a particular input(works on input element).
       ->  Can be used for autocomplete or validation as the user types.
     
+    ng-model:
+      ->  This can be used to configure when do we need to trigger our ng-change event. 
+      ->  ng-model="{}". e.g { updateOn: "default blur", debounce: { default: 250, blur: 0 }}
+
     ng-disabled:
       ->  ng-disabled="boolean expression"
 
@@ -409,6 +431,7 @@ Directives:
                 ->  parents in the context of the HTML template hierarchy.
                 ->  This can be used to pass in data from the child to the parent directive. The Object will be the same in child and parent directive.
                 ->  If we accessed $ctrl inside of the Link function of the directive without specifying the require field, then it corresponds to the Controller of the Current Directive(Its its own)
+                ->  
 
 
 
@@ -431,6 +454,7 @@ Data bindings:
   ->  One  way:
         Output data (from JS to HTML) i.e String Interpolation {{data}}. We can add any valid JS expression inside there.
         !!!!!!!
+        If we add {{ ::myField}}, then angular renders it as a static data. i.e it will not change when myField changes. To make our app faster
         Note:
           -> For Interpolation, even if we only call a function which internally uses the field which was changed. Angular will still call that method and get the updated value.
   ->  Two way data bindings. 
@@ -511,16 +535,24 @@ Routing:
               template: ""
             })
         ->  Add the <ui-view> or <div ui-view> for the route placeholder
+        ->  We can add ui-sref-active=""        // The value can be a JS expression returning a CSS class name.
+            This directive can also be put on its parent element.
+            We can use ui-sref-active-eq for exact match(i.e if child is loaded parent will not get this class)
         Navigation:
           There are three main ways to activate a state:
-            ->  Call $state.go(). High-level convenience method.
-            ->  Click a link containing the ui-sref directive.e.g ui-sref="stateName"
+            ->  Call $state.go("state", { }).     // the object is a params object
+            ->  Click a link containing the ui-sref directive.e.g ui-sref="stateName" OR ui-sref="stateName({ })" // the object may contain the params to be passed to the state
             ->  Navigate to the url associated with the state.
+          Note:
+            ->  If we have two states such as /contact and /contact/:id OR /contact?id
         URL Parameters:
+          ->  We can access the URL params using $transition$($ in the end). i.e $transition$.params()
+          ->  We can use params object while defining state to give default value to params
           ->  '/hello/' - exactly match
           ->  '/user/:id' - Matches '/user/bob' 
           ->  '/user/{id}' - Same as the previous example, but using curly brace syntax.
           ->  '/user/{id:int}' - The param is interpreted as Integer.
+
         Router properties:
           url:                      //  URL to load this resource
           controller:               //  Controller of the View. Not preffered, use Components
@@ -557,6 +589,8 @@ Routing:
                   component: "innerViewComponent"
                 }
               }
+              Note:
+                -> Shorthand for above will be "methods@contact": "innerViewComponent"      // if we are only having component field
           ->  Add ui-view="viewName" (here ui-view is attribute instead of an element)
           ->  Adding the views config for a component can be done anywhere. But, the thing to note is that, there is going to be only one url loaded at a time.
               So, if a view is associated with an url, then we can define the view in its own component declaration file(i.e where the state is also declared). 
@@ -564,10 +598,44 @@ Routing:
               Since this component will otherwise never gets loaded.
           ->  Also, there can be multiple views with the same name and parent state name. The right view will be selected based on the url.
         Data inheritence:
-          ->  Child states will inherit resolved dependencies from parent state(s), which they can overwrite. we can access it in $scope of the controller
-          ->  Custom data properties
+          ->  Custom data properties. These are inherited by the routes(including child).
+          ->  Child states can also inherit resolved dependencies from parent state(s), which they can overwrite. 
+          ->  we can access it in $scope of the controller
+        Transition Hooks:
+          ->  They allow us to hook into state changes.
+          $transitionsProvider:
+            ->  Need to inject $transitionsProvider. This allows us to set-up, GLOBAL HOOK for a particular route.
+            ->  $transitionsProvider.onStart({}, callbackFunction)
+                Object properties(First param of onStart):
+                  to: function (state)          //  gets current state(state to move in) as param. This has all details of the state(route). 
+                                                //  returns boolean
+            ->  callbackFunction syntax is function($transition$) { }           // can use $transition$ to control navigation. Also, end $ is IMPORTANT
+          $transitions:
+            ->  $transitions are also at GLOBAL Level but if declared at Component level it will behave at Component level.(No $ in end of $transitions)
+            ->  $transitions can be injected inside of Controllers. 
+            ->  This kicks in ONLY if the Component on which this is configured is LOADED(due to some route)
+            ->  $transitions.onStart(
+                { to: "myState"},           // myState.* 
+                callbackFunction);
+            ->  callbackFunction syntax is function($transition$) { }           // can use $transition$ to control navigation. Also, end $ is IMPORTANT
+            ->  If we leave the {}(First arg) as empty, then it will apply to all states which uses this Component
+            ->  We need to manually destroy this when the component is destroyed. 
+                i.e store $transitions.onStart to a variable and call(variable()) that inside this.onDestroy(function() { })
+                We don't have to do this for $transitionsProvider, it takes care of itself.
+          uiCanExit:
+            ->  Inside the controller, this callback is used to inform a view that it is about to be exited, due to a new Transition..
+                We can run some logic like asking user for confirmation etc..
+            ->  should return boolean value.
+          Hooks on .state():                            // i.e while defining state(routes)
+            onEnter:
+              ->  When we enter a state
+            onExit:
+              ->  When we exit a state
+            onRetain:
+              ->  When the state is retained(i.e when navigating inside of child routes, parent state is retained)
         Notes:
-          -> We can't have two different states named "edit" even if they have different parents.
+          ->  We can't have two different states named "edit" even if they have different parents.
+          ->  $state is the service provided by the ui-router module. Used for navigating states etc..
            
   
 
@@ -606,6 +674,7 @@ Forms:
         // myForm.isValid etc..
     ->  We can add our own custom validation using ngModelCtrl.$validation.myErrorField = function(modelValue, viewValue) { // reurn BOOLEAN_EXPRESSION }     // ngModelCtrl is required using require field in our directive($ctrl)
         We can then access myErrorField using formName.fieldName.$error.myErrorField to see if has true value.
+    ->  Add novalidate attribute on form element to prevent native form validation.
         NgMessages:
           ->  We can use ng-message module to display easy error messages for our form.
               It allows us to group all errors of a particular element together.
@@ -735,7 +804,7 @@ Testing:
             var $httpBackend = $injector.get('$httpBackend')
             $httpBackend.when('url').respond({})                                  // Need to ALSO STUB the TEMPLATE URL, because it is also loaded by angular
           }))
-      ->  Here, myState has all the properties of the state declaration.
+      ->  Here, myState has all the properties of the state declaration(i.e route declarations).
       ->  myState.resolve.user($http, {}).then(function() {})                                // Here, use is one property in resolve object
       ->  We can also test the api getting fired using $httpBackend.expectGet('url')
       ->  $httpBackend.flush() in the end.

@@ -1,0 +1,13 @@
+Install heroku
+  ->  heroku --version
+  ->  Check internet
+
+heroku login
+heroku keys:add
+heroku create
+git push -u heroku master OR git push heroku(second times and above)
+heroku open
+
+Run custom commands on heroku
+
+->  heroku run rails db:migrate

@@ -1,2 +1,3 @@
 1 ->  Always use the HTML coded characters for special characters 
       e.g &#215; for x
+2 ->  novalidate HTML attribute is used to disable browser's native FORM validation.
