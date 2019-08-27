@@ -1,10 +1,16 @@
 1 ->  rails console is built on top of interactive Ruby (irb). The console also has access to the Rails environment.
       But, we have to require the file(s) that we are planning to use.
-2 ->  Rails defines three types of environment, namely development, test and production.
+2 ->  Rails defines three types of environment, namely development, test and production. The default environment for the Rails server and Rails console is development.
+      We can change it using rails server --environment production
 3 ->  We can comment in .erb file using the <%#=  %> syntax. i.e just add # between % and =
+4 ->  To know what the env the code is currently running. we can do Rails.env.development?
+5 ->  Inside of the controller action, we can access the request object using the `request` field itself. This field is just magically accessible.
+      e.g request.original_url
+6 ->  Redirects don’t happen until an explicit return or the end of the method, so any code appearing after the redirect is still executed
 
 Namings Conventions:
-  ->  model(database fields) as singular and controller and views as plaural
+  ->  model(database fields) as singular and controller and views as plural. But, the actual table name will be plural only. 
+      Since the model class represents a single user.
   
   Cases:
     ->  Classes
@@ -12,6 +18,17 @@ Namings Conventions:
           file name   - snake case
     ->  
 
+
+Controllers:
+  ->  Render works in controller actions as well(Also used in rendering partials).
+      e.g render 'new'
+
+      Common method to be used inside of the model class
+      before_action:
+        ->  A method that gets executed before the controller action.
+        ->  before filters apply to every action in a controller. We can configure it using the :only 
+            Synatax:
+            before_action :logged_in_user, only: [:edit, :update]
 
 Layouts:
   ->  It is kind of like the top level of our controller view. i.e Inside of the layout, we add <%= yield %>, to include controller view.
@@ -25,6 +42,7 @@ Partials:
 
 Helpers:
   ->  We can define helper methods and use them in our views.(without requiring)
+  ->  By default, methods defined in any helper file are automatically available in any view.
   link_to:
     ->  to create links (i.e create anchor tag <a>).
     ->  Can be used along with image_tag helper - as first attribute to add the imgage for the link.
@@ -41,8 +59,82 @@ Routes:
       Syntax:
         get  '/help', to: 'static_pages#help', as: 'helf'              //  url - /help and path - static_pages#help and as - name for the route
         naive syntax  - get 'static_pages/help'
-  ->  Then we can access the route name in our entire application(including views)(e.g help_path WITHOUT quotes)
-      If we rename the route using `as: "helf"`, we still need to use it as helf_path.
+      Notes:
+        ->  We can then access the route name in our entire application(including views)(e.g help_path WITHOUT quotes). The name comes from actual path(e.g /help) and append _path to it.
+            i.e the constant url path variable for the path '/help' becomes help_path.
+            If we rename the route using `as: "helf"`, we still need to use it as helf_path.
+  ->  We can access/modify a resource by defining the following line in routes.rb file
+      resources :users
+      This makes available all the combinations of REST apis along with the corresponding url path variable to access the corresponding urls.
+  ->  We we use variable params(not definied anywhere bu automatically available), inside of our controller. We can access params object of the request.
+  ->  Inside of controller, we can use redirect_to url_path(my_obj), in order to redirect to the desired page
+      We can skip the url_path and just call redirect_to my_obj. Rails automatically redirects to the appropriate url_path(i.e one associated with the controller).
+  ->  We can add a resource(i.e implement all form of REST apis), and specify what all the methods we want to execute.
+      e.g resources :account_activations, only: [:edit]
+
+Sessions:
+  ->  We can use the session method which places a temporary cookie on the user’s browser containing an encrypted version of the user’s id, which allows us to retrieve the id on subsequent pages.
+      This is removed when the browser closes or the user logs out
+      Synatax:
+        session[:user_id] = user.id
+  ->  We can also set permanent cookies using the cookies method.
+      Synatax:
+        cookies[:user_id] = user.id
+        cookies.permanent.signed[:user_id] = user.id            // for permanent and signed cookies. We can retrieve them using cookies.signed[:user_id])
+        cookies.delete(:user_id)                                //  for deleting cookies
+
+Debug:
+  ->  We can call the debug method to debug our application. e.g <%= debug(params) if Rails.env.development? %>
+  ->  To actually debug, we just need to add a line consisting of debugger to our application(e.g controller file). 
+      We can continue execution by pressing ctrl + D. This is happening using the byebug gem.
+
+Databases:
+  ->  The default library for interacting with the database is called Active Record.
+  ->  Rails has a feature called migrations to allow data definitions to be written in pure Ruby, without having to learn an SQL data definition language (DDL)
+  ->  generate command creats a new file called a migration. Migrations provide a way to alter the structure of the database incrementally,
+      so that our data model can adapt to changing requirements.
+  ->  If a column is of boolean value. Rails automatically creats a method for that column. e.g if admin is a boolean valued column, then we automatically 
+      have a method named admin? on the data row(model) object.
+  ->  We can add our own error to the data model field using `@user.errors.add(:password, "can't be empty")`
+      Common methods:
+      save:
+        ->  Saves the data model to database.
+
+      create:
+        ->  Creates a new record with the given hash.
+      
+      reload:
+        ->  Get the data from the database for the record. Useful when the data object is modified after getting from database.
+
+      update_attribute:
+        ->  Updates a single column
+
+      update_attributes:
+        ->  Does both the update(data object) and the save(in database) in one step
+
+      Common method to be used inside of the model class
+
+        before_create:
+          ->  This is called, before we create the data in database.(i.e not every time the data is updated)
+              e.g before_create :create_activation_digest
+        before_save:
+          ->  Callback that gets called before saving the data to database.
+              e.g before_save { self.email = email.downcase }
+        has_secure_password:
+          ->  When included in a model, this one method adds the following functionality  
+            ->  The ability to save a securely hashed password_digest attribute to the database
+            ->  A pair of virtual attributes18 (password and password_confirmation), including presence validations upon object creation
+                and a validation requiring that they match
+            ->  An authenticate method that returns the user when the password is correct (and false otherwise)
+        validates:
+          ->  Inside of the data model class, we can use the validates method(Yes validates is a method) with arguments presence: true
+              e.g validates :name, presence: true         // where :name is the column name being validated
+              presence
+              length                                      //  { maximum: 50 }
+              format                                      //  { with: /<regular expression>/ }
+              uniqueness                                  //  boolean value or object. e.g. { case_sensitive: false } 
+          ->  We can check for the errors in the object using `userObj.errors.full_messages` OR just `userObj.errors`
+        
 
 The asset pipeline:
   ->  In particular, the asset pipeline combines all the application stylesheets into one CSS file (application.css), combines all the
@@ -63,7 +155,7 @@ The asset pipeline:
 
 SCSS:
   ->  Sass is a language for writing stylesheets that improves on CSS in many ways.
-  ->  most important improvements, nesting, variables and mixins.
+  ->  most important improvements include nesting, variables and mixins.
       Nesting:
         .center {
           text-align: center;             // only for .center
@@ -79,6 +171,17 @@ SCSS:
             Syntax:
               $light-gray: #777;
               We can use like i.e color: $light-gray;
+      Mixins:
+        ->  A mixin allows a group of CSS rules to be packaged up and used for multiple elements.
+            Synatax:
+            @mixin box_sizing {
+              -moz-box-sizing:    border-box;
+              -webkit-box-sizing: border-box;
+            }
+            Can be used like 
+            .something {
+              @include box_sizing;
+            }
   ->  Import CSS gems
       e.g @import "bootstrap-sprockets";
 
@@ -88,6 +191,18 @@ Testing:
       inside of test/test_helper.rb - add below lines
       require "minitest/reporters"
       Minitest::Reporters.use!
+      Assertions:
+        assert
+        assert_response
+        assert_select
+        assert_not
+        assert_no_difference                - we arrange for a comparison between some method (e.g. User.count) before and after the contents inside the assert_no_difference block.
+        assert_difference                   - To make sure that there is actually a difference before after the block execution.
+        assert_redirected_to
+        assert_match                        - regex match. e.g assert_match 'foo', 'foobar'      # true
+
+  ->  Inside controller TESTS, we can manipulate the session method directly. But, inside integration TESTS, we can’t manipulate session directly.
+  ->  ActionMailer::Base.deliveries can be used to check for mail deliveries in tests.
   ->  Automated tests with Guard - detects file changes and run the test automatically.
       ->  bundle exec guard init            //  Generates Guardfile file
       ->  guard :minitest, spring: "bin/rails test", all_on_start: false do

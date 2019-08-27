@@ -1,8 +1,9 @@
 ->  understand routes.rb file
-->  validates :content, length: { maximum: 140 }
 ->  has_many :microposts
 ->  belongs_to :user
+->  has_secure_password
 ->  layout
+->  Digest::MD5::hexdigest(email.downcase)
 
 
 Dynamic contents:
@@ -18,7 +19,6 @@ Tests:
 ->  assert_response
 ->  assert_select
 
-what is Active Record ??
 
 Update the layout links to use the helf route from Listing 5.29.
 

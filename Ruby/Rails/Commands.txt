@@ -15,16 +15,23 @@ Installation and starting server:
 
 rails commands:
   ->  rails generate scaffold User name:string email:string
-  ->  rails generate controller StaticPages home help               // here StaticPages is the controller and home, help are actions
-  ->  rails destroy controller StaticPages home help               // Opposite of above
+  ->  rails generate controller StaticPages home help               //  here StaticPages is the controller and home, help are actions. 
+                                                                        In this case, views for home and help will also be generated.
+  ->  rails destroy controller StaticPages home help                //  Opposite of above
   ->  rails generate model User name:string email:string
   ->  rails destroy model User
-  ->  rails db:migrate
-  ->  rails db:rollback                                             // undo single migration step
-  ->  rails db:migrate VERSION=0                                    // to undo all mogration steps
-  ->  rails test
-  ->  rails test:integration                                        // only running integration tests inside of the test/integration folder
-  ->  rails generate integration_test site_layout                   // generating a template test, site_layout
+  ->  rails generate integration_test site_layout                   //  generating a template test, site_layout
+  ->  rails db:migrate                                              //  Needs to be run when we make changes to the model migration file.
+  ->  rails db:rollback                                             //  undo single migration step
+  ->  rails db:migrate VERSION=0                                    //  to undo all mogration steps
+  ->  rails db:migrate:reset                                        //  To clear all the data in our database
+  ->  rails generate migration add_index_to_users_email             //  To modify existing database structure
+  ->  rails generate mailer UserMailer account_activation password_reset
+  ->  rails test 
+  ->  rails test:integration                                        //  only running integration tests inside of the test/integration folder
+  ->  rails test:models
+  ->  rails console
+  ->  rails console --sandbox                                       //  Any modifications we make will be rolled back on exit” (i.e., undo) any database changes 
 
 Shortcuts:
   Full command	Shortcut

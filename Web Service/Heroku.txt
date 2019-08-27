@@ -7,6 +7,12 @@ heroku keys:add
 heroku create
 git push -u heroku master OR git push heroku(second times and above)
 heroku open
+heroku logs
+
+For running tasks (like db migration) involving server downtime
+
+heroku maintenance:on
+heroku maintenance:off
 
 Run custom commands on heroku
 

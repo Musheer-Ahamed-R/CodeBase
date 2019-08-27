@@ -60,3 +60,5 @@
 
 26 -> ('a'..'z').to_a.shuffle[0..7]       # Pull out the first eight elements.
       Understand why we are calling [0..7] on shuffle. isn't shuffle a method on array ??
+
+27 -> Can we omit self. inside of instance methods ??. i.e for accessing instance fields or methods. 

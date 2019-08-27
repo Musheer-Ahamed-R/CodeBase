@@ -141,6 +141,7 @@ Methods:
           my_func "Sample", name: "Musheer", email: "m@m.com", pass: "pass"     
           // inside of my_func options param value will be { name: "Musheer", email: "m@mc.com" ...}
    -> When using terinary operator, we should use () if we calling any method that returns a boolean
+   -> We can use MyClass.method_1 or self.method_1 to declare class methods.
    Types of Encapsulation:
       -> private:
             Syntax:
@@ -305,6 +306,7 @@ Symbol:
    -> The symbol object will be unique for each different name but does not refer to a particular instance of the name.
       i.e if the same symbol is used in code to assign to different objects, the symbol obj will be same, but its actual 
       type will be different according to the context in which it is used.
+   -> If used in string interpolation. e.g "Hey - #{:failure}". The symbol(:success in this case), gets converted to a string.
 
 
 Collections:
