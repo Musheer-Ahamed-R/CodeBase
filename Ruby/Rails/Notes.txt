@@ -52,6 +52,8 @@ Helpers:
     ->  This can be added to add the image element. The path to an image and an optional options hash.
         Syntax:
         <%= image_tag("kitten.jpg", alt: "Cat Image") %>
+  time_ago_in_words:
+    ->  
 
 Routes:
   ->  Rails conventionally uses named routes. i.e for a url e.g (/about), we can name it as about_path and use it in our application(views).
@@ -96,6 +98,17 @@ Databases:
   ->  If a column is of boolean value. Rails automatically creats a method for that column. e.g if admin is a boolean valued column, then we automatically 
       have a method named admin? on the data row(model) object.
   ->  We can add our own error to the data model field using `@user.errors.add(:password, "can't be empty")`
+  ->  The errors are not populated, unless we tried to save the record or call valid? method.
+  ->  If we have a foreign key relations with a table. We can access one using the other(both ways). e.g micropost.user OR user.microposts
+      In this case, contructing the dependent record(micropost in this case), is preferred to be done using the parent record itself. e.g @user.microposts.build(content: "Lorem ipsum")
+  ->  We can add condition(i.e where clause) by using the where method.
+      e.g  Micropost.where("user_id = ?", id)
+      Associations:
+        ->  The has_one, belongs_to, has_many are all different forms of foreign key references. 
+        ->  The field which is specified BECOMES an ACTUAL field on the class, which on accessing fetches the RELATED(FOREIGN KEY) ROWS.
+            e.g belongs_to: followed, class_name: "User". Here if we access row.followed, it will go and fetches all the related row(s) from User table.
+            The same is also applicable for has_many too.
+
       Common methods:
       save:
         ->  Saves the data model to database.

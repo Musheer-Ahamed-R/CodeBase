@@ -107,6 +107,8 @@ Methods:
    -> For a method that expects a block/method to run on each single element inside of the collection, we can pass in built in method. 
       This shorthand is called as called “symbol-to-proc”. i.e we use &:
       e.g .select(&:even?) OR .map(&:to_i) 
+      Note:
+         -> We can also use this to pick a certain field from the object(hash). .eg map(&:id) 
    -> Splat 
          -> lets us pass in multiple arguments but treats them as a regular array inside of the method
             *my_name
