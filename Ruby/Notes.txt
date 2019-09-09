@@ -195,6 +195,19 @@ Methods:
          -> Only -> (stabby lambda) takes argument outside of code block
             e.g -> (arg) { puts arg }
 
+  yield keyword:
+    ->  yield keyword — in association with a block allows to pass a set of additional instructions during a method invocation.
+        i.e when a block is recognised by the Ruby parser then it’ll be associated to the invoked method and literally replaces the yield(s) in the method
+    ->  When block is not passed to a method that uses yield, a LocalJumpError is raised. We can handle this gracefully by using the block_given? method.
+        e.g yield if block_given?
+    ->  yield can take a list of arguments that will be available inside the block.
+    ->  It’s possible to get the return value of a block by simply assigning the return value of a yield to a variable
+        Syntax:
+        my_method("val1") { "My Block" }
+        Note:
+          ->  The method can also have paramas in addition to the block.
+
+
 Class:
    -> We can create a class variables and also set getters and setters in a single line
       e.g attr_accessor :title, :name, :url 
@@ -237,6 +250,15 @@ Modules:
         include MyModule
         // code inside class
       end
+  ->  we can include  module using 
+      include     - module methods becomes instance methods
+      extend      - module methods becomes class methods
+      prepend     - module method become instance methods, but when calling, the module method if available is executed first.
+
+      Notes:
+        ->  We can also `extend` class methods(i.e static methods) by doing classInstance.extend ClassOrModuleToExtend. Now, this class instance
+            will have all the methods of the ClassOrModuleToExtend as its class methods(static methods).
+
 Loops:
    -> while
       Syntax:

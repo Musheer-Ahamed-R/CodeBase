@@ -1,244 +1,339 @@
-CSS Info :-
-
--> Cascading Style Sheets(CSS) is a style sheet language used for describing the look and formatting of a document written in a markup language.
+3	->  If a single basic selector in a chain or group is invalid, like when using an unknown pseudo-element or pseudo-class, the whole group of 
+	    selectors is invalid and therefore the entire rule is invalid and ignored.
+4	->  The whitespace we need to be careful of in CSS is the whitespace around the properties and their values. i.e padding- left is Invalid.
+      *******
+5	->  Properties override other properties, but rules(entirely) DONT overriding other rules. When several CSS rules match the same element, they
+	    are ALL applied to that element. Only after that are any conflicting properties evaluated to see which individual styles will win over others(Cascading).
+6 ->  The browser applies some default styling to some elements. e.g default styles for <p> element.
+7 ->  Viewpost means the visible area of the page in the browser(Not the entire document).
+8 ->  Replaced elements(images and videos), when they become part of a grid or flex layout, have different default behaviors, essentially to avoid them being
+      stretched strangely by the layout.
+9 ->  Follow the reduced test case approach(have only the buggy part) can help in solving a problem. Take this as a last resort.
+10->  We can use multiple column layout method to bring in the news paper effect(i.e text spread across multiple columns).
 
 Definition
+	Selectors:
+  	->  A pattern that matches some elements on the page.
 
-	-> Selectors 	:	A pattern that matches some elements on the page.
+	Properties
+    ->  Human-readable identifiers that indicate which stylistic features (e.g. font, width, background color) you want to change.
 
-	-> Properties	:	Human-readable identifiers that indicate which stylistic features (e.g. font, width, background color) you want to change.
+  Values
+    ->  Each specified property is given a value, which indicates how you want to change those stylistic features 
+        (e.g. what you want to change the font, width or background color to.)
 
-	-> Values		: 	Each specified property is given a value, which indicates how you want to change those stylistic features (e.g. what you want to 
-						change the font, width or background color to.)
-
-	-> Declaration 	:	A property paired with a value is called a CSS declaration.
+	Declaration
+    ->  A property paired with a value is called a CSS declaration.
 	
-	-> Declaration 	:	CSS declarations are put within CSS Declaration Blocks. 	
-	   Block						
+	Declaration
+    ->  CSS declarations are put within CSS Declaration Blocks. 	
+	                  Block						
+	CSS Rules
+    ->  CSS declaration blocks are paired with selectors to produce CSS Rulesets (or CSS Rules).
+	
+  At-Rules:
+    ->  These are special rules(CSS Rules) which allow logic for rendering/applying CSS rules.
+    ->  Each type of at-rule, will have its own internal syntax and semantics.
+        Syntax:
+          @import 'styles2.css';                  //  Single statement
+          OR
+          @media (min-width: 30em) {              //  Multiple/Nested statements
+            body {
+              background-color: blue;
+            }
+          }
 
-	-> CSS Rules	:	CSS declaration blocks are paired with selectors to produce CSS Rulesets (or CSS Rules).
-
-
-	-> CSS Statements
+  CSS Statements
 			->  CSS rules are one type of so-called CSS statements. The other types are as follows:
 
 					-> At-rules	:
 							-> They are used in CSS to convey metadata, conditional information, or other descriptive information. They start with an at 
 							   sign (@), followed by an identifier to say what kind of rule it is, then a syntax block of some kind, ending with a 
 							   semi-colon (;). 
-							-> Each type of at-rule, defined by the identifier, will have its own internal syntax and semantics. Examples include:
 
-								-> @charset and @import (metadata) [e.g @import 'custom.css'; ]
-								-> @media or @document (conditional information, also called nested statements, see below.)
-								-> @font-face (descriptive information)
+  
 
-					-> Nested statements :
-							-> They are a specific subset of at-rule, the syntax of which is a nested block of CSS rules that will only be applied to the 
-							   document if a specific condition is matched
-
-							   	-> The @media at-rule content is applied only if the device which runs the browser matches the expressed condition;
-								-> The @supports at-rule content is applied only if the browser actually supports the tested feature;
-								-> The @document at-rule content is applied only if the current page matches some conditions.
-
-								e.g
-									@media (min-width: 801px) {
-									  body {
-									    margin: 0 auto;
-									    width: 800px;
-									  }
-									}
-
-	-> CSS Shorthands 
-	
-			-> Some properties like font, background, padding, border, and margin are called shorthand properties. This is because they allow you to set 
-			   several property values in a single line, saving time and making your code neater in the process.
-
-			   		e.g 
+  CSS Shorthands
+        ->  Some properties like font, background, padding, border, and margin are called shorthand properties. They allow you to set 
+            several property values in a single line.
+            e.g 
 			   			padding: 10px 15px 15px 5px;
-
 			   			Does this same thing as all these:
-
 			   			padding-top: 10px;
-						padding-right: 15px;
-						padding-bottom: 15px;
-						padding-left: 5px;	
+              padding-right: 15px;
+              padding-bottom: 15px;
+              padding-left: 5px;	
+
+Property Values:
+  
+  Function:
+    ->  Some CSS properties takes a function as a value. This allows us to do simple math from within your CSS.
+        Syntax:
+          width: calc(90% - 30px);            // value is 90% - 30px. where 90% is dynamic value. 
+
+CSS Selectors:
+  ->  In CSS, selectors are used to target the HTML elements on our web pages that we want to style.
+      Type selectors aka element selectors
+        ->  This selector selects a given HTML element by name.
+      Class selectors
+        ->  Multiple elements in a document can have the same class value and a single element can have 
+            multiple class names separated by white space. 		
+            Syntax:
+              .my-class
+      ID selectors
+        ->  It's the most efficient way to select a single element.
+            Syntax:
+              #my-id
+      Universal selector
+        ->  It allows selecting all elements in a page
+        ->  It is often used in combination with other selectors
+        Notes:
+          ->  Careful when using the universal selector. As it applies to all elements, using it in large web pages can have a 
+              perceptible impact on performance: web pages can be displayed slower than expected. There are not many instances where 
+              you'd want to use this selector.
+      Attribute selectors :
+        [attr]:
+          ->  attribute name alone. Can also be added with an element. e.g a[href]
+        [attr=value]
+          ->  attribute and value(exact match)
+        [attr~=value]:
+          ->  attribute and value(exact match, but values seperated by space. e.g for class attributes)
+        [attr^=value]
+          ->  attribute and value prefix
+        [attr$=value]
+          ->  attribute and value suffix
+        [attr*=value]
+          ->  attribute and value contains
+      Pseudo-Selectors:
+        ->  These don't select actual elements, but rather certain parts of elements, or elements only in certain contexts. They come in two 
+            main types — pseudo-classes and pseudo-elements.
+        ->  They only work with a selector (i.e selector:pseudo-selector).
+        ->  The rule applied by the Pseudo-Selectors, is toggled back to its OLD STATE, once the element leaves the state or condition.
+            Pseudo-classes:
+              ->  A CSS pseudo-class is a keyword added to a selector that specifies a special state of the selected element(s).
+                  It may be due to its position in the DOM(e.g :first-child), or due to some user action(e.g :hover)
+                  Syntax
+                    my-selector:hover OR h1:hover
+                  Note:
+                    ->  Pseudo class selectors with different formats. 
+                        :empty
+                        element()
+                        <filter-function>
+                        <image>
+                        ::first-letter (:first-letter)
+                        @ornaments
+
+            Pseudo-elements : 
+              ->  A CSS pseudo-element is a keyword added to a selector that lets you style a SPECIFIC PART of the selected element(s).
+                  e.g select first line of a paragraph element
+                  Syntax:
+                    p::first-line OR p::selection
+      Combinators: 
+        A, B		Matches A or B(without any conditions)
+        A B			Matches B if
+                ->  B is a descendant of A(May not be direct child. i.e child of child)
+        A > B		Matches B if
+                ->  B is a DIRECT descendant of A.
+        A + B		Matches B if 
+                ->  A and B are sibilings(i.e have same parent)
+                ->  B is immediately followed by A.(No other element in between)
+        A ~ B		Matches B if 
+                ->  A and B are sibilings(i.e have same parent)
+                ->  B is followed by A.(Not immediately, but should be followed)
+
+Cascade:
+  ->  Incases where there are multiple CSS rules for an Element, which CSS rule "wins", and ends up finally applied to 
+      the element is controlled by a mechanism called the Cascade. This is also related to inheritance (elements will take some property values from their parents, but not others.) 
+  ->  What selectors win out in the cascade depends on three factors (these are listed in order of weight — earlier ones will overrule later 
+      ones)
+      -> Importance
+      -> Specificity
+      -> Source order
+    -> Importance:
+        ->  This makes sure that a certain rule will always win over all others
+            e.g  border: none !important;
+        Notes : 
+          ->  The only way to override this !important declaration would be to include another !important declaration of the same 
+              specificity, later in the source order.
+    -> Specificity:
+        ->  Specificity is basically a measure of how specific a selector is — how many elements it could match.
+        ->  This is NOT related to Inheritence.
+        ->  The amount of specificity a selector has is measured using four different values (or components), which can be thought of as
+            thousands, hundreds, tens and ones — four single digits in four columns. It is the sum of all the selectors combined for a rule.
+            Thousands:
+              ->  The matching selector is inside a <style> element or the declaration is inside a style attribute.
+            Hundreds:
+              ->  ID selector contained inside the overall selector.
+            Tens:
+              ->  Score one in this column for each class selector, attribute selector, or pseudo-class contained inside the overall selector.
+            Ones:
+              ->  Score one in this column for each element selector or pseudo-element contained inside the overall selector.
+            e.g
+              h1 						        ->  0001
+              #important				    ->  0100
+              .my-class             ->  0010
+              h1 + p::first-letter	->  0003      // It is sum of all selectors
+            Notes : 
+              ->  Note: Universal selector (*), combinators (+, >, ~, ' ') and negation pseudo-class (:not) have no effect on 
+                  specificity.
+    -> Source order:
+        ->  If multiple competing selectors have the same importance and specificity, the third factor that comes into play to help 
+            decide which rule wins is source order — later rules will win over earlier rules
+Inheritance:
+  ->  Some property values applied to an element will be inherited by that element's children, and some won't.
+  ->  The Properties are inherited ONLY if the element does not have that property on its own(or from browser's default styles).
+      e.g it makes sense for font-family and color to be inherited and it makes sense for margin, padding, border, and 
+      background-image to NOT be inherited
+  Controlling inheritance:
+    ->  inherit
+          ->  This value sets the property value applied to a selected element to be the same as that of its parent element.
+    ->  initial
+          ->  This value sets the property value applied to a selected element to be the same as the value set for that element 
+              in the BROWSER'S DEFAULT STYLE SHEET. If no value is set by the browser's default style sheet and the property is 
+              naturally inherited, then the property value is set to inherit instead.	
+    ->  unset: 
+          ->  This value resets the property to its natural value, which means that if the property is naturally inherited it 	
+              acts like inherit, otherwise it acts like initial.
+
+CSS Box Model:
+  ->  There are two types of boxes - block boxes and inline boxes.
+      Block Boxes:
+        ->  The box will extend in the inline direction to fill the space available(i.e fill up 100% available width)
+        ->  The box will break onto a new line.
+        ->  The width and height properties are respected.
+        ->  Padding, margin and border will cause other elements to be pushed away from the box.
+      Inline Boxes:
+        ->  The box will not break onto a new line.
+            !!!!!!!
+        ->  The width and height properties will not apply.
+        ->  Padding, margin and borders will APPLY but will not cause other inline boxes to move away from the box.
+            i. the padding and border OVERLAPS other elements
+
+      Note:
+        ->  Boxes also have outer and inner display types. The outer display type is mentioned above(whether the element itself is block or inline).
+            The inner display types dictates how elements INSIDE that box are laid out.(e.g `display: flex` means element itself will be block and inner elements will behave as flex)
+        ->  We can use `display: inline-block`, to conbine some of the properties of inline and block.
+            https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model#Using_display_inline-block
+      The Box model:
+        ->  The full CSS box model applies to block boxes, inline boxes only use some of the behavior defined in the box model. 
+            Parts of a Box:
+              Content box:
+                ->  The area where your content is displayed, which can be sized using properties like width and height.
+              Padding box:
+                ->  The padding sits around the content as WHITE SPACE; its size can be controlled using padding and related properties.
+                ->  It is typically used to push the content away from the border.
+              Border box:
+                ->  The border box wraps the content and any padding. Its size and style can be controlled using border and related properties.
+              Margin box:
+                ->  The margin is the outermost layer, wrapping the content, padding and border as WHITE SPACE between this box and other elements. It is the invisible space around our box.
+                    Its size can be controlled using margin and related properties.
+                    !!!!!!!!!
+                ->  It pushes other elements away from the box. 
+                ->  Margins can have positive or negative values. Setting a negative margin on one side of your box can cause it to OVERLAP other things on the page. 
+                    i.e In this case, the box(i.e including the border) moves(does not grow!!) moves from its position up to the specified negative value into the other element(OVERLAPS). e.g margin-top: -10px;
+                ->  If we have two adjacent elements whose margins touch, those margins will combine to become one margin, which is the size of the largest individual margin.
+                    Here, one margin in the sense that, the margin(space) between the boxes.
 
 
-	-> CSS Selectors 
-	
-			-> In CSS, selectors are used to target the HTML elements on our web pages that we want to style. There are a wide variety of CSS selectors 
-			   available, allowing for fine grained precision when selecting elements to style.
+            Types of Box model:
+              The standard Box model:
+                ->  The padding and border are added to the width/height used for the content box. (i.e The margin is not counted towards the actual size of the box, 
+                  but it affects the total space that the box will take up on the page, but it space is outside the box)  
 
-			   Types : 
+              The alternative Box model
+                ->  The width/height is JUST the width of the visible box on the page(i.e content area width is that width minus the width for the padding and border)
+                    e.g if elem width is 300 and padding is 90 and border is 10px. Then the element width is reduced to 100(i.e 100 + 90 + 90 + 10 + 10). i.e the final width will be fixed to 300.
+                    Syntax:
+                      box-sizing: border-box; 
 
-			   		-> Simple selectors: Match one or more elements based on element type, class, or id.
-					-> Attribute selectors: Match one or more elements based on their attributes/attribute values.
-					-> Pseudo-classes: Match one or more elements that exist in a certain state, such as an element that is being hovered over by the 
-					   mouse pointer, or a checkbox that is currently disabled or checked, or an element that is the first child of its parent in the DOM 
-					   tree.
-					-> Pseudo-elements: Match one or more parts of content that are in a certain position in relation to an element, for example the 
-					   first word of each paragraph, or generated content appearing just before an element.
-					-> Combinators: These are not exactly selectors themselves, but ways of combining two or more selectors in useful ways for very 
-					   specific selections. So for example, you could select only paragraphs that are direct descendants of divs, or paragraphs that come 
-					   directly after headings.
-					-> Multiple selectors: Again, these are not separate selectors; the idea is that you can put multiple selectors on the same CSS rule, 
-					   separated by commas, to apply a single set of declarations to all the elements selected by those selectors.
+Overflow:
+  ->  Overflow happens when you have too much content in a box, so it won't fit inside it comfortably.
+      Syntax:
+        overflow: auto;               // scroll appears if the content could not fit into the box
+        overflow: scroll;
+        overflow: hidden;
 
+Values:
+  ->  A value in CSS is a way to define a collection of allowable sub-values. e.g <color> (NOT color property) denotes all color values e.g keywords(black, green), hex values, rgb() functions, etc.
+      Sample Values:
+        <integer>     - whole number such as 1024 or -55.
+        <number>      - a decimal number. may have negative value.
+        <dimension>   - Includes <length>, <angle>, <time>, and <resolution>
+        <percentage>  - fraction of some other value.
+        <color>       - keyword(e.g red, blue), Hexadecimal RGB values(e.g #02798b), rgb() and rgba()(e.g rgb(197, 93, 161), hsl() and hsla()
+        <functions>   - calc(), url(), rgb(), hsl()
 
+      Notes:
+        ->  There are absolute values and relative values. Incase of relative values, it can be relative to the parent or the document.
+        ->  If we use % value for the margin and padding, then its value is corresponding to the WIDTH of the PARENT Element(Not is own element too). Its the same for margin-left, margin-top etc..
+            (Parent element height is never considered).
 
-				Simple selectors : 
+Form elements:
+  ->  In some browsers, form elements do not inherit font styling by default. Therefore we should add this rule to your CSS.
+      https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Images_media_form_elements#Inheritance_and_form_elements
+  ->  For consistency it is a good idea to set margins and padding to 0 on all elements, then add these back in when styling particular controls.
 
-					-> Type selectors aka element selectors
-						-> This selector is just a case-insensitive match between the selector name and a given HTML element name. 
-						-> This is the simplest way to target all elements of a given type.	   
+CSS Positioning:
+  ->  The methods that can change how elements are laid out in CSS are as follows:
+        ->  display
+        ->  Floats
+        ->  position
+        ->  Table layout
+        ->  Multi-column layout
 
-					-> Class selectors
-						-> The class selector consists of a dot, '.', followed by a class name. 
-						-> It is also worth knowing that multiple elements in a document can have the same class value and a single element can have 
-						   multiple class names separated by white space. 		
+    display:
+      ->  The main methods of achieving page layout in CSS are all values of the display property.
+          e.g block, inline, flex, grid
 
-					-> ID selectors
-						-> The ID selector consists of a hash/pound symbol (#), followed by the ID name of a given element
-						-> It's the most efficient way to select a single element.
+    Flexbox:
+      ->  They are designed to make it easy for us to lay things out in ONE dimension — either as a row or as a column.
+      ->  The default behaviour is to stretch to the height of the tallest item, because the initial value of the align-items property is stretch.
+          Properties:
+            flex-direction
+            align-items
+            flex
+    
+    Grid:
+      ->  Grid Layout is designed for TWO dimensions — lining things up in rows and columns.
+          Properties:
+             grid-template-rows
+             grid-template-columns
+             grid-gap
+             grid-column
+             grid-row
 
-					-> Universal selector
-						-> It allows selecting all elements in a page
-						-> It is often used in combination with other selectors 		   
-
-						Notes : 
-							-> Careful when using the universal selector. As it applies to all elements, using it in large web pages can have a 
-							   perceptible impact on performance: web pages can be displayed slower than expected. There are not many instances where 
-							   you'd want to use this selector.
-
-				Attribute selectors :
-					
-					-> Attribute selectors are a special kind of selector that will match elements based on their attributes and attribute values.
-
-					-> Presence and value attribute selectors
-						-> These attribute selectors try to match an exact attribute value:
-
-						Types :
-							-> [attr] : This selector will select all elements with the attribute attr, whatever its value.
-							
-							-> [attr=val](Exact Match) : This selector will select all elements with the attribute attr, but only if its value is val.
-							
-							-> [attr~=val](Contains) : This selector will select all elements with the attribute attr, but only if the value val is one 
-							   of a space-separated list of values contained in attr's value. for example a single class in a space-separated list of 
-							   classes.(This is not like *= in below)
-
-					-> Substring value attribute selectors   
-						-> Attribute selectors in this class are also known as "RegExp-like selectors" (but to be clear, these selectors are not true 
-						   regular expression):
-
-						Types : 
-						
-							-> [attr|=val] : This selector will select all elements with the attribute attr for which the value is exactly val or starts 
-							   with val- (careful, the dash here isn't a mistake, this is to handle language codes.). 
-							   (This is similar to [attr=values] + begining with val- (e.g lang="fr-FR")). 
-							
-							-> [attr^=val] : This selector will select all elements with the attribute attr for which the value starts with val.
-							
-							-> [attr$=val] : This selector will select all elements with the attribute attr for which the value ends with val.
-							
-							-> [attr*=val] : This selector will select all elements with the attribute attr for which the value contains the string val (
-							   unlike [attr~=val], this selector doesn't treat spaces as value separators but as part of the attribute value.)   
-
-				Pseudo-Selectors : 
-					
-					->  These don't select actual elements, but rather certain parts of elements, or elements only in certain contexts. They come in two 
-					    main types — pseudo-classes and pseudo-elements.
-
-					-> They only work with a selector (i.e selector:pseudo-selector).
-
-					-> The rule applied by the Pseudo-Selectors, is toggled back to its OLD STATE, once the element leaves the state or condition.
-
-					    	-> Pseudo-classes : 
-					    		-> A CSS pseudo-class is a keyword preceded by a colon (:) that is added on to the end of selectors to specify that you 
-					    		   want to style the selected elements only when they are in certain state. For example you might want to style an 
-					    		   element only when it is being hovered over by the mouse pointer(USER ACTION), or a checkbox when it is disabled or 
-					    		   checked(ELEMENT STATE), or an element that is the first child of its parent(ELEMENT POSITION) in the DOM tree.
-
-					    		   e.g a:hover
-
-					    	-> Pseudo-elements : 
-					    		-> Pseudo-elements are very much like pseudo-classes. They are keywords preceded by two colons (::) — that can be added 
-					    		   to the end of selectors to select a CERTAIN PART of an element(selector element).
-
-				Combinators : 
-				
-					-> Combinators		Select
-
-						A, B		Any element matching A and/or B (see also Multiple selectors on one rule, below).
-						A B			Any element matching B that is a descendant of an element matching A (that is: a child, or a child of a child, etc.)
-						A > B		Any element matching B that is a direct child of an element matching A.
-						A + B		Any element matching B that is the next sibling of an element matching A (that is: the next child of the same 
-									parent.)
-						A ~ B		Any element matching B that is one of the next siblings of an element matching A (that is: one of the next children 
-									of the same parent.)
-
-	-> Cascade and inheritance
-
-			-> Incases where there are multiple CSS rules for an Element, which CSS rule "wins", and ends up being the one that is finally applied to 
-			   the element?. This is controlled by a mechanism called the Cascade; This is also related to inheritance (elements will take some property values from their parents, but not others.) 
-
-			-> What selectors win out in the cascade depends on three factors (these are listed in order of weight — earlier ones will overrule later 
-			   ones):
-
-					-> Importance
-					-> Specificity
-					-> Source order   
-
-				-> Importance
-				
-						-> This makes sure that a certain rule will always win over all others
-						e.g  border: none !important;
-
-						Notes : 
-							-> The only way to override this !important declaration would be to include another !important declaration of the same 
-							   specificity, later in the source order.
-
-				-> Specificity
-
-						-> Specificity is basically a measure of how specific a selector is — how many elements it could match.
-
-						-> This is NOT related to Inheritence.
-
-						-> The amount of specificity a selector has is measured using four different values (or components), which can be thought of as 
-						   thousands, hundreds, tens and ones — four single digits in four columns:
-
-							-> Thousands: Score one in this column if the matching selector is inside a <style> element or the declaration is inside a 
-							   style attribute (such declarations don't have selectors, so their specificity is always simply 1000.) Otherwise 0.
-							-> Hundreds: Score one in this column for each ID selector contained inside the overall selector.
-							-> Tens: Score one in this column for each class selector, attribute selector, or pseudo-class contained inside the overall 
-							   selector.
-							-> Ones: Score one in this column for each element selector or pseudo-element contained inside the overall selector.
-
-							e.g h1 						-> 0001
-								#important				-> 0100
-								h1 + p::first-letter	-> 0003
-
-							Notes : 
-								-> Note: Universal selector (*), combinators (+, >, ~, ' ') and negation pseudo-class (:not) have no effect on 
-								   specificity.	
-
-				-> Source order
-						->  If multiple competing selectors have the same importance and specificity, the third factor that comes into play to help 
-						    decide which rule wins is source order — later rules will win over earlier rules				   
-
-			-> Inheritance
-					-> The idea is that some property values applied to an element will be inherited by that element's children, and some won't.
-
-					-> The Properties are inherited only if the element does not that property on its own(or from browser's default styles).
-
-						e.g it makes sense for font-family and color to be inherited and it makes sense for margin, padding, border, and 
-						background-image to NOT be inherited			    
-
-					Controlling inheritance : 
-						-> inherit 	: This value sets the property value applied to a selected element to be the same as that of its parent element.
-
-						-> initial 	: This value sets the property value applied to a selected element to be the same as the value set for that element 
-									  in the BROWSER'S DEFAULT STYLE SHEET. If no value is set by the browser's default style sheet and the property is 
-									  naturally inherited, then the property value is set to inherit instead.	
-
-						-> unset 	: This value resets the property to its natural value, which means that if the property is naturally inherited it 	
-									  acts like inherit, otherwise it acts like initial.			 
+    Floats:
+      ->  Floating an element CHANGES the behavior of that element and also the block level elements that follow it in normal flow. 
+          !!!!!!!
+      ->  The element is moved to the left or right and REMOVED from NORMAL LAYOUT FLOW, and also the surrounding content floats around the floated item.
+      ->  Any content that comes below the floated element in the normal layout flow will now wrap around it. i.e Will try to fill whatever it can leaving the space for the floated element.
+      ->  While we can add a margin to the float to push the text away(surrounding element), we can't add a margin to the text(surrounding element) to move it away from the float.
+      ->  If we want to stop a following element from moving up we need to clear it. This is achieved with the clear property.
+          Properties:
+            float         //  left, right, none, inherit(value inherited from the element's parent)
+            clear         //  left;
+    
+    Positioning:
+      ->  Positioning allows you to move an element from where it would be placed when in normal flow to another location. 
+          Static positioning:
+            ->  Default. 
+          Relative positioning:
+            ->  Allows us to modify an element's position on the page, moving it Relative to its position in NORMAL flow(Not parent) — including making it OVERLAP other elements on the page.
+            ->  The element will still be positioned as though it were in the normal flow until we apply the CSS offset properties (left, right, top, bottom)
+            ->  In this case, the margin value does not push the adjacent elements aside
+          Absolute positioning:
+            ->  Moves an element completely out of the page's normal layout flow, like it is sitting on its own separate layer. 
+                Then, we can fix it in a position relative to the edges of the page's <html> element (or its NEAREST positioned ancestor element).
+                i.e An absolutely positioned element no longer exists in the normal document layout flow(i.e has no effect like new line for block element etc..).
+            ->  In this case, the margin value does not push the adjacent elements aside
+            ->  The element will still be positioned as though it were in the normal flow until we apply the CSS offset properties (left, right, top, bottom)
+                Notes:
+                  ->  The "nearst positioned ancestor" is the FIRST ancestor PARENT element whose position value is set as other than static(i.e except `position: static`)
+                  ->  In case of more than one absolutively positioned elements, positioned elements later in the source order win over positioned elements earlier in the source order.
+                      We can control this using the z-index.
+          Fixed positioning:
+            ->  This is very similar to absolute positioning(i.e removes element from the normal flow), except that it fixes an element relative to the browser viewport,
+                not another element(i.e not nearest ancestor). 
+          Sticky positioning:
+            ->  Makes an element act like position: relative until it hits a defined offset from the viewport, at which point it acts like position: fixed.
+                i.e after scrolling certain level, the element becomes fixed.
