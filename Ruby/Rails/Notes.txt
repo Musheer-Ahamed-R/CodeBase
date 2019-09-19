@@ -7,6 +7,8 @@
 5 ->  Inside of the controller action, we can access the request object using the `request` field itself. This field is just magically accessible.
       e.g request.original_url
 6 ->  Redirects don’t happen until an explicit return or the end of the method, so any code appearing after the redirect is still executed
+7 ->  The Safe Navigation Operator (&.) in Ruby returns nil if a method is called on a nil object otherwise it would throws NoMethodError.
+      e.g account&.owner&.address
 
 Namings Conventions:
   ->  model(database fields) as singular and controller and views as plural. But, the actual table name will be plural only. 

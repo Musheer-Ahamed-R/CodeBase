@@ -234,10 +234,10 @@ Class:
       -> We can just call super(NOT super.my_method) inside of a method. It will automatically call the super class method.
 
 Modules:
-  ->  Modules are somewhat similar to classes: they are things that hold methods, just like classes do. However, modules can not be instantiated.
-      i.e., it is not possible to create objects from a module. And modules, unlike classes, therefore do not have a method new.
-      They facilitiate code re-usability.
-  ->  With modules you can share methods between classes. Modules can be included into classes, and this makes their methods available on the class.
+  ->  Modules are somewhat similar to classes: they are things that hold methods, just like classes do. 
+      However, modules CANNOT be instantiated.
+  ->  They facilitiate code re-usability.
+  ->  With modules we can share methods between classes. Modules can be included into classes, and this makes their methods available on the class.
       e.g Comparable module
       Syntax:
       module MyModule
@@ -254,6 +254,14 @@ Modules:
       include     - module methods becomes instance methods
       extend      - module methods becomes class methods
       prepend     - module method become instance methods, but when calling, the module method if available is executed first.
+  ->  The included method is a callback that Ruby invokes whenever the module is included into another module/class.
+      Syntax:
+        self.included(base)         // base is the target class
+      Note:
+        ->  Inside of rails (ActiveSupport::Concern) we can use above syntax as (Just syntactic sugar)
+            included do
+              # somecode
+            end
 
       Notes:
         ->  We can also `extend` class methods(i.e static methods) by doing classInstance.extend ClassOrModuleToExtend. Now, this class instance
