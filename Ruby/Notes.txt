@@ -523,6 +523,7 @@ Rack:
       Implementation:
         ->  Should be a ruby Object that implements a call method.(e.g Proc, Lambda or custom class with call method)
         ->  Accepts a single parameter, with info about request and server.
+            !!!!!!!!!!!!
         ->  Returns an Array
               - Status Code (Integer)
               - Hash Object(Response Header)
@@ -535,6 +536,7 @@ Rack:
           ->  Calls the Applications call method(implemented before), passes the env hash as a param
           ->  We can run this file as `rackup config.ru` OR just `rackup` (i.e config.ru). This has to be saved with .ru extension
           ->  Inside of .ru file, we can just call run @app instead of Rack::Handler::WEBrick.run @app (inside of .rb - ruby file)
+   
 
 Rake:
   ->  Tool for organizing tasks(task runner). (i.e like gulp ??)

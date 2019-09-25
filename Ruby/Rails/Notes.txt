@@ -90,6 +90,31 @@ Routes:
       We can skip the url_path and just call redirect_to my_obj. Rails automatically redirects to the appropriate url_path(i.e one associated with the controller).
   ->  We can add a resource(i.e implement all form of REST apis), and specify what all the methods we want to execute.
       e.g resources :account_activations, only: [:edit]
+  ->  use `rails routes` to get the list of routes
+  ->  For each route "resource" we get Path and URL Helpers(e.g users_path and users_url)
+
+        namespace       -     folder structure and also api structure
+        scope           -     folder structure without structure in name (e.g scope module: 'admin')i.e it WILL NOT BE /admin/
+        scope           -     no folder structure, but it has api structure(e.g scope '/admin')
+                              This can also be named params like (:username) which will be part of the url and its data(dynamic) can be accessed
+        shallow         -     generate the collection actions(e.g :index, :new, :create) scoped under the parent, 
+                              but to not nest the member actions([:show, :edit, :update, :destroy])(e.g shallow: true)
+        member          -     To add additional member route(other than the default 7 added by rails)
+                              e.g /photo/custom   (singular term photo)
+        collection      -     To add additional collection route(other than the default 7 added by rails)
+                              e.g /photos/custom   (plural term photos)
+        match           -     match method with the :via option to match multiple verbs at once to a single action.(Not recommended)
+                              Also, used for routing to rack application
+        constraints     -     enforce a format for a dynamic segment.
+        format          -     a method on the Request object and also an implicit optional parameter on every path
+        mount           -     Rack application to receive requests at the root path.
+                              It actually tells the app that another application (usually a Rack application) exists on that location. It is used mostly for Rails Engines.
+                              Mounting an engine means that the functionality from that engine is available inside your application.
+        direct          -     create custom URL helpers directly.
+        resolve         -     allows customizing polymorphic mapping of models
+        path_names      -     override the automatically-generated new and edit segments in paths. (still route to the same action)
+                              use scope path_names: for also chaning the action method.
+
 
 Sessions:
   ->  We can use the session method which places a temporary cookie on the user’s browser containing an encrypted version of the user’s id, which allows us to retrieve the id on subsequent pages.
@@ -265,7 +290,7 @@ Databases:
               format                                      //  { with: /<regular expression>/ }
               uniqueness                                  //  boolean value or object. e.g. { case_sensitive: false } 
           ->  We can check for the errors in the object using `userObj.errors.full_messages` OR just `userObj.errors`
-        
+
 
 The asset pipeline:
   ->  In particular, the asset pipeline combines all the application stylesheets into one CSS file (application.css), combines all the
