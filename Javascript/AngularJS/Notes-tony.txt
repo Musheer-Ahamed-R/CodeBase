@@ -336,6 +336,8 @@ Directives:
               e.g scope = {
                 personName: "@"             //  personNameSpecial: "@personName". Here, @personName comes from the attribute person-name.
               }
+              Notes:
+                ->  Better explanation - https://blog.krawaller.se/posts/dissecting-bindings-in-angularjs/
           ->  We can keep its value as either true or pass an Object with details about the type of bindings.
               If true specified, then a seperate scope is created for the child directive, and it also prottypically inherits from the parent scope.
               This also creates same problem as scope false, since the child scope is binded to parent unsing the two way binding(Prototypical inheritence)

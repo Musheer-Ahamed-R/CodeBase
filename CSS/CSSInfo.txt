@@ -287,12 +287,35 @@ CSS Positioning:
 
     Flexbox:
       ->  They are designed to make it easy for us to lay things out in ONE dimension — either as a row or as a column.
+          !!!!!!!!!!
+          e.g  Items flex to fill additional space and shrink to fit into smaller spaces.
       ->  The default behaviour is to stretch to the height of the tallest item, because the initial value of the align-items property is stretch.
+      ->  It has a feature for changing the layout order of flex items, without affecting the source order. e.g order: 1;
+      ->  A single flex item can be proportianately bigger than other items using the flex attribute(i.e higher the value, higher the extra space
+          (col or row based on flex-direction))
+
           Properties:
             flex-direction
-            align-items
+            flex-wrap
+            flex-flow(both flex-direction and flex-wrap)
+            row-reverse/column-reverse
+            !!!!!!!!!!!!!
+            align-items                                     -     controls where the flex items sit on the cross axis.
+            align-self                                      -     invidual flex item control
+            justify-content                                 -     controls where the flex items sit on the main axis.
             flex
-    
+
+          Terms:
+            main axis       -       the axis running in the direction the flex items are being laid out in 
+                                    (e.g. as rows across the page, or columns down the page.) 
+            cross axis      -       the axis running perpendicular to the direction the flex items are being laid out in.
+            flex container  -       The parent element that has display: flex set on it 
+            flex items      -       The items being laid out as flexible boxes inside the flex container
+
+          Notes:
+            ->  We can use flex: 1 auto; to automatically move flex items to new line if they cannot fix inside of the same line.
+
+
     Grid:
       ->  Grid Layout is designed for TWO dimensions — lining things up in rows and columns.
           Properties:

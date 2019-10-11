@@ -1,0 +1,2 @@
+1 -> Is cluster a seperate server by itself, or what is it.
+-> We can index a document using two api's.PUT and POST(if id is not available). true ?

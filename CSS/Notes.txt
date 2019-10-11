@@ -1,0 +1,2 @@
+1 ->  Even if the z-index of the child element is higher than that of any other element. If the parent of that child is having a lower z-index than the other element,
+      then the child will be having z-index equal to parent only.
