@@ -1,0 +1,48 @@
+Starting sidekiq
+bundle exec sidekiq -r ./worker.rb
+
+Configuring sidekiq:
+  Sidekiq.configure_client do |config|
+    config.redis = { db: 1 }
+  end
+
+  Sidekiq.configure_server do |config|
+    config.redis = { db: 1 }
+  end
+
+Sidekiq Job class:
+  
+  Syntax:
+    class OurWorker
+    include Sidekiq::Worker
+
+      def perform(complexity)
+        //  code
+      end
+    end
+
+  Configuring job:
+    sidekiq_options retry: 1, expires_in: 1.hour
+
+
+Know all Queues:
+  Sidekiq::Queue.all
+  Sidekiq::Queue.new            // default queue
+  Sidekiq::RetrySet.new.clear
+  Sidekiq::DeadSet.new.clear
+  Sidekiq::ScheduledSet.new
+
+
+Naming Queues:
+  ->  This can be done to prioritize queues over other.
+      e.g
+        :queues:
+          - critical
+          - default
+          - low
+        !!!!!!!
+        any job in the default queue will be processed only when the critical queue is empty.
+  ->  Also, running sidekiq for seperate queues
+      i.e If we like to "reserve" a queue so it only handles certain jobs
+      e.g sidekiq -q critical # Only handles jobs on the "critical" queue
+      e.g sidekiq -q default -q low # Handles the other jobs

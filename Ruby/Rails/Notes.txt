@@ -1,5 +1,365 @@
-Installing rails:
-   -> gem install bundler
-   -> gem install nokogiri
-   -> gem install rails
+1 ->  rails console is built on top of interactive Ruby (irb). The console also has access to the Rails environment.
+      But, we have to require the file(s) that we are planning to use.
+2 ->  Rails defines three types of environment, namely development, test and production. The default environment for the Rails server and Rails console is development.
+      We can change it using rails server --environment production
+3 ->  We can comment in .erb file using the <%#=  %> syntax. i.e just add # between % and =
+4 ->  To know what the env the code is currently running. we can do Rails.env.development?
+5 ->  Inside of the controller action, we can access the request object using the `request` field itself. This field is just magically accessible.
+      e.g request.original_url
+6 ->  Redirects don’t happen until an explicit return or the end of the method, so any code appearing after the redirect is still executed
+7 ->  The Safe Navigation Operator (&.) in Ruby returns nil if a method is called on a nil object otherwise it would throws NoMethodError.
+      e.g account&.owner&.address
 
+Namings Conventions:
+  ->  model(database fields) as singular and controller and views as plural. But, the actual table name will be plural only. 
+      Since the model class represents a single user.
+  
+  Cases:
+    ->  Classes
+          class name  - Pascal Case
+          file name   - snake case
+        Model Classes:
+          class name  - Pascal case (Singular)
+    ->  Databases
+          names       - snake case (Plural)
+
+
+Controllers:
+  ->  Render works in controller actions as well(Also used in rendering partials).
+      e.g render 'new'
+
+      Common method to be used inside of the model class
+      before_action:
+        ->  A method that gets executed before the controller action.
+        ->  before filters apply to every action in a controller. We can configure it using the :only 
+            Synatax:
+            before_action :logged_in_user, only: [:edit, :update]
+
+Layouts:
+  ->  It is kind of like the top level of our controller view. i.e Inside of the layout, we add <%= yield %>, to include controller view.
+  ->  It can include many partials.
+
+Partials:
+  ->  It's just a piece of template that can be re-used.
+  ->  Create a partial name as _header.html.erb                           // _ before name is the convention for naming partials. But, should not include _ while referring inside of template.
+  ->  Syntax:
+      <%= render 'layouts/header' %>
+
+Helpers:
+  ->  We can define helper methods and use them in our views.(without requiring)
+  ->  By default, methods defined in any helper file are automatically available in any view.
+  link_to:
+    ->  to create links (i.e create anchor tag <a>).
+    ->  Can be used along with image_tag helper - as first attribute to add the imgage for the link.
+        Syntax:
+        <%= link_to "Sign up now!", '#', class: "btn btn-lg btn-primary" %>    
+  image_tag:
+    ->  This can be added to add the image element. The path to an image and an optional options hash.
+        Syntax:
+        <%= image_tag("kitten.jpg", alt: "Cat Image") %>
+  time_ago_in_words:
+    ->  
+
+Routes:
+  ->  Rails conventionally uses named routes. i.e for a url e.g (/about), we can name it as about_path and use it in our application(views).
+  ->  While adding route, we can do.
+      Syntax:
+        get  '/help', to: 'static_pages#help', as: 'helf'              //  url - /help and path - static_pages#help and as - name for the route
+        naive syntax  - get 'static_pages/help'
+      Notes:
+        ->  We can then access the route name in our entire application(including views)(e.g help_path WITHOUT quotes). The name comes from actual path(e.g /help) and append _path to it.
+            i.e the constant url path variable for the path '/help' becomes help_path.
+            If we rename the route using `as: "helf"`, we still need to use it as helf_path.
+  ->  We can access/modify a resource by defining the following line in routes.rb file
+      resources :users
+      Sample result of above
+
+              articles GET   /articles(.:format)          articles#index
+                      POST   /articles(.:format)          articles#create
+          new_article GET    /articles/new(.:format)      articles#new
+        edit_article GET     /articles/:id/edit(.:format) articles#edit
+              article GET    /articles/:id(.:format)      articles#show
+                      PATCH  /articles/:id(.:format)      articles#update
+                      PUT    /articles/:id(.:format)      articles#update
+                      DELETE /articles/:id(.:format)      
+
+
+      This makes available all the combinations of REST apis along with the corresponding url path variable to access the corresponding urls.
+  ->  We we use variable params(not definied anywhere bu automatically available), inside of our controller. We can access params object of the request.
+  ->  Inside of controller, we can use redirect_to url_path(my_obj), in order to redirect to the desired page
+      We can skip the url_path and just call redirect_to my_obj. Rails automatically redirects to the appropriate url_path(i.e one associated with the controller).
+  ->  We can add a resource(i.e implement all form of REST apis), and specify what all the methods we want to execute.
+      e.g resources :account_activations, only: [:edit]
+  ->  use `rails routes` to get the list of routes
+  ->  For each route "resource" we get Path and URL Helpers(e.g users_path and users_url)
+
+        namespace       -     folder structure and also api structure
+        scope           -     folder structure without structure in name (e.g scope module: 'admin')i.e it WILL NOT BE /admin/
+        scope           -     no folder structure, but it has api structure(e.g scope '/admin')
+                              This can also be named params like (:username) which will be part of the url and its data(dynamic) can be accessed
+        shallow         -     generate the collection actions(e.g :index, :new, :create) scoped under the parent, 
+                              but to not nest the member actions([:show, :edit, :update, :destroy])(e.g shallow: true)
+        member          -     To add additional member route(other than the default 7 added by rails)
+                              e.g /photo/custom   (singular term photo)
+        collection      -     To add additional collection route(other than the default 7 added by rails)
+                              e.g /photos/custom   (plural term photos)
+        match           -     match method with the :via option to match multiple verbs at once to a single action.(Not recommended)
+                              Also, used for routing to rack application
+        constraints     -     enforce a format for a dynamic segment.
+        format          -     a method on the Request object and also an implicit optional parameter on every path
+        mount           -     Rack application to receive requests at the root path.
+                              It actually tells the app that another application (usually a Rack application) exists on that location. It is used mostly for Rails Engines.
+                              Mounting an engine means that the functionality from that engine is available inside your application.
+        direct          -     create custom URL helpers directly.
+        resolve         -     allows customizing polymorphic mapping of models
+        path_names      -     override the automatically-generated new and edit segments in paths. (still route to the same action)
+                              use scope path_names: for also chaning the action method.
+
+
+Sessions:
+  ->  We can use the session method which places a temporary cookie on the user’s browser containing an encrypted version of the user’s id, which allows us to retrieve the id on subsequent pages.
+      This is removed when the browser closes or the user logs out
+      Synatax:
+        session[:user_id] = user.id
+  ->  We can also set permanent cookies using the cookies method.
+      Synatax:
+        cookies[:user_id] = user.id
+        cookies.permanent.signed[:user_id] = user.id            // for permanent and signed cookies. We can retrieve them using cookies.signed[:user_id])
+        cookies.delete(:user_id)                                //  for deleting cookies
+
+Debug:
+  ->  We can call the debug method to debug our application. e.g <%= debug(params) if Rails.env.development? %>
+  ->  To actually debug, we just need to add a line consisting of debugger to our application(e.g controller file). 
+      We can continue execution by pressing ctrl + D. This is happening using the byebug gem.
+
+Databases:
+  ->  The default library for interacting with the database is called Active Record.
+  ->  Rails has a feature called migrations to allow data definitions to be written in pure Ruby, without having to learn an SQL data definition language (DDL)
+  ->  generate command creats a new file called a migration. Migrations provide a way to alter the structure of the database incrementally,
+      so that our data model can adapt to changing requirements.
+  ->  If a column is of boolean value. Rails automatically creats a method for that column. e.g if admin is a boolean valued column, then we automatically 
+      have a method named admin? on the data row(model) object.
+  ->  We can add our own error to the data model field using `@user.errors.add(:password, "can't be empty")`
+  ->  The errors are not populated, unless we tried to save the record or call valid? method.
+  ->  If we have a foreign key relations with a table. We can access one using the other(both ways). e.g micropost.user OR user.microposts
+      In this case, contructing the dependent record(micropost in this case), is preferred to be done using the parent record itself. e.g @user.microposts.build(content: "Lorem ipsum")
+  ->  We can add condition(i.e where clause) by using the where method.
+      e.g  Micropost.where("user_id = ?", id)
+      Model Object lifecycle callbacks:
+        ->  We can make the calling of a callback method conditional on the satisfaction of a given predicate
+            The predicate can take a symbol, a Proc or an Array(having symbol or Procs)
+            e.g before_save :normalize_card_number, if: :paid_with_card?
+        ->  Callbacks can also be registered to only fire on certain life cycle events. This can also be some custom name. In which case, we need to invoke the methods with that symbol passed.
+            e.g before_validation :normalize_name, on: :create
+
+            Notes:
+              ->  Callbacks and life cylce of an object(create, update, delete) are different things.
+              ->  The following methods on database skip callbacks when executed. They should be used with caution!!!
+                  update_column
+                  update_columns
+                  update_all
+                  update_counters
+                  decrement!
+                  decrement_counter
+                  delete
+                  delete_all
+                  increment!
+                  increment_counter
+              ->  In addition to the above, the following skip validations,
+                  update_attribute
+                  toggle!
+                  touch
+
+      Validations:
+        ->  We can also run validations on associations. e.g presence: true. To make sure that the association is always existing for an entity.
+            e.g belongs_to :order
+                validates :order, presence: true
+        ->  If we want to validate the presence/absence of a boolean field you should use inclusion or exclusion.
+        ->  It is possible multiple validations use one condition(to begin validation), using `with_options`.
+        ->  We can specify multiple columns for a single validation too(e.g presence validation).
+            Synatax:
+              validates :column_1, :column_2, :column_3, presence: true
+        ->  We can also have custom validation. These custom models inherit from `ActiveModel::Validator`.
+
+      Associations:
+        ->  The has_one, belongs_to, has_many are all different forms of foreign key references. 
+        ->  The field which is specified BECOMES an ACTUAL field on the class, which on accessing fetches the RELATED(FOREIGN KEY) ROWS.
+            e.g belongs_to: followed, class_name: "User". Here if we access row.followed, it will go and fetches all the related row(s) from User table.
+            The same is also applicable for has_many too.
+        ->  The field related to belongs_to is a field inside of its own table and the field related to the hash_many(has_one) is a field in its relational table(foreign key).
+        ->  Also, if a belongs_to relation is mentioned for a model, it MUST also be mentioned inside of the migration schema for that model.
+        ->  The has_and_belongs_to_many Association(many to many association) can be easily replaced by using has_many_through relation(There will be a join table in the midddle in this case).
+            But, we should go with has_and_belongs_to_many, if you don't need to do anything with the relationship model(middle/join table)
+            Note:
+              ->  The join table should still be created in the database and its name should table1name_table2name (sorted alphabetically).
+        ->  has_many_through can be of two forms. One is many-many relationship(e.g doctor and patient through appointments) and the other one is one to many relationship
+            (e.g document and paragraphs with section as join table).            
+            
+            belongs_to Association:
+              ->  The inverse_of option is a method for avoiding SQL queries. It's a hint to ActiveRecord to use already loaded data (in memory data)
+                  instead of fetching it again through a relationship. i.e any in-memory changes of associations gets reflected.
+                  e.g belongs_to :author, inverse_of: :books
+                      has_many :books, inverse_of: :author
+              ->  We can customize the query used by belongs_to using scope block. 
+                  https://guides.rubyonrails.org/association_basics.html#scopes-for-belongs-to
+              ->  By default, it does not save the associated object.
+            Polymorphic Associations:
+              ->  With polymorphic associations, a model can belong to more than one other model, on a single association. Here, the belongs_to declaration can be considered as setting
+                  up an interface that any other model can use.
+              ->  The polymorphic model(child) should have both the foreign key column and a type column(tells which parent table to look into with the foreign key id).
+                  The `type` is ONLY useful for going FROM the polymorphic model to the associated model.
+              ->  This can be done on both belongs_to and has_one relations.
+                  Synatax:
+                  declaration - belongs_to :imageable, polymorphic: true
+                  usage       - has_many :pictures, as: :imageable
+            
+            Bi-directional Associations:
+              ->  Active Record will attempt to automatically identify that two models share a bi-directional association based on the association name. i.e changes(In-memory) in one gets reflected in the other.
+                  https://guides.rubyonrails.org/association_basics.html#bi-directional-associations
+              ->  Active Record will not automatically identify bi-directional associations that contain a
+                    ->  scope
+                    ->  :through
+                    ->  :foreign_key
+                  In this case, we should use the `inverse_of` option in the has_many association declaration.
+            Association Extension:
+              ->  We can also extend association proxy objects(available on ASSOCIATION) through anonymous modules, adding new finders, creators, or other methods.
+                  e.g has_many :doctors, through: :appointments do
+                        def unselected(reload=false)
+                          @unselected_app_profiles ||= proxy_association.owner.app_profile_ids.empty? 
+                        end
+                      end
+
+                      Usage:
+                        patient.doctors.unselected            // patient is model object and patient.doctors is an association proxy object
+                      Notes:
+                        ->  When we call self while extending an association(inside of extending method) it won't return an Association instance, but instead delegates to to_a. To get the actual association, we have to use
+                            proxy_association method which contains the owner, target, and reflection attributes.
+
+
+            Notes:
+                  !!!!!!!!
+              ->  All of the association methods are built around caching, which keeps the result of the most recent query available for further operations. But, reload can be used to discard cache.
+              ->  Should not give an association a name that is already used for an instance method of ActiveRecord::Base.
+              ->  foreign_key field can be used on both has_many and belongs_to relations incase of explicitly defining foreign_key columns.
+              ->  For the methods/properties brought in through associations, look into the documentation(along with examples)
+                  https://guides.rubyonrails.org/association_basics.html#detailed-association-reference    
+                  !!!!!!!
+              ->  Always check if autosave: true option is needed for saving updated associations. Based on the association i.e belongs_to, has_many
+              
+      Common methods:
+      save:
+        ->  Saves the data model to database.
+
+      create:
+        ->  Creates a new record with the given hash.
+      
+      reload:
+        ->  Get the data from the database for the record. Useful when the data object is modified after getting from database.
+
+      update_attribute:
+        ->  Updates a single column
+
+      update_attributes:
+        ->  Does both the update(data object) and the save(in database) in one step
+      
+      touch:
+        ->  All this does is to JUST update the updated_at timestamp. We can also specify custom column to update(instead of updated_at column) using `touch: :books_updated_at`.
+        ->  This is extremely useful along with belongs_to association. (i.e updating child `touches`/updates parent). This can also be done otherwise(updating parent touches child)
+            using has_many.
+            belongs_to :parent, touch: true
+
+      Common method to be used inside of the model class
+
+        before_create:
+          ->  This is called, before we create the data in database.(i.e not every time the data is updated)
+              e.g before_create :create_activation_digest
+        before_save:
+          ->  Callback that gets called before saving the data to database.
+              e.g before_save { self.email = email.downcase }
+        has_secure_password:
+          ->  When included in a model, this one method adds the following functionality  
+            ->  The ability to save a securely hashed password_digest attribute to the database
+            ->  A pair of virtual attributes18 (password and password_confirmation), including presence validations upon object creation
+                and a validation requiring that they match
+            ->  An authenticate method that returns the user when the password is correct (and false otherwise)
+        validates:
+          ->  Inside of the data model class, we can use the validates method(Yes validates is a method) with arguments presence: true
+              e.g validates :name, presence: true         // where :name is the column name being validated
+              presence
+              length                                      //  { maximum: 50 }
+              format                                      //  { with: /<regular expression>/ }
+              uniqueness                                  //  boolean value or object. e.g. { case_sensitive: false } 
+          ->  We can check for the errors in the object using `userObj.errors.full_messages` OR just `userObj.errors`
+
+
+The asset pipeline:
+  ->  In particular, the asset pipeline combines all the application stylesheets into one CSS file (application.css), combines all the
+      application JavaScript into one JavaScript file (application.js), and then minifies them to remove the unnecessary spacing and indentation that bloats file size.
+  ->  There are three main features to understand about the asset pipeline: asset directories, manifest files, and preprocessor engines.
+      Asset directories:
+        - app/assets: assets specific to the present application
+        - lib/assets: assets for libraries written by your dev team
+        - vendor/assets: assets from third-party vendors
+      Manifest files:
+        ->  We can use manifest files to tell Rails (via the Sprockets gem) how to combine them to form single files(seperate for CSS and JS files).
+        ->  Inside that. 
+              require_tree  - ensures that all CSS files in the app/assets/stylesheets directory (including the tree subdirectories) are included into the application CSS
+              require_self  - specifies where in the loading sequence the CSS in application.css itself gets included.
+      Preprocessor engines:
+        ->  Rails prepares them for the site template by running them through several preprocessing engines and using the manifest files to combine them for delivery to the browser.
+        ->  We tell Rails which processor to use using filename extensions; the three most common cases are .scss for Sass, .coffee for CoffeeScript, and .erb for embedded Ruby (ERb).
+
+SCSS:
+  ->  Sass is a language for writing stylesheets that improves on CSS in many ways.
+  ->  most important improvements include nesting, variables and mixins.
+      Nesting:
+        .center {
+          text-align: center;             // only for .center
+          h1 {
+            margin-bottom: 10px;          // for both .center and h1. i.e `.center h1`
+          }
+        }
+        Note:
+          ->  For #logo:hover, need to use &:hover  inside of #logo to reference the parent element. i.e `#logo:hover`
+      Variables:
+        ->  Sass allows us to define variables to eliminate duplication and write more expressive code.
+        ->  The bootstrap-sass gem provides the Sass equivalents(from the bootstrap Less language) for commonly used variables.
+            Syntax:
+              $light-gray: #777;
+              We can use like i.e color: $light-gray;
+      Mixins:
+        ->  A mixin allows a group of CSS rules to be packaged up and used for multiple elements.
+            Synatax:
+            @mixin box_sizing {
+              -moz-box-sizing:    border-box;
+              -webkit-box-sizing: border-box;
+            }
+            Can be used like 
+            .something {
+              @include box_sizing;
+            }
+  ->  Import CSS gems
+      e.g @import "bootstrap-sprockets";
+
+Testing:
+  ->  setup method is automatically run before every test.
+  ->  For adding colors for tesing result - 
+      inside of test/test_helper.rb - add below lines
+      require "minitest/reporters"
+      Minitest::Reporters.use!
+      Assertions:
+        assert
+        assert_response
+        assert_select
+        assert_not
+        assert_no_difference                - we arrange for a comparison between some method (e.g. User.count) before and after the contents inside the assert_no_difference block.
+        assert_difference                   - To make sure that there is actually a difference before after the block execution.
+        assert_redirected_to
+        assert_match                        - regex match. e.g assert_match 'foo', 'foobar'      # true
+
+  ->  Inside controller TESTS, we can manipulate the session method directly. But, inside integration TESTS, we can’t manipulate session directly.
+  ->  ActionMailer::Base.deliveries can be used to check for mail deliveries in tests.
+  ->  Automated tests with Guard - detects file changes and run the test automatically.
+      ->  bundle exec guard init            //  Generates Guardfile file
+      ->  guard :minitest, spring: "bin/rails test", all_on_start: false do
+      ->  bundle exec guard

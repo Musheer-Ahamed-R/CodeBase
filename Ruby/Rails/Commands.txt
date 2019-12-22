@@ -1,0 +1,49 @@
+Installation and starting server:
+  ->  gem update --system              // Update Gems
+  ->  rvm gemset list
+  ->  rvm gemset use global
+  ->  gem install bundler
+  ->  gem install nokogiri
+  ->  gem install rails -v 5.1.6
+  ->  rails new FirstRailsProject -T --database=postgresql
+  ->  bundle install                //  This is only needed if we change any gem version after above command.
+                                    //  This installs the dependencies specified in your Gemfile
+  ->  bundle install --without production
+  ->  bundle update minitest OR Just bundle update                //  This is to update the bundle for a specific gem or all gems
+  ->  rails server                  //  Starting rails application
+
+
+rails commands:
+  ->  rails generate scaffold User name:string email:string
+  ->  rails generate controller StaticPages home help               //  here StaticPages is the controller and home, help are actions. 
+                                                                        In this case, views for home and help will also be generated.
+  ->  rails destroy controller StaticPages home help                //  Opposite of above
+  ->  rails generate model User name:string email:string
+  ->  rails generate model Micropost content:text user:references   //  Model with references.
+  ->  rails destroy model User
+  ->  rails generate integration_test site_layout                   //  generating a template test, site_layout
+  ->  rails db:migrate                                              //  Needs to be run when we make changes to the model migration file.
+  ->  rails db:rollback                                             //  undo single migration step
+  ->  rails db:migrate VERSION=0                                    //  to undo all mogration steps
+  ->  rails db:migrate:reset                                        //  To clear all the data in our database
+  ->  rails generate migration add_index_to_users_email             //  To modify existing database structure
+  ->  rails generate mailer UserMailer account_activation password_reset
+  ->  rails test 
+  ->  rails test:integration                                        //  only running integration tests inside of the test/integration folder
+  ->  rails test:models
+  ->  rails console
+  ->  rails console --sandbox                                       //  Any modifications we make will be rolled back on exit” (i.e., undo) any database changes 
+
+Shortcuts:
+  Full command	Shortcut
+
+  rails server      -   rails s
+  rails console     -   rails c
+  rails generate    -   rails g
+  rails test        -   rails t
+  bundle install    -   bundle
+
+
+Notes:
+  ->  bunlde install and gem install are both the same. except that bundle install is much more helpful in resolving conflicts.
+      i.e we should be using bundle install inide of a project and then gem install outside of it(Not useful)

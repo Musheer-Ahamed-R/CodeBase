@@ -1,0 +1,28 @@
+->  understand routes.rb file
+->  has_many :microposts
+->  belongs_to :user
+->  has_secure_password
+->  layout
+->  Digest::MD5::hexdigest(email.downcase)
+
+
+Dynamic contents:
+  ->  <% provide(:title, "Home") %>   //  <% - to run ruby code inside.
+  ->  <%= yield(:title) %>            //  <%= yield - To yield a value.
+
+Tests:
+->  test "should get about" do
+      get static_pages_about_url
+      assert_response :success
+    end
+    what is static_pages_about_url and root_url (for root) in above ?
+->  assert_response
+->  assert_select
+
+
+Update the layout links to use the helf route from Listing 5.29.
+
+What is fixtures :all in 
+class ActiveSupport::TestCase
+  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
+  fixtures :all

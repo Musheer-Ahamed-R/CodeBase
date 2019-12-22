@@ -1,0 +1,42 @@
+Routing;
+  -> Controls the navigation for the user and creats a Controller and Views 
+  -> Controllers are responsible for View logic and exposing properties for view binding
+  -> View to controller - date is binded through Scope object
+  -> Views are bigger Components(Can have multiple Components)
+  -> Components can also have a controller. Declaring new template and binding data.
+
+Creating Services:
+  -> angular
+      .module('app')      // don't pass the second arg. That means creating a new module
+      .service("ServiceName", Service)
+  -> Any service we created in Angular's Dependency injection system.
+  -> We can also .factory(). This will return the fields that can be accessed by outside code. Otherwise, all fields we assisned using this inside of the Service
+     method will be accessible to all. It is just a matter of preference.
+
+Directives:
+  -> Behaviourial directives and template directives
+  -> Can use Directive to chunk out some common functionalites. We can define which controller the directive belongs to and also its template.
+  -> Need to pass scope otherwise changes will be reflected globally.
+  -> The fields inside of the scope can be used to bind values from outside. e.g scope: {
+      count: "="  // actually says "=count" since name and bind field are same. Also, = means two way bindings.
+    }
+  -> we can say bindToController instead of scope, to be able to bind to the this value inside of the controller. This will avoid using $scope inside of the controlller
+     i.e Here $scope has the value we obtained through binding from template(Directive). The date is then passed from directive to the controller using $scope.
+     Still need to keep scope as {}.
+     Since two way binding, the values changed in the controller of the directive is also reflected inside of parent controller.
+  -> We can do field: "@"   // to make it as read only. Then, inside of the template, we have to do field="{{ }}" (i.e like string interpolation)
+     otherwise if two way binding, we have to do field="parentField"      // without string interpolation
+  -> link function has ($scope, element, attrs) for a directive. (Behaviourial directives)
+  -> scope: false inherits the scope of the current context.
+  -> We can use .$watch to watch for watching changes to a certain field. e.g $scope.$watch('fieldName', callBack). If we removed $scope.count and used this.count,
+     then we should do it as $scope.$watch(function() { return me.count }, callBack)
+     Also, any new event we execute like .focus etc should be done inside of a setTimeout. i.e It has to be pushed to the end of the call stack. (The way angular works)
+     For Objects, we need to pass in a third arguement, to tell angular for Deep watching(Objects). Otherwise, we can just use watchCollection.
+  -> We can use $attr (inside link function) and do $attr.observe('name', function() { }) to watch for changes, just like .$watch
+     We can also use $attr.updateClass to update classes.
+  -> We can also pass in an entire object from the parent controller to the directive and that too with two way data bindings.
+  -> To deligate functions to our directive from our component, we can do field="myFunction()" and inside of the directive.bindToController, field: "&"   // Yes. actually use ()
+
+
+Validators:
+  -> create name attribue on top level form. and also create name obj for all input. ng-model is for data binding and name is for validation.

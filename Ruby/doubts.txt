@@ -17,20 +17,13 @@
      puts "something" if x > y?
      puts "something" unless x > y?
 
-8 -> Understand curl in video 50
-
 9 -> string.to_enum(:scan, /\d+/).map { Regexp.last_match }
      What does above do ?
      Video: 59
 
-10 -> What is rake and rackup
-
 11 -> What is diff between ruby hash and ruby object
 
 12 -> What is the ? In the end for a Boolean variables or expressions. Is this optional.?
-
-13 -> What is run filename do?. Can we run scripts inside of ruby code??  Also what is config.ru i.e extension .ru
-      Video - 75
 
 14 -> Defining routes in case of sintara?. Video - 75
       Also, same for define_method("#{method_name}_action") block
@@ -60,3 +53,12 @@
 22 -> Grep section completely
 
 23 -> Video - 91 Amicable numbers
+
+24 -> Should the method params and arg match in all cases.
+
+25 -> why "foo bar   baz".split(" ") gives ["foo", "bar", "baz"]. why not 
+
+26 -> ('a'..'z').to_a.shuffle[0..7]       # Pull out the first eight elements.
+      Understand why we are calling [0..7] on shuffle. isn't shuffle a method on array ??
+
+27 -> Can we omit self. inside of instance methods ??. i.e for accessing instance fields or methods. 
