@@ -4,7 +4,7 @@ Installation and starting server:
   ->  rvm gemset use global
   ->  gem install bundler
   ->  gem install nokogiri
-  ->  gem install rails -v 5.1.6
+  ->  gem install rails -v 5.1.6 
   ->  rails new FirstRailsProject -T --database=postgresql
   ->  bundle install                //  This is only needed if we change any gem version after above command.
                                     //  This installs the dependencies specified in your Gemfile
