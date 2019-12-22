@@ -411,6 +411,10 @@ Ruby gems:
    -> We can definfe - group: development to say that a gem needs to be run only in development. 
    -> Rails itself is a ruby gem
    -> For requiring a ruby gem, first require 'rubygems', then the gem we want to require
+   -> gem update --system        // We can update the gems package
+   -> rvm gemset list            // List all gems installed
+   -> rvm gemset use global      // what version we want to use - global or default
+   -> gem update                 // to update any outdated gems
    -> Sample gems
          Device gem     - used for registration, sign-in, sign out. Related to authentication
          Will_paginate  - pagination

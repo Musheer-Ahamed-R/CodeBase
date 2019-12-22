@@ -1,0 +1,5 @@
+Installing rails:
+   -> gem install bundler
+   -> gem install nokogiri
+   -> gem install rails
+
