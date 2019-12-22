@@ -1,0 +1,9 @@
+1. Min edit dist
+2. Egg dropping problem (Go dropping eggs from the bottom)
+3. Max square with sides as X
+4. Maximum Size Rectangle of All 1's Dynamic Programming
+5. Maximum Sum Rectangular Submatrix in Matrix dynamic programming/2D kadane
+6. Weighted Job Scheduling Dynamic Programming
+7. Word Break Problem Dynamic Programming
+8. Box stacking problem - a variation of LIS problem.
+9. String Interleaving Dynamic Programming

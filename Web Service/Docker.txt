@@ -1,0 +1,16 @@
+Docker registry
+  Docker hub
+  
+Docker images:
+  ->  Contains all the dependencies for a particular application.
+
+Docker Containers:
+  ->  Isolate Application platform
+  ->  Built from one or more images
+
+Docker Compose:
+  ->  We can run multiple applications present on various containers with one single command
+      e.g run web app, postgress, redis running in different containers with a single command
+
+Run custom commands inside of docker contaner:
+  ->  docker-compose run dev rake db:migrate

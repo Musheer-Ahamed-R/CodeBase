@@ -1,0 +1,24 @@
+Cat Api's
+
+  Cluster Health:
+    -> 
+
+
+  Notes:  
+    -> GET /_cat command lists all the available cat commands
+
+
+
+Indices Api:
+
+  -> 
+
+
+
+
+
+
+Query Params:
+  -> Each of the commands accepts a query string parameter v to turn on verbose output. (e.g GET /_cat/master?v)
+  -> All the cat commands accept a query string parameter help to see all the headers and info they provide.
+  -> We can pretty-print the JSON response (if any), using the pretty param(e.g PUT /customer?pretty)

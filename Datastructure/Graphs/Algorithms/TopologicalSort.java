@@ -2,6 +2,8 @@ import java.util.*;
 
 public class TopologicalSort {
 
+   // Only difference from normal DFS is we should be populating the element in stack at the end
+
    private static Stack<Vertex> stack = new Stack<>();
 
    public static void dfsSearch(int[][] relationMatrix, Vertex[] vertices, int currentVertex) {

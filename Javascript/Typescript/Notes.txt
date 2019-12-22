@@ -1,0 +1,44 @@
+1 -> Typescript is a super set of vannila JS.(i.e offers more features than vanilla JS like Classes, Interfaces and Strong typing)
+	 This is complied to JS in the end.
+
+2 -> let myStr: string;
+
+3 -> Typescript can also infer the types of the variables. let str = "Hello";
+
+4 -> If the variable type is NOT specified and also not assigned to a value. The TS will consider its type as 'any' by default.
+     i.e we can assign any value to that variable.
+
+5 -> Diff types - 
+        - string
+        - number
+        - boolean
+        - Array<string>
+        - any
+        - void and enums. e.g myFunc(): void {}
+
+6 -> we can have private variables inside of classes    
+
+7 -> Can have interfaces. Its like a contract. i.e an object must have certain fields and methods(skeleton) etc..
+     we can specify optional field as - myField?: string - inside of that interface.(all other fields are mandatory)
+     A variable with type(custom type) as interface can be assigned to A PLAIN OBJECT, which has all the mandatory fields and methods.
+
+8 -> It helps us in specify what type an object may contain. The object can be anything like an Array etc..
+     e.g let myArray: Array<number>; OR let myArray: Custom[] (array of custom objects)
+
+9 -> Modules can be used to specify what variables that can be accessible outside of the file. 
+     We use the export keyword for this. e.g export class MyClass
+
+10 -> constructor(puclic name: string) {} is a shorthand for the Normal way of creating field and assigning it in constructor.
+
+11 ->  defining object is myObj: { field1: string, field2: string }
+
+12 -> If we do +"123". It will convert the string to a number if possible
+
+13 -> We can validate dynaic key values in an object using the notation.
+      { [s: string]: boolean }
+
+14 -> We can use spread operators like { ...myObj }, to put key value in new Object.
+
+15 -> It is better to always specify the Schema/Type of data we are dealing with.(i.e method return value, api response data etc..)
+
+16 -> !!user will handle for !user ? false : true;

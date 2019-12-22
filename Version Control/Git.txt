@@ -11,7 +11,6 @@ Generating SSH Keys :
         -> make sure the default file id_rsa is used
 
 remote : 
-
     -> Using this we can tell our repository(machine) about the remote urls we want it to know/connect to.
     -> We can have more than one remote in our repository.(This is where the remote name comes into play)
        One of the remote(origin) will be the GitHub itself.
@@ -25,8 +24,25 @@ remote :
     Notes : 
         -> origin is the default remote(usually GitHub remote)
 
+Push exisiting codebase to github:
+  ->  Create repo in git hub with same name
+  ->  git init
+  ->  git add README.md
+  ->  git commit -m "first commit"
+  ->  git remote add origin https://github.com/Musheer-Ahamed-R/toy_app.git
+  ->  git push -u origin master OR git push -f origin master
+
 
 Ignore files : 
 
-    -> We can ignore specific files/folder by specifying them in .gitignore file and pushing .gitignore file to git repository.    
+  -> We can ignore specific files/folder by specifying them in .gitignore file and pushing .gitignore file to git repository.    
      e.g *.class will ignore all the files with .class extension in our local repository
+
+Configuring User:
+
+  git config --global user.name "Your Name Comes Here"
+  git config --global user.email you@yourdomain.example.com
+
+Deleting branch:
+
+  git branch -D crazy-idea

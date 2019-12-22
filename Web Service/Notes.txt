@@ -1,0 +1,5 @@
+1 -> Always update the UI after we get a successful response from the API. As there is always a possibility of API failing.
+
+2 ->  OAuth2.0 is protocol to provide temporary access to a resource(e.g Google contacts etc..).
+
+3 ->  OpenIdConnect is a thin layer built on top of OAuth2.0 used for login.

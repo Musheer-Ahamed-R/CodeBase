@@ -1,0 +1,4 @@
+Starting AngularJS:
+  ->  npm init
+  ->  npm i http-server
+  ->  inside of package.json, add "start": "http-server -o" in npm scripts.

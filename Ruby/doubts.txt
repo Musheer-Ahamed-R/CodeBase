@@ -1,0 +1,64 @@
+1. what is the diff between my_proc and my_proc.call    // both execute proc
+
+2. When we do teams ( object inside of object. i.e not object inside of arrays), what does the var have
+   in each iteration. e.g teams.each do | team |. What does team have in each iteration
+
+3. what does .to_a do ?. Where/On What, it can be used ?
+
+4. Incase of .select(&:even?), what does the & and ? mean.. ??? 
+   Also, what is .inject(:+) do. i.e why we did not have & here too           // + is a method here       
+
+5. If, Symbol Object don't contain values or objects, like variables do. 
+   Then why, They are used in case of hashes as keys.
+
+6 -> Revisit lambda notes
+
+7 -> What is the use of ? in the end of single if/unless statements like 
+     puts "something" if x > y?
+     puts "something" unless x > y?
+
+9 -> string.to_enum(:scan, /\d+/).map { Regexp.last_match }
+     What does above do ?
+     Video: 59
+
+11 -> What is diff between ruby hash and ruby object
+
+12 -> What is the ? In the end for a Boolean variables or expressions. Is this optional.?
+
+14 -> Defining routes in case of sintara?. Video - 75
+      Also, same for define_method("#{method_name}_action") block
+      i.e why are we passing blocks seperately
+
+15 -> What is method missing ?? in Meta programming?. 
+      Also, what is author.send inside it.
+      Video 71
+
+16 -> What is $1 inside of a method. Video 71.
+
+17 -> What does include mean. e.g MyClass incluce HttpParty
+
+18 -> What does empty? mean. (Note: This is inside of Array class)
+      The answere is inside of an class we can just call the method name instead of doing obj.method. Please confirm
+      Video - 83
+
+19 -> What is &pivot.method(:>)
+      Video - 83     // Quick sort impl
+
+20 -> What is enumerator. 
+      Video - 90
+
+21 -> What is DecisionTree::ID3  i.e what is :: ?
+      Video - 96
+
+22 -> Grep section completely
+
+23 -> Video - 91 Amicable numbers
+
+24 -> Should the method params and arg match in all cases.
+
+25 -> why "foo bar   baz".split(" ") gives ["foo", "bar", "baz"]. why not 
+
+26 -> ('a'..'z').to_a.shuffle[0..7]       # Pull out the first eight elements.
+      Understand why we are calling [0..7] on shuffle. isn't shuffle a method on array ??
+
+27 -> Can we omit self. inside of instance methods ??. i.e for accessing instance fields or methods. 

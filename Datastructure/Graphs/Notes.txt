@@ -1,24 +1,10 @@
-1 -> A Graph is a Pair(V, E), where V is a set of nodes, called Vertices and E is a collection of Vertices, called Edges.
+1 -> FORGET Doing problems in Graphs with knowing/considering Cycle Cases.(Both Directed and Un-Directed).
 
-2kl-0:>P -> Two types of Graphs
+2 -> In case of BFS, we should mark the node as visited when adding the node to the Queue itself.
 
-         -> Directed Graph(All the Edges are directed)(e.g route network)
-         -> UnDirected Graph(All the Edges are undirected(e.g flight network)
+3 -> Having the visitied node information inside of the node iteslf is not very elegant. We may keep it in a seperate visitied array
+		 or have a wrapper over graph vertex.
 
-3 -> When an Edge connects two Vertices, the Vertices are said to ADJACENT to each other.
+4 -> Detecting Cycle in an undirected graph can be done using both BFS and DFS. But in case of Directed graph, only DFS can be used.
 
-4 -> Graphs can be represented in Three ways
-
-                                             Recommended Use                          Checking edge between Vertices          Iterate Over edges incident over a Vertex
-         -> Adjacency Matrix       When the Graph is dense(lots of edges).                   O(1)                                      V
-         -> Adjacency List         When the Graph is sparse(has less edges).                 Degree(v)                               Degree(V)
-         -> Adjacency Set                                                                    log(Degree V)                           Degree(V)
-
-5 -> A Separate VERTICES ARRAY is required for both Adjacency Matrix and Adjacency List.(But, could be avoided for Adjacency List)
-
-6 -> Graph Traversal Algorithms
-
-         -> Depth First Search(DFS)
-         -> Breadth First Search(BFS)
-
-7 -> 
+5 -> Always consider using Stack if we need to track path while we traverse.
