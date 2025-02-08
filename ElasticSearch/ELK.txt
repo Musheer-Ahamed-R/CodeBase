@@ -1,2 +1,0 @@
-LogStash:
-  -> It facilitates ingestion of data in Elastic Search, from our data source.

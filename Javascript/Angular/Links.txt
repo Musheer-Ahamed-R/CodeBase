@@ -1,2 +1,0 @@
-Angular Cli - 
-https://angular.io/cli

@@ -1,1 +1,0 @@
-1 -> Inside of the class, use the equal sign for assigning variables and not ':' as in JS 

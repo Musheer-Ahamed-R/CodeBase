@@ -1,0 +1,5 @@
+1. Prefix Sum
+
+Use case:
+    Sum of elements in a Sub Array
+    

@@ -1,6 +1,0 @@
--> Function type were not implemented in java 8 because of backward compatiability.(In Third party libraries and other places)
-
--> Lambdas play very well especially in cases of Condition(which differs quite a lot)
-
--> Nothing of a Functional Interface matters(e.g Name, package) except for the structure(parameters and return values). Thus, a Functional Interface 
-   defined once with a specific structure can be RE-USED in all places.(Thus, Java's Native functions(java.util.function) serves a good purpose)

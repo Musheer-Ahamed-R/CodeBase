@@ -1,1 +1,0 @@
-UI Router                       -       https://github.com/angular-ui/ui-router/wiki
